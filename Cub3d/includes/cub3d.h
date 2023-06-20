@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 12:18:12 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:42:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,14 +193,15 @@ typedef struct s_vars
     void	*mlx;
     void	*win;
 
+	//jonn parsing
 	char	*north;
 	char	*south;
 	char	*west;
 	char	*east;
-	char	*floor;
 	int		f[3];
-	char	*ceiling;
 	int		c[3];
+	char	dir; //N W S E
+	t_map	*jonn_map;
 
 	void	*north_x;
 	void	*south_x;

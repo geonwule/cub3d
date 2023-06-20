@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 17:38:35 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:43:05 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,8 @@ int main(int ac, char **av)
 	#endif
     t_vars  *vars;
 
-    // if (ac != 2)
-    // {
-    //     printf("arg_error\n");
-    //     return (RETURN_FAILURE);
-    // }
     vars = vars_allocation();
-    if (map_read(av[1], vars) || map_error(vars))
+    if (map_read(av[1], vars) || map_error(vars)) // jonn
 	{
 		vars_free(vars);
 		return (RETURN_FAILURE);
