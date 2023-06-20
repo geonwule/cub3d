@@ -1,0 +1,33 @@
+{
+    "files.associations": {
+        "mlx.h": "c",
+        "cub3d.h": "c",
+        "math.h": "c",
+        "so_long.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c",
+        "__bit_reference": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "unordered_map": "c",
+        "libft.h": "c",
+        "key_macos.h": "c",
+        "string.h": "c",
+        "__string": "c",
+        "cctype": "c",
+        "cstdio": "c",
+        "cstring": "c",
+        "cwchar": "c",
+        "ios": "c",
+        "istream": "c",
+        "iterator": "c",
+        "locale": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "streambuf": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c"
+    }
+}
