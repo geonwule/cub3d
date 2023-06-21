@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 17:38:35 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:57:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	map[15][34] = {
         "11111111 1111111 111111111111    "
     };
 
-#ifdef DEBUG
+#ifdef DEBUG_LEAK
 void	leaks(void)
 {
 	system("leaks cub3d");
@@ -38,7 +38,7 @@ void	leaks(void)
 
 int main(int ac, char **av)
 {
-	#ifdef DEBUG
+	#ifdef DEBUG_LEAK
 	atexit(leaks); //tmp
 	#endif
     t_vars  *vars;

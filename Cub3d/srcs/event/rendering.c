@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 17:41:34 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:16:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ static void mini_map(t_vars *vars)
 			else if (map[x][y] == '1')// wall
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'M')// monster
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->player_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'B')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->player_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->door_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == '0' || map[x][y] == 'b')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
 		}
@@ -154,10 +154,19 @@ void	draw_mlx(t_vars *vars)
 void	aim_point(t_vars *vars)
 {
 	int x, y;
-	void	*aim = mlx_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
-	void	*gun = mlx_xpm_file_to_image(vars->mlx, "texture/gun.xpm", &x, &y);
-	mlx_put_image_to_window(vars->mlx, vars->win, aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-	mlx_put_image_to_window(vars->mlx, vars->win, gun, WIN_WIDTH / 9 * 5, WIN_HEIGHT / 9 * 7);
+	vars->aim = mlx_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
+	if (vars->gun_change)
+	{
+		vars->gun = mlx_xpm_file_to_image(vars->mlx, "texture/hand2.xpm", &x, &y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 10 * 3, WIN_HEIGHT / 9 * 6);
+		vars->gun_change = 0;
+	}
+	else
+	{
+		vars->gun = mlx_xpm_file_to_image(vars->mlx, "texture/hand1.xpm", &x, &y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 9 * 1, WIN_HEIGHT / 9 * 5);
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
 void	monster_come_on(t_vars *vars, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 12:18:12 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:16:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@
 // #define MAP_DEBUG
 // # define DEBUG
 // # define KEY_DEBUG
+// # define DEBUG_LEAK
+// #define DEBUG_MON
 
 # define NORTH "./texture/jeong/no.xpm"
 # define SOUTH "./texture/jeong/so.xpm"
 # define EAST "./texture/jeong/ea.xpm"
 # define WEST "./texture/jeong/we.xpm"
-
-# define PLAYER "./texture/player_10.xpm"
-# define EMPTY "./texture/empty_10.xpm"
-# define WALL "./texture/wall_10.xpm"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
@@ -42,11 +40,11 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
-# define TEX_WIDTH 64
-# define TEX_HEIGHT 64
+# define TEX_WIDTH 400	
+# define TEX_HEIGHT 400
 
-# define IMG_WIDTH 400
-# define IMG_HEIGHT 300
+// # define IMG_WIDTH 4000
+// # define IMG_HEIGHT 3000
 
 enum	e_pos
 {
@@ -206,9 +204,12 @@ typedef struct s_vars
 	void	*south_x;
 	void	*west_x;
 	void	*east_x;
-	void	*player_x;
+
+	void	*player_x;	
 	void	*empty_x;
 	void	*wall_x;
+	void	*door_x;
+	void	*monster_x;
 
     void    *img_ptr;
     char    *data;
@@ -224,6 +225,11 @@ typedef struct s_vars
 
 	int		monster_come;
 	int		m_pos[2];
+
+	//aim,shot
+	void	*aim;
+	void	*gun;
+	int		gun_change;
 }   t_vars;
 
 //vars_init
