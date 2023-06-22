@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 19:16:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:59:26 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ t_vars  *vars_allocation(void)
     vars->ceiling = NULL;
 	vars->monster_come = 0;
 	vars->gun_change = 0;
+	vars->hp = 3;
+	vars->hp_before = 3;
+	vars->hunt = 0;
+	vars->level = 1;
+	vars->dead_check = 0;
 	// map->height = 0;
 	// map->width = 0;
 	// map->arr = NULL;
@@ -54,6 +59,14 @@ static void	img_xpm_set(t_vars *vars)
 	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
 	vars->monster_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
 	vars->door_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
+	vars->hp1 = mlx_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
+	vars->hp2 = mlx_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);
+	vars->hp3 = mlx_xpm_file_to_image(vars->mlx, "texture/hp3.xpm", &x, &y);
+	vars->damage = mlx_xpm_file_to_image(vars->mlx, "texture/damage.xpm", &x, &y);
+	vars->dead = mlx_xpm_file_to_image(vars->mlx, "texture/dead.xpm", &x, &y);
+	vars->exp1 = mlx_xpm_file_to_image(vars->mlx, "texture/exp1.xpm", &x, &y);
+	vars->exp2 = mlx_xpm_file_to_image(vars->mlx, "texture/exp2.xpm", &x, &y);
+	vars->lv = mlx_xpm_file_to_image(vars->mlx, "texture/level.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -118,14 +131,19 @@ int vars_init(t_vars *vars)
 	
 	info->posX = 11.0;
 	info->posY = 26.0;
-	
+	vars->init_pos[X] = info->posX;
+	vars->init_pos[Y] = info->posY;
 	//player direction(x, y) 플레이어 방향 벡터
 	info->dirX = -1.0;
 	info->dirY = 0.0;
+	vars->init_dir[X] = info->dirX;
+	vars->init_dir[Y] = info->dirY;
 	
 	//camera line 카메라 평면벡터
 	info->planeX = 0.0;
 	info->planeY = 0.66;
+	vars->init_plane[X] = info->planeX;
+	vars->init_plane[Y] = info->planeY;
 
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.05;

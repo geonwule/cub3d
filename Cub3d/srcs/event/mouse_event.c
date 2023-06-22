@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 17:50:32 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:03:06 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	handle_mouse_move(int x, int y, void *args)
 	printf("in mouse_handel\nx = %d y = %d, vars = %p\n", x, y, vars);
 
 	t_info	*info = vars->info;
-	if (x > (WIN_WIDTH / 2 + WIN_WIDTH / 3))//left
+	if (x > (WIN_WIDTH / 2))// + WIN_WIDTH / 3))//left
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -63,7 +63,7 @@ int	handle_mouse_move(int x, int y, void *args)
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
 	
-	if (x < (WIN_WIDTH / 2 - + WIN_WIDTH / 3))//right
+	if (x < (WIN_WIDTH / 2))//- + WIN_WIDTH / 3))//right
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;

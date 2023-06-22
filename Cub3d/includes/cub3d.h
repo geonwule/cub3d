@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 19:16:03 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:59:18 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ enum	e_key
 	S = 1,
 	D = 2,
 	B = 11,
+	R = 15,
 	ESC = 53,
 	DEAD = 3,
 	LEFT = 124,
@@ -229,7 +230,31 @@ typedef struct s_vars
 	//aim,shot
 	void	*aim;
 	void	*gun;
+
+	int		hp;
+	int		hp_before;
+
+	void	*hp1;
+	void	*hp2;
+	void	*hp3;
+
+	void	*damage;
+
+	int		dead_check;
+	void	*dead;
+
+	int		hunt;
+	void	*exp1;
+	void	*exp2;
+
+	int		level;
+	void	*lv;
+
 	int		gun_change;
+
+	double	init_pos[2];
+	double	init_dir[2];
+	double	init_plane[2];
 }   t_vars;
 
 //vars_init

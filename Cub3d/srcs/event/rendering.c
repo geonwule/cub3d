@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 19:16:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:12:08 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,54 +169,123 @@ void	aim_point(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
+void	damaged(t_vars *vars)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
+}
+
 void	monster_come_on(t_vars *vars, int x, int y)
 {
 	t_info	*info = vars->info;
-	
-	// printf("vars->m_pos[y] - 1 %d\n",vars->m_pos[Y] - 1);
-	// printf("map[x][vars->m_pos[y] - 1] = %c\n",  map[x][vars->m_pos[Y] - 1]);
-	// printf("vars->m_pos[y] + 1 %d\n",vars->m_pos[Y] + 1);
-	// printf("map[x][vars->m_pos[y] + 1] = %c\n",  map[x][vars->m_pos[Y] + 1]);
-	if (info->posX < x && map[x - 1][y] == '0')
-	{
-		map[x][y] = '0';
-		map[x - 1][y] = 'M';
-		vars->m_pos[X] -= 1;
-	}
-	else if (map[x + 1][y] == '0')
-	{
-		map[x][y] = '0';
-		map[x + 1][y] = 'M';
-		vars->m_pos[X] += 1;
-	}
-	x = vars->m_pos[X];
-	if (info->posY < y && map[x][y - 1] == '0')
-	{
-		map[x][y] = '0';
-		map[x][y - 1] = 'M';
-		vars->m_pos[Y] -= 1;
-	}
-	else if (map[x][y + 1] == '0')
-	{
-		map[x][y] = '0';
-		map[x][y + 1] = 'M';
-		vars->m_pos[Y] += 1;
-	}
-}
 
-int i = 0;
-int	rendering(t_vars *vars)
-{
-	if (vars->monster_come && ++i % 30 == 0)
+	if ((int)info->posX < x && map[x - 1][y] == '0')
 	{
-		if (map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
+		if (((int)info->posX == x - 1 && (int)info->posY == y) && vars->hp > 0)
 		{
-			vars->monster_come = 0;
+			vars->hp -= 1;
+			// damaged(vars);
 		}
 		else
 		{
-			monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
+			map[x][y] = '0';
+			map[x - 1][y] = 'M';
+			vars->m_pos[X] -= 1;
+		}		
+	}
+	else if ((int)info->posX > x && map[x + 1][y] == '0')
+	{
+		if (((int)info->posX == x + 1 && (int)info->posY == y))
+		{
+			vars->hp -= 1;
+			// damaged(vars);
 		}
+		else
+		{
+			map[x][y] = '0';
+			map[x + 1][y] = 'M';
+			vars->m_pos[X] += 1;
+		}
+	}
+	x = vars->m_pos[X];
+	if ((int)info->posY < y && map[x][y - 1] == '0')
+	{
+		if ((int)info->posX == x && (int)info->posY == y - 1)
+		{
+			vars->hp -= 1;
+			// damaged(vars);
+		}
+		else
+		{
+			map[x][y] = '0';
+			map[x][y - 1] = 'M';
+			vars->m_pos[Y] -= 1;
+		}
+	}
+	else if ((int)info->posY > y && map[x][y + 1] == '0')
+	{
+		if ((int)info->posX == x && (int)info->posY == y + 1)
+		{
+			vars->hp -= 1;
+			// damaged(vars);
+		}
+		else
+		{
+			map[x][y] = '0';
+			map[x][y + 1] = 'M';
+			vars->m_pos[Y] += 1;
+		}
+	}
+	
+}
+
+void	hp_exp(t_vars *vars)
+{
+	if (vars->hp == 3)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp3, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->hp == 2)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp2, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->hp == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp1, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->hp == 0)
+	{
+		vars->dead_check = 1;
+		return ;
+	}
+	if (vars->hunt % 2 == 0)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp1, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
+	else if (vars->hunt % 2 == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp2, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
+}
+
+void	level_up(t_vars *vars)
+{
+	char	*level_str;
+	if (vars->hunt != 0 && vars->hunt % 2 == 0)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->lv, WIN_WIDTH / 9 * 2, WIN_HEIGHT / 5 * 2);
+		vars->level += 1;
+		vars->hunt = 0;
+	}
+	level_str = ft_itoa(vars->level); //overflow protect need!
+	mlx_string_put(vars->mlx, vars->win, 52, 710, 0xFFFFFF, level_str);
+	free(level_str);
+}
+
+int i = 0;
+
+int	rendering(t_vars *vars)
+{
+	if (vars->dead_check)
+	{
+		for (int j = 0; j < 2147483647; j++) ;
+		exit(0);
+	}
+	if (vars->monster_come && ++i % 30 == 0)
+	{
+		if (map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
+			vars->monster_come = 0;
+		else
+			monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
 		printf("monster[%d][%d]\n", vars->m_pos[X], vars->m_pos[Y]);
 	}
 	key_check(vars);
@@ -225,6 +294,17 @@ int	rendering(t_vars *vars)
 	map_set(vars);
 	draw_mlx(vars);
 	aim_point(vars);
+	hp_exp(vars);
+	level_up(vars);
 	mini_map(vars);
+	if (vars->hp_before != vars->hp)
+	{
+		damaged(vars);
+		vars->hp_before = vars->hp;
+	}
+	if (vars->dead_check)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
+	}
 	return (0);
 }
