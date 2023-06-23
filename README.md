@@ -1,4 +1,14 @@
-# cub3d
+# cub3d(geon)
+1. 6.23.(금)
+    + 1. feat: 죽었을때 P누르면 부활(리셋), ESC누르면 종료
+    + 2. feat: 난수(random_generator)구현, 몬스터리젠/포션드랍률 설정
+    + 3. feat: 스피드 조절기능(q, e), 몬스터 포션드랍(체력충전)
+
+2. 할일
+    + 1. mandatory의 벽 사분면 구분해서 출력하는것
+    + 2. ray_casting, sprite 개념 이해
+
+# rule
 Commit message 7가지 규칙
 제목과 본문을 한 줄 띄어 구분
 제목은 50자 이내
