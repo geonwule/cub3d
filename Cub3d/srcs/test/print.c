@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:05:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/23 17:12:08 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/23 19:26:57 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,11 @@ void	print_texture(t_vars *vars)
 	printf("vars->south: %s\n", vars->south);
 	printf("vars->west: %s\n", vars->west);
 	printf("vars->east: %s\n", vars->east);
+}
+
+
+void	print_color(t_vars *vars)
+{
+	printf("vars->floor: %s\n", vars->floor);
+	printf("vars->ceiling: %s\n", vars->ceiling);
 }

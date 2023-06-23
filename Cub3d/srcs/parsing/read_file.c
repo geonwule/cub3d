@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 21:42:31 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/23 18:45:25 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/23 19:30:04 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,41 @@ void	init_map_info(t_vars *vars, char *path)
 	if (fd < 0)
 		print_error("File open failed", vars);
 
-	for (int i = 0; i < 4; i++)
+	cnt = 0;
+//	print_texture(vars);
+
+	while (1)
 	{
+//		if (cnt == 4)
+//		{
+//			if (check_texture(vars));		// alloc check
+//			{
+//				print_error("exture input error", vars);
+//				exit(1);
+//			}
+//		}
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 		arr = ft_split(line, ' ');
-		cnt = 0;
+		// arr[0] isascii -> error
+
+
 		if (set_texture(arr, vars))
 		{
+			if (cnt > 3)
+				print_error("Too many texture", vars);
 			cnt++;
-			printf("check_dir end\n");
 		}
+		if (set_color(arr, vars))
+		{
+			if (cnt <= 3)
+				print_error("Need more texture", vars);
+			else if (cnt > 5)
+				print_error("Too many color", vars);
+			cnt++;
+		}
+	
 		free_arr_2d(&arr);
 		free(line);
 	}

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 18:40:34 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/23 18:57:45 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ int main(int ac, char **av)
 //    mlx_hook(vars->win, WINDOW_DESTROY, DESTROY_MASK, exit_game, vars);
 // 	mlx_loop(vars->mlx);
 
-	vars_free(&vars);
 	return (RETURN_SUCCESS);
 }

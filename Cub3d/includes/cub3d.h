@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 18:41:11 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/23 19:26:47 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,8 +286,10 @@ void    free_arr_2d(char ***arr);
 
 // parsing/set.c
 int		set_texture(char **arr, t_vars *vars);
+int		set_color(char **arr, t_vars *vars);
 
 //test
 void	print_texture(t_vars *vars);
+void	print_color(t_vars *vars);
 
 #endif
