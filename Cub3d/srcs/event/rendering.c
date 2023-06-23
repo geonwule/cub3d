@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:12:30 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:25:23 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,17 +262,25 @@ void	level_up(t_vars *vars)
 }
 
 
-void	dead_check_game_end(t_vars *vars)
+int	dead_check_game_end(t_vars *vars)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
+	if (!vars->dead_check)
+		return (0);
 	if (vars->dead_check)
 	{
-		while (i < 2147483647)
-			i++;
-		exit_game(vars);
+		if (vars->keyboard[ESC])
+			exit_game(vars);
+		else if (vars->keyboard[P])
+		{
+			reset_game(vars);
+			vars->dead_check = 0;
+			return (0);
+		}
 	}
+	return (1);
 }
 
 void	monster_rezen(t_vars *vars)
@@ -322,7 +330,8 @@ void	monster_rezen(t_vars *vars)
 
 int	rendering(t_vars *vars)
 {
-	dead_check_game_end(vars);
+	if (dead_check_game_end(vars))
+		return (0);
 	monster_rezen(vars);
 	monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
 

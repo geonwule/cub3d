@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:09:29 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:17:15 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,7 @@ int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 void	monster_kill(t_vars *vars);
+void	reset_game(t_vars *vars);
 
 //mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);

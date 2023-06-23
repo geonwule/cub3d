@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:10:01 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:17:04 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,12 @@ void	reset_game(t_vars *vars)
 	vars->hunt = 0;
 	vars->monster_come = 0;
 	vars->m_num = 0;
-	vars->info->posX = POS_X;
-	vars->info->posY = POS_Y;
+	vars->info->posX = vars->init_pos[X];
+	vars->info->posY = vars->init_pos[Y];
+	vars->info->dirX = vars->init_dir[X];
+	vars->info->dirY = vars->init_dir[Y];
+	vars->info->planeX = vars->init_plane[X];
+	vars->info->planeY = vars->init_plane[Y];
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
 		for (int j = 0; j < MAP_WIDTH; j++)
@@ -160,9 +164,7 @@ int	key_press(int keycode, t_vars *vars)
 	t_info *info = vars->info;	
 	//gun shot
 	if (keycode == P)
-	{
 		reset_game(vars);
-	}
 	if (keycode == Q)
 	{
 		info->moveSpeed -= 0.01;
