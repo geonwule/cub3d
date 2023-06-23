@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:23:32 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:06:16 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vars  *vars_allocation(t_vars *vars)
     vars->ceiling = NULL;
 
 	vars->monster_come = 0;
-	vars->m_zen = 0;
+	vars->m_num = 0;
 	vars->sprite = NULL;
 
 	vars->gun_change = 0;
@@ -55,6 +55,7 @@ static void	img_xpm_set(t_vars *vars)
 	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
 	vars->monster_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
 	vars->door_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
+	vars->potion_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
 	vars->hp1 = mlx_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
 	vars->hp2 = mlx_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);
 	vars->hp3 = mlx_xpm_file_to_image(vars->mlx, "texture/hp3.xpm", &x, &y);
@@ -124,8 +125,8 @@ int vars_init(t_vars *vars)
 {
 	t_info	*info = vars->info;
 	
-	info->posX = 11.0;
-	info->posY = 26.0;
+	info->posX = POS_X;
+	info->posY = POS_Y;
 	vars->init_pos[X] = info->posX;
 	vars->init_pos[Y] = info->posY;
 	//player direction(x, y) 플레이어 방향 벡터

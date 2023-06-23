@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:32:16 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:09:29 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # define TEX_WIDTH 400	
 # define TEX_HEIGHT 400
 
+# define MAP_HEIGHT 15
+# define MAP_WIDTH 34
+
 // # define IMG_WIDTH 4000
 // # define IMG_HEIGHT 3000
 
@@ -50,6 +53,8 @@ enum	e_pos
 {
 	X = 0,
 	Y = 1,
+	POS_X = 11,
+	POS_Y = 26,
 }	;
 
 enum	e_return_value
@@ -79,6 +84,7 @@ enum	e_key
 	R = 15,
 	Q = 12,
 	E = 14,
+	P = 35,
 	ESC = 53,
 	DEAD = 3,
 	LEFT = 124,
@@ -223,6 +229,7 @@ typedef struct s_vars
 	void	*wall_x;
 	void	*door_x;
 	void	*monster_x;
+	void	*potion_x;
 
     void    *img_ptr;
     char    *data;
@@ -239,7 +246,7 @@ typedef struct s_vars
 	int				monster_come;
 	int				m_speed;
 	unsigned int	m_pos[2];
-	unsigned int	m_zen;
+	unsigned int	m_num;
 
 	void			*potion;
 

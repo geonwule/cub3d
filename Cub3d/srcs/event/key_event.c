@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:38:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:10:01 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	monster_kill(t_vars *vars)
 			sideDistY += deltaDistY;
 			mapY += stepY;
 		}
-		if (map[mapX][mapY] == '0')
+		if (map[mapX][mapY] == '0' || map[mapX][mapY] == 'b' \
+			|| map[mapX][mapY] == 'P')
 			continue;
 		if (map[mapX][mapY] == 'M')
 		{
@@ -113,6 +114,29 @@ void	monster_kill(t_vars *vars)
 		else
 			map[mapX][mapY] = '0';
 		vars->hunt++;
+		vars->m_num--;
+	}
+}
+
+void	reset_game(t_vars *vars)
+{
+	vars->hp = 3;
+	vars->hp_before = 3;
+	vars->level = 1;
+	vars->hunt = 0;
+	vars->monster_come = 0;
+	vars->m_num = 0;
+	vars->info->posX = POS_X;
+	vars->info->posY = POS_Y;
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			if (map[i][j] == 'b')
+				map[i][j] = 'B';
+			else if (map[i][j] == 'M' || map[i][j] == 'P')
+				map[i][j] = '0';
+		}
 	}
 }
 
@@ -135,6 +159,10 @@ int	key_press(int keycode, t_vars *vars)
 
 	t_info *info = vars->info;	
 	//gun shot
+	if (keycode == P)
+	{
+		reset_game(vars);
+	}
 	if (keycode == Q)
 	{
 		info->moveSpeed -= 0.01;

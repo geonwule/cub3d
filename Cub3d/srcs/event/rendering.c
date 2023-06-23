@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:28:37 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:12:30 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ static void mini_map(t_vars *vars)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'B')// break 벽
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->door_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'P')// break 벽
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == '0' || map[x][y] == 'b')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
 		}
@@ -177,7 +179,7 @@ void	monster_come_on(t_vars *vars, int x, int y)
 		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
 		return ;
 
-	printf("map[%d][%d] = %c\n", vars->m_pos[X], vars->m_pos[Y], map[vars->m_pos[X]][vars->m_pos[Y]]);
+	// printf("map[%d][%d] = %c\n", vars->m_pos[X], vars->m_pos[Y], map[vars->m_pos[X]][vars->m_pos[Y]]);
 	
 	if ((int)info->posX < x && map[x - 1][y] == '0')
 	{
@@ -283,30 +285,35 @@ void	monster_rezen(t_vars *vars)
 	vars->map->width = 34;
 	*/
 
+	// i = 0;
+	// while (i < 15)
+	// {
+	// 	j = 0;
+	// 	while (j < 34)
+	// 	{
+	// 		if (map[i][j] == 'M')
+	// 			return ;
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	if (vars->m_num)
+		return ;
 	i = 0;
 	while (i < 15)
 	{
 		j = 0;
 		while (j < 34)
 		{
-			if (map[i][j] == 'M')
-				return ;
-			j++;
-		}
-		i++;
-	}
-
-	i = 0;
-	while (i < 15)
-	{
-		j = 0;
-		while (j < 34)
-		{
-			vars->m_zen++;
 			if (i > 7 && j > 24)
 				break ;
-			if (map[i][j] == '0' && (vars->m_zen) % 10 == 0 && i != (int)vars->info->posX && j != (int)vars->info->posY)
+			if (map[i][j] == '0' && random_generator(2) \
+				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
+			{
 				map[i][j] = 'M';
+				vars->m_num++;
+				usleep(1);
+			}
 			j++;
 		}
 		i++;

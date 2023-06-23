@@ -6,18 +6,25 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:07:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:53:14 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h> //, time rand()
+#include <sys/time.h>
 
 int		random_generator(int frequency)
 {
-    int ret;
+    struct timeval      tv;
+    unsigned long long  milliseconds;
+    int                 ret;
 
-    srand(time(NULL));
+    gettimeofday(&tv, NULL);
+    // milliseconds = (unsigned long long)(tv.tv_sec) * 1000 \
+     + 
+    milliseconds = (unsigned long long)(tv.tv_usec);
+    srand((unsigned int)milliseconds);
     ret = rand();
     if (ret % frequency == 0)
         return (1);
