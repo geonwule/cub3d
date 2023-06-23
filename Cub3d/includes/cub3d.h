@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 19:42:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:41:11 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@
 // #define MAP_DEBUG
 // # define DEBUG
 // # define KEY_DEBUG
+// # define DEBUG_LEAK
+// #define DEBUG_MON
 
 # define NORTH "./texture/jeong/no.xpm"
 # define SOUTH "./texture/jeong/so.xpm"
 # define EAST "./texture/jeong/ea.xpm"
 # define WEST "./texture/jeong/we.xpm"
-
-# define PLAYER "./texture/player_10.xpm"
-# define EMPTY "./texture/empty_10.xpm"
-# define WALL "./texture/wall_10.xpm"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
@@ -42,11 +40,11 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 
-# define TEX_WIDTH 64
-# define TEX_HEIGHT 64
+# define TEX_WIDTH 400	
+# define TEX_HEIGHT 400
 
-# define IMG_WIDTH 400
-# define IMG_HEIGHT 300
+// # define IMG_WIDTH 4000
+// # define IMG_HEIGHT 3000
 
 enum	e_pos
 {
@@ -193,23 +191,25 @@ typedef struct s_vars
     void	*mlx;
     void	*win;
 
-	//jonn parsing
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
+	char	*north;		// alloc
+	char	*south;		// alloc
+	char	*west;		// alloc
+	char	*east;		// alloc
+	char	*floor;
 	int		f[3];
+	char	*ceiling;
 	int		c[3];
-	char	dir; //N W S E
-	t_map	*jonn_map;
 
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
 	void	*east_x;
-	void	*player_x;
+
+	void	*player_x;	
 	void	*empty_x;
 	void	*wall_x;
+	void	*door_x;
+	void	*monster_x;
 
     void    *img_ptr;
     char    *data;
@@ -225,6 +225,11 @@ typedef struct s_vars
 
 	int		monster_come;
 	int		m_pos[2];
+
+	//aim,shot
+	void	*aim;
+	void	*gun;
+	int		gun_change;
 }   t_vars;
 
 //vars_init
@@ -235,12 +240,6 @@ void	set_plane(t_info *info, double x, double y);
 
 //background_init
 void	fill_background(t_vars *vars, int ceiling[3], int floor[3]);
-
-//map_read
-int		map_read(char *map_path, t_vars *vars);
-
-//map_error
-int 	map_error(t_vars *vars);
 
 //key_event
 int		can_move(t_vars *vars, int y, int x);
@@ -277,4 +276,18 @@ t_map	*ft_lstnew_cub(void *content);
 t_map	*ft_lstlast_cub(t_map *lst);
 void	ft_lstadd_back_cub(t_map **lst, t_map *new);
 int		ft_lstsize_cub(t_map *lst);
+
+// parsing/read_file.c
+void	print_error(char *str, t_vars *vars);
+void	read_file(t_vars *vars, char *path);
+
+// parsing/free.c
+void    free_arr_2d(char ***arr);
+
+// parsing/set.c
+int		set_texture(char **arr, t_vars *vars);
+
+//test
+void	print_texture(t_vars *vars);
+
 #endif

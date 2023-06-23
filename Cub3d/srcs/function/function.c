@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/14 13:21:54 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:01:35 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ int ft_open(char *file_path)
 
 void	vars_free(t_vars *vars)
 {
-    // if (vars->map)
-    // {
-    //     #ifdef DEBUG
-    //     printf("map free\n");//tmp
-    //     #endif
-    //     free(vars->map);
-    // }
-    // t_map   *temp;
-    // t_map   *cur;
-
-    // cur = vars->map_head;
-    // while (cur)
-    // {
-    //     temp = cur;
-    //     cur = cur->next;
-    //     free (temp);
-    // }
 	if (vars->north)
 	{
         #ifdef DEBUG
@@ -100,7 +83,12 @@ void	vars_free(t_vars *vars)
 		free(vars->ceiling);
 	}
     if (vars->info)
+    {
+        for (int i = 0; i < 8; i++)
+            free(vars->info->texture[i]);
+        free(vars->info->texture);
         free(vars->info);
+    }
 	free(vars);
 }
 

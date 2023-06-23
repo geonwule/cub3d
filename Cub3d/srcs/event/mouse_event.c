@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 12:10:40 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:50:32 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	handle_mouse_button(int button, int x, int y, void *args)
 	if (button == 1)
 	{
 		int x, y;
-		void	*shot = mlx_xpm_file_to_image(vars->mlx, "texture/shot.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+		void	*shot = mlx_xpm_file_to_image(vars->mlx, "texture/clo_1.xpm", &x, &y);
+		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
+		shot = mlx_xpm_file_to_image(vars->mlx, "texture/clo_2.xpm", &x, &y);
+		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
 		monster_kill(vars);
 		printf("mouse_button\n");
 	}

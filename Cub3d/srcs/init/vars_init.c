@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 17:49:43 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:16:02 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_vars  *vars_allocation(void)
     vars->floor = NULL;
     vars->ceiling = NULL;
 	vars->monster_come = 0;
+	vars->gun_change = 0;
 	// map->height = 0;
 	// map->width = 0;
 	// map->arr = NULL;
@@ -48,17 +49,11 @@ static void	img_xpm_set(t_vars *vars)
 	int	x;
 	int	y;
 
-	// vars->north_x = mlx_xpm_file_to_image(vars->mlx, vars->north, &x, &y);
-	// vars->south_x = mlx_xpm_file_to_image(vars->mlx, vars->south, &x, &y);
-	// vars->east_x = mlx_xpm_file_to_image(vars->mlx, vars->east, &x, &y);
-	// vars->west_x = mlx_xpm_file_to_image(vars->mlx, vars->west, &x, &y);
-	vars->north_x = mlx_xpm_file_to_image(vars->mlx, NORTH, &x, &y);
-	vars->south_x = mlx_xpm_file_to_image(vars->mlx, SOUTH, &x, &y);
-	vars->east_x = mlx_xpm_file_to_image(vars->mlx, EAST, &x, &y);
-	vars->west_x = mlx_xpm_file_to_image(vars->mlx, WEST, &x, &y);
-	vars->player_x = mlx_xpm_file_to_image(vars->mlx, PLAYER, &x, &y);
-	vars->empty_x = mlx_xpm_file_to_image(vars->mlx, EMPTY, &x, &y);
-	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, WALL, &x, &y);
+	vars->player_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
+	vars->empty_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
+	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
+	vars->monster_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
+	vars->door_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -73,31 +68,44 @@ void	set_plane(t_info *info, double x, double y)
 	info->planeY = y;
 }
 
+#ifdef DEBUG_MON
+#include <string.h>
+#endif
+
 static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_img *img)
 {
 	img->img = mlx_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+
+	printf("img_width = %d img_height = %d\n", img->img_width, img->img_height);
+
 	for (int y = 0; y < img->img_height; y++)
 	{
 		for (int x = 0; x < img->img_width; x++)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			#ifdef DEBUG_MON
+			printf("%d", texture[img->img_width * y + x]);
+			if (x % img->img_width == 0)
+				printf("\n");
+			#endif
 		}
 	}
+	#ifdef DEBUG_MON
+	printf("exit\n");
+	exit(0);
+	#endif
 	mlx_destroy_image(vars->mlx, img->img);
 }
 
 static void	load_texture(t_vars *vars, t_info *info)
 {
 	t_img	img;
-	load_image(vars, info, info->texture[TEX_NO], "texture/north.xpm", &img);
-	load_image(vars, info, info->texture[TEX_SO], "texture/south.xpm", &img);
-	load_image(vars, info, info->texture[TEX_EA], "texture/east.xpm", &img);
-	load_image(vars, info, info->texture[TEX_WE], "texture/west.xpm", &img);
-	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster.xpm", &img);
-	// load_image(vars, info, info->texture[5], "textures_study/mossy.xpm", &img);
-	// load_image(vars, info, info->texture[6], "textures_study/wood.xpm", &img);
-	// load_image(vars, info, info->texture[7], "textures_study/colorstone.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NO], "texture/no400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_SO], "texture/so400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_EA], "texture/ea400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_WE], "texture/we400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster400.xpm", &img);
 }
 	// load_image(vars, info, info->texture[TEX_NO], NORTH, &img);
 	// load_image(vars, info, info->texture[TEX_SO], SOUTH, &img);
@@ -119,8 +127,8 @@ int vars_init(t_vars *vars)
 	info->planeX = 0.0;
 	info->planeY = 0.66;
 
-	info->moveSpeed = 0.04;
-	info->rotSpeed = 0.04;
+	info->moveSpeed = 0.05;
+	info->rotSpeed = 0.05;
 
 	vars->f[0] = 220;
 	vars->f[1] = 100;
