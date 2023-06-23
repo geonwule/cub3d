@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 12:30:00 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:25:54 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct  s_info
 
 	t_img	img;
 	int		buf[WIN_HEIGHT][WIN_WIDTH];
+	double	zBuffer[WIN_WIDTH];
 	int		**texture;
 }   t_info;
 
@@ -183,6 +184,13 @@ typedef	struct s_map
 	char	*tmp_arr;
 	char	**arr;
 }	t_map;
+
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+}	t_sprite;
 
 typedef struct s_vars
 {
@@ -228,6 +236,8 @@ typedef struct s_vars
 	int				m_speed;
 	unsigned int	m_pos[2];
 	unsigned int	m_zen;
+	int				monster_num; //sprite_num
+	t_sprite		*sprite;
 
 	//aim,shot
 	void	*aim;

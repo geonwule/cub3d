@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 12:30:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:26:17 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ t_vars  *vars_allocation(t_vars *vars)
     vars->east = NULL;
     vars->floor = NULL;
     vars->ceiling = NULL;
+
 	vars->monster_come = 0;
 	vars->m_zen = 0;
+	vars->sprite = NULL;
+
 	vars->gun_change = 0;
 	vars->hp = 3;
 	vars->hp_before = 3;
@@ -82,8 +85,6 @@ static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_i
 {
 	img->img = mlx_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
-
-	printf("img_width = %d img_height = %d\n", img->img_width, img->img_height);
 
 	for (int y = 0; y < img->img_height; y++)
 	{
