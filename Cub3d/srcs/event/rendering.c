@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/22 20:12:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:48:29 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,7 @@ int	can_move(t_vars *vars, int x, int y)
 	spot = map[x][y];
 	if (spot == '0' || spot == 'N' || spot == 'S' \
 		|| spot == 'W' || spot == 'E' || spot == 'b')
-	{
-		// printf("can move\n");//tmp
 		return (1);
-	}
-	//tmp
-	// printf("init x = %d y = %d\n", (int)vars->info->posX, (int)vars->info->posY);
-	// printf("x = %d, y = %d\n", x, y);
-	// printf("%c\n", map[x][y]);
-	// printf("can not move\n");
 	return (0);
 }
 
@@ -135,7 +127,6 @@ static void mini_map(t_vars *vars)
 	}
 }
 
-
 void	draw_mlx(t_vars *vars)
 {
 	for (int y = 0; y < WIN_HEIGHT; y++)
@@ -148,8 +139,6 @@ void	draw_mlx(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->info->img.img, 0, 0);
 }
 
-// int idx = 0;
-// 	printf("render %d ok\n", ++idx);
 
 void	aim_point(t_vars *vars)
 {
@@ -169,22 +158,27 @@ void	aim_point(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
-void	damaged(t_vars *vars)
+void	damaged_or_recovery(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
+	if (vars->hp_before > vars->hp)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
+	vars->hp_before = vars->hp;
 }
 
 void	monster_come_on(t_vars *vars, int x, int y)
 {
 	t_info	*info = vars->info;
 
+	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
+		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
+		return ;
+
+	printf("map[%d][%d] = %c\n", vars->m_pos[X], vars->m_pos[Y], map[vars->m_pos[X]][vars->m_pos[Y]]);
+	
 	if ((int)info->posX < x && map[x - 1][y] == '0')
 	{
 		if (((int)info->posX == x - 1 && (int)info->posY == y) && vars->hp > 0)
-		{
 			vars->hp -= 1;
-			// damaged(vars);
-		}
 		else
 		{
 			map[x][y] = '0';
@@ -195,10 +189,7 @@ void	monster_come_on(t_vars *vars, int x, int y)
 	else if ((int)info->posX > x && map[x + 1][y] == '0')
 	{
 		if (((int)info->posX == x + 1 && (int)info->posY == y))
-		{
 			vars->hp -= 1;
-			// damaged(vars);
-		}
 		else
 		{
 			map[x][y] = '0';
@@ -210,10 +201,7 @@ void	monster_come_on(t_vars *vars, int x, int y)
 	if ((int)info->posY < y && map[x][y - 1] == '0')
 	{
 		if ((int)info->posX == x && (int)info->posY == y - 1)
-		{
 			vars->hp -= 1;
-			// damaged(vars);
-		}
 		else
 		{
 			map[x][y] = '0';
@@ -224,10 +212,7 @@ void	monster_come_on(t_vars *vars, int x, int y)
 	else if ((int)info->posY > y && map[x][y + 1] == '0')
 	{
 		if ((int)info->posX == x && (int)info->posY == y + 1)
-		{
 			vars->hp -= 1;
-			// damaged(vars);
-		}
 		else
 		{
 			map[x][y] = '0';
@@ -235,7 +220,6 @@ void	monster_come_on(t_vars *vars, int x, int y)
 			vars->m_pos[Y] += 1;
 		}
 	}
-	
 }
 
 void	hp_exp(t_vars *vars)
@@ -271,40 +255,80 @@ void	level_up(t_vars *vars)
 	free(level_str);
 }
 
-int i = 0;
+
+void	dead_check_game_end(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	if (vars->dead_check)
+	{
+		while (i < 2147483647)
+			i++;
+		exit_game(vars);
+	}
+}
+
+void	monster_rezen(t_vars *vars)
+{
+	int			i;
+	int			j;
+
+	/*need parsing
+	vars->map->height = 15;
+	vars->map->width = 34;
+	*/
+
+	i = 0;
+	while (i < 15)
+	{
+		j = 0;
+		while (j < 34)
+		{
+			if (map[i][j] == 'M')
+				return ;
+			j++;
+		}
+		i++;
+	}
+
+	i = 0;
+	while (i < 15)
+	{
+		j = 0;
+		while (j < 34)
+		{
+			vars->m_zen++;
+			if (i > 7 && j > 24)
+				break ;
+			if (map[i][j] == '0' && (vars->m_zen) % 10 == 0)
+				map[i][j] = 'M';
+			j++;
+		}
+		i++;
+	}
+}
 
 int	rendering(t_vars *vars)
 {
-	if (vars->dead_check)
-	{
-		for (int j = 0; j < 2147483647; j++) ;
-		exit(0);
-	}
-	if (vars->monster_come && ++i % 30 == 0)
-	{
-		if (map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
-			vars->monster_come = 0;
-		else
-			monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
-		printf("monster[%d][%d]\n", vars->m_pos[X], vars->m_pos[Y]);
-	}
+	dead_check_game_end(vars);
+	monster_rezen(vars);
+	monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
+
 	key_check(vars);
 	mlx_clear_window(vars->mlx, vars->win); // clear window
 	fill_background(vars, vars->c, vars->f); // study_need // fill back ground
 	map_set(vars);
 	draw_mlx(vars);
+
 	aim_point(vars);
 	hp_exp(vars);
 	level_up(vars);
-	mini_map(vars);
-	if (vars->hp_before != vars->hp)
-	{
-		damaged(vars);
-		vars->hp_before = vars->hp;
-	}
+
+	mini_map(vars);	
+
+	damaged_or_recovery(vars);
 	if (vars->dead_check)
-	{
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
-	}
 	return (0);
 }

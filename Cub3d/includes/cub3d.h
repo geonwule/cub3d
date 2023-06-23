@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/22 19:59:18 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:30:00 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,10 @@ typedef struct s_vars
 	t_ray	ray;
 	t_info	*info;
 
-	int		monster_come;
-	int		m_pos[2];
+	int				monster_come;
+	int				m_speed;
+	unsigned int	m_pos[2];
+	unsigned int	m_zen;
 
 	//aim,shot
 	void	*aim;
@@ -258,7 +260,7 @@ typedef struct s_vars
 }   t_vars;
 
 //vars_init
-t_vars  *vars_allocation(void);
+t_vars  *vars_allocation(t_vars *vars);
 int		vars_init(t_vars *vars);
 void	set_dir(t_info *info, double x, double y);
 void	set_plane(t_info *info, double x, double y);

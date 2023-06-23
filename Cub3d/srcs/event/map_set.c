@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 19:25:21 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:10:56 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void calc(t_vars *vars, int x)
 			hit = 1;
 
 	}
-	if (vars->monster_come == 0 && map[mapX][mapY] == 'M')
+	if (map[mapX][mapY] == 'M')
 	{
 		vars->m_pos[X] = mapX;
 		vars->m_pos[Y] = mapY;

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 16:01:35 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:15:23 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	vars_free(t_vars *vars)
         free(vars->info->texture);
         free(vars->info);
     }
-	free(vars);
 }
 
 int	exit_game(t_vars *vars)
