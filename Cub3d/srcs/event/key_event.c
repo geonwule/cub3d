@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/22 20:08:44 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:38:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ void	monster_kill(t_vars *vars)
 	}
 	if (hit)
 	{
-		map[mapX][mapY] = '0';
+		if (random_generator(3))
+			map[mapX][mapY] = 'P';
+		else
+			map[mapX][mapY] = '0';
 		vars->hunt++;
 	}
 }
@@ -132,6 +135,16 @@ int	key_press(int keycode, t_vars *vars)
 
 	t_info *info = vars->info;	
 	//gun shot
+	if (keycode == Q)
+	{
+		info->moveSpeed -= 0.01;
+		info->rotSpeed -= 0.001;
+	}
+	if (keycode == E)
+	{
+		info->moveSpeed += 0.01;
+		info->rotSpeed += 0.001;
+	}
 	if (keycode == SPACE)
 	{
 		int x, y;

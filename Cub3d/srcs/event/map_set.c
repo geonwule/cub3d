@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 14:58:42 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:12:25 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,30 @@ void verLine(t_vars *vars, int x, int y1, int y2, int color)
 
 void	sprite_init(t_vars *vars)
 {
-	vars->monster_num = 0;
+	vars->sprite_num = 0;
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 34; j++)
 		{
-			if (map[i][j] == 'M')
-				vars->monster_num++;
+			if (map[i][j] == 'M' || map[i][j] == 'P')
+				vars->sprite_num++;
 		}
 	}
-	t_sprite	*sprite = malloc(sizeof(t_sprite) * vars->monster_num);
+	t_sprite	*sprite = malloc(sizeof(t_sprite) * vars->sprite_num);
 	int	s_idx = 0;
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 34; j++)
 		{
 			if (map[i][j] == 'M')
-			{
-				sprite[s_idx].x = (double)i;
-				sprite[s_idx].y = (double)j;
 				sprite[s_idx].texture = TEX_MONSTER;
-				s_idx++;
-			}
+			else if (map[i][j] == 'P')
+				sprite[s_idx].texture = TEX_POTION;
+			else
+				continue ;
+			sprite[s_idx].x = (double)i;
+			sprite[s_idx].y = (double)j;
+			s_idx++;
 		}
 	}
 	if (vars->sprite)
@@ -167,15 +169,14 @@ void calc(t_vars *vars, int x)
 			side = 1;
 		}
 		if (map[mapX][mapY] == '1' || map[mapX][mapY] == '2' \
-			|| map[mapX][mapY] == '3' || map[mapX][mapY] == 'B' || map[mapX][mapY] == 'M')
+			|| map[mapX][mapY] == '3' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
 			hit = 1;
-
-	}
-	if (map[mapX][mapY] == 'M')
-	{
-		vars->m_pos[X] = mapX;
-		vars->m_pos[Y] = mapY;
-		vars->monster_come = 1;
+		if (map[mapX][mapY] == 'M')
+		{	
+			vars->m_pos[X] = mapX;
+			vars->m_pos[Y] = mapY;
+			vars->monster_come = 1;
+		}
 	}
 
 	if (side == 0)
@@ -201,8 +202,8 @@ void calc(t_vars *vars, int x)
 		tex_num = 2;
 	else if (map[mapX][mapY] == 'B')
 		tex_num = 3;
-	else if (map[mapX][mapY] == 'M')
-		tex_num = 4;
+	// else if (map[mapX][mapY] == 'M') //sprite
+	// 	tex_num = 4;
 
 	// calculate value of wallX
 	double	wallX;
@@ -272,7 +273,7 @@ void map_set(t_vars *vars)
 	}
 
 	sprite_init(vars);
-	int numSprites = vars->monster_num;
+	int numSprites = vars->sprite_num;
 	t_sprite	*sprite = vars->sprite;
 	
 	int		spriteOrder[numSprites];

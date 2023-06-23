@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 14:25:54 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:32:16 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,13 @@ enum	e_return_value
 
 enum	e_texture
 {
+	TEX_NUM = 6,
 	TEX_NO = 0,
 	TEX_SO,
 	TEX_EA,
 	TEX_WE,
 	TEX_MONSTER,
+	TEX_POTION,
 };
 
 enum	e_key
@@ -75,6 +77,8 @@ enum	e_key
 	D = 2,
 	B = 11,
 	R = 15,
+	Q = 12,
+	E = 14,
 	ESC = 53,
 	DEAD = 3,
 	LEFT = 124,
@@ -236,7 +240,10 @@ typedef struct s_vars
 	int				m_speed;
 	unsigned int	m_pos[2];
 	unsigned int	m_zen;
-	int				monster_num; //sprite_num
+
+	void			*potion;
+
+	int				sprite_num; //sprite_num
 	t_sprite		*sprite;
 
 	//aim,shot
@@ -312,7 +319,8 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2);
 void    *ft_malloc(size_t size);
 int		ft_open(char *file_path);
 void	vars_free(t_vars *vars);
-int	exit_game(t_vars *vars);
+int		exit_game(t_vars *vars);
+int		random_generator(int frequency);
 
 //ft_lstcub
 t_map	*ft_lstnew_cub(void *content);

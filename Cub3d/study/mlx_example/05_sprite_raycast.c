@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:28:54 by yohlee            #+#    #+#             */
-/*   Updated: 2023/06/23 14:05:32 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:37:07 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -594,7 +594,7 @@ int	main(void)
 		for (int j = 0; j < texHeight * texWidth; j++)
 		{
 			info.texture[i][j] = 0;
-		}
+		} 
 	}
 
 	load_texture(&info);

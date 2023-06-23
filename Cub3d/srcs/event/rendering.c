@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 12:48:29 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:28:37 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ int	can_move(t_vars *vars, int x, int y)
 	char	spot;
 
 	spot = map[x][y];
-	if (spot == '0' || spot == 'N' || spot == 'S' \
+	if (spot == 'P')
+	{
+		map[x][y] = '0';
+		if (vars->hp < 3)
+			vars->hp++;
+	}
+	else if (spot == '0' || spot == 'N' || spot == 'S' \
 		|| spot == 'W' || spot == 'E' || spot == 'b')
 		return (1);
 	return (0);
@@ -35,9 +41,7 @@ static void	key_check(t_vars *vars)
 	{
 		if (can_move(vars, (int)(info->posX + info->dirX * info->moveSpeed) \
 			, (int)(info->posY)))
-			{
 				info->posX += info->dirX * info->moveSpeed;
-			}
 		if (can_move(vars, (int)(info->posX) \
 			, (int)(info->posY + info->dirY * info->moveSpeed)))
 			info->posY += info->dirY * info->moveSpeed;
@@ -251,7 +255,7 @@ void	level_up(t_vars *vars)
 		vars->hunt = 0;
 	}
 	level_str = ft_itoa(vars->level); //overflow protect need!
-	mlx_string_put(vars->mlx, vars->win, 52, 710, 0xFFFFFF, level_str);
+	mlx_string_put(vars->mlx, vars->win, 50, 710, 0xFFFFFF, level_str);
 	free(level_str);
 }
 
@@ -301,7 +305,7 @@ void	monster_rezen(t_vars *vars)
 			vars->m_zen++;
 			if (i > 7 && j > 24)
 				break ;
-			if (map[i][j] == '0' && (vars->m_zen) % 10 == 0)
+			if (map[i][j] == '0' && (vars->m_zen) % 10 == 0 && i != (int)vars->info->posX && j != (int)vars->info->posY)
 				map[i][j] = 'M';
 			j++;
 		}

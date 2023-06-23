@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 14:26:17 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:23:32 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_EA], "texture/ea400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_WE], "texture/we400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_POTION], "texture/potion400.xpm", &img);
 }
 	// load_image(vars, info, info->texture[TEX_NO], NORTH, &img);
 	// load_image(vars, info, info->texture[TEX_SO], SOUTH, &img);
@@ -158,8 +159,8 @@ int vars_init(t_vars *vars)
 	}
 
 	//texture 8개
-	info->texture = (int **)malloc(sizeof(int *) * 8);
-	for (int i = 0; i < 8; i++)
+	info->texture = (int **)malloc(sizeof(int *) * TEX_NUM);
+	for (int i = 0; i < TEX_NUM; i++)
 	{
 		info->texture[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 		for (int j = 0; j < TEX_HEIGHT * TEX_WIDTH; j++)
