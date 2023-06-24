@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:15:33 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:36:46 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vars  *vars_allocation(t_vars *vars)
 	t_info	*info;
 	int		i;
 
-	info = malloc(sizeof(t_info));
+	info = ft_malloc(sizeof(t_info));
 	vars->info = info;
     vars->north = NULL;
     vars->south = NULL;
@@ -54,20 +54,21 @@ static void	img_xpm_set(t_vars *vars)
 	int	x;
 	int	y;
 
-	vars->player_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
-	vars->empty_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
-	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
-	vars->monster_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
-	vars->door_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
-	vars->potion_x = mlx_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
-	vars->hp1 = mlx_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
-	vars->hp2 = mlx_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);
-	vars->hp3 = mlx_xpm_file_to_image(vars->mlx, "texture/hp3.xpm", &x, &y);
-	vars->damage = mlx_xpm_file_to_image(vars->mlx, "texture/damage.xpm", &x, &y);
-	vars->dead = mlx_xpm_file_to_image(vars->mlx, "texture/dead.xpm", &x, &y);
-	vars->exp1 = mlx_xpm_file_to_image(vars->mlx, "texture/exp1.xpm", &x, &y);
-	vars->exp2 = mlx_xpm_file_to_image(vars->mlx, "texture/exp2.xpm", &x, &y);
-	vars->lv = mlx_xpm_file_to_image(vars->mlx, "texture/level.xpm", &x, &y);
+	vars->player_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
+	vars->empty_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
+	vars->wall_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
+	vars->monster_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
+	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
+	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
+	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
+	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
+	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);
+	vars->hp3 = ft_xpm_file_to_image(vars->mlx, "texture/hp3.xpm", &x, &y);
+	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/damage.xpm", &x, &y);
+	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/dead.xpm", &x, &y);
+	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/exp1.xpm", &x, &y);
+	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/exp2.xpm", &x, &y);
+	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/level.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -88,8 +89,8 @@ void	set_plane(t_info *info, double x, double y)
 
 static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_img *img)
 {
-	img->img = mlx_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	img->img = ft_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
+	img->data = (int *)ft_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 
 	for (int y = 0; y < img->img_height; y++)
 	{
@@ -161,10 +162,10 @@ int vars_init(t_vars *vars)
 	}
 
 	//texture 8개
-	info->texture = (int **)malloc(sizeof(int *) * TEX_NUM);
+	info->texture = (int **)ft_malloc(sizeof(int *) * TEX_NUM);
 	for (int i = 0; i < TEX_NUM; i++)
 	{
-		info->texture[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
+		info->texture[i] = (int *)ft_malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 		for (int j = 0; j < TEX_HEIGHT * TEX_WIDTH; j++)
 		{
 			info->texture[i][j] = 0;
@@ -173,7 +174,7 @@ int vars_init(t_vars *vars)
 
 	load_texture(vars, info);
 	info->img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
-	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
+	info->img.data = (int *)ft_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 	
 	//->rgb
 	// vars->img_ptr = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);

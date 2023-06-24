@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:15:42 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:37:58 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sprite_init(t_vars *vars)
 				vars->sprite_num++;
 		}
 	}
-	t_sprite	*sprite = malloc(sizeof(t_sprite) * vars->sprite_num);
+	t_sprite	*sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
 	int	s_idx = 0;
 	for (int i = 0; i < 15; i++)
 	{
@@ -102,7 +102,7 @@ void	sortSprites(int *order, double *dist, int amount)
 	t_pair	*sprites;
 
 	//std::vector<std::pair<double, int>> sprites(amount);
-	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
+	sprites = (t_pair*)ft_malloc(sizeof(t_pair) * amount);
 	for (int i = 0; i < amount; i++)
 	{
 		sprites[i].first = dist[i];
@@ -275,9 +275,9 @@ void	sprite_ex(t_vars *vars)
 	t_sprite	*sprite = vars->sprite;
 	
 	int		spriteOrder[numSprites];
-	// int		*spriteOrder = malloc(sizeof(int) * numSprites);
+	// int		*spriteOrder = ft_malloc(sizeof(int) * numSprites);
 	double	spriteDistance[numSprites];
-	// double	*spriteDistance = malloc(sizeof(double) * numSprites);
+	// double	*spriteDistance = ft_malloc(sizeof(double) * numSprites);
 	t_info	*info = vars->info;
 	//SPRITE CASTING
 	//sort sprites from far to close

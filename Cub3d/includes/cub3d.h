@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:15:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:42:26 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,7 @@ int		map_read(char *map_path, t_vars *vars);
 int 	map_error(t_vars *vars);
 
 //key_event
+void	attack(t_vars *vars);
 int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
@@ -325,6 +326,10 @@ char	*ft_strdup_gnl(const char *s1, char *back);
 char	*ft_strchr_gnl(const char *s, int c);
 size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
+
+//mlx_function
+void    *ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
+char    *ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
 
 //function
 void    *ft_malloc(size_t size);

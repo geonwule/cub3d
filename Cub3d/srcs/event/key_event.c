@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 16:19:29 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:42:59 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int is_weak_brick(t_vars *vars, int x, int y)
 
 	spot = map[x][y];
 	if (spot == 'B' || spot == 'b')
-	{
-		printf("can break or build\n");//tmp
 		return (1);
-	}
 	return (0);
 }
 
@@ -145,6 +142,21 @@ void	reset_game(t_vars *vars)
 	}
 }
 
+void	attack(t_vars *vars)
+{
+	int		x;
+	int		y;
+	void	*shot;
+	void	*shot2;
+
+	vars->gun_change = 1;
+	shot = ft_xpm_file_to_image(vars->mlx, "texture/clo_1.xpm", &x, &y);
+	mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
+	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/clo_2.xpm", &x, &y);
+	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
+	monster_kill(vars);
+}
+
 int	key_press(int keycode, t_vars *vars)
 {
 	#ifdef KEY_DEBUG
@@ -177,16 +189,7 @@ int	key_press(int keycode, t_vars *vars)
 		info->rotSpeed += 0.001;
 	}
 	if (keycode == SPACE)
-	{
-		int x, y;
-
-		vars->gun_change = 1;
-		void	*shot = mlx_xpm_file_to_image(vars->mlx, "texture/clo_1.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
-		shot = mlx_xpm_file_to_image(vars->mlx, "texture/clo_2.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
-		monster_kill(vars);
-	}
+		attack(vars);
 	if (keycode == B)
 	{
 		double	tmp_x, tmp_y;

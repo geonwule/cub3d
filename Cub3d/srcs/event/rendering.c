@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 16:25:19 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:44:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,16 +149,15 @@ void	draw_mlx(t_vars *vars)
 void	aim_point(t_vars *vars)
 {
 	int x, y;
-	vars->aim = mlx_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
 	if (vars->gun_change)
 	{
-		vars->gun = mlx_xpm_file_to_image(vars->mlx, "texture/hand2.xpm", &x, &y);
+		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/hand2.xpm", &x, &y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 10 * 3, WIN_HEIGHT / 9 * 6);
 		vars->gun_change = 0;
 	}
 	else
 	{
-		vars->gun = mlx_xpm_file_to_image(vars->mlx, "texture/hand1.xpm", &x, &y);
+		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/hand1.xpm", &x, &y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 9 * 1, WIN_HEIGHT / 9 * 5);
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);

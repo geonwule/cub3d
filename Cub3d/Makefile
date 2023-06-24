@@ -14,6 +14,7 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 FUNC_DIR	= srcs/function/
 
 _FUNC_SRCS	= function.c \
+			  mlx_function.c \
 			  ft_lstcub.c \
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
