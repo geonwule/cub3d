@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:36:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:03:23 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_vars  *vars_allocation(t_vars *vars)
 
 	vars->monster_come = 0;
 	vars->m_num = 0;
+	vars->warning_time = 0;
 	vars->sprite = NULL;
 
 	vars->gun_change = 0;
@@ -69,6 +70,7 @@ static void	img_xpm_set(t_vars *vars)
 	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/exp1.xpm", &x, &y);
 	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/exp2.xpm", &x, &y);
 	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/level.xpm", &x, &y);
+	vars->w_messege = ft_xpm_file_to_image(vars->mlx, "texture/warning.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)

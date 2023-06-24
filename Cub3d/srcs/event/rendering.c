@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:44:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:09:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,17 @@ int	dead_check_game_end(t_vars *vars)
 	return (1);
 }
 
+void	warning_message(t_vars *vars)
+{
+	if (vars->m_num)
+		return ;
+	vars->warning_time++;
+	if (vars->warning_time % 7 == 0) //깜빡이게
+		return ;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->w_messege \
+		, WIN_WIDTH / 100 * 20, WIN_HEIGHT / 100 * 35);
+}
+
 void	monster_rezen(t_vars *vars)
 {
 	int			i;
@@ -307,6 +318,9 @@ void	monster_rezen(t_vars *vars)
 	// }
 	if (vars->m_num)
 		return ;
+	if (vars->warning_time < 50) //warning_time
+		return ;
+	vars->warning_time = 0;
 	i = 0;
 	while (i < 15)
 	{
@@ -344,6 +358,7 @@ int	rendering(t_vars *vars)
 	aim_point(vars);
 	hp_exp(vars);
 	level_up(vars);
+	warning_message(vars);
 
 	mini_map(vars);	
 

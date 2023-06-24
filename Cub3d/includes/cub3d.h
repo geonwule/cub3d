@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:42:26 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:03:14 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,9 @@ typedef struct s_vars
 	int				m_speed;
 	unsigned int	m_pos[2];
 	unsigned int	m_num;
+	
+	void			*w_messege;
+	unsigned int	warning_time;
 
 	void			*potion;
 

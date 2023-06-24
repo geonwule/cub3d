@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:37:58 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:00:25 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	sprite_init(t_vars *vars)
 	if (vars->v_move >= 300 || vars->v_move <= 0)
 		vars->v_i *= -1;
 	vars->v_move += vars->v_i;
-	printf("v_move = %d\n", vars->v_move);
 
 	vars->sprite = sprite;
 }
