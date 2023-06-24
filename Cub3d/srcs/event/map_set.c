@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 16:52:03 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:15:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,19 +167,19 @@ void calc(t_vars *vars, int x)
 		{
 			sideDistX += deltaDistX;
 			mapX += stepX;
-			if (stepX > 0)//north
-				side = 0;
+			if (stepX < 0)//north
+				side = TEX_NO;
 			else //south
-				side = 1;
+				side = TEX_SO;
 		}
 		else // sideDistX >= sideDistY
 		{
 			sideDistY += deltaDistY;
 			mapY += stepY;
 			if (stepY > 0)//east
-				side = 2;
+				side = TEX_EA;
 			else //west
-				side = 3;
+				side = TEX_WE;
 		}
 		if (map[mapX][mapY] == '1' || map[mapX][mapY] == '2' \
 			|| map[mapX][mapY] == '3' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
@@ -210,13 +210,7 @@ void calc(t_vars *vars, int x)
 	if (map[mapX][mapY] == '1')
 		tex_num = side; // side is 0(north), 1(south), 2(east), 3(west)
 	else if (map[mapX][mapY] == 'B')
-		tex_num = 3;
-	// else if (map[mapX][mapY] == '2')
-	// 	tex_num = 1;
-	// else if (map[mapX][mapY] == '3')
-	// 	tex_num = 2;
-	// else if (map[mapX][mapY] == 'M') //sprite
-	// 	tex_num = 4;
+		tex_num = TEX_DOOR;
 
 	// calculate value of wallX
 	double	wallX;

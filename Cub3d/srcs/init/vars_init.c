@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 16:20:13 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:15:33 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_SO], "texture/so400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_EA], "texture/ea400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_WE], "texture/we400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_DOOR], "texture/door.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/potion400.xpm", &img);
 }
