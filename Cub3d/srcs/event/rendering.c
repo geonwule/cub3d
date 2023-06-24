@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:27:16 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:25:19 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void	level_up(t_vars *vars)
 	}
 	level_str = ft_itoa(vars->level); //overflow protect need!
 	mlx_string_put(vars->mlx, vars->win, 50, 710, 0xFFFFFF, level_str);
+	
 	free(level_str);
 }
 

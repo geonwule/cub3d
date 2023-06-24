@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:17:04 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:19:29 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	monster_kill(t_vars *vars)
 			map[mapX][mapY] = '0';
 		vars->hunt++;
 		vars->m_num--;
+		vars->monster_come = 0;
 	}
 }
 

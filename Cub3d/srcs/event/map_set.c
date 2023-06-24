@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 16:09:21 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:52:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,18 +167,24 @@ void calc(t_vars *vars, int x)
 		{
 			sideDistX += deltaDistX;
 			mapX += stepX;
-			side = 0;
+			if (stepX > 0)//north
+				side = 0;
+			else //south
+				side = 1;
 		}
-		else
+		else // sideDistX >= sideDistY
 		{
 			sideDistY += deltaDistY;
 			mapY += stepY;
-			side = 1;
+			if (stepY > 0)//east
+				side = 2;
+			else //west
+				side = 3;
 		}
 		if (map[mapX][mapY] == '1' || map[mapX][mapY] == '2' \
 			|| map[mapX][mapY] == '3' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
 			hit = 1;
-		if (map[mapX][mapY] == 'M')
+		if (map[mapX][mapY] == 'M' && vars->monster_come == 0)
 		{	
 			vars->m_pos[X] = mapX;
 			vars->m_pos[Y] = mapY;
@@ -186,9 +192,9 @@ void calc(t_vars *vars, int x)
 		}
 	}
 
-	if (side == 0)
+	if (side <= 1) //north, south
 		perWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
-	else
+	else //east, west
 		perWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY;
 
 	int lineHeight = (int)(WIN_HEIGHT / perWallDist);
@@ -202,30 +208,30 @@ void calc(t_vars *vars, int x)
 
 	int	tex_num;
 	if (map[mapX][mapY] == '1')
-		tex_num = 0;
-	else if (map[mapX][mapY] == '2')
-		tex_num = 1;
-	else if (map[mapX][mapY] == '3')
-		tex_num = 2;
+		tex_num = side; // side is 0(north), 1(south), 2(east), 3(west)
 	else if (map[mapX][mapY] == 'B')
 		tex_num = 3;
+	// else if (map[mapX][mapY] == '2')
+	// 	tex_num = 1;
+	// else if (map[mapX][mapY] == '3')
+	// 	tex_num = 2;
 	// else if (map[mapX][mapY] == 'M') //sprite
 	// 	tex_num = 4;
 
 	// calculate value of wallX
 	double	wallX;
-	if (side == 0)
+	if (side <= 1) //north, south
 		wallX = info->posY + perWallDist * rayDirY;
-	else
+	else //east, west
 		wallX = info->posX + perWallDist * rayDirX;
 	wallX -= floor(wallX);
 
 	// x coordinate on the texture
 
 	int texX = (int)(wallX * (double)TEX_WIDTH);
-	if (side == 0 && rayDirX > 0)
+	if (side <= 1 && rayDirX > 0)
 		texX = TEX_WIDTH - texX - 1;
-	if (side == 1 && rayDirY < 0)
+	if (side >= 2 && rayDirY < 0)
 		texX = TEX_WIDTH - texX - 1;
 
 	// how much to increase the texture coordinate perscreen pixel
@@ -242,12 +248,13 @@ void calc(t_vars *vars, int x)
 		int color = info->texture[tex_num][TEX_HEIGHT * texY + texX];
 
 		// make color darker for y-sides : R, G and B byte each divided through two with a "shift" and an "and"
-		if (side == 1)
-			color = (color >> 1) & 8355711;
+		// no_need;
+		// if (side == 1)
+		// 	color = (color >> 1) & 8355711;
 
 		info->buf[y][x] = color;
 	}
-	info->zBuffer[x] = perWallDist;
+	info->zBuffer[x] = perWallDist;//need sprite
 
 #ifdef MAP_DEBUG
 	printf("side = %d\n", side);
