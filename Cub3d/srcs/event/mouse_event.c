@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:43:20 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:40:31 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	handle_mouse_button(int button, int x, int y, void *args)
 	t_vars	*vars;
 	vars = (t_vars *)args;
 	// printf("in mouse_handel\nbutton = %d, x = %d y = %d, vars = %p\n", button, x, y, vars);
+	if (vars->dead_check && x >= 800 && x <= 860 && y >= 380 && y <= 400)
+	{
+		reset_game(vars);
+		vars->dead_check = 0;
+		return (0);
+	}
 	if (button == 1)
 		attack(vars);
 	return (0);

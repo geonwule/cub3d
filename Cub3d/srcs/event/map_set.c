@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 18:00:25 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:33:51 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,8 +306,8 @@ void	sprite_ex(t_vars *vars)
 		int spriteScreenX = (int)((WIN_WIDTH / 2) * (1 + transformX / transformY));
 
 		//parameters for scaling and moving the sprites
-		#define uDiv 2
-		#define vDiv 2
+		#define uDiv 1.5
+		#define vDiv 1.5
 		// #define vMove 200.0 // 64 ~ 200
 		// -> sprite->v_move
 		int vMoveScreen = (int)(vars->v_move / transformY);

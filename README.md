@@ -1,12 +1,18 @@
 # cub3d(geon)
 1. 6.23.(금)
-    + 1. feat: 죽었을때 P누르면 부활(리셋), ESC누르면 종료
-    + 2. feat: 난수(random_generator)구현, 몬스터리젠/포션드랍률 설정
-    + 3. feat: 스피드 조절기능(q, e), 몬스터 포션드랍(체력충전)
+    + feat: 죽었을때 P누르면 부활(리셋), ESC누르면 종료
+    + feat: 난수(random_generator)구현, 몬스터리젠/포션드랍률 설정
+    + feat: 스피드 조절기능(q, e), 몬스터 포션드랍(체력충전)
+    + 할 일
+        - mandatory의 벽 사분면 구분해서 출력하는것
+        - ray_casting, sprite 개념 이해
 
-2. 할일
-    + 1. mandatory의 벽 사분면 구분해서 출력하는것
-    + 2. ray_casting, sprite 개념 이해
+2. 6.24.(Sat)
+    + feat: 몬스터 점프 구현(sprite up & down)
+    + feat: 벽 텍스쳐 방면에 따라 구분(N,S,E,W)
+    + chore: Texture 수정(북쪽, 문)
+    + docs: mlx_function 추가/Segfault방지(ft_xpm, ft_get_addr)
+    + feat: 몬스터 뜨기 전 경고메세지 추가(warning message), 깜빡거림
 
 # rule
 Commit message 7가지 규칙
