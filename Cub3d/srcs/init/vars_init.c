@@ -43,7 +43,7 @@ t_vars  *vars_allocation(t_vars *vars)
 
 	vars->npc_talk = 0;
 	vars->quest_num = 0;
-	vars->quest_monster_num = 20;
+	vars->quest_monster_num = 30;
 
 	vars->v_move = 64;
 	vars->v_i = 20;

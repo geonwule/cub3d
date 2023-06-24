@@ -361,8 +361,8 @@ void	quest_progress(t_vars *vars)
 		vars->quest_num = 2;
 		return ;
 	}
-	kill = ft_itoa(20 - vars->quest_monster_num);
-	str = ft_strjoin("quest progress : 20 / ", kill);
+	kill = ft_itoa(30 - vars->quest_monster_num);
+	str = ft_strjoin("quest progress : 30 / ", kill);
 	free(kill);
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
 	, 0xFFFFFF, str);
