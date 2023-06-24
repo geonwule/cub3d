@@ -120,18 +120,9 @@ void	monster_kill(t_vars *vars)
 
 void	reset_game(t_vars *vars)
 {
-	vars->hp = 3;
-	vars->hp_before = 3;
-	vars->level = 1;
-	vars->hunt = 0;
-	vars->monster_come = 0;
-	vars->m_num = 0;
-	vars->info->posX = vars->init_pos[X];
-	vars->info->posY = vars->init_pos[Y];
-	vars->info->dirX = vars->init_dir[X];
-	vars->info->dirY = vars->init_dir[Y];
-	vars->info->planeX = vars->init_plane[X];
-	vars->info->planeY = vars->init_plane[Y];
+	vars_free(vars);
+	vars_allocation(vars);
+	vars_init(vars);	
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
 		for (int j = 0; j < MAP_WIDTH; j++)
