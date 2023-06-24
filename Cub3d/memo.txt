@@ -1,1 +1,78 @@
-gnl 종료조건 수정하기
+set_map 수도코드 다시짜기
+
+
+gnl을 통해 line 을 가져올 때
+6가지 info 까지는 받자마자 free
+
+맵부터는 free 하지 않고 list에 보관 
+-> 추후 free 필요 . 
+
+
+
+
+
+예외처리 할 것
+1.	texture, color 가 여러개
+	=> set 함수에서 넣으려고 할 때 할당되어 있다면 print_erorr("Too many info")
+
+2. texture, color 가 부족할 때
+	=> texture 도 아니고, color 도 아니고, 개행도 아닌데 cnt < 6  일 때 
+		print_error("Need more info")
+
+3. map 이 1로 시작 안함
+
+4. 맵 유효성 검사
+
+5. player 위치
+
+
+
+
+while (1)
+{
+	line = gnl(fd)
+	if (!line)
+		break;
+	arr = split(line, ' ')
+	if (cnt < 6 && !check_texture && !check_color && 라인이 개행 아님)
+		print_err("Invalid info input)
+	if (cnt >= 6 && 라인이 개행 아님)		// map 시작지점 찾겠다. 
+	{
+		set_map()
+		break ;
+	}
+	if (check_texture)
+		set_texture
+		cnt++
+	if (check_color)
+		set_color
+		cnt++
+
+	free_arr_2d(&arr)
+	free(line)
+
+}
+
+
+set map			// 처음에 맵의 가장 맨 위 line 가져옴-> list의 헤더
+{
+	0. line 유효성 검사 -> 조건 만족 못하면 free(line), free(arr), free(t_list),  print_err() 
+		조건 : arr[0], arr[1] ... 들의 앞뒤가 1, 사이는 숫자
+
+	free(arr)
+
+	1. line 을 list 에 넣고,
+		길이 & 갯수 count	// vars 에 있는 변수로 
+		ft_strchr로 NSEW 위치 찾기 & count 하기 
+
+	
+	2. 캐릭터 count 체크
+		-> count < 1 : Need plater
+		-> count > 1 : Too many player 
+				에러시 : free(t_list), print_err();			// free(t_list) 에 free(line) 포함 
+
+	3. 리스트를 배열로 만들기 
+		
+
+}
+
