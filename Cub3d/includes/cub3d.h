@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:29:05 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:50:56 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ enum	e_return_value
 
 enum	e_texture
 {
-	TEX_NUM = 7,
+	TEX_NUM = 8,
 	TEX_NO = 0,
 	TEX_SO,
 	TEX_EA,
@@ -73,6 +73,7 @@ enum	e_texture
 	TEX_DOOR,
 	TEX_MONSTER,
 	TEX_POTION,
+	TEX_NPC,
 };
 
 enum	e_key

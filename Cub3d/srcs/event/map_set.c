@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:14:52 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:51:11 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sprite_init(t_vars *vars)
 	{
 		for (int j = 0; j < 34; j++)
 		{
-			if (map[i][j] == 'M' || map[i][j] == 'P')
+			if (map[i][j] == 'M' || map[i][j] == 'P' || map[i][j] == 'H')
 				vars->sprite_num++;
 		}
 	}
@@ -48,6 +48,8 @@ void	sprite_init(t_vars *vars)
 				sprite[s_idx].texture = TEX_MONSTER;
 			else if (map[i][j] == 'P')
 				sprite[s_idx].texture = TEX_POTION;
+			else if (map[i][j] == 'H')
+				sprite[s_idx].texture = TEX_NPC;
 			else
 				continue ;
 			sprite[s_idx].x = (double)i + 0.5;

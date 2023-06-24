@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:40:00 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:52:22 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NPC], "texture/ray/npc.xpm", &img);
 }
 
 int vars_init(t_vars *vars)
