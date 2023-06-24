@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:28:54 by yohlee            #+#    #+#             */
-/*   Updated: 2023/06/23 16:37:07 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:13:13 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ struct	Sprite
 
 struct Sprite	sprite[numSprites] =
 {
-	{20.5, 11.5, 10}, //green light in front of playerstart
+	{21.5, 12.5, 10}, //green light in front of playerstart
 	//green lights in every room
-	{18.5,4.5, 10},
-	{10.0,4.5, 10},
+	{21.5, 13.5, 10},
+	{21.5, 14.5, 10},
 	{10.0,12.5,10},
 	{3.5, 6.5, 10},
 	{3.5, 20.5,10},
@@ -563,7 +563,7 @@ int	main(void)
 	info.mlx = mlx_init();
 
 	info.posX = 22.0;
-	info.posY = 11.5;
+	info.posY = 11.0;
 	info.dirX = -1.0;
 	info.dirY = 0.0;
 	info.planeX = 0.0;

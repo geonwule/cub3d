@@ -5,7 +5,7 @@
     + feat: 스피드 조절기능(q, e), 몬스터 포션드랍(체력충전)
     + 할 일
         - mandatory의 벽 사분면 구분해서 출력하는것
-        - ray_casting, sprite 개념 이해
+        - ray_casting, sprite 개념 이해 
 
 2. 6.24.(Sat)
     + feat: 몬스터 점프 구현(sprite up & down)

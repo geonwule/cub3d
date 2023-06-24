@@ -6,13 +6,11 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 19:33:51 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:14:52 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdint.h>
-
 
 extern char	map[15][34]; //tmp
 
@@ -22,7 +20,6 @@ void verLine(t_vars *vars, int x, int y1, int y2, int color)
 
 	y = y1;
 
-	// printf("y1 = %d, y2 = %d\n", y1, y2);
 	while (y <= y2)
 	{
 		mlx_pixel_put(vars->mlx, vars->win, x, y, color);
@@ -53,8 +50,8 @@ void	sprite_init(t_vars *vars)
 				sprite[s_idx].texture = TEX_POTION;
 			else
 				continue ;
-			sprite[s_idx].x = (double)i;
-			sprite[s_idx].y = (double)j;
+			sprite[s_idx].x = (double)i + 0.5;
+			sprite[s_idx].y = (double)j + 0.5;
 			s_idx++;
 		}
 	}
@@ -100,7 +97,6 @@ void	sortSprites(int *order, double *dist, int amount)
 {
 	t_pair	*sprites;
 
-	//std::vector<std::pair<double, int>> sprites(amount);
 	sprites = (t_pair*)ft_malloc(sizeof(t_pair) * amount);
 	for (int i = 0; i < amount; i++)
 	{
@@ -108,7 +104,6 @@ void	sortSprites(int *order, double *dist, int amount)
 		sprites[i].second = order[i];
 	}
 	sort_order(sprites, amount);
-	//std::sort(sprites.begin(), sprites.end());
 	for (int i = 0; i < amount; i++)
 	{
 		dist[i] = sprites[amount - i - 1].first;
@@ -274,10 +269,9 @@ void	sprite_ex(t_vars *vars)
 	t_sprite	*sprite = vars->sprite;
 	
 	int		spriteOrder[numSprites];
-	// int		*spriteOrder = ft_malloc(sizeof(int) * numSprites);
 	double	spriteDistance[numSprites];
-	// double	*spriteDistance = ft_malloc(sizeof(double) * numSprites);
 	t_info	*info = vars->info;
+	
 	//SPRITE CASTING
 	//sort sprites from far to close
 	for(int i = 0; i < numSprites; i++)

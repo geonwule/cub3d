@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 18:03:23 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:59:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->dead_check = 0;
 	vars->m_speed = 0;
 
-	vars->sprite = NULL;
 	vars->v_move = 64;
 	vars->v_i = 20;
 	i = -1;
