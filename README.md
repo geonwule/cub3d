@@ -13,6 +13,8 @@
     + chore: Texture 수정(북쪽, 문)
     + docs: mlx_function 추가/Segfault방지(ft_xpm, ft_get_addr)
     + feat: 몬스터 뜨기 전 경고메세지 추가(warning message), 깜빡거림
+	+ 할일 벽 가까이갔을떄 텍스트 띄워주기(press B)
+
 
 # rule
 Commit message 7가지 규칙

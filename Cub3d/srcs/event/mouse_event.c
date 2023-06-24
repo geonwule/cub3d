@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 19:40:31 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:41:59 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	handle_mouse_button(int button, int x, int y, void *args)
 		vars->dead_check = 0;
 		return (0);
 	}
-	if (button == 1)
+	if (button == 1 && vars->dead_check == 0)
 		attack(vars);
 	return (0);
 }
