@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 21:42:31 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/23 19:30:04 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 01:31:28 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,40 +36,20 @@ void	init_map_info(t_vars *vars, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		print_error("File open failed", vars);
-
 	cnt = 0;
-//	print_texture(vars);
-
 	while (1)
 	{
-//		if (cnt == 4)
-//		{
-//			if (check_texture(vars));		// alloc check
-//			{
-//				print_error("exture input error", vars);
-//				exit(1);
-//			}
-//		}
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		arr = ft_split(line, ' ');
-		// arr[0] isascii -> error
-
-
 		if (set_texture(arr, vars))
-		{
-			if (cnt > 3)
-				print_error("Too many texture", vars);
 			cnt++;
-		}
 		if (set_color(arr, vars))
-		{
-			if (cnt <= 3)
-				print_error("Need more texture", vars);
-			else if (cnt > 5)
-				print_error("Too many color", vars);
 			cnt++;
+		if (cnt > 5)
+		{
+//			printf("arr[0]: %s\n", arr[0]);
 		}
 	
 		free_arr_2d(&arr);
@@ -84,4 +64,5 @@ void	read_file(t_vars *vars, char *path)
 
 	/*print test*/
 	print_texture(vars);
+	print_color(vars);
 }
