@@ -21,7 +21,15 @@
         - 문(door) 가까이갔을떄 텍스트 띄워주기(press B), 기타 텍스쳐 띄워주는 디테일
         - NPC(하인즈) 만들어서 퀘스트를 받고, 슬라임 (100마리 처치 완료시 게임 승리)
 
-
+3. 6.25.(Sun)
+    + feat: NPC,퀘스트 기능 추가 / press 'B' 문구 추가
+    + docs: reset_game 내 vars_init, vars_allocation을 재시행 함으로써 변수들 초기화
+    + fix: 'D'로 벽이뚫리는 버그 수정(key_check(D)부분 오타수정)
+    + 할 일
+        - 게임 리셋버튼 P / 공격버튼 SP, mouse(left) / 이동버튼 W,A,S,D / 방향전환 <-,->, mouse
+        해당 기능 키 화면 오른쪽 상단에 띄워주기
+        - 레이캐스팅/스프라이트 개념이해
+        - norm, 코드정리
 
 # rule
 Commit message 7가지 규칙
