@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 19:59:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:29:25 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	img_xpm_set(t_vars *vars)
 	vars->monster_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
 	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
 	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
+	vars->dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
 	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
 	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
 	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);

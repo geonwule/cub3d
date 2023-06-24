@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:10:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:29:05 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ typedef struct s_vars
 	void	*door_x;
 	void	*monster_x;
 	void	*potion_x;
+	void	*dir_x;
 
     void    *img_ptr;
     char    *data;

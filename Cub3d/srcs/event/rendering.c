@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 18:09:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:29:07 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ static void mini_map(t_vars *vars)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
 		}
 	}
+	int x = (int)vars->info->posX;
+	int y = (int)vars->info->posY;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
 }
 
 void	draw_mlx(t_vars *vars)
