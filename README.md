@@ -13,7 +13,14 @@
     + chore: Texture 수정(북쪽, 문)
     + docs: mlx_function 추가/Segfault방지(ft_xpm, ft_get_addr)
     + feat: 몬스터 뜨기 전 경고메세지 추가(warning message), 깜빡거림
-	+ 할일 벽 가까이갔을떄 텍스트 띄워주기(press B)
+    + feat: 죽고, 확인눌러서 리셋
+    + feat: 몬스터(스프라이트) 정위치 조정(+0.5)
+    + feat: 미니맵 눈 추가(캐릭터 방향)
+    + docs: texture 폴더 정리
+	+ 할 일
+        - 문(door) 가까이갔을떄 텍스트 띄워주기(press B), 기타 텍스쳐 띄워주는 디테일
+        - NPC(하인즈) 만들어서 퀘스트를 받고, 슬라임 (100마리 처치 완료시 게임 승리)
+
 
 
 # rule
