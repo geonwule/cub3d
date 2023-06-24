@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:29:25 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:40:00 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,18 @@ static void	img_xpm_set(t_vars *vars)
 	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
 	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
 	vars->dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
-	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/aim.xpm", &x, &y);
-	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/hp1.xpm", &x, &y);
-	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/hp2.xpm", &x, &y);
-	vars->hp3 = ft_xpm_file_to_image(vars->mlx, "texture/hp3.xpm", &x, &y);
-	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/damage.xpm", &x, &y);
-	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/dead.xpm", &x, &y);
-	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/exp1.xpm", &x, &y);
-	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/exp2.xpm", &x, &y);
-	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/level.xpm", &x, &y);
-	vars->w_messege = ft_xpm_file_to_image(vars->mlx, "texture/warning.xpm", &x, &y);
+	
+	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/etc/dead.xpm", &x, &y);
+	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/etc/damage.xpm", &x, &y);
+	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/etc/aim.xpm", &x, &y);
+	vars->w_messege = ft_xpm_file_to_image(vars->mlx, "texture/etc/warning.xpm", &x, &y);
+
+	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp1.xpm", &x, &y);
+	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp2.xpm", &x, &y);
+	vars->hp3 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp3.xpm", &x, &y);
+	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp1.xpm", &x, &y);
+	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp2.xpm", &x, &y);
+	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/underbar/level.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -116,13 +118,13 @@ static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_i
 static void	load_texture(t_vars *vars, t_info *info)
 {
 	t_img	img;
-	load_image(vars, info, info->texture[TEX_NO], "texture/no400.xpm", &img);
-	load_image(vars, info, info->texture[TEX_SO], "texture/so400.xpm", &img);
-	load_image(vars, info, info->texture[TEX_EA], "texture/ea400.xpm", &img);
-	load_image(vars, info, info->texture[TEX_WE], "texture/we400.xpm", &img);
-	load_image(vars, info, info->texture[TEX_DOOR], "texture/door.xpm", &img);
-	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster400.xpm", &img);
-	load_image(vars, info, info->texture[TEX_POTION], "texture/potion400.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NO], "texture/ray/no.xpm", &img);
+	load_image(vars, info, info->texture[TEX_SO], "texture/ray/so.xpm", &img);
+	load_image(vars, info, info->texture[TEX_EA], "texture/ray/ea.xpm", &img);
+	load_image(vars, info, info->texture[TEX_WE], "texture/ray/we.xpm", &img);
+	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
+	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
+	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
 }
 
 int vars_init(t_vars *vars)

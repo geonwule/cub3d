@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 17:42:59 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:44:31 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,9 @@ void	attack(t_vars *vars)
 	void	*shot2;
 
 	vars->gun_change = 1;
-	shot = ft_xpm_file_to_image(vars->mlx, "texture/clo_1.xpm", &x, &y);
+	shot = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_1.xpm", &x, &y);
 	mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
-	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/clo_2.xpm", &x, &y);
+	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);
 	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
 	monster_kill(vars);
 }
