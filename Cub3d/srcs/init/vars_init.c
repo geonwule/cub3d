@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 19:16:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/25 05:06:38 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 extern char	map[15][34]; //tmp
 
-t_vars  *vars_allocation(void)
+void	*vars_allocation(t_vars *vars)
 {
-    t_vars  *vars;
-	// t_map	*map;
 	t_info	*info;
 	int		i;
 
-    vars = malloc(sizeof(t_vars));
-	// map	= malloc(sizeof(t_map));
 	info = malloc(sizeof(t_info));
 	vars->info = info;
     vars->north = NULL;
@@ -33,14 +29,14 @@ t_vars  *vars_allocation(void)
     vars->ceiling = NULL;
 	vars->monster_come = 0;
 	vars->gun_change = 0;
-	// map->height = 0;
-	// map->width = 0;
-	// map->arr = NULL;
-	// map->tmp_arr = NULL;
-	// vars->map = map;
-	i = -1;
-	while (++i < 1000)
-		vars->keyboard[i] = 0;
+//	map->height = 0;
+//	map->width = 0;
+//	map->arr = NULL;
+//	map->tmp_arr = NULL;
+//	vars->map = map;
+//	i = -1;
+//	while (++i < 1000)
+//		vars->keyboard[i] = 0;
     return (vars);
 }
 

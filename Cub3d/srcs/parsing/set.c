@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 18:00:02 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 01:31:36 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 06:20:04 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,100 @@ static char *allocate_and_copy_string(char *src)
     return (dst);
 }
 
-int set_color(char **arr, t_vars *vars)
+void set_color(char **arr, t_vars *vars)
 {
-//	printf("Hi, Im set color;\n");
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0])))
 	{
-//		printf("Find floor\n");
+		if (vars->floor)
+			print_error("Too many info", vars);
 		vars->floor = allocate_and_copy_string(arr[1]);
-		return (1);
 	}
 	else if (!ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
 	{
-//		printf("Find ceiling\n");
+		if (vars->ceiling)
+			print_error("Too many info", vars);
 		vars->ceiling = allocate_and_copy_string(arr[1]); 
-		return (1);
 	}
-	return (0);
 }
 
-int	set_texture(char **arr, t_vars *vars)
+void	set_texture(char **arr, t_vars *vars)
 {
-//		printf("Hi, Im set texture\n");
-		if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])))
-		{
-//			printf("Find NO\n");
-			vars->north = allocate_and_copy_string(arr[1]);
-			return (1);
-		}
-		else if (!ft_strncmp(arr[0], "SO", ft_strlen(arr[0])))
-		{
-//			printf("Find SO\n");
-			vars->south = allocate_and_copy_string(arr[1]);
-			return (1);
-		}
-		else if (!ft_strncmp(arr[0], "WE", ft_strlen(arr[0])))
-		{
-//			printf("Find WE\n");
+	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])))
+	{
+		if (vars->north)
+			print_error("Too many info", vars);
+		vars->north = allocate_and_copy_string(arr[1]);
+	}
+	else if (!ft_strncmp(arr[0], "SO", ft_strlen(arr[0])))
+	{
+		if (vars->south)
+			print_error("Too many info", vars);
+		vars->south = allocate_and_copy_string(arr[1]);
+	}
+	else if (!ft_strncmp(arr[0], "WE", ft_strlen(arr[0])))
+	{
+		if (vars->west)
+			print_error("Too many info", vars);
+		vars->west = allocate_and_copy_string(arr[1]);
+	}
+	else if (!ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
+	{
+		if (vars->east)
+			print_error("Too many info", vars);
+		vars->east = allocate_and_copy_string(arr[1]);
+	}
+}
 
-			vars->west = allocate_and_copy_string(arr[1]);
-			return (1);
-		}
-		else if (!ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
-		{
-//			printf("Find EA\n");
+int		size_arr_2d(char **arr)
+{
+	int i;
 
-			vars->east = allocate_and_copy_string(arr[1]);
-			return (1);
-		}
-		return (0);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+
+/*
+head_init();
+while()
+{
+	add_list
+}
+
+map_list_to_arr
+	- check_valid_map
+	- check player
+
+ */
+void	set_map(char **arr, t_vars *vars, int fd, char *line)
+{
+	int i;
+	t_list	*cur;
+
+	cur = ft_lstnew(line);
+	printf("%s\n", cur->content);
+	printf("%s", line);
+	i = 0;
+//	while (i < size_arr_2d(arr))
+//	{
+//		
+//	}
+	free(line);
+	free_arr_2d(&arr);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return ;
+		printf("%s", line);
+		arr = ft_split(line, ' ');
+
+
+		free(line);
+		free_arr_2d(&arr);
+	}
+
+
 }

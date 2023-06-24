@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 18:57:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 05:06:24 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main(int ac, char **av)
 		print_error("Need one arguement", &vars);
 		return (RETURN_FAILURE);
 	}
-//	vars = vars_allocation();
+	vars_allocation(&vars);
 
 	read_file(&vars, av[1]);
 

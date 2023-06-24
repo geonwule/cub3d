@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:26:47 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 05:15:33 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ typedef struct s_vars
 }   t_vars;
 
 //vars_init
-t_vars  *vars_allocation(void);
+void	*vars_allocation(t_vars *vars);
 int		vars_init(t_vars *vars);
 void	set_dir(t_info *info, double x, double y);
 void	set_plane(t_info *info, double x, double y);
@@ -285,8 +285,9 @@ void	read_file(t_vars *vars, char *path);
 void    free_arr_2d(char ***arr);
 
 // parsing/set.c
-int		set_texture(char **arr, t_vars *vars);
-int		set_color(char **arr, t_vars *vars);
+void	set_texture(char **arr, t_vars *vars);
+void	set_color(char **arr, t_vars *vars);
+void	set_map(char **arr, t_vars *vars, int fd, char *line);
 
 //test
 void	print_texture(t_vars *vars);
