@@ -233,6 +233,15 @@ typedef struct s_vars
 	void	*monster_x;
 	void	*potion_x;
 	void	*dir_x;
+	void	*npc_x;
+
+	int		npc_talk;
+	int		quest_num; //no = 0, ing = 1, end = 2
+	int		quest_monster_num; // monster num
+
+	void	*quest_start;
+	void	*quest_ing;
+	void	*quest_end;
 
     void    *img_ptr;
     char    *data;

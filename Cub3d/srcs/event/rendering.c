@@ -127,6 +127,8 @@ static void mini_map(t_vars *vars)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->door_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'P')// break 벽
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'H')// npc
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == '0' || map[x][y] == 'b')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
 		}
@@ -178,7 +180,8 @@ void	monster_come_on(t_vars *vars, int x, int y)
 	t_info	*info = vars->info;
 
 	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
-		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M')
+		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M' \
+		|| vars->npc_talk)
 		return ;
 
 	// printf("map[%d][%d] = %c\n", vars->m_pos[X], vars->m_pos[Y], map[vars->m_pos[X]][vars->m_pos[Y]]);
@@ -345,6 +348,69 @@ void	monster_rezen(t_vars *vars)
 	}
 }
 
+void	quest_progress(t_vars *vars)
+{
+	char	*str;
+	char	*kill;
+
+	if (vars->quest_monster_num == 0)
+	{
+		mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
+		, 0xFFFFFF, "quest clear!! go back to NPC");
+		vars->quest_num = 2;
+		return ;
+	}
+	kill = ft_itoa(20 - vars->quest_monster_num);
+	str = ft_strjoin("quest progress : 20 / ", kill);
+	free(kill);
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
+	, 0xFFFFFF, str);
+	free(str);
+}
+
+void	npc_quest(t_vars *vars)
+{
+	if (vars->quest_num != 0)
+		quest_progress(vars);
+	if (vars->npc_talk == 0)
+		return ;
+	if (vars->quest_num == 0) // init
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_start \
+		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
+	else if (vars->quest_num == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_ing \
+		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
+	else if (vars->quest_num == 2)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_end \
+		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
+}
+
+void	press_b(t_vars *vars)
+{
+	t_info	*info = vars->info;
+
+	double		x, y;
+	const int	dx[4] = {-1, 1, 0, 0};
+	const int	dy[4] = {0, 0, -1, 1};
+	char		spot;
+
+	for (int i = 0; i < 4; i++)
+	{
+		x = info->posX + dx[i];
+		y = info->posY + dy[i]; 
+		spot = map[(int)x][(int)y];
+		if (x < 0 || x >= WIN_HEIGHT \
+			|| y < 0 || y >= WIN_WIDTH)
+			continue ;
+		if (spot == 'B' || spot == 'b' || spot == 'H')
+		{
+			mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 47, WIN_HEIGHT / 100 * 70 \
+				, 0xFFFFFF, "press key 'B'");
+			return ;
+		}
+	}	
+}
+
 int	rendering(t_vars *vars)
 {
 	if (dead_check_game_end(vars))
@@ -358,10 +424,12 @@ int	rendering(t_vars *vars)
 	map_set(vars);
 	draw_mlx(vars);
 
+	press_b(vars);
 	aim_point(vars);
 	hp_exp(vars);
 	level_up(vars);
 	warning_message(vars);
+	npc_quest(vars);
 
 	mini_map(vars);	
 

@@ -35,7 +35,7 @@ int is_weak_brick(t_vars *vars, int x, int y)
 	char	spot;
 
 	spot = map[x][y];
-	if (spot == 'B' || spot == 'b')
+	if (spot == 'B' || spot == 'b' || spot == 'H')
 		return (1);
 	return (0);
 }
@@ -113,6 +113,8 @@ void	monster_kill(t_vars *vars)
 		vars->hunt++;
 		vars->m_num--;
 		vars->monster_come = 0;
+		if (vars->quest_num && vars->quest_monster_num > 0)
+			vars->quest_monster_num--;
 	}
 }
 
@@ -171,13 +173,15 @@ int	key_press(int keycode, t_vars *vars)
 	else if (keycode == ESC)
 		printf("press ESC\n");
 	#endif
+	if (keycode == P)
+		reset_game(vars);
+	if (vars->npc_talk)
+		return (0);
 	if (keycode >= 0 && keycode <= 255)
 		vars->keyboard[keycode] = 1;
 
 	t_info *info = vars->info;	
 	//gun shot
-	if (keycode == P)
-		reset_game(vars);
 	if (keycode == Q)
 	{
 		info->moveSpeed -= 0.01;
@@ -207,6 +211,8 @@ int	key_press(int keycode, t_vars *vars)
 				map[(int)tmp_x][(int)tmp_y] = 'b';
 			else if (map[(int)tmp_x][(int)tmp_y] == 'b')
 				map[(int)tmp_x][(int)tmp_y] = 'B';
+			else if (map[(int)tmp_x][(int)tmp_y] == 'H')
+				vars->npc_talk = 1;
 		}
 	}
 	if (keycode == R) // respone_back

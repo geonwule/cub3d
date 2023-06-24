@@ -41,6 +41,10 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->dead_check = 0;
 	vars->m_speed = 0;
 
+	vars->npc_talk = 0;
+	vars->quest_num = 0;
+	vars->quest_monster_num = 20;
+
 	vars->v_move = 64;
 	vars->v_i = 20;
 	i = -1;
@@ -61,6 +65,11 @@ static void	img_xpm_set(t_vars *vars)
 	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
 	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
 	vars->dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
+	vars->npc_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/npc.xpm", &x, &y);
+
+	vars->quest_start = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_start.xpm", &x, &y);
+	vars->quest_ing = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_ing.xpm", &x, &y);
+	vars->quest_end = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_end.xpm", &x, &y);
 	
 	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/etc/dead.xpm", &x, &y);
 	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/etc/damage.xpm", &x, &y);
@@ -125,7 +134,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
-	load_image(vars, info, info->texture[TEX_NPC], "texture/ray/npc.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NPC], "texture/npc/npc.xpm", &img);
 }
 
 int vars_init(t_vars *vars)
