@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:06:16 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:11:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->level = 1;
 	vars->dead_check = 0;
 	vars->m_speed = 0;
+
+	vars->sprite = NULL;
+	vars->v_move = 64;
+	vars->v_i = 20;
 	i = -1;
 	while (++i < 1000)
 		vars->keyboard[i] = 0;
@@ -116,10 +120,6 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster400.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/potion400.xpm", &img);
 }
-	// load_image(vars, info, info->texture[TEX_NO], NORTH, &img);
-	// load_image(vars, info, info->texture[TEX_SO], SOUTH, &img);
-	// load_image(vars, info, info->texture[TEX_EA], EAST, &img);
-	// load_image(vars, info, info->texture[TEX_WE], WEST, &img);
 
 int vars_init(t_vars *vars)
 {

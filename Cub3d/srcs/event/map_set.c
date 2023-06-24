@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 17:12:25 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:09:21 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ void	sprite_init(t_vars *vars)
 	}
 	if (vars->sprite)
 		free(vars->sprite);
+
+	//sprite_up_and_down
+	if (vars->v_move >= 300 || vars->v_move <= 0)
+		vars->v_i *= -1;
+	vars->v_move += vars->v_i;
+	printf("v_move = %d\n", vars->v_move);
+
 	vars->sprite = sprite;
 }
 
@@ -261,18 +268,8 @@ void calc(t_vars *vars, int x)
 #endif
 }
 
-void map_set(t_vars *vars)
+void	sprite_ex(t_vars *vars)
 {
-	int x;
-
-	x = 0;
-	while (x < WIN_WIDTH)
-	{
-		calc(vars, x);
-		x++;
-	}
-
-	sprite_init(vars);
 	int numSprites = vars->sprite_num;
 	t_sprite	*sprite = vars->sprite;
 	
@@ -309,10 +306,11 @@ void map_set(t_vars *vars)
 		int spriteScreenX = (int)((WIN_WIDTH / 2) * (1 + transformX / transformY));
 
 		//parameters for scaling and moving the sprites
-		#define uDiv 1
-		#define vDiv 1
-		#define vMove 0.0
-		int vMoveScreen = (int)(vMove / transformY);
+		#define uDiv 2
+		#define vDiv 2
+		// #define vMove 200.0 // 64 ~ 200
+		// -> sprite->v_move
+		int vMoveScreen = (int)(vars->v_move / transformY);
 
 		//calculate height of the sprite on screen
 		int spriteHeight = (int)fabs((WIN_HEIGHT / transformY) / vDiv); //using "transformY" instead of the real distance prevents fisheye
@@ -352,4 +350,19 @@ void map_set(t_vars *vars)
 	//tmp
 	// free (spriteOrder);
 	// free (spriteDistance);
+}
+
+void map_set(t_vars *vars)
+{
+	int x;
+
+	x = 0;
+	while (x < WIN_WIDTH)
+	{
+		calc(vars, x);
+		x++;
+	}
+
+	sprite_init(vars);
+	sprite_ex(vars);
 }

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/23 19:17:15 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:01:51 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,8 @@ typedef struct s_vars
 
 	int				sprite_num; //sprite_num
 	t_sprite		*sprite;
+	int				v_move;
+	int				v_i;
 
 	//aim,shot
 	void	*aim;
