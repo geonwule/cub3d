@@ -24,6 +24,7 @@ int	can_move(t_vars *vars, int x, int y)
 		map[x][y] = '0';
 		if (vars->hp < 3)
 			vars->hp++;
+		return (1);
 	}
 	else if (spot == '0' || spot == 'N' || spot == 'S' \
 		|| spot == 'W' || spot == 'E' || spot == 'b')
@@ -58,7 +59,7 @@ static void	key_check(t_vars *vars)
 	}
 	if (vars->keyboard[D])
 	{
-		if (can_move(vars, (int)(info->posX + info->dirX * info->moveSpeed) \
+		if (can_move(vars, (int)(info->posX + info->dirY * info->moveSpeed) \
 			, (int)(info->posY)))
 			info->posX += info->dirY * info->moveSpeed;
 		if (can_move(vars, (int)(info->posX) \
