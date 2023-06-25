@@ -23,6 +23,7 @@ PARSING_DIR	= srcs/parsing/
 _PARSING_SRCS	= read_file.c \
 				  free.c \
 				  set.c \
+				  utils.c \
 				# map_read.c \
 				# map_error.c \
 

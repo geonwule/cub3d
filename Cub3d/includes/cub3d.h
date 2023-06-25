@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/25 17:07:32 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 22:40:59 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,10 @@ void    free_arr_2d(char ***arr);
 void	set_texture(char **arr, t_vars *vars);
 void	set_color(char **arr, t_vars *vars);
 void	set_map(t_vars *vars, int fd, char *line);
+int		is_digit_str(char *str);
+
+// parsing/utils.c
+int		size_arr_2d(char **arr);
 
 //test
 void	print_texture(t_vars *vars);
@@ -295,4 +299,5 @@ void	print_color(t_vars *vars);
 void	print_lst(t_list *head);
 void	print_arr_2d(char **arr);
 void	print_arr_2d_2(char **arr);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 21:42:31 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 16:43:52 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 21:01:44 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static int	check_color(char **arr)
 	return (0);
 }
 
-// init_map_height();
-
 void	init_map_info(t_vars *vars, char *path)
 {
 	int		fd;
@@ -64,14 +62,13 @@ void	init_map_info(t_vars *vars, char *path)
 		if (cnt < 6 && ft_strncmp(line, "\n", 1)
 			&& !check_texture(arr) && !check_color(arr))
 			print_error("Invalid info input 1", vars);
-		if (cnt >= 6 && ft_strncmp(line, "\n", 1))
+		if (cnt == 6 && ft_strncmp(line, "\n", 1))
 		{
 			printf("func set_map arr\n");
 			free_arr_2d(&arr);
 			set_map(vars, fd, line);
 			break ;
 		}
-
 		if (check_texture(arr))
 		{
 			set_texture(arr, vars);
@@ -95,4 +92,5 @@ void	read_file(t_vars *vars, char *path)
 	/*print test*/
 	print_texture(vars);
 	print_color(vars);
+	print_arr_2d(vars->map.arr);
 }

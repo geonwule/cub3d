@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:05:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 17:19:39 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 20:57:36 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,22 @@ void	print_texture(t_vars *vars)
 
 void	print_color(t_vars *vars)
 {
+	int i;
+
 	printf("vars->floor:%s\n", vars->floor);
 	printf("vars->ceiling:%s\n", vars->ceiling);
+	i = 0;
+	while (i < 3)
+	{
+		printf("f[%d]: %d\n", i, vars->f[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		printf("c[%d]: %d\n", i, vars->c[i]);
+		i++;
+	}
 }
 
 void	print_arr_2d(char **arr)
@@ -49,5 +63,5 @@ void	print_lst(t_list *head)
 		printf("%s", cur->content);
 		cur = cur->next;
 	}
-
 }
+

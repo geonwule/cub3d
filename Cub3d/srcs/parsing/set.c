@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 18:00:02 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 17:20:50 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 23:29:47 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,66 @@ static char *allocate_and_copy_string(char *src)
     return (dst);
 }
 
-void set_color(char **arr, t_vars *vars)
+//int	is_digit_str(char *str)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (str[i])
+//	{
+//		printf("%d\n", ft_isdigit(str[i]));
+//		printf("%d\n", str[i]);
+//		if (!ft_isdigit(str[i]))
+//			return (1);
+//		i++;
+//	}
+//	return (0);
+//}
+
+//void	set_rgb(char **arr, t_vars *vars, char type)
+//{
+//	char	**rgb;
+//	int		tmp;
+//	int		i;
+//
+//	rgb = ft_split(arr[1], ',');
+//	if (size_arr_2d(rgb) != 3)
+//	{
+//		free_arr_2d(&arr);
+//		print_error("Invalid rgb input", vars);
+//	}
+//	i = 0;
+//	while (i < 3)
+//	{
+//		tmp = ft_atoi(rgb[i]);
+//		if (tmp < 0 || tmp > 255)
+//			print_error("Invalid rgb input2", vars);
+//		if (type == 'F')
+//			vars->f[i] = tmp;
+//		else if (type == 'C')
+//			vars->c[i] = tmp;
+//		i++;
+//	}		
+//	free_arr_2d(&rgb);
+//}
+
+void	set_color(char **arr, t_vars *vars)
 {
+	char **rgb;
+
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0])))
 	{
 		if (vars->floor)
-			print_error("Too many info", vars);
+			print_error("Too many info", vars);		// no arr, line free 
 		vars->floor = allocate_and_copy_string(arr[1]);
+//		set_rgb(arr, vars, 'F');
 	}
 	else if (!ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
 	{
 		if (vars->ceiling)
 			print_error("Too many info", vars);
 		vars->ceiling = allocate_and_copy_string(arr[1]); 
+//		set_rgb(arr, vars, 'C');
 	}
 }
 
@@ -101,6 +148,22 @@ void	init_map_arr(t_vars *vars, t_list *head)
 	}
 }
 
+void	free_lst(t_list **head)
+{
+	t_list *cur;
+	t_list *next;
+
+	cur = *head;
+	while (cur)
+	{
+		next = cur->next;
+		if (cur->content)
+			free(cur->content);
+		free(cur);
+		cur = next;
+	}
+}
+
 void	set_map(t_vars *vars, int fd, char *line)
 {
 	t_list	*head;
@@ -122,6 +185,5 @@ void	set_map(t_vars *vars, int fd, char *line)
 			vars->map.width = ft_strlen(line) - 1;
 	}
 	init_map_arr(vars, head);
-	print_arr_2d(vars->map.arr);
-//	print_lst(head);
+	free_lst(&head);
 }
