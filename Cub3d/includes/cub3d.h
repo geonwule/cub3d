@@ -87,6 +87,8 @@ enum	e_key
 	Q = 12,
 	E = 14,
 	P = 35,
+	N = 45,
+	M = 46,
 	ESC = 53,
 	DEAD = 3,
 	LEFT = 124,

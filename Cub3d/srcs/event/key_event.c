@@ -173,18 +173,25 @@ int	key_press(int keycode, t_vars *vars)
 
 	t_info *info = vars->info;	
 	//gun shot
-	if (keycode == Q)
+	if (keycode == N)
 	{
 		info->moveSpeed -= 0.01;
 		info->rotSpeed -= 0.001;
 	}
-	if (keycode == E)
+	if (keycode == M)
 	{
 		info->moveSpeed += 0.01;
 		info->rotSpeed += 0.001;
 	}
 	if (keycode == SPACE)
 		attack(vars);
+	if (keycode == Q)
+	{
+		info->dirX *= -1;
+		info->dirY *= -1;
+		info->planeX *= -1;
+		info->planeY *= -1;
+	}
 	if (keycode == B)
 	{
 		double	tmp_x, tmp_y;

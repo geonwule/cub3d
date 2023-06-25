@@ -425,7 +425,7 @@ void	game_key_explain(t_vars *vars)
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 11 \
 		, 0xFFFFFF, "R : return respone");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 13 \
-		, 0xFFFFFF, "Q/E : Game speed slow/fast");
+		, 0xFFFFFF, "N/M : Game speed slow/fast");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 15 \
 		, 0xFFFFFF, "P : game reset");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 17 \
