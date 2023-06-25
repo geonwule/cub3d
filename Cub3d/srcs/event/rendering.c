@@ -334,7 +334,7 @@ void	monster_rezen(t_vars *vars)
 		j = 0;
 		while (j < 34)
 		{
-			if (i > 7 && j > 24)
+			if (i > 5 && j > 23) // respone area
 				break ;
 			if (map[i][j] == '0' && random_generator(2) \
 				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
