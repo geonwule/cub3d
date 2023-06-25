@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/25 05:15:33 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 17:07:32 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_vars
 	int		f[3];
 	char	*ceiling;
 	int		c[3];
+	t_map	map;
 
 	void	*north_x;
 	void	*south_x;
@@ -218,7 +219,6 @@ typedef struct s_vars
     int     bpp;
     int     endian;
 	
-	t_map	*map;
 	// ray
 	t_ray	ray;
 	t_info	*info;
@@ -287,10 +287,12 @@ void    free_arr_2d(char ***arr);
 // parsing/set.c
 void	set_texture(char **arr, t_vars *vars);
 void	set_color(char **arr, t_vars *vars);
-void	set_map(char **arr, t_vars *vars, int fd, char *line);
+void	set_map(t_vars *vars, int fd, char *line);
 
 //test
 void	print_texture(t_vars *vars);
 void	print_color(t_vars *vars);
-
+void	print_lst(t_list *head);
+void	print_arr_2d(char **arr);
+void	print_arr_2d_2(char **arr);
 #endif

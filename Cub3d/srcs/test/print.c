@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:05:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 00:53:17 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 17:19:39 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,29 @@ void	print_color(t_vars *vars)
 {
 	printf("vars->floor:%s\n", vars->floor);
 	printf("vars->ceiling:%s\n", vars->ceiling);
+}
+
+void	print_arr_2d(char **arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
+}
+
+void	print_lst(t_list *head)
+{
+	t_list *cur;
+
+	cur = head;
+	while (cur)
+	{
+		printf("%s", cur->content);
+		cur = cur->next;
+	}
+
 }

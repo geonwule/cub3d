@@ -6,17 +6,11 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 18:00:02 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 06:20:04 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 17:20:50 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
-set_texture()
-set_color();
-set_map();
-*/
 
 static char *allocate_and_copy_string(char *src)
 {
@@ -25,6 +19,7 @@ static char *allocate_and_copy_string(char *src)
 	dst = (char *)malloc(sizeof(char) * ft_strlen(src));
     if (!dst)
 	{
+//		print_error("dst malloc err in allocate_and_copy_string func", vars);		// need vars argu
         printf("malloc error\n");
         exit(1);
     }
@@ -77,56 +72,56 @@ void	set_texture(char **arr, t_vars *vars)
 	}
 }
 
-int		size_arr_2d(char **arr)
+void	init_map_arr(t_vars *vars, t_list *head)
 {
 	int i;
-
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
-
-/*
-head_init();
-while()
-{
-	add_list
-}
-
-map_list_to_arr
-	- check_valid_map
-	- check player
-
- */
-void	set_map(char **arr, t_vars *vars, int fd, char *line)
-{
-	int i;
+	int j;
 	t_list	*cur;
 
-	cur = ft_lstnew(line);
-	printf("%s\n", cur->content);
-	printf("%s", line);
+	vars->map.arr = (char **)malloc(sizeof(char *) * (vars->map.height + 1));
+	if (!vars->map.arr)
+		return ;
+	vars->map.arr[vars->map.height] = NULL;
 	i = 0;
-//	while (i < size_arr_2d(arr))
-//	{
-//		
-//	}
-	free(line);
-	free_arr_2d(&arr);
+	cur = head;
+	while (cur)
+	{
+		vars->map.arr[i] = (char *)malloc(sizeof(char) * vars->map.width);
+		if (!vars->map.arr[i])
+			return ;
+		ft_memcpy(vars->map.arr[i], cur->content, ft_strlen(cur->content) - 1);
+		j = ft_strlen(cur->content) - 1;
+		while (j <= vars->map.width - 1)
+		{
+			vars->map.arr[i][j] = ' ';
+			j++;
+		}
+		i++;
+		cur = cur->next;
+	}
+}
+
+void	set_map(t_vars *vars, int fd, char *line)
+{
+	t_list	*head;
+	t_list	*tmp;
+
+	head = ft_lstnew(line);
+	vars->map.height++;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return ;
-		printf("%s", line);
-		arr = ft_split(line, ' ');
-
-
-		free(line);
-		free_arr_2d(&arr);
+			break ;
+		if (!ft_strncmp(line, "\n", 1))
+			print_error("Invalid map: new line", vars);
+		tmp = ft_lstnew(line);
+		ft_lstadd_back(&head, tmp);
+		vars->map.height++;
+		if (vars->map.width < ft_strlen(line) - 1)		// 개행 제거한 길이가 map 의 width 
+			vars->map.width = ft_strlen(line) - 1;
 	}
-
-
+	init_map_arr(vars, head);
+	print_arr_2d(vars->map.arr);
+//	print_lst(head);
 }

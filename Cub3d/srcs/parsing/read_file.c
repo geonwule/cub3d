@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 21:42:31 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/25 06:19:39 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 16:43:52 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	init_map_info(t_vars *vars, char *path)
 		if (cnt >= 6 && ft_strncmp(line, "\n", 1))
 		{
 			printf("func set_map arr\n");
-			set_map(arr, vars, fd, line);
+			free_arr_2d(&arr);
+			set_map(vars, fd, line);
 			break ;
 		}
 

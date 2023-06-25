@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/25 05:06:38 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/25 16:23:06 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	*vars_allocation(t_vars *vars)
     vars->ceiling = NULL;
 	vars->monster_come = 0;
 	vars->gun_change = 0;
-//	map->height = 0;
-//	map->width = 0;
-//	map->arr = NULL;
-//	map->tmp_arr = NULL;
-//	vars->map = map;
+
+	vars->map.height = 0;
+	vars->map.width = 0;
+	vars->map.tmp_arr = NULL;
+	vars->map.arr = NULL;
+
+	
 //	i = -1;
 //	while (++i < 1000)
 //		vars->keyboard[i] = 0;
