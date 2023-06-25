@@ -1,4 +1,10 @@
+set_color int 배열에 넣기 
+
+
+길이에 따른 이중배열 초기화 수정하기 // 뒤에 공백채우기  
+
 set_map 수도코드 다시짜기
+
 
 
 gnl을 통해 line 을 가져올 때
@@ -19,11 +25,11 @@ gnl을 통해 line 을 가져올 때
 	=> texture 도 아니고, color 도 아니고, 개행도 아닌데 cnt < 6  일 때 
 		print_error("Need more info")
 
-3. map 이 1로 시작 안함
+// 3. map 이 1로 시작 안함
 
-4. 맵 유효성 검사
+3. 맵 유효성 검사
 
-5. player 위치
+4. player 위치
 
 
 
@@ -75,4 +81,91 @@ set map			// 처음에 맵의 가장 맨 위 line 가져옴-> list의 헤더
 		
 
 }
+
+
+---------------------------------------------------------------
+
+split 을 check 안에서 할지 밖에서 할지. 
+밖에서 미리 해야 split을 한번만함.
+
+void	init_map_info
+{
+
+	fd = open
+	if (fd < 0)
+		err
+	cnt = 0
+	while (1)
+	{
+		line = gnl(fd)
+		if (!line)
+			break
+		if (cnt < 6 && ft_strncmp(line, "\n", 1)			// info 를 더 받아야 하는데 없는경우 
+			&& !check_texture(line) && !check_color(line))
+			print_err(Invalid info input)			
+		if (cnt >= 6 && ft_strncmp(line, "\n", 1))			// map의 첫번째 라인 
+		{
+			free_arr_2d()
+			set_map_lst(vars, fd, line)						// line을 한줄씩 리스트에 넣기
+			break
+		}
+	}
+}
+
+void	set_map(t_var *vars, int fd, char *line)
+{
+	한줄씩 받아서 
+	공백이면 에러처리
+	아니면 lst에 넣음
+
+	-> lst 에 넣을 때 height++, 최대 width 구해놓기 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
