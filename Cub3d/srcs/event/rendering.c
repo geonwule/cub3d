@@ -412,6 +412,26 @@ void	press_b(t_vars *vars)
 	}	
 }
 
+void	game_key_explain(t_vars *vars)
+{
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 3 \
+		, 0xFFFFFF, "Key setting");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 5 \
+		, 0xFFFFFF, "W/A/S/D : character move");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 7 \
+		, 0xFFFFFF, "<-/->/mouse_move : Direct move");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 9 \
+		, 0xFFFFFF, "Space/mouse_left : Attack");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 11 \
+		, 0xFFFFFF, "R : return respone");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 13 \
+		, 0xFFFFFF, "Q/E : Game speed slow/fast");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 15 \
+		, 0xFFFFFF, "P : game reset");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 17 \
+		, 0xFFFFFF, "B : Door open/close, NPC contect");
+}
+
 int	rendering(t_vars *vars)
 {
 	if (dead_check_game_end(vars))
@@ -425,6 +445,7 @@ int	rendering(t_vars *vars)
 	map_set(vars);
 	draw_mlx(vars);
 
+	game_key_explain(vars);
 	press_b(vars);
 	aim_point(vars);
 	hp_exp(vars);
