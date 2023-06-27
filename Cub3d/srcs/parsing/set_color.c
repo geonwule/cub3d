@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 01:52:14 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 01:57:37 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 	int		i;
 	int		cnt;
 	char	**rgb;
+	int tmp;
 
 	i = 0;
 	cnt = 0;
@@ -30,20 +31,26 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 		return (1);
 	rgb = ft_split(arr[1], ',');
 	if (size_arr_2d(rgb) != 3)
+	{
+		free_arr_2d(&rgb);
 		return (1);
+	}
 	i = 0;
-	int tmp;
 	while (i < 3)
 	{
 		tmp = ft_atoi(rgb[i]);
 		if (tmp < 0 || tmp > 255)
+		{
+			free_arr_2d(&rgb);
 			return (1);
+		}
 		if (type == 'F')
 			vars->map.info.f[i] = tmp;
 		else if (type == 'C')
 			vars->map.info.c[i] = tmp;
 		i++;
 	}
+	free_arr_2d(&rgb);
 	return (0);
 }
 
