@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:39:53 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:31:24 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,11 @@ int vars_init(t_vars *vars)
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 
-	vars->f[0] = 220;
-	vars->f[1] = 100;
+	vars->f[0] = 0;
+	vars->f[1] = 50;
 	vars->f[2] = 0;
-	vars->c[0] = 225;
-	vars->c[1] = 30;
+	vars->c[0] = 0;
+	vars->c[1] = 100;
 	vars->c[2] = 0;
 
 	for (int y = 0; y < WIN_HEIGHT; y++)
