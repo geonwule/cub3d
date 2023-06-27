@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_error.c                                        :+:      :+:    :+:   */
+/*   size_arr_2d.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 19:10:56 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/02 19:11:06 by geonwule         ###   ########.fr       */
+/*   Created: 2023/06/28 01:38:58 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/06/28 01:39:35 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int map_error(t_vars *vars)
+int		size_arr_2d(char **arr)
 {
-	vars = (void *)vars;
-    return (RETURN_SUCCESS);
+	int i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

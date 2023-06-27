@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 01:57:37 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 04:32:06 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 	int		i;
 	int		cnt;
 	char	**rgb;
-	int tmp;
+	int		tmp;
 
 	i = 0;
 	cnt = 0;
@@ -56,7 +56,7 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 
 int	set_color(char **arr, t_vars *vars)
 {
-	char **rgb;
+	char	**rgb;
 
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0])))
 	{

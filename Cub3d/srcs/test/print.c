@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:53:07 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/27 23:47:42 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 01:48:37 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ void	print_color(t_vars *vars)
 
 	printf("floor:%s\n", vars->map.info.floor);
 	printf("ceiling:%s\n", vars->map.info.ceiling);
-//	i = 0;
-//	while (i < 3)
-//	{
-//		printf("f[%d]: %d\n", i, vars->f[i]);
-//		i++;
-//	}
-//	i = 0;
-//	while (i < 3)
-//	{
-//		printf("c[%d]: %d\n", i, vars->c[i]);
-//		i++;
-//	}
+	i = 0;
+	while (i < 3)
+	{
+		printf("f[%d]: %d\n", i, vars->map.info.f[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		printf("c[%d]: %d\n", i, vars->map.info.c[i]);
+		i++;
+	}
 }
 
 void	print_arr_2d(char **arr)

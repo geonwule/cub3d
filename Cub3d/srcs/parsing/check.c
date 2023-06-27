@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:56:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/27 23:30:07 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 04:28:09 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_file(t_vars *vars, char *path)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(path);
 	if (len < 5)
@@ -26,12 +26,12 @@ void	check_file(t_vars *vars, char *path)
 
 int	check_texture(char **arr)
 {
-		if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0]))
-			|| !ft_strncmp(arr[0], "SO", ft_strlen(arr[0]))
-			|| !ft_strncmp(arr[0], "WE", ft_strlen(arr[0]))
+	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])) \
+			|| !ft_strncmp(arr[0], "SO", ft_strlen(arr[0])) \
+			|| !ft_strncmp(arr[0], "WE", ft_strlen(arr[0])) \
 			|| !ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
-			return (1);
-		return (0);
+		return (1);
+	return (0);
 }
 
 int	check_color(char **arr)
@@ -41,4 +41,3 @@ int	check_color(char **arr)
 		return (1);
 	return (0);
 }
-

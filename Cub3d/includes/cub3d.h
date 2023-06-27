@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/28 00:02:31 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 02:37:02 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,6 +396,13 @@ void	print_error(char *str, t_vars *vars);
 // utils/free.c
 void	free_arr_2d(char ***arr);
 void	free_map(t_map *map);
+void	free_lst(t_list **head);
+
+// utils/alloc_copy_str.c
+char *allocate_and_copy_string(char *src, t_vars *vars);
+
+// utils/size_arr_2d.c
+int		size_arr_2d(char **arr);
 
 // parsing/check.c
 void	check_file(t_vars *vars, char *path);
@@ -407,7 +414,12 @@ void	read_file(t_vars *vars, char *path);
 
 // parsing/set.c
 int		set_texture(char **arr, t_vars *vars);
-int		set_color(char **arr, t_vars *vars);
 void	set_map(t_vars *vars, int fd, char *line);
+
+// parsing/set_color.c
+int		set_color(char **arr, t_vars *vars);
+
+// parsing/check_map.c
+int		check_map(t_vars *vars);
 
 #endif

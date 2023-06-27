@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:13:11 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/27 23:16:50 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/28 00:10:21 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ void	free_map(t_map *map)
 		free(map->info.ceiling);
 	if (map->arr)
 		free_arr_2d(&map->arr);
+}
+
+void	free_lst(t_list **head)
+{
+	t_list *cur;
+	t_list *next;
+
+	cur = *head;
+	while (cur)
+	{
+		next = cur->next;
+		if (cur->content)
+			free(cur->content);
+		free(cur);
+		cur = next;
+	}
 }
