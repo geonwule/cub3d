@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:49:35 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:33:45 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,16 @@ int main(int ac, char **av)
     //     return (RETURN_FAILURE);
     // }
     vars_allocation(&vars);
-    if (map_read(av[1], &vars) || map_error(&vars))
-	{
-		vars_free(&vars);
-		return (RETURN_FAILURE);
-	}
-    vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
-	vars_init(&vars);
-	mlx_hook(vars.win, KEY_PRESS, PRESS_MASK, key_press, &vars);
-	mlx_hook(vars.win, KEY_RELEASE, RELEASE_MASK, key_release, &vars);
-	mlx_hook(vars.win, MOUSE_BUTTON, BUTTON_MASK, handle_mouse_button, &vars);
-	mlx_hook(vars.win, MOUSE_MOVE, MOVE_MASK, handle_mouse_move, &vars);
-	mlx_loop_hook(vars.mlx, rendering, &vars);
-    mlx_hook(vars.win, WINDOW_DESTROY, DESTROY_MASK, exit_game, &vars);
- 	mlx_loop(vars.mlx);
+	
+//    vars.mlx = mlx_init();
+//    vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+//	vars_init(&vars);
+//	mlx_hook(vars.win, KEY_PRESS, PRESS_MASK, key_press, &vars);
+//	mlx_hook(vars.win, KEY_RELEASE, RELEASE_MASK, key_release, &vars);
+//	mlx_hook(vars.win, MOUSE_BUTTON, BUTTON_MASK, handle_mouse_button, &vars);
+//	mlx_hook(vars.win, MOUSE_MOVE, MOVE_MASK, handle_mouse_move, &vars);
+//	mlx_loop_hook(vars.mlx, rendering, &vars);
+//    mlx_hook(vars.win, WINDOW_DESTROY, DESTROY_MASK, exit_game, &vars);
+// 	mlx_loop(vars.mlx);
 	return (RETURN_SUCCESS);
 }
