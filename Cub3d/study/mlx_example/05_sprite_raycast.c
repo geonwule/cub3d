@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 20:28:54 by yohlee            #+#    #+#             */
-/*   Updated: 2023/06/21 18:49:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:13:13 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@
 #define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_RELEASE	3
 #define X_EVENT_KEY_EXIT	17
-#define texWidth 400
-#define texHeight 400
-#define mapWidth 24
-#define mapHeight 24
+
 #define width 640
 #define height 480
-#define numSprites 19
+#define texWidth 400
+#define texHeight 400
+// #define texWidth 64
+// #define texHeight 64
+
+#define mapWidth 24
+#define mapHeight 24
+
 
 typedef struct	s_img
 {
@@ -45,13 +49,14 @@ struct	Sprite
 	double		y;
 	int			texture;
 };
+#define numSprites 19
 
 struct Sprite	sprite[numSprites] =
 {
-	{20.5, 11.5, 10}, //green light in front of playerstart
+	{21.5, 12.5, 10}, //green light in front of playerstart
 	//green lights in every room
-	{18.5,4.5, 10},
-	{10.0,4.5, 10},
+	{21.5, 13.5, 10},
+	{21.5, 14.5, 10},
 	{10.0,12.5,10},
 	{3.5, 6.5, 10},
 	{3.5, 20.5,10},
@@ -530,10 +535,13 @@ void	load_texture(t_info *info)
 	load_image(info, info->texture[5], "textures/no400.xpm", &img);
 	load_image(info, info->texture[6], "textures/ea400.xpm", &img);
 	load_image(info, info->texture[7], "textures/ea400.xpm", &img);
+
+	//sprite
 	load_image(info, info->texture[8], "textures/ea400.xpm", &img);
-	load_image(info, info->texture[9], "textures/we400.xpm", &img);
-	load_image(info, info->texture[10], "textures/no400.xpm", &img);
-	// 	load_image(info, info->texture[0], "textures/eagle.xpm", &img);
+	load_image(info, info->texture[9], "textures/monster400.xpm", &img); //sprite
+	load_image(info, info->texture[10], "textures/monster400.xpm", &img); //sprite
+	
+	// load_image(info, info->texture[0], "textures/eagle.xpm", &img);
 	// load_image(info, info->texture[1], "textures/redbrick.xpm", &img);
 	// load_image(info, info->texture[2], "textures/purplestone.xpm", &img);
 	// load_image(info, info->texture[3], "textures/greystone.xpm", &img);
@@ -541,6 +549,8 @@ void	load_texture(t_info *info)
 	// load_image(info, info->texture[5], "textures/mossy.xpm", &img);
 	// load_image(info, info->texture[6], "textures/wood.xpm", &img);
 	// load_image(info, info->texture[7], "textures/colorstone.xpm", &img);
+
+	//sprite textures
 	// load_image(info, info->texture[8], "textures/barrel.xpm", &img);
 	// load_image(info, info->texture[9], "textures/pillar.xpm", &img);
 	// load_image(info, info->texture[10], "textures/greenlight.xpm", &img);
@@ -553,7 +563,7 @@ int	main(void)
 	info.mlx = mlx_init();
 
 	info.posX = 22.0;
-	info.posY = 11.5;
+	info.posY = 11.0;
 	info.dirX = -1.0;
 	info.dirY = 0.0;
 	info.planeX = 0.0;
@@ -584,7 +594,7 @@ int	main(void)
 		for (int j = 0; j < texHeight * texWidth; j++)
 		{
 			info.texture[i][j] = 0;
-		}
+		} 
 	}
 
 	load_texture(&info);

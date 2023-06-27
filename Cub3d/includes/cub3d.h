@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/25 22:40:59 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/27 13:42:05 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # define TEX_WIDTH 400	
 # define TEX_HEIGHT 400
 
+# define MAP_HEIGHT 15
+# define MAP_WIDTH 34
+
 // # define IMG_WIDTH 4000
 // # define IMG_HEIGHT 3000
 
@@ -50,6 +53,8 @@ enum	e_pos
 {
 	X = 0,
 	Y = 1,
+	POS_X = 11,
+	POS_Y = 26,
 }	;
 
 enum	e_return_value
@@ -60,11 +65,15 @@ enum	e_return_value
 
 enum	e_texture
 {
+	TEX_NUM = 8,
 	TEX_NO = 0,
 	TEX_SO,
 	TEX_EA,
 	TEX_WE,
+	TEX_DOOR,
 	TEX_MONSTER,
+	TEX_POTION,
+	TEX_NPC,
 };
 
 enum	e_key
@@ -74,6 +83,12 @@ enum	e_key
 	S = 1,
 	D = 2,
 	B = 11,
+	R = 15,
+	Q = 12,
+	E = 14,
+	P = 35,
+	N = 45,
+	M = 46,
 	ESC = 53,
 	DEAD = 3,
 	LEFT = 124,
@@ -164,6 +179,7 @@ typedef struct  s_info
 
 	t_img	img;
 	int		buf[WIN_HEIGHT][WIN_WIDTH];
+	double	zBuffer[WIN_WIDTH];
 	int		**texture;
 }   t_info;
 
@@ -183,6 +199,13 @@ typedef	struct s_map
 	char	**arr;
 }	t_map;
 
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+}	t_sprite;
+
 typedef struct s_vars
 {
 
@@ -191,15 +214,14 @@ typedef struct s_vars
     void	*mlx;
     void	*win;
 
-	char	*north;		// alloc
-	char	*south;		// alloc
-	char	*west;		// alloc
-	char	*east;		// alloc
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
 	char	*floor;
 	int		f[3];
 	char	*ceiling;
 	int		c[3];
-	t_map	map;
 
 	void	*north_x;
 	void	*south_x;
@@ -211,6 +233,17 @@ typedef struct s_vars
 	void	*wall_x;
 	void	*door_x;
 	void	*monster_x;
+	void	*potion_x;
+	void	*dir_x;
+	void	*npc_x;
+
+	int		npc_talk;
+	int		quest_num; //no = 0, ing = 1, end = 2
+	int		quest_monster_num; // monster num
+
+	void	*quest_start;
+	void	*quest_ing;
+	void	*quest_end;
 
     void    *img_ptr;
     char    *data;
@@ -219,21 +252,66 @@ typedef struct s_vars
     int     bpp;
     int     endian;
 	
+	t_map	*map;
 	// ray
 	t_ray	ray;
 	t_info	*info;
 
-	int		monster_come;
-	int		m_pos[2];
+	int				monster_come;
+	int				m_speed;
+	unsigned int	m_pos[2];
+	unsigned int	m_num;
+	
+	void			*w_messege;
+	unsigned int	warning_time;
+
+	void			*potion;
+
+	int				sprite_num; //sprite_num
+	t_sprite		*sprite;
+	int				v_move;
+	int				v_i;
 
 	//aim,shot
 	void	*aim;
 	void	*gun;
+
+	int		hp;
+	int		hp_before;
+
+	void	*hp1;
+	void	*hp2;
+	void	*hp3;
+
+	void	*damage;
+
+	int		dead_check;
+	void	*dead;
+
+	int		hunt;
+	void	*exp1;
+	void	*exp2;
+
+	int		level;
+	void	*lv;
+
 	int		gun_change;
+
+	double	init_pos[2];
+	double	init_dir[2];
+	double	init_plane[2];
+
+	//mouse
+	int		mouse_x;
+	int		mouse_old_x;
+	int		mouse_y;
+	int		mouse_old_y;
+
+	unsigned int	render_i;
 }   t_vars;
 
 //vars_init
-void	*vars_allocation(t_vars *vars);
+t_vars  *vars_allocation(t_vars *vars);
 int		vars_init(t_vars *vars);
 void	set_dir(t_info *info, double x, double y);
 void	set_plane(t_info *info, double x, double y);
@@ -241,11 +319,19 @@ void	set_plane(t_info *info, double x, double y);
 //background_init
 void	fill_background(t_vars *vars, int ceiling[3], int floor[3]);
 
+//map_read
+int		map_read(char *map_path, t_vars *vars);
+
+//map_error
+int 	map_error(t_vars *vars);
+
 //key_event
+void	attack(t_vars *vars);
 int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 void	monster_kill(t_vars *vars);
+void	reset_game(t_vars *vars);
 
 //mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);
@@ -265,39 +351,20 @@ char	*ft_strchr_gnl(const char *s, int c);
 size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 
+//mlx_function
+void    *ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
+char    *ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
+
 //function
 void    *ft_malloc(size_t size);
 int		ft_open(char *file_path);
 void	vars_free(t_vars *vars);
-int	exit_game(t_vars *vars);
+int		exit_game(t_vars *vars);
+int		random_generator(int frequency);
 
 //ft_lstcub
 t_map	*ft_lstnew_cub(void *content);
 t_map	*ft_lstlast_cub(t_map *lst);
 void	ft_lstadd_back_cub(t_map **lst, t_map *new);
 int		ft_lstsize_cub(t_map *lst);
-
-// parsing/read_file.c
-void	print_error(char *str, t_vars *vars);
-void	read_file(t_vars *vars, char *path);
-
-// parsing/free.c
-void    free_arr_2d(char ***arr);
-
-// parsing/set.c
-void	set_texture(char **arr, t_vars *vars);
-void	set_color(char **arr, t_vars *vars);
-void	set_map(t_vars *vars, int fd, char *line);
-int		is_digit_str(char *str);
-
-// parsing/utils.c
-int		size_arr_2d(char **arr);
-
-//test
-void	print_texture(t_vars *vars);
-void	print_color(t_vars *vars);
-void	print_lst(t_list *head);
-void	print_arr_2d(char **arr);
-void	print_arr_2d_2(char **arr);
-
 #endif

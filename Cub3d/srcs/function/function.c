@@ -6,11 +6,30 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/21 16:01:35 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:56:04 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <time.h> //, time rand()
+#include <sys/time.h>
+
+int		random_generator(int frequency)
+{
+    struct timeval      tv;
+    unsigned long long  milliseconds;
+    int                 ret;
+
+    gettimeofday(&tv, NULL);
+    // milliseconds = (unsigned long long)(tv.tv_sec) * 1000 \
+     + 
+    milliseconds = (unsigned long long)(tv.tv_usec);
+    srand((unsigned int)milliseconds);
+    ret = rand();
+    if (ret % frequency == 0)
+        return (1);
+    return (0);
+}
 
 void    *ft_malloc(size_t size)
 {
@@ -84,12 +103,13 @@ void	vars_free(t_vars *vars)
 	}
     if (vars->info)
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < TEX_NUM; i++)
             free(vars->info->texture[i]);
         free(vars->info->texture);
         free(vars->info);
     }
-	free(vars);
+    if (vars->sprite)
+        free (vars->sprite);
 }
 
 int	exit_game(t_vars *vars)

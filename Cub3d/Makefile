@@ -14,18 +14,15 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 FUNC_DIR	= srcs/function/
 
 _FUNC_SRCS	= function.c \
+			  mlx_function.c \
 			  ft_lstcub.c \
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
 PARSING_DIR	= srcs/parsing/
 
-_PARSING_SRCS	= read_file.c \
-				  free.c \
-				  set.c \
-				  utils.c \
-				# map_read.c \
-				# map_error.c \
+_PARSING_SRCS	= map_read.c \
+				  map_error.c \
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
@@ -45,40 +42,25 @@ _EVENT_SRCS	= key_event.c \
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 
-TEST_DIR	= srcs/test/
-
-_TEST_SRCS	= print.c \
-
-TEST_SRCS	= $(addprefix $(TEST_DIR), $(_TEST_SRCS))
-
 SRCS = srcs/main.c \
 	   ${PARSING_SRCS} \
 	   ${FUNC_SRCS} \
 	   ${GNL_SRCS} \
 	   ${INIT_SRCS} \
 	   ${EVENT_SRCS} \
-	   ${TEST_SRCS} \
 
 BONUS_SRCS = \
 
-OBJS_DIR	= objs
-
-#OBJS = ${SRCS:.c=.o}
-OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
+OBJS = ${SRCS:.c=.o}
 
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
-#my m1
-#MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-
-#cluster
 MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
-
 #-L${MLXDIR} -lmlx -I${MLXDIR} -lX11 -lXext
 
 CC = cc
 
-CFLAGS = -g
+CFLAGS = 
 #-Wall -Wextra -Werror
 
 DEBUG_FLAG = -fsanitize=address  -g
@@ -101,15 +83,8 @@ WHITE = \033[0;97m
 
 all : ${NAME}
 
-#%.o : %.c
-#	@${CC} ${CFLAGS} -c $< -o $@ -I ${HEAD}
-
-$(OBJS_DIR)/%.o	: 	%.c
-			@mkdir -p $(@D)
-			@${CC} ${CFLAGS} -c $< -o $@ -I ${HEAD}
-#			@cc $(CFLAGS) -c $^ $(HEAD) -o $@
-#			@echo "${YELLOW}Compiling $<${END}"
-
+%.o : %.c
+	@${CC} ${CFLAGS} -c $< -o $@ -I ${HEAD}
 
 ${NAME} : ${OBJS}
 	@make -C ${LIBFT_DIR}
@@ -128,7 +103,7 @@ debug : ${OBJS}
 
 clean :
 	@make clean -C ${LIBFT_DIR}
-	@rm -rf ${OBJS_DIR}
+	@rm -f ${OBJS}
 	@rm -f ${BONUS_OBJS}
 	@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 	@echo "$(BLUE)cub_3d object files cleaned!$(DEF_COLOR)"

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:17:26 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/22 19:27:40 by jonchoi          ###   ########.fr       */
+/*   Updated: 2022/11/17 20:38:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	recul_nbr(int n, int fd)
 
 void	ft_putnbr_fd(int n, int fd)
 {
+	int	i;
+
 	if (n == -2147483648)
 	{
 		write(fd, "-2147483648", ft_strlen("-2147483648"));
@@ -36,6 +38,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd('0', fd);
 		return ;
 	}
+	i = 0;
 	if (n < 0)
 	{
 		write(fd, "-", 1);
