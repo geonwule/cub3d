@@ -1,4 +1,4 @@
-//#TEST
+//#TEST3
 
 #include "./mlx_opengl/mlx.h"
 #include <math.h>
