@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:44:31 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:16:18 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,12 +176,12 @@ int	key_press(int keycode, t_vars *vars)
 	if (keycode == N)
 	{
 		info->moveSpeed -= 0.01;
-		info->rotSpeed -= 0.001;
+		info->rotSpeed -= 0.01;
 	}
 	if (keycode == M)
 	{
 		info->moveSpeed += 0.01;
-		info->rotSpeed += 0.001;
+		info->rotSpeed += 0.01;
 	}
 	if (keycode == SPACE)
 		attack(vars);

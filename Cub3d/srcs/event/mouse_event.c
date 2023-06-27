@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 19:41:59 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:13:01 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,34 @@ int	handle_mouse_move(int x, int y, void *args)
 
 	if (vars->npc_talk)
 		return (0);
-	t_info	*info = vars->info;
-	if (x > (WIN_WIDTH / 2))// + WIN_WIDTH / 3))//left
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
-		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
-		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
-	}
+	vars->mouse_x = x;
+	vars->mouse_y = y;
+	// t_info	*info = vars->info;
+	// if (x > (WIN_WIDTH / 2))// + WIN_WIDTH / 3))//left
+	// {
+	// 	//both camera direction and camera plane must be rotated
+	// 	double oldDirX = info->dirX;
+	// 	info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
+	// 	info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
+	// 	double oldPlaneX = info->planeX;
+	// 	info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
+	// 	info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
+		
+	// 	// info->dirX *= 0.05;
+	// 	// info->dirY *= 0.05;
+	// 	// info->planeX *= 0.05;
+	// 	// info->planeY *= 0.05;
+	// }
 	
-	if (x < (WIN_WIDTH / 2))//- + WIN_WIDTH / 3))//right
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
-		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
-		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
-	}
+	// if (x < (WIN_WIDTH / 2))//- + WIN_WIDTH / 3))//right
+	// {
+	// 	//both camera direction and camera plane must be rotated
+	// 	double oldDirX = info->dirX;
+	// 	info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
+	// 	info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
+	// 	double oldPlaneX = info->planeX;
+	// 	info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
+	// 	info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
+	// }
 	return (0);
 }

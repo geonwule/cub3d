@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:52:22 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:11:14 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ t_vars  *vars_allocation(t_vars *vars)
 
 	vars->v_move = 64;
 	vars->v_i = 20;
+
+	vars->mouse_x = WIN_WIDTH / 2;
+	vars->mouse_y = WIN_HEIGHT / 2;
 	i = -1;
 	while (++i < 1000)
 		vars->keyboard[i] = 0;

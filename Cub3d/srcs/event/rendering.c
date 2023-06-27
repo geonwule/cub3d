@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:43:48 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:13:15 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,6 +432,32 @@ void	game_key_explain(t_vars *vars)
 		, 0xFFFFFF, "B : Door open/close, NPC contect");
 }
 
+void	mouse_check(t_vars *vars)
+{
+	t_info	*info = vars->info;
+	if (vars->mouse_x > (WIN_WIDTH / 2) + WIN_WIDTH / 3) //left
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = info->dirX;
+		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
+		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
+		double oldPlaneX = info->planeX;
+		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
+		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
+	}
+	
+	if (vars->mouse_x < (WIN_WIDTH / 2) - WIN_WIDTH / 3)//right
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = info->dirX;
+		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
+		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
+		double oldPlaneX = info->planeX;
+		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
+		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
+	}
+}
+
 int	rendering(t_vars *vars)
 {
 	if (dead_check_game_end(vars))
@@ -440,6 +466,7 @@ int	rendering(t_vars *vars)
 	monster_come_on(vars, vars->m_pos[X], vars->m_pos[Y]);
 
 	key_check(vars);
+	mouse_check(vars);
 	mlx_clear_window(vars->mlx, vars->win); // clear window
 	fill_background(vars, vars->c, vars->f); // study_need // fill back ground
 	map_set(vars);
