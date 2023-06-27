@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:11:14 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:39:53 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->v_i = 20;
 
 	vars->mouse_x = WIN_WIDTH / 2;
+	vars->mouse_old_x = WIN_WIDTH / 2;
 	vars->mouse_y = WIN_HEIGHT / 2;
+
+	vars->render_i = 0;
 	i = -1;
 	while (++i < 1000)
 		vars->keyboard[i] = 0;
@@ -161,7 +164,7 @@ int vars_init(t_vars *vars)
 	vars->init_plane[Y] = info->planeY;
 
 	info->moveSpeed = 0.05;
-	info->rotSpeed = 0.05;
+	info->rotSpeed = 0.08;
 
 	vars->f[0] = 220;
 	vars->f[1] = 100;

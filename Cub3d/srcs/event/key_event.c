@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:16:18 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:21:17 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int	key_press(int keycode, t_vars *vars)
 	if (keycode >= 0 && keycode <= 255)
 		vars->keyboard[keycode] = 1;
 
-	t_info *info = vars->info;	
+	t_info *info = vars->info;
 	//gun shot
 	if (keycode == N)
 	{

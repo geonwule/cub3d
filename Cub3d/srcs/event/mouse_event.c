@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:13:01 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:31:07 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	handle_mouse_button(int button, int x, int y, void *args)
 {
 	t_vars	*vars;
 	vars = (t_vars *)args;
-	printf("in mouse_handel\nbutton = %d, x = %d y = %d, vars = %p\n", button, x, y, vars);
+	// printf("in mouse_handel\nbutton = %d, x = %d y = %d, vars = %p\n", button, x, y, vars);
 	if (vars->dead_check && x >= 800 && x <= 860 && y >= 380 && y <= 400)
 	{
 		reset_game(vars);
@@ -42,12 +42,13 @@ int	handle_mouse_move(int x, int y, void *args)
 {
 	t_vars	*vars;
 	vars = (t_vars *)args;
-	// printf("in mouse_handel\nx = %d y = %d, vars = %p\n", x, y, vars);
 
 	if (vars->npc_talk)
 		return (0);
+	vars->mouse_old_x = vars->mouse_x;
 	vars->mouse_x = x;
 	vars->mouse_y = y;
+	printf("in mouse_handel\nx = %d old_x = %d, vars = %p\n", vars->mouse_x, vars->mouse_old_x, vars);
 	// t_info	*info = vars->info;
 	// if (x > (WIN_WIDTH / 2))// + WIN_WIDTH / 3))//left
 	// {

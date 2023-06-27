@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 12:46:49 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:37:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,10 @@ typedef struct s_vars
 
 	//mouse
 	int		mouse_x;
+	int		mouse_old_x;
 	int		mouse_y;
+
+	unsigned int	render_i;
 }   t_vars;
 
 //vars_init

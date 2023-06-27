@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:13:15 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:39:22 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,7 +435,8 @@ void	game_key_explain(t_vars *vars)
 void	mouse_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
-	if (vars->mouse_x > (WIN_WIDTH / 2) + WIN_WIDTH / 3) //left
+	// if (vars->mouse_x > (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// + WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x) //left
+	if (vars->mouse_x > vars->mouse_old_x)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -445,8 +446,8 @@ void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
-	
-	if (vars->mouse_x < (WIN_WIDTH / 2) - WIN_WIDTH / 3)//right
+	// if (vars->mouse_x < (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// - WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x)//right
+	if (vars->mouse_x < vars->mouse_old_x)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -456,6 +457,8 @@ void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
 		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
+	if (++vars->render_i % 5 == 0)
+		vars->mouse_old_x = vars->mouse_x;
 }
 
 int	rendering(t_vars *vars)
