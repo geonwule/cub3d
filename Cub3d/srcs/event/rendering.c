@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:56:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:37:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,16 +419,18 @@ void	game_key_explain(t_vars *vars)
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 5 \
 		, 0xFFFFFF, "W/A/S/D : character move");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 7 \
-		, 0xFFFFFF, "<-/->/mouse_move : Direct move");
+		, 0xFFFFFF, "Q : turn back");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 9 \
-		, 0xFFFFFF, "Space/mouse_left : Attack");
+		, 0xFFFFFF, "<-/->/mouse_move : Direct move");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 11 \
-		, 0xFFFFFF, "R : return respone");
+		, 0xFFFFFF, "Space/mouse_left : Attack");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 13 \
-		, 0xFFFFFF, "N/M : Game speed slow/fast");
+		, 0xFFFFFF, "R : return respone");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 15 \
-		, 0xFFFFFF, "P : game reset");
+		, 0xFFFFFF, "N/M : Game speed slow/fast");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 17 \
+		, 0xFFFFFF, "P : game reset");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 19 \
 		, 0xFFFFFF, "B : Door open/close, NPC contect");
 }
 
