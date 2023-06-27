@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:53:20 by yohlee            #+#    #+#             */
-/*   Updated: 2023/06/16 19:06:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:19:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
-#define texWidth 64
-#define texHeight 64
+#define texWidth 400
+#define texHeight 400
 #define mapWidth 24
 #define mapHeight 24
 #define width 640

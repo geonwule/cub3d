@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 12:10:05 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:21:17 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ int is_weak_brick(t_vars *vars, int x, int y)
 	char	spot;
 
 	spot = map[x][y];
-	if (spot == 'B' || spot == 'b')
-	{
-		printf("can break or build\n");//tmp
+	if (spot == 'B' || spot == 'b' || spot == 'H')
 		return (1);
-	}
 	return (0);
 }
 
@@ -96,7 +93,8 @@ void	monster_kill(t_vars *vars)
 			sideDistY += deltaDistY;
 			mapY += stepY;
 		}
-		if (map[mapX][mapY] == '0')
+		if (map[mapX][mapY] == '0' || map[mapX][mapY] == 'b' \
+			|| map[mapX][mapY] == 'P')
 			continue;
 		if (map[mapX][mapY] == 'M')
 		{
@@ -108,8 +106,48 @@ void	monster_kill(t_vars *vars)
 	}
 	if (hit)
 	{
-		map[mapX][mapY] = '0';
+		if (random_generator(3))
+			map[mapX][mapY] = 'P';
+		else
+			map[mapX][mapY] = '0';
+		vars->hunt++;
+		vars->m_num--;
+		vars->monster_come = 0;
+		if (vars->quest_num && vars->quest_monster_num > 0)
+			vars->quest_monster_num--;
 	}
+}
+
+void	reset_game(t_vars *vars)
+{
+	vars_free(vars);
+	vars_allocation(vars);
+	vars_init(vars);	
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			if (map[i][j] == 'b')
+				map[i][j] = 'B';
+			else if (map[i][j] == 'M' || map[i][j] == 'P')
+				map[i][j] = '0';
+		}
+	}
+}
+
+void	attack(t_vars *vars)
+{
+	int		x;
+	int		y;
+	void	*shot;
+	void	*shot2;
+
+	vars->gun_change = 1;
+	shot = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_1.xpm", &x, &y);
+	mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
+	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);
+	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
+	monster_kill(vars);
 }
 
 int	key_press(int keycode, t_vars *vars)
@@ -126,17 +164,33 @@ int	key_press(int keycode, t_vars *vars)
 	else if (keycode == ESC)
 		printf("press ESC\n");
 	#endif
+	if (keycode == P)
+		reset_game(vars);
+	if (vars->npc_talk)
+		return (0);
 	if (keycode >= 0 && keycode <= 255)
 		vars->keyboard[keycode] = 1;
 
-	t_info *info = vars->info;	
+	t_info *info = vars->info;
 	//gun shot
-	if (keycode == SPACE)
+	if (keycode == N)
 	{
-		int x, y;
-		void	*shot = mlx_xpm_file_to_image(vars->mlx, "texture/shot.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-		monster_kill(vars);
+		info->moveSpeed -= 0.01;
+		info->rotSpeed -= 0.01;
+	}
+	if (keycode == M)
+	{
+		info->moveSpeed += 0.01;
+		info->rotSpeed += 0.01;
+	}
+	if (keycode == SPACE)
+		attack(vars);
+	if (keycode == Q)
+	{
+		info->dirX *= -1;
+		info->dirY *= -1;
+		info->planeX *= -1;
+		info->planeY *= -1;
 	}
 	if (keycode == B)
 	{
@@ -155,7 +209,18 @@ int	key_press(int keycode, t_vars *vars)
 				map[(int)tmp_x][(int)tmp_y] = 'b';
 			else if (map[(int)tmp_x][(int)tmp_y] == 'b')
 				map[(int)tmp_x][(int)tmp_y] = 'B';
+			else if (map[(int)tmp_x][(int)tmp_y] == 'H')
+				vars->npc_talk = 1;
 		}
+	}
+	if (keycode == R) // respone_back
+	{
+		info->posX = vars->init_pos[X];
+		info->posY = vars->init_pos[Y];
+		info->dirX = vars->init_dir[X];
+		info->dirY = vars->init_dir[Y];
+		info->planeX = vars->init_plane[X];
+		info->planeY = vars->init_plane[Y];
 	}
 	return (0);
 }

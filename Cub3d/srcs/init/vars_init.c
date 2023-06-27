@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/20 17:49:43 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:19:08 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 extern char	map[15][34]; //tmp
 
-t_vars  *vars_allocation(void)
+t_vars  *vars_allocation(t_vars *vars)
 {
-    t_vars  *vars;
-	// t_map	*map;
 	t_info	*info;
 	int		i;
 
-    vars = malloc(sizeof(t_vars));
-	// map	= malloc(sizeof(t_map));
-	info = malloc(sizeof(t_info));
+	info = ft_malloc(sizeof(t_info));
 	vars->info = info;
     vars->north = NULL;
     vars->south = NULL;
@@ -31,12 +27,32 @@ t_vars  *vars_allocation(void)
     vars->east = NULL;
     vars->floor = NULL;
     vars->ceiling = NULL;
+
 	vars->monster_come = 0;
-	// map->height = 0;
-	// map->width = 0;
-	// map->arr = NULL;
-	// map->tmp_arr = NULL;
-	// vars->map = map;
+	vars->m_num = 0;
+	vars->warning_time = 0;
+	vars->sprite = NULL;
+
+	vars->gun_change = 0;
+	vars->hp = 3;
+	vars->hp_before = 3;
+	vars->hunt = 0;
+	vars->level = 1;
+	vars->dead_check = 0;
+	vars->m_speed = 0;
+
+	vars->npc_talk = 0;
+	vars->quest_num = 0;
+	vars->quest_monster_num = 30;
+
+	vars->v_move = 64;
+	vars->v_i = 20;
+
+	vars->mouse_x = WIN_WIDTH / 2;
+	vars->mouse_old_x = WIN_WIDTH / 2;
+	vars->mouse_y = WIN_HEIGHT / 2;
+
+	vars->render_i = 0;
 	i = -1;
 	while (++i < 1000)
 		vars->keyboard[i] = 0;
@@ -48,17 +64,30 @@ static void	img_xpm_set(t_vars *vars)
 	int	x;
 	int	y;
 
-	// vars->north_x = mlx_xpm_file_to_image(vars->mlx, vars->north, &x, &y);
-	// vars->south_x = mlx_xpm_file_to_image(vars->mlx, vars->south, &x, &y);
-	// vars->east_x = mlx_xpm_file_to_image(vars->mlx, vars->east, &x, &y);
-	// vars->west_x = mlx_xpm_file_to_image(vars->mlx, vars->west, &x, &y);
-	vars->north_x = mlx_xpm_file_to_image(vars->mlx, NORTH, &x, &y);
-	vars->south_x = mlx_xpm_file_to_image(vars->mlx, SOUTH, &x, &y);
-	vars->east_x = mlx_xpm_file_to_image(vars->mlx, EAST, &x, &y);
-	vars->west_x = mlx_xpm_file_to_image(vars->mlx, WEST, &x, &y);
-	vars->player_x = mlx_xpm_file_to_image(vars->mlx, PLAYER, &x, &y);
-	vars->empty_x = mlx_xpm_file_to_image(vars->mlx, EMPTY, &x, &y);
-	vars->wall_x = mlx_xpm_file_to_image(vars->mlx, WALL, &x, &y);
+	vars->player_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
+	vars->empty_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
+	vars->wall_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
+	vars->monster_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
+	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
+	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
+	vars->dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
+	vars->npc_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/npc.xpm", &x, &y);
+
+	vars->quest_start = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_start.xpm", &x, &y);
+	vars->quest_ing = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_ing.xpm", &x, &y);
+	vars->quest_end = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_end.xpm", &x, &y);
+	
+	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/etc/dead.xpm", &x, &y);
+	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/etc/damage.xpm", &x, &y);
+	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/etc/aim.xpm", &x, &y);
+	vars->w_messege = ft_xpm_file_to_image(vars->mlx, "texture/etc/warning.xpm", &x, &y);
+
+	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp1.xpm", &x, &y);
+	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp2.xpm", &x, &y);
+	vars->hp3 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp3.xpm", &x, &y);
+	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp1.xpm", &x, &y);
+	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp2.xpm", &x, &y);
+	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/underbar/level.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -73,60 +102,75 @@ void	set_plane(t_info *info, double x, double y)
 	info->planeY = y;
 }
 
+#ifdef DEBUG_MON
+#include <string.h>
+#endif
+
 static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_img *img)
 {
-	img->img = mlx_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	img->img = ft_xpm_file_to_image(vars->mlx, path, &img->img_width, &img->img_height);
+	img->data = (int *)ft_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+
 	for (int y = 0; y < img->img_height; y++)
 	{
 		for (int x = 0; x < img->img_width; x++)
 		{
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			#ifdef DEBUG_MON
+			printf("%d", texture[img->img_width * y + x]);
+			if (x % img->img_width == 0)
+				printf("\n");
+			#endif
 		}
 	}
+	#ifdef DEBUG_MON
+	printf("exit\n");
+	exit(0);
+	#endif
 	mlx_destroy_image(vars->mlx, img->img);
 }
 
 static void	load_texture(t_vars *vars, t_info *info)
 {
 	t_img	img;
-	load_image(vars, info, info->texture[TEX_NO], "texture/north.xpm", &img);
-	load_image(vars, info, info->texture[TEX_SO], "texture/south.xpm", &img);
-	load_image(vars, info, info->texture[TEX_EA], "texture/east.xpm", &img);
-	load_image(vars, info, info->texture[TEX_WE], "texture/west.xpm", &img);
-	load_image(vars, info, info->texture[TEX_MONSTER], "texture/monster.xpm", &img);
-	// load_image(vars, info, info->texture[5], "textures_study/mossy.xpm", &img);
-	// load_image(vars, info, info->texture[6], "textures_study/wood.xpm", &img);
-	// load_image(vars, info, info->texture[7], "textures_study/colorstone.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NO], "texture/ray/no.xpm", &img);
+	load_image(vars, info, info->texture[TEX_SO], "texture/ray/so.xpm", &img);
+	load_image(vars, info, info->texture[TEX_EA], "texture/ray/ea.xpm", &img);
+	load_image(vars, info, info->texture[TEX_WE], "texture/ray/we.xpm", &img);
+	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
+	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
+	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NPC], "texture/npc/npc.xpm", &img);
 }
-	// load_image(vars, info, info->texture[TEX_NO], NORTH, &img);
-	// load_image(vars, info, info->texture[TEX_SO], SOUTH, &img);
-	// load_image(vars, info, info->texture[TEX_EA], EAST, &img);
-	// load_image(vars, info, info->texture[TEX_WE], WEST, &img);
 
 int vars_init(t_vars *vars)
 {
 	t_info	*info = vars->info;
 	
-	info->posX = 11.0;
-	info->posY = 26.0;
-	
+	info->posX = POS_X;
+	info->posY = POS_Y;
+	vars->init_pos[X] = info->posX;
+	vars->init_pos[Y] = info->posY;
 	//player direction(x, y) 플레이어 방향 벡터
 	info->dirX = -1.0;
 	info->dirY = 0.0;
+	vars->init_dir[X] = info->dirX;
+	vars->init_dir[Y] = info->dirY;
 	
 	//camera line 카메라 평면벡터
 	info->planeX = 0.0;
 	info->planeY = 0.66;
+	vars->init_plane[X] = info->planeX;
+	vars->init_plane[Y] = info->planeY;
 
-	info->moveSpeed = 0.04;
-	info->rotSpeed = 0.04;
+	info->moveSpeed = 0.05;
+	info->rotSpeed = 0.08;
 
-	vars->f[0] = 220;
-	vars->f[1] = 100;
+	vars->f[0] = 0;
+	vars->f[1] = 50;
 	vars->f[2] = 0;
-	vars->c[0] = 225;
-	vars->c[1] = 30;
+	vars->c[0] = 0;
+	vars->c[1] = 100;
 	vars->c[2] = 0;
 
 	for (int y = 0; y < WIN_HEIGHT; y++)
@@ -138,10 +182,10 @@ int vars_init(t_vars *vars)
 	}
 
 	//texture 8개
-	info->texture = (int **)malloc(sizeof(int *) * 8);
-	for (int i = 0; i < 8; i++)
+	info->texture = (int **)ft_malloc(sizeof(int *) * TEX_NUM);
+	for (int i = 0; i < TEX_NUM; i++)
 	{
-		info->texture[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
+		info->texture[i] = (int *)ft_malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 		for (int j = 0; j < TEX_HEIGHT * TEX_WIDTH; j++)
 		{
 			info->texture[i][j] = 0;
@@ -150,7 +194,7 @@ int vars_init(t_vars *vars)
 
 	load_texture(vars, info);
 	info->img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
-	info->img.data = (int *)mlx_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
+	info->img.data = (int *)ft_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
 	
 	//->rgb
 	// vars->img_ptr = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
