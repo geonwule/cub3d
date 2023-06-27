@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:46:31 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:56:46 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,6 +484,7 @@ void	mouse_check(t_vars *vars)
 
 int	rendering(t_vars *vars)
 {
+	// printf("rendered %d\n", vars->render_i);
 	if (dead_check_game_end(vars))
 		return (0);
 	monster_rezen(vars);
