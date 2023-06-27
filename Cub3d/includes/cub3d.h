@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:42:05 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/28 00:02:31 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,20 +191,33 @@ typedef struct  s_info
 // 	struct s_map	*next;
 // }	t_map;
 
-typedef	struct s_map
-{
-	int		height;
-	int		width;
-	char	*tmp_arr;
-	char	**arr;
-}	t_map;
-
 typedef struct	s_sprite
 {
 	double		x;
 	double		y;
 	int			texture;
 }	t_sprite;
+
+typedef struct s_map_info
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*floor;
+	int		f[3];
+	char	*ceiling;
+	int		c[3];
+}			t_map_info;
+
+typedef	struct s_map
+{
+	t_map_info	info;
+	int			height;
+	int			width;
+//	char		*tmp_arr;
+	char		**arr;
+}	t_map;
 
 typedef struct s_vars
 {
@@ -214,6 +227,9 @@ typedef struct s_vars
     void	*mlx;
     void	*win;
 
+	t_map	map;
+
+	/*Need delete*/
 	char	*north;
 	char	*south;
 	char	*west;
@@ -222,6 +238,7 @@ typedef struct s_vars
 	int		f[3];
 	char	*ceiling;
 	int		c[3];
+
 
 	void	*north_x;
 	void	*south_x;
@@ -252,7 +269,6 @@ typedef struct s_vars
     int     bpp;
     int     endian;
 	
-	t_map	*map;
 	// ray
 	t_ray	ray;
 	t_info	*info;
@@ -367,4 +383,31 @@ t_map	*ft_lstnew_cub(void *content);
 t_map	*ft_lstlast_cub(t_map *lst);
 void	ft_lstadd_back_cub(t_map **lst, t_map *new);
 int		ft_lstsize_cub(t_map *lst);
+
+// test/print.c
+void	print_texture(t_vars *vars);
+void	print_color(t_vars *vars);
+void	print_arr_2d(char **arr);
+void	print_lst(t_list *head);
+
+//	utils/print_error.c
+void	print_error(char *str, t_vars *vars);
+
+// utils/free.c
+void	free_arr_2d(char ***arr);
+void	free_map(t_map *map);
+
+// parsing/check.c
+void	check_file(t_vars *vars, char *path);
+int		check_texture(char **arr);
+int		check_color(char **arr);
+
+// parsing/read_file.c
+void	read_file(t_vars *vars, char *path);
+
+// parsing/set.c
+int		set_texture(char **arr, t_vars *vars);
+int		set_color(char **arr, t_vars *vars);
+void	set_map(t_vars *vars, int fd, char *line);
+
 #endif
