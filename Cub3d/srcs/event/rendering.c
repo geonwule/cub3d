@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:39:22 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:46:31 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,7 +436,7 @@ void	mouse_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
 	// if (vars->mouse_x > (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// + WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x) //left
-	if (vars->mouse_x > vars->mouse_old_x)
+	if (vars->mouse_x > vars->mouse_old_x) // right
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -447,7 +447,7 @@ void	mouse_check(t_vars *vars)
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
 	// if (vars->mouse_x < (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// - WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x)//right
-	if (vars->mouse_x < vars->mouse_old_x)
+	if (vars->mouse_x < vars->mouse_old_x) // left
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -457,8 +457,29 @@ void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
 		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
+	// if (vars->mouse_y < vars->mouse_old_y) // up
+	// {
+	// 	double oldDirY = info->dirY;
+	// 	info->dirY = info->dirY * cos(-info->rotSpeed) - info->dirX * sin(-info->rotSpeed);
+	// 	info->dirX = oldDirY * sin(-info->rotSpeed) + info->dirX * cos(-info->rotSpeed);
+	// 	double oldPlaneY = info->planeY;
+	// 	info->planeY = info->planeY * cos(-info->rotSpeed) - info->planeX * sin(-info->rotSpeed);
+	// 	info->planeX = oldPlaneY * sin(-info->rotSpeed) + info->planeX * cos(-info->rotSpeed);
+	// }
+	// if (vars->mouse_y > vars->mouse_old_y) // down
+	// {
+	// 	double oldDirY = info->dirY;
+	// 	info->dirY = info->dirY * cos(info->rotSpeed) - info->dirX * sin(info->rotSpeed);
+	// 	info->dirX = oldDirY * sin(info->rotSpeed) + info->dirX * cos(info->rotSpeed);
+	// 	double oldPlaneY = info->planeY;
+	// 	info->planeY = info->planeY * cos(info->rotSpeed) - info->planeX * sin(info->rotSpeed);
+	// 	info->planeX = oldPlaneY * sin(info->rotSpeed) + info->planeX * cos(info->rotSpeed);
+	// }
 	if (++vars->render_i % 5 == 0)
+	{
 		vars->mouse_old_x = vars->mouse_x;
+		vars->mouse_old_y = vars->mouse_y;
+	}
 }
 
 int	rendering(t_vars *vars)

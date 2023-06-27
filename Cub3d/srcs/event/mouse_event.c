@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:31:07 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:42:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	handle_mouse_move(int x, int y, void *args)
 	if (vars->npc_talk)
 		return (0);
 	vars->mouse_old_x = vars->mouse_x;
+	vars->mouse_old_y = vars->mouse_y;
 	vars->mouse_x = x;
 	vars->mouse_y = y;
 	printf("in mouse_handel\nx = %d old_x = %d, vars = %p\n", vars->mouse_x, vars->mouse_old_x, vars);
