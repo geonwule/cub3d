@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/24 20:51:11 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:44:02 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,13 +172,12 @@ void calc(t_vars *vars, int x)
 		{
 			sideDistY += deltaDistY;
 			mapY += stepY;
-			if (stepY > 0)//east
+			if (stepY < 0)//east
 				side = TEX_EA;
 			else //west
 				side = TEX_WE;
 		}
-		if (map[mapX][mapY] == '1' || map[mapX][mapY] == '2' \
-			|| map[mapX][mapY] == '3' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
+		if (map[mapX][mapY] == '1' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
 			hit = 1;
 		if (map[mapX][mapY] == 'M' && vars->monster_come == 0)
 		{	

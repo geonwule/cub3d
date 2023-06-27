@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 15:37:03 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:18:00 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,18 +461,19 @@ void	mouse_check(t_vars *vars)
 	}
 	// if (vars->mouse_y < vars->mouse_old_y) // up
 	// {
-	// 	double oldDirY = info->dirY;
-	// 	info->dirY = info->dirY * cos(-info->rotSpeed) - info->dirX * sin(-info->rotSpeed);
-	// 	info->dirX = oldDirY * sin(-info->rotSpeed) + info->dirX * cos(-info->rotSpeed);
-	// 	double oldPlaneY = info->planeY;
-	// 	info->planeY = info->planeY * cos(-info->rotSpeed) - info->planeX * sin(-info->rotSpeed);
-	// 	info->planeX = oldPlaneY * sin(-info->rotSpeed) + info->planeX * cos(-info->rotSpeed);
+	// 	// double oldDirY = info->dirY;
+	// 	// info->dirY = info->dirY * cos(-info->rotSpeed) - info->dirX * sin(-info->rotSpeed);
+	// 	// info->dirX = oldDirY * sin(-info->rotSpeed) + info->dirX * cos(-info->rotSpeed);
+	// 	// double oldPlaneY = info->planeY;
+	// 	// info->planeY = info->planeY * cos(-info->rotSpeed) - info->planeX * sin(-info->rotSpeed);
+	// 	// info->planeX = oldPlaneY * sin(-info->rotSpeed) + info->planeX * cos(-info->rotSpeed);
+	// 	info->planeX += 1;
 	// }
 	// if (vars->mouse_y > vars->mouse_old_y) // down
 	// {
-	// 	double oldDirY = info->dirY;
-	// 	info->dirY = info->dirY * cos(info->rotSpeed) - info->dirX * sin(info->rotSpeed);
-	// 	info->dirX = oldDirY * sin(info->rotSpeed) + info->dirX * cos(info->rotSpeed);
+	// 	// double oldDirY = info->dirY;
+	// 	// info->dirY = info->dirY * cos(info->rotSpeed) - info->dirX * sin(info->rotSpeed);
+	// 	// info->dirX = oldDirY * sin(info->rotSpeed) + info->dirX * cos(info->rotSpeed);
 	// 	double oldPlaneY = info->planeY;
 	// 	info->planeY = info->planeY * cos(info->rotSpeed) - info->planeX * sin(info->rotSpeed);
 	// 	info->planeX = oldPlaneY * sin(info->rotSpeed) + info->planeX * cos(info->rotSpeed);
