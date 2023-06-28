@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 18:33:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/27 23:19:18 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ int main(int ac, char **av)
 	#endif
     t_vars  vars;
 
-    // if (ac != 2)
-    // {
-    //     printf("arg_error\n");
-    //     return (RETURN_FAILURE);
-    // }
-    vars_allocation(&vars);
-	
+	if (ac != 2)
+	{
+		print_error("Need one argument", &vars);
+		return (RETURN_FAILURE);
+	}
+	read_file(&vars, av[1]);
+
+//	vars_allocation(&vars);
+
 //    vars.mlx = mlx_init();
 //    vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 //	vars_init(&vars);

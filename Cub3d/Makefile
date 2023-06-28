@@ -21,7 +21,13 @@ FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
 PARSING_DIR	= srcs/parsing/
 
-_PARSING_SRCS	= 
+_PARSING_SRCS	= read_file.c	\
+				  check.c		\
+				  set.c			\
+				  set_color.c	\
+				  check_map.c	\
+
+				  
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
@@ -41,6 +47,16 @@ _EVENT_SRCS	= key_event.c \
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 
+UTILS_DIR	= srcs/utils/
+
+_UTILS_SRCS	=	print_error.c	\
+				free.c			\
+				alloc_copy_str.c\
+				size_arr_2d.c	\
+
+UTILS_SRCS	= $(addprefix $(UTILS_DIR), $(_UTILS_SRCS))
+
+
 TEST_DIR	= srcs/test/
 
 _TEST_SRCS	= print.c \
@@ -54,10 +70,11 @@ SRCS = srcs/main.c \
 	   ${INIT_SRCS} \
 	   ${EVENT_SRCS} \
 	   ${TEST_SRCS} \
+	   ${UTILS_SRCS} \
 
 BONUS_SRCS = \
 
-OBJS_DIR	=	objs
+OBJS_DIR	= objs
 
 #OBJS = ${SRCS:.c=.o}
 OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -65,10 +82,10 @@ OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 #my m1
-#MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 #cluster
-MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
+#MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
 
 #-L${MLXDIR} -lmlx -I${MLXDIR} -lX11 -lXext
 
@@ -77,7 +94,7 @@ CC = cc
 CFLAGS = -g
 #-Wall -Wextra -Werror
 
-#DEBUG_FLAG = -fsanitize=address  -g
+DEBUG_FLAG = -fsanitize=address  -g
 #-O2
 
 NAME = cub3d
@@ -123,7 +140,7 @@ debug : ${OBJS}
 
 clean :
 	@make clean -C ${LIBFT_DIR}
-	@rm -f ${OBJS}
+	@rm -rf ${OBJS_DIR}
 	@rm -f ${BONUS_OBJS}
 	@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 	@echo "$(BLUE)cub_3d object files cleaned!$(DEF_COLOR)"
