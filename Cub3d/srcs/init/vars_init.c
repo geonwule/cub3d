@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-// extern char	map[15][34]; //tmp
-
 t_vars  *vars_allocation(t_vars *vars)
 {
 	t_info	*info;
@@ -21,12 +19,6 @@ t_vars  *vars_allocation(t_vars *vars)
 
 	info = ft_malloc(sizeof(t_info));
 	vars->info = info;
-//    vars->north = NULL;
-//    vars->south = NULL;
-//    vars->west = NULL;
-//    vars->east = NULL;
-//    vars->floor = NULL;
-//    vars->ceiling = NULL;
 
 	vars->monster_come = 0;
 	vars->m_num = 0;
@@ -137,11 +129,6 @@ static void	load_texture(t_vars *vars, t_info *info)
 	load_image(vars, info, info->texture[TEX_SO], vars->map.info.south, &img);
 	load_image(vars, info, info->texture[TEX_EA], vars->map.info.east, &img);
 	load_image(vars, info, info->texture[TEX_WE], vars->map.info.west, &img);
-
-	// load_image(vars, info, info->texture[TEX_NO], "texture/ray/no.xpm", &img);
-	// load_image(vars, info, info->texture[TEX_SO], "texture/ray/so.xpm", &img);
-	// load_image(vars, info, info->texture[TEX_EA], "texture/ray/ea.xpm", &img);
-	// load_image(vars, info, info->texture[TEX_WE], "texture/ray/we.xpm", &img);
 	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
@@ -152,13 +139,16 @@ int vars_init(t_vars *vars)
 {
 	t_info	*info = vars->info;
 	
+	//jonn 이걸 주석처리
 	info->posX = POS_X;
 	info->posY = POS_Y;
+	info->dirX = -1.0;
+	info->dirY = 0.0;
+
 	vars->init_pos[X] = info->posX;
 	vars->init_pos[Y] = info->posY;
 	//player direction(x, y) 플레이어 방향 벡터
-	info->dirX = -1.0;
-	info->dirY = 0.0;
+
 	vars->init_dir[X] = info->dirX;
 	vars->init_dir[Y] = info->dirY;
 	
@@ -190,10 +180,6 @@ int vars_init(t_vars *vars)
 	load_texture(vars, info);
 	info->img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
 	info->img.data = (int *)ft_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);
-	
-	//->rgb
-	// vars->img_ptr = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
-	// vars->data = mlx_get_data_addr(vars->img_ptr, &vars->bpp, &vars->size_l, &vars->endian);
     img_xpm_set(vars);
     return (RETURN_SUCCESS);
 }

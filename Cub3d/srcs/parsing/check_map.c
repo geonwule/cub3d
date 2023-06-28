@@ -25,7 +25,7 @@ static int	count_plyer_and_is_valid(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!ft_strchr("NWES01 ", map[i][j]))
+			if (!ft_strchr("NWES01HB ", map[i][j]))
 				return (-1);
 			if (ft_strchr("NWES", map[i][j]))		// set players pos
 				cnt++;								// set_pos();

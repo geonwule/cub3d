@@ -21,8 +21,6 @@ int		random_generator(int frequency)
     int                 ret;
 
     gettimeofday(&tv, NULL);
-    // milliseconds = (unsigned long long)(tv.tv_sec) * 1000 \
-     + 
     milliseconds = (unsigned long long)(tv.tv_usec);
     srand((unsigned int)milliseconds);
     ret = rand();

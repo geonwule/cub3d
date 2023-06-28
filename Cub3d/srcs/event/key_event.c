@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-// extern char	map[15][34]; //tmp
-
 int	key_release(int keycode, t_vars *vars)
 {
 	#ifdef KEY_DEBUG
@@ -126,9 +124,9 @@ void	reset_game(t_vars *vars)
 	vars_free(vars);
 	vars_allocation(vars);
 	vars_init(vars);	
-	for (int i = 0; i < MAP_HEIGHT; i++)
+	for (int i = 0; i < vars->map.height; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++)
+		for (int j = 0; j < vars->map.width; j++)
 		{
 			if (map[i][j] == 'b')
 				map[i][j] = 'B';
@@ -228,10 +226,3 @@ int	key_press(int keycode, t_vars *vars)
 	}
 	return (0);
 }
-
-	// 	//tmp
-	// 	printf("map=\n");
-	// 	//extern char	map[15][34]; //tmp
-	// 	for (int i = 0; i < 15; i++)
-	// 		printf("%s\n", map[i]);
-	// }
