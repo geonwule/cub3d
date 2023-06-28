@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
+// extern char	map[15][34]; //tmp
 
 t_vars  *vars_allocation(t_vars *vars)
 {
@@ -20,7 +20,7 @@ t_vars  *vars_allocation(t_vars *vars)
 	int		i;
 
 	info = ft_malloc(sizeof(t_info));
-//	vars->info = info;
+	vars->info = info;
 //    vars->north = NULL;
 //    vars->south = NULL;
 //    vars->west = NULL;
@@ -150,7 +150,6 @@ static void	load_texture(t_vars *vars, t_info *info)
 
 int vars_init(t_vars *vars)
 {
-int i = 0;
 	t_info	*info = vars->info;
 	
 	info->posX = POS_X;
@@ -171,14 +170,6 @@ int i = 0;
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 
-		printf("here %d\n", ++i);
-	vars->f[0] = 0;
-	vars->f[1] = 50;
-	vars->f[2] = 0;
-	vars->c[0] = 0;
-	vars->c[1] = 100;
-	vars->c[2] = 0;
-
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
 		for (int x = 0; x < WIN_WIDTH; x++)
@@ -186,7 +177,6 @@ int i = 0;
 			info->buf[y][x] = 0;
 		}
 	}
-	printf("here %d\n", ++i);
 	//texture 8개
 	info->texture = (int **)ft_malloc(sizeof(int *) * TEX_NUM);
 	for (int i = 0; i < TEX_NUM; i++)
@@ -197,7 +187,6 @@ int i = 0;
 			info->texture[i][j] = 0;
 		}
 	}
-	printf("here %d\n", ++i);
 	load_texture(vars, info);
 	info->img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
 	info->img.data = (int *)ft_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);

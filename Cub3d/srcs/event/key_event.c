@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
+// extern char	map[15][34]; //tmp
 
 int	key_release(int keycode, t_vars *vars)
 {
@@ -34,7 +34,7 @@ int is_weak_brick(t_vars *vars, int x, int y)
 {
 	char	spot;
 
-	spot = map[x][y];
+	spot = vars->map.arr[x][y];
 	if (spot == 'B' || spot == 'b' || spot == 'H')
 		return (1);
 	return (0);
@@ -42,6 +42,7 @@ int is_weak_brick(t_vars *vars, int x, int y)
 
 void	monster_kill(t_vars *vars)
 {
+	char	**map = vars->map.arr;
 	t_info	*info = vars->info;
 	double	cameraX = 0;
 	double	rayDirX = info->dirX + info->planeX * cameraX;
@@ -120,6 +121,8 @@ void	monster_kill(t_vars *vars)
 
 void	reset_game(t_vars *vars)
 {
+	char	**map = vars->map.arr;
+
 	vars_free(vars);
 	vars_allocation(vars);
 	vars_init(vars);	
@@ -172,6 +175,7 @@ int	key_press(int keycode, t_vars *vars)
 		vars->keyboard[keycode] = 1;
 
 	t_info *info = vars->info;
+	char	**map = vars->map.arr;
 	//gun shot
 	if (keycode == N)
 	{

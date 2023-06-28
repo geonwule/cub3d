@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
+// extern char	map[15][34]; //tmp
 
 int	can_move(t_vars *vars, int x, int y)
 {
 	char	spot;
 
-	spot = map[x][y];
+	spot = vars->map.arr[x][y];
 	if (spot == 'P')
 	{
-		map[x][y] = '0';
+		vars->map.arr[x][y] = '0';
 		if (vars->hp < 3)
 			vars->hp++;
 		return (1);
@@ -101,6 +101,7 @@ static void	key_check(t_vars *vars)
 static void mini_map(t_vars *vars)
 {
 	int mini_width, mini_height;
+	char	**map = vars->map.arr;
 
 	mini_width = 34;
 	mini_height = 15;
@@ -179,6 +180,7 @@ void	damaged_or_recovery(t_vars *vars)
 void	monster_come_on(t_vars *vars, int x, int y)
 {
 	t_info	*info = vars->info;
+	char	**map = vars->map.arr;
 
 	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
 		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M' \
@@ -305,7 +307,7 @@ void	monster_rezen(t_vars *vars)
 {
 	int			i;
 	int			j;
-
+	char	**map = vars->map.arr;
 	/*need parsing
 	vars->map->height = 15;
 	vars->map->width = 34;
@@ -389,6 +391,7 @@ void	npc_quest(t_vars *vars)
 void	press_b(t_vars *vars)
 {
 	t_info	*info = vars->info;
+	char	**map = vars->map.arr;
 
 	double		x, y;
 	const int	dx[4] = {-1, 1, 0, 0};
@@ -496,7 +499,7 @@ int	rendering(t_vars *vars)
 	key_check(vars);
 	mouse_check(vars);
 	mlx_clear_window(vars->mlx, vars->win); // clear window
-	fill_background(vars, vars->c, vars->f); // study_need // fill back ground
+	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
 	map_set(vars);
 	draw_mlx(vars);
 

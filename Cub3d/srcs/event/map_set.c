@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
+// extern char	map[15][34]; //tmp
 
 void verLine(t_vars *vars, int x, int y1, int y2, int color)
 {
@@ -29,6 +29,7 @@ void verLine(t_vars *vars, int x, int y1, int y2, int color)
 
 void	sprite_init(t_vars *vars)
 {
+	char	**map = vars->map.arr;
 	vars->sprite_num = 0;
 	for (int i = 0; i < 15; i++)
 	{
@@ -116,6 +117,7 @@ void	sortSprites(int *order, double *dist, int amount)
 
 void calc(t_vars *vars, int x)
 {
+	char	**map = vars->map.arr;
 	t_info	*info = vars->info;
 	double cameraX = 2 * x / (double)WIN_WIDTH - 1;
 	double rayDirX = info->dirX + info->planeX * cameraX;
