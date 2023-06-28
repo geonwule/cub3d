@@ -12,16 +12,14 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
-
 int	can_move(t_vars *vars, int x, int y)
 {
 	char	spot;
 
-	spot = map[x][y];
+	spot = vars->map.arr[x][y];
 	if (spot == 'P')
 	{
-		map[x][y] = '0';
+		vars->map.arr[x][y] = '0';
 		if (vars->hp < 3)
 			vars->hp++;
 		return (1);
@@ -46,7 +44,6 @@ static void	key_check(t_vars *vars)
 		if (can_move(vars, (int)(info->posX) \
 			, (int)(info->posY + info->dirY * info->moveSpeed)))
 			info->posY += info->dirY * info->moveSpeed;
-			//printf("posX = %d, dirX = %d, posY = %d, dirY = %d\n", (int)info->posX, (int)info->dirX, (int)info->posY, (int)info->dirY);
 	}
 	if (vars->keyboard[S])
 	{
@@ -101,9 +98,10 @@ static void	key_check(t_vars *vars)
 static void mini_map(t_vars *vars)
 {
 	int mini_width, mini_height;
+	char	**map = vars->map.arr;
 
-	mini_width = 34;
-	mini_height = 15;
+	mini_width = vars->map.width;
+	mini_height = vars->map.height;
 	
 	void	*mini_back = mlx_new_image(vars->mlx, mini_width * 10, mini_height * 10);
 	for (int x = 0; x < mini_height; x++)
@@ -179,14 +177,12 @@ void	damaged_or_recovery(t_vars *vars)
 void	monster_come_on(t_vars *vars, int x, int y)
 {
 	t_info	*info = vars->info;
+	char	**map = vars->map.arr;
 
 	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
 		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M' \
 		|| vars->npc_talk)
-		return ;
-
-	// printf("map[%d][%d] = %c\n", vars->m_pos[X], vars->m_pos[Y], map[vars->m_pos[X]][vars->m_pos[Y]]);
-	
+		return ;	
 	if ((int)info->posX < x && map[x - 1][y] == '0')
 	{
 		if (((int)info->posX == x - 1 && (int)info->posY == y) && vars->hp > 0)
@@ -271,9 +267,6 @@ void	level_up(t_vars *vars)
 
 int	dead_check_game_end(t_vars *vars)
 {
-	// int	i;
-
-	// i = 0;
 	if (!vars->dead_check)
 		return (0);
 	if (vars->dead_check)
@@ -305,36 +298,20 @@ void	monster_rezen(t_vars *vars)
 {
 	int			i;
 	int			j;
+	char	**map = vars->map.arr;
 
-	/*need parsing
-	vars->map->height = 15;
-	vars->map->width = 34;
-	*/
-
-	// i = 0;
-	// while (i < 15)
-	// {
-	// 	j = 0;
-	// 	while (j < 34)
-	// 	{
-	// 		if (map[i][j] == 'M')
-	// 			return ;
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
 	if (vars->m_num)
 		return ;
 	if (vars->warning_time < 50) //warning_time
 		return ;
 	vars->warning_time = 0;
 	i = 0;
-	while (i < 15)
+	while (i < vars->map.height)
 	{
 		j = 0;
-		while (j < 34)
+		while (j < vars->map.width)
 		{
-			if (i > 5 && j > 23) // respone area
+			if (i > vars->map.height * 0.7 && vars->map.width * 0.5) // respone area
 				break ;
 			if (map[i][j] == '0' && random_generator(2) \
 				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
@@ -389,6 +366,7 @@ void	npc_quest(t_vars *vars)
 void	press_b(t_vars *vars)
 {
 	t_info	*info = vars->info;
+	char	**map = vars->map.arr;
 
 	double		x, y;
 	const int	dx[4] = {-1, 1, 0, 0};
@@ -437,7 +415,7 @@ void	game_key_explain(t_vars *vars)
 void	mouse_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
-	// if (vars->mouse_x > (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// + WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x) //left
+
 	if (vars->mouse_x > vars->mouse_old_x) // right
 	{
 		//both camera direction and camera plane must be rotated
@@ -448,7 +426,6 @@ void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
-	// if (vars->mouse_x < (WIN_WIDTH / 2) && vars->mouse_x != vars->mouse_old_x)// - WIN_WIDTH / 3 && vars->mouse_x != vars->mouse_old_x)//right
 	if (vars->mouse_x < vars->mouse_old_x) // left
 	{
 		//both camera direction and camera plane must be rotated
@@ -459,25 +436,6 @@ void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
 		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
-	// if (vars->mouse_y < vars->mouse_old_y) // up
-	// {
-	// 	// double oldDirY = info->dirY;
-	// 	// info->dirY = info->dirY * cos(-info->rotSpeed) - info->dirX * sin(-info->rotSpeed);
-	// 	// info->dirX = oldDirY * sin(-info->rotSpeed) + info->dirX * cos(-info->rotSpeed);
-	// 	// double oldPlaneY = info->planeY;
-	// 	// info->planeY = info->planeY * cos(-info->rotSpeed) - info->planeX * sin(-info->rotSpeed);
-	// 	// info->planeX = oldPlaneY * sin(-info->rotSpeed) + info->planeX * cos(-info->rotSpeed);
-	// 	info->planeX += 1;
-	// }
-	// if (vars->mouse_y > vars->mouse_old_y) // down
-	// {
-	// 	// double oldDirY = info->dirY;
-	// 	// info->dirY = info->dirY * cos(info->rotSpeed) - info->dirX * sin(info->rotSpeed);
-	// 	// info->dirX = oldDirY * sin(info->rotSpeed) + info->dirX * cos(info->rotSpeed);
-	// 	double oldPlaneY = info->planeY;
-	// 	info->planeY = info->planeY * cos(info->rotSpeed) - info->planeX * sin(info->rotSpeed);
-	// 	info->planeX = oldPlaneY * sin(info->rotSpeed) + info->planeX * cos(info->rotSpeed);
-	// }
 	if (++vars->render_i % 5 == 0)
 	{
 		vars->mouse_old_x = vars->mouse_x;
@@ -487,7 +445,6 @@ void	mouse_check(t_vars *vars)
 
 int	rendering(t_vars *vars)
 {
-	// printf("rendered %d\n", vars->render_i);
 	if (dead_check_game_end(vars))
 		return (0);
 	monster_rezen(vars);
@@ -496,7 +453,7 @@ int	rendering(t_vars *vars)
 	key_check(vars);
 	mouse_check(vars);
 	mlx_clear_window(vars->mlx, vars->win); // clear window
-	fill_background(vars, vars->c, vars->f); // study_need // fill back ground
+	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
 	map_set(vars);
 	draw_mlx(vars);
 

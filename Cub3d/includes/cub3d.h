@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:42:05 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/28 02:37:02 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@
 // # define KEY_DEBUG
 // # define DEBUG_LEAK
 // #define DEBUG_MON
-
-# define NORTH "./texture/jeong/no.xpm"
-# define SOUTH "./texture/jeong/so.xpm"
-# define EAST "./texture/jeong/ea.xpm"
-# define WEST "./texture/jeong/we.xpm"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
@@ -114,18 +109,6 @@ enum	e_hook_event
 	DESTROY_MASK = 0,
 }	;
 
-// typedef struct s_img
-// {
-// 	void	*ptr;
-// 	char	*path;
-// 	char	*data;
-// 	int		w;
-// 	int		h;
-// 	int		bpp;
-// 	int		lsize;
-// 	int		end;
-// }	t_img;
-
 typedef	struct	s_img
 {
 	void	*img;
@@ -138,6 +121,7 @@ typedef	struct	s_img
 	int		img_height;
 }	t_img;
 
+// need later
 typedef struct s_dda
 {
 	double	ray_dir[2];
@@ -152,7 +136,6 @@ typedef struct s_dda
 	t_img	img;
 	int		tex[2];
 }	t_dda;
-
 typedef struct s_ray
 {
 	double	pos_x;
@@ -162,14 +145,16 @@ typedef struct s_ray
 	double	plane_x;
 	double	plane_y;
 }	t_ray;
-
+// need later
 
 typedef struct  s_info
 {
+	//jonn
     double  posX;
     double  posY;
     double  dirX;
     double  dirY;
+
     double  planeX;
     double  planeY;
     void    *mlx;
@@ -183,28 +168,32 @@ typedef struct  s_info
 	int		**texture;
 }   t_info;
 
-// typedef	struct s_map
-// {
-// 	char			*line;
-// 	int				line_len;
-// 	struct s_map	*prev;
-// 	struct s_map	*next;
-// }	t_map;
-
-typedef	struct s_map
-{
-	int		height;
-	int		width;
-	char	*tmp_arr;
-	char	**arr;
-}	t_map;
-
 typedef struct	s_sprite
 {
 	double		x;
 	double		y;
 	int			texture;
 }	t_sprite;
+
+typedef struct s_map_info
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*floor;
+	int		f[3];
+	char	*ceiling;
+	int		c[3];
+}			t_map_info;
+
+typedef	struct s_map
+{
+	t_map_info	info;
+	int			height;
+	int			width;
+	char		**arr;
+}	t_map;
 
 typedef struct s_vars
 {
@@ -214,15 +203,9 @@ typedef struct s_vars
     void	*mlx;
     void	*win;
 
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*floor;
-	int		f[3];
-	char	*ceiling;
-	int		c[3];
+	t_map	map;
 
+	//minimap
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
@@ -245,16 +228,12 @@ typedef struct s_vars
 	void	*quest_ing;
 	void	*quest_end;
 
-    void    *img_ptr;
-    char    *data;
-
     int     size_l;
     int     bpp;
     int     endian;
 	
-	t_map	*map;
 	// ray
-	t_ray	ray;
+	// t_ray	ray;
 	t_info	*info;
 
 	int				monster_come;
@@ -367,4 +346,43 @@ t_map	*ft_lstnew_cub(void *content);
 t_map	*ft_lstlast_cub(t_map *lst);
 void	ft_lstadd_back_cub(t_map **lst, t_map *new);
 int		ft_lstsize_cub(t_map *lst);
+
+// test/print.c
+void	print_texture(t_vars *vars);
+void	print_color(t_vars *vars);
+void	print_arr_2d(char **arr);
+void	print_lst(t_list *head);
+
+//	utils/print_error.c
+void	print_error(char *str, t_vars *vars);
+
+// utils/free.c
+void	free_arr_2d(char ***arr);
+void	free_map(t_map *map);
+void	free_lst(t_list **head);
+
+// utils/alloc_copy_str.c
+char *allocate_and_copy_string(char *src, t_vars *vars);
+
+// utils/size_arr_2d.c
+int		size_arr_2d(char **arr);
+
+// parsing/check.c
+void	check_file(t_vars *vars, char *path);
+int		check_texture(char **arr);
+int		check_color(char **arr);
+
+// parsing/read_file.c
+void	read_file(t_vars *vars, char *path);
+
+// parsing/set.c
+int		set_texture(char **arr, t_vars *vars);
+void	set_map(t_vars *vars, int fd, char *line);
+
+// parsing/set_color.c
+int		set_color(char **arr, t_vars *vars);
+
+// parsing/check_map.c
+int		check_map(t_vars *vars);
+
 #endif
