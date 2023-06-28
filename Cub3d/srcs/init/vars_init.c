@@ -133,10 +133,15 @@ static void	load_image(t_vars *vars, t_info *info, int *texture, char *path, t_i
 static void	load_texture(t_vars *vars, t_info *info)
 {
 	t_img	img;
-	load_image(vars, info, info->texture[TEX_NO], "texture/ray/no.xpm", &img);
-	load_image(vars, info, info->texture[TEX_SO], "texture/ray/so.xpm", &img);
-	load_image(vars, info, info->texture[TEX_EA], "texture/ray/ea.xpm", &img);
-	load_image(vars, info, info->texture[TEX_WE], "texture/ray/we.xpm", &img);
+	load_image(vars, info, info->texture[TEX_NO], vars->map.info.north, &img);
+	load_image(vars, info, info->texture[TEX_SO], vars->map.info.south, &img);
+	load_image(vars, info, info->texture[TEX_EA], vars->map.info.east, &img);
+	load_image(vars, info, info->texture[TEX_WE], vars->map.info.west, &img);
+
+	// load_image(vars, info, info->texture[TEX_NO], "texture/ray/no.xpm", &img);
+	// load_image(vars, info, info->texture[TEX_SO], "texture/ray/so.xpm", &img);
+	// load_image(vars, info, info->texture[TEX_EA], "texture/ray/ea.xpm", &img);
+	// load_image(vars, info, info->texture[TEX_WE], "texture/ray/we.xpm", &img);
 	load_image(vars, info, info->texture[TEX_DOOR], "texture/ray/door.xpm", &img);
 	load_image(vars, info, info->texture[TEX_MONSTER], "texture/ray/monster.xpm", &img);
 	load_image(vars, info, info->texture[TEX_POTION], "texture/ray/potion.xpm", &img);
@@ -145,6 +150,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 
 int vars_init(t_vars *vars)
 {
+int i = 0;
 	t_info	*info = vars->info;
 	
 	info->posX = POS_X;
@@ -162,16 +168,16 @@ int vars_init(t_vars *vars)
 	info->planeY = 0.66;
 	vars->init_plane[X] = info->planeX;
 	vars->init_plane[Y] = info->planeY;
-
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 
-//	vars->f[0] = 0;
-//	vars->f[1] = 50;
-//	vars->f[2] = 0;
-//	vars->c[0] = 0;
-//	vars->c[1] = 100;
-//	vars->c[2] = 0;
+		printf("here %d\n", ++i);
+	vars->f[0] = 0;
+	vars->f[1] = 50;
+	vars->f[2] = 0;
+	vars->c[0] = 0;
+	vars->c[1] = 100;
+	vars->c[2] = 0;
 
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
@@ -180,7 +186,7 @@ int vars_init(t_vars *vars)
 			info->buf[y][x] = 0;
 		}
 	}
-
+	printf("here %d\n", ++i);
 	//texture 8개
 	info->texture = (int **)ft_malloc(sizeof(int *) * TEX_NUM);
 	for (int i = 0; i < TEX_NUM; i++)
@@ -191,7 +197,7 @@ int vars_init(t_vars *vars)
 			info->texture[i][j] = 0;
 		}
 	}
-
+	printf("here %d\n", ++i);
 	load_texture(vars, info);
 	info->img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
 	info->img.data = (int *)ft_get_data_addr(info->img.img, &info->img.bpp, &info->img.size_l, &info->img.endian);

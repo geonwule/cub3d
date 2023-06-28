@@ -25,7 +25,7 @@
 // #define MAP_DEBUG
 // # define DEBUG
 // # define KEY_DEBUG
-// # define DEBUG_LEAK
+# define DEBUG_LEAK
 // #define DEBUG_MON
 
 # define NORTH "./texture/jeong/no.xpm"
