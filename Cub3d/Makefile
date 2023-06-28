@@ -82,10 +82,10 @@ OBJS		=	$(SRCS:%.c=$(OBJS_DIR)/%.o)
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 #my m1
-#MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 #cluster
-MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
+#MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
 
 #-L${MLXDIR} -lmlx -I${MLXDIR} -lX11 -lXext
 
