@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 16:19:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/06/27 23:07:36 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_vars  *vars_allocation(t_vars *vars)
 	int		i;
 
 	info = ft_malloc(sizeof(t_info));
-	vars->info = info;
-    vars->north = NULL;
-    vars->south = NULL;
-    vars->west = NULL;
-    vars->east = NULL;
-    vars->floor = NULL;
-    vars->ceiling = NULL;
+//	vars->info = info;
+//    vars->north = NULL;
+//    vars->south = NULL;
+//    vars->west = NULL;
+//    vars->east = NULL;
+//    vars->floor = NULL;
+//    vars->ceiling = NULL;
 
 	vars->monster_come = 0;
 	vars->m_num = 0;
@@ -166,12 +166,12 @@ int vars_init(t_vars *vars)
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 
-	vars->f[0] = 0;
-	vars->f[1] = 50;
-	vars->f[2] = 0;
-	vars->c[0] = 0;
-	vars->c[1] = 100;
-	vars->c[2] = 0;
+//	vars->f[0] = 0;
+//	vars->f[1] = 50;
+//	vars->f[2] = 0;
+//	vars->c[0] = 0;
+//	vars->c[1] = 100;
+//	vars->c[2] = 0;
 
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
