@@ -138,25 +138,13 @@ static void	load_texture(t_vars *vars, t_info *info)
 int vars_init(t_vars *vars)
 {
 	t_info	*info = vars->info;
-	
-	//jonn 이걸 주석처리
-	info->posX = POS_X;
-	info->posY = POS_Y;
-	info->dirX = -1.0;
-	info->dirY = 0.0;
 
-	vars->init_pos[X] = info->posX;
-	vars->init_pos[Y] = info->posY;
-	//player direction(x, y) 플레이어 방향 벡터
-
-	vars->init_dir[X] = info->dirX;
-	vars->init_dir[Y] = info->dirY;
-	
-	//camera line 카메라 평면벡터
-	info->planeX = 0.0;
-	info->planeY = 0.66;
-	vars->init_plane[X] = info->planeX;
-	vars->init_plane[Y] = info->planeY;
+	info->posX = vars->init_pos[X];
+	info->posY = vars->init_pos[Y];
+	info->dirX = vars->init_dir[X];
+	info->dirY = vars->init_dir[Y];
+	info->planeX = vars->init_plane[X];
+	info->planeY = vars->init_plane[Y];	
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 

@@ -26,8 +26,6 @@ static void	recul_nbr(int n, int fd)
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
-
 	if (n == -2147483648)
 	{
 		write(fd, "-2147483648", ft_strlen("-2147483648"));
@@ -38,7 +36,6 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd('0', fd);
 		return ;
 	}
-	i = 0;
 	if (n < 0)
 	{
 		write(fd, "-", 1);

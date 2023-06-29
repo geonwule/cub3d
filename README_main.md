@@ -34,6 +34,11 @@
         - 레이캐스팅/스프라이트 개념이해
         - norm, 코드정리
 
+4. 6.28.(Wed)
+    + 존/건 파일 메인에 병합 완료
+    + sprite/ray-casting공부 필요
+    + 코드정리
+
 # rule
 >>>>>>> geon
 Commit message 7가지 규칙

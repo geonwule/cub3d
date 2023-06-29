@@ -31,12 +31,19 @@ int main(int ac, char **av)
 		print_error("Need one argument", &vars);
 		return (RETURN_FAILURE);
 	}
+	vars_allocation(&vars);
 	read_file(&vars, av[1]);
 
-	vars_allocation(&vars);
+	//아래 내용 read_file에 넣기..
+	vars.init_pos[X] = vars.info->posX;
+	vars.init_pos[Y] = vars.info->posY;
+	vars.init_dir[X] = vars.info->dirX;
+	vars.init_dir[Y] = vars.info->dirY;
+	vars.init_plane[X] = vars.info->planeX;
+	vars.init_plane[Y] = vars.info->planeY;
 
-   vars.mlx = mlx_init();
-   vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	vars_init(&vars);
 	mlx_hook(vars.win, KEY_PRESS, PRESS_MASK, key_press, &vars);
 	mlx_hook(vars.win, KEY_RELEASE, RELEASE_MASK, key_release, &vars);

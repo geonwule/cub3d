@@ -304,7 +304,10 @@ int		map_read(char *map_path, t_vars *vars);
 //map_error
 int 	map_error(t_vars *vars);
 
-//key_event
+//evnet/check_key_and_mouse
+void	check_key_and_mouse(t_vars *vars);
+
+//evnet/key_event
 void	attack(t_vars *vars);
 int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
@@ -312,15 +315,23 @@ int		key_press(int keycode, t_vars *vars);
 void	monster_kill(t_vars *vars);
 void	reset_game(t_vars *vars);
 
-//mouse_event
+//event/manage_monster
+void	manage_monster(t_vars *vars);
+
+//evnet/map_set
+void	map_set(t_vars *vars);
+
+//evnet/mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);
 int		handle_mouse_move(int x, int y, void *args);
 
-//redering
+//evnet/print_window
+void	print_window1(t_vars *vars);
+void	print_window2(t_vars *vars);
+
+//event/redering
 int		rendering(t_vars *vars);
 
-//map_set
-void	map_set(t_vars *vars);
 
 //get_next_line
 char	*get_next_line(int fd);
