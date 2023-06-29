@@ -6,11 +6,33 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 04:32:06 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/29 20:17:17 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_digit_rgb(char **rgb)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (rgb[i][j] && rgb[i][j] != '\n')
+		{
+			if (!ft_isdigit(rgb[i][j]))
+				return (1);
+			j++;
+		}
+		if (rgb[i][0] == '0' && rgb[i][1] == '0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	set_rgb(char **arr, t_vars *vars, char type)
 {
@@ -27,10 +49,15 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 			cnt++;
 		i++;
 	}
-	if (cnt > 2)
+	if (cnt != 2)
 		return (1);
 	rgb = ft_split(arr[1], ',');
 	if (size_arr_2d(rgb) != 3)
+	{
+		free_arr_2d(&rgb);
+		return (1);
+	}
+	if (check_digit_rgb(rgb))
 	{
 		free_arr_2d(&rgb);
 		return (1);

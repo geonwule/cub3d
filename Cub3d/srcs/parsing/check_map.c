@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 04:24:18 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/29 18:56:38 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ int	check_map(t_vars *vars)
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_edge(i, j, vars))
-			{
-				printf("[%d][%d] is not wall\n", i, j); // del
-				return (1);
-			}
+//			if (check_edge(i, j, vars))
+//			{
+//				printf("[%d][%d] is not wall\n", i, j); // del
+//				return (1);
+//			}
 			if (check_dir(i, j, vars))
 			{
 				printf("[%d][%d] is not wall2\n", i, j); // del
