@@ -315,6 +315,9 @@ int		key_press(int keycode, t_vars *vars);
 void	monster_kill(t_vars *vars);
 void	reset_game(t_vars *vars);
 
+//event/manage_monster
+void	manage_monster(t_vars *vars);
+
 //evnet/map_set
 void	map_set(t_vars *vars);
 
