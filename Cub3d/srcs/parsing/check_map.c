@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	count_plyer_and_is_valid(char **map)
+static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -25,10 +25,35 @@ static int	count_plyer_and_is_valid(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!ft_strchr("NWES01 ", map[i][j]))
+			if (!ft_strchr("NWES01HB ", map[i][j]))
 				return (-1);
-			if (ft_strchr("NWES", map[i][j]))		// set players pos
-				cnt++;								// set_pos();
+			if (ft_strchr("NWES", map[i][j]))
+			{
+				vars->info->posX = i;
+				vars->info->posY = j;
+				if (map[i][j] == 'N')
+				{
+					vars->info->dirX = -1.0;
+					vars->info->dirY = 0.0;
+				}
+				else if (map[i][j] == 'S')
+				{
+					vars->info->dirX = 1.0;
+					vars->info->dirY = 0.0;
+				}
+				else if (map[i][j] == 'E')
+				{
+					vars->info->dirX = 0.0;
+					vars->info->dirY = 1.0;
+				}
+				else if (map[i][j] == 'W')
+				{
+					vars->info->dirX = 0.0;
+					vars->info->dirY = -1.0;
+				}
+				map[i][j] = '0';
+				cnt++;
+			}
 			j++;
 		}
 		i++;
@@ -81,7 +106,7 @@ int	check_map(t_vars *vars)
 	int		j;
 
 	map = vars->map.arr;
-	if (count_plyer_and_is_valid(map) != 1)
+	if (count_plyer_and_is_valid(map, vars) != 1)
 	{
 		printf("player is not one or invalid map\n");	// del
 		return (1);

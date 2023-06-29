@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-extern char	map[15][34]; //tmp
-
 void verLine(t_vars *vars, int x, int y1, int y2, int color)
 {
 	int y;
@@ -29,10 +27,11 @@ void verLine(t_vars *vars, int x, int y1, int y2, int color)
 
 void	sprite_init(t_vars *vars)
 {
+	char	**map = vars->map.arr;
 	vars->sprite_num = 0;
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < vars->map.height; i++)
 	{
-		for (int j = 0; j < 34; j++)
+		for (int j = 0; j < vars->map.width; j++)
 		{
 			if (map[i][j] == 'M' || map[i][j] == 'P' || map[i][j] == 'H')
 				vars->sprite_num++;
@@ -40,9 +39,9 @@ void	sprite_init(t_vars *vars)
 	}
 	t_sprite	*sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
 	int	s_idx = 0;
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < vars->map.height; i++)
 	{
-		for (int j = 0; j < 34; j++)
+		for (int j = 0; j < vars->map.width; j++)
 		{
 			if (map[i][j] == 'M')
 				sprite[s_idx].texture = TEX_MONSTER;
@@ -116,6 +115,7 @@ void	sortSprites(int *order, double *dist, int amount)
 
 void calc(t_vars *vars, int x)
 {
+	char	**map = vars->map.arr;
 	t_info	*info = vars->info;
 	double cameraX = 2 * x / (double)WIN_WIDTH - 1;
 	double rayDirX = info->dirX + info->planeX * cameraX;
@@ -341,10 +341,6 @@ void	sprite_ex(t_vars *vars)
 			}
 		}
 	}
-
-	//tmp
-	// free (spriteOrder);
-	// free (spriteDistance);
 }
 
 void map_set(t_vars *vars)

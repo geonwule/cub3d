@@ -60,7 +60,7 @@ void	print_lst(t_list *head)
 	cur = head;
 	while (cur)
 	{
-		printf("%s", cur->content);
+		printf("%s", (char *)cur->content);
 		cur = cur->next;
 	}
 }

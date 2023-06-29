@@ -21,8 +21,6 @@ int		random_generator(int frequency)
     int                 ret;
 
     gettimeofday(&tv, NULL);
-    // milliseconds = (unsigned long long)(tv.tv_sec) * 1000 \
-     + 
     milliseconds = (unsigned long long)(tv.tv_usec);
     srand((unsigned int)milliseconds);
     ret = rand();
@@ -59,48 +57,6 @@ int ft_open(char *file_path)
 
 void	vars_free(t_vars *vars)
 {
-	if (vars->north)
-	{
-        #ifdef DEBUG
-		printf("north free\n");//tmp
-        #endif
-		free(vars->north);
-	}
-	if (vars->south)
-	{
-        #ifdef DEBUG
-		printf("south free\n");//tmp
-        #endif
-		free(vars->south);
-	}
-	if (vars->west)
-	{
-        #ifdef DEBUG
-		printf("west free\n");//tmp
-        #endif
-		free(vars->west);
-	}
-	if (vars->east)
-	{
-        #ifdef DEBUG
-		printf("east free\n");//tmp
-        #endif
-		free(vars->east);
-	}
-	if (vars->floor)
-	{
-        #ifdef DEBUG
-		printf("floor free\n");//tmp
-        #endif
-		free(vars->floor);
-	}
-	if (vars->ceiling)
-	{
-        #ifdef DEBUG
-		printf("ceinling free\n");//tmp
-        #endif
-		free(vars->ceiling);
-	}
     if (vars->info)
     {
         for (int i = 0; i < TEX_NUM; i++)

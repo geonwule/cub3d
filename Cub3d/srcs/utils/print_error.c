@@ -17,6 +17,6 @@ void	print_error(char *str, t_vars *vars)
 	printf("Error\n");
 	printf("%s\n", str);
 	free_map(&vars->map);
-//	vars_free(vars);
+	// vars_free(vars);
 	exit(1);
 }

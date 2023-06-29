@@ -28,11 +28,6 @@
 // # define DEBUG_LEAK
 // #define DEBUG_MON
 
-# define NORTH "./texture/jeong/no.xpm"
-# define SOUTH "./texture/jeong/so.xpm"
-# define EAST "./texture/jeong/ea.xpm"
-# define WEST "./texture/jeong/we.xpm"
-
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 1
 #endif
@@ -114,18 +109,6 @@ enum	e_hook_event
 	DESTROY_MASK = 0,
 }	;
 
-// typedef struct s_img
-// {
-// 	void	*ptr;
-// 	char	*path;
-// 	char	*data;
-// 	int		w;
-// 	int		h;
-// 	int		bpp;
-// 	int		lsize;
-// 	int		end;
-// }	t_img;
-
 typedef	struct	s_img
 {
 	void	*img;
@@ -138,6 +121,7 @@ typedef	struct	s_img
 	int		img_height;
 }	t_img;
 
+// need later
 typedef struct s_dda
 {
 	double	ray_dir[2];
@@ -152,7 +136,6 @@ typedef struct s_dda
 	t_img	img;
 	int		tex[2];
 }	t_dda;
-
 typedef struct s_ray
 {
 	double	pos_x;
@@ -162,14 +145,16 @@ typedef struct s_ray
 	double	plane_x;
 	double	plane_y;
 }	t_ray;
-
+// need later
 
 typedef struct  s_info
 {
+	//jonn
     double  posX;
     double  posY;
     double  dirX;
     double  dirY;
+
     double  planeX;
     double  planeY;
     void    *mlx;
@@ -182,14 +167,6 @@ typedef struct  s_info
 	double	zBuffer[WIN_WIDTH];
 	int		**texture;
 }   t_info;
-
-// typedef	struct s_map
-// {
-// 	char			*line;
-// 	int				line_len;
-// 	struct s_map	*prev;
-// 	struct s_map	*next;
-// }	t_map;
 
 typedef struct	s_sprite
 {
@@ -215,7 +192,6 @@ typedef	struct s_map
 	t_map_info	info;
 	int			height;
 	int			width;
-//	char		*tmp_arr;
 	char		**arr;
 }	t_map;
 
@@ -229,17 +205,7 @@ typedef struct s_vars
 
 	t_map	map;
 
-	/*Need delete*/
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*floor;
-	int		f[3];
-	char	*ceiling;
-	int		c[3];
-
-
+	//minimap
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
@@ -262,15 +228,12 @@ typedef struct s_vars
 	void	*quest_ing;
 	void	*quest_end;
 
-    void    *img_ptr;
-    char    *data;
-
     int     size_l;
     int     bpp;
     int     endian;
 	
 	// ray
-	t_ray	ray;
+	// t_ray	ray;
 	t_info	*info;
 
 	int				monster_come;
