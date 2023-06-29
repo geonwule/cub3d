@@ -236,8 +236,6 @@ int	key_press(int keycode, t_vars *vars)
 		return (0);
 	if (keycode >= 0 && keycode <= 255)
 		vars->keyboard[keycode] = 1;
-
-	//gun shot
 	if (keycode == N || keycode == M)
 		adjust_gamespeed(info, keycode);
 	if (keycode == SPACE)
@@ -246,7 +244,7 @@ int	key_press(int keycode, t_vars *vars)
 		turn_back(info);
 	if (keycode == B)
 		open_door_tell_npc(vars, map);
-	if (keycode == R) // respone_back
+	if (keycode == R)
 		return_ellinia(vars);
 	return (0);
 }
