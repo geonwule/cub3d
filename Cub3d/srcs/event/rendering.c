@@ -149,31 +149,6 @@ void	draw_mlx(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->info->img.img, 0, 0);
 }
 
-
-void	aim_point(t_vars *vars)
-{
-	int x, y;
-	if (vars->gun_change)
-	{
-		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand2.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 10 * 3, WIN_HEIGHT / 9 * 6);
-		vars->gun_change = 0;
-	}
-	else
-	{
-		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand1.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 9 * 1, WIN_HEIGHT / 9 * 5);
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-}
-
-void	damaged_or_recovery(t_vars *vars)
-{
-	if (vars->hp_before > vars->hp)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
-	vars->hp_before = vars->hp;
-}
-
 void	monster_come_on(t_vars *vars, int x, int y)
 {
 	t_info	*info = vars->info;
@@ -230,41 +205,6 @@ void	monster_come_on(t_vars *vars, int x, int y)
 	}
 }
 
-void	hp_exp(t_vars *vars)
-{
-	if (vars->hp == 3)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp3, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 2)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp2, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp1, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 0)
-	{
-		vars->dead_check = 1;
-		return ;
-	}
-	if (vars->hunt % 2 == 0)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp1, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
-	else if (vars->hunt % 2 == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp2, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
-}
-
-void	level_up(t_vars *vars)
-{
-	char	*level_str;
-	if (vars->hunt != 0 && vars->hunt % 2 == 0)
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->lv, WIN_WIDTH / 9 * 2, WIN_HEIGHT / 5 * 2);
-		vars->level += 1;
-		vars->hunt = 0;
-	}
-	level_str = ft_itoa(vars->level); //overflow protect need!
-	mlx_string_put(vars->mlx, vars->win, 50, 710, 0xFFFFFF, level_str);
-	
-	free(level_str);
-}
-
-
 int	dead_check_game_end(t_vars *vars)
 {
 	if (!vars->dead_check)
@@ -281,17 +221,6 @@ int	dead_check_game_end(t_vars *vars)
 		}
 	}
 	return (1);
-}
-
-void	warning_message(t_vars *vars)
-{
-	if (vars->m_num)
-		return ;
-	vars->warning_time++;
-	if (vars->warning_time % 7 == 0) //깜빡이게
-		return ;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->w_messege \
-		, WIN_WIDTH / 100 * 20, WIN_HEIGHT / 100 * 35);
 }
 
 void	monster_rezen(t_vars *vars)
@@ -346,72 +275,6 @@ void	quest_progress(t_vars *vars)
 	free(str);
 }
 
-void	npc_quest(t_vars *vars)
-{
-	if (vars->quest_num != 0)
-		quest_progress(vars);
-	if (vars->npc_talk == 0)
-		return ;
-	if (vars->quest_num == 0) // init
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_start \
-		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
-	else if (vars->quest_num == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_ing \
-		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
-	else if (vars->quest_num == 2)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_end \
-		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
-}
-
-void	press_b(t_vars *vars)
-{
-	t_info	*info = vars->info;
-	char	**map = vars->map.arr;
-
-	double		x, y;
-	const int	dx[4] = {-1, 1, 0, 0};
-	const int	dy[4] = {0, 0, -1, 1};
-	char		spot;
-
-	for (int i = 0; i < 4; i++)
-	{
-		x = info->posX + dx[i];
-		y = info->posY + dy[i]; 
-		spot = map[(int)x][(int)y];
-		if (x < 0 || x >= WIN_HEIGHT \
-			|| y < 0 || y >= WIN_WIDTH)
-			continue ;
-		if (spot == 'B' || spot == 'b' || spot == 'H')
-		{
-			mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 47, WIN_HEIGHT / 100 * 70 \
-				, 0xFFFFFF, "press key 'B'");
-			return ;
-		}
-	}	
-}
-
-void	game_key_explain(t_vars *vars)
-{
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 3 \
-		, 0xFFFFFF, "Key setting");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 5 \
-		, 0xFFFFFF, "W/A/S/D : character move");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 7 \
-		, 0xFFFFFF, "Q : turn back");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 9 \
-		, 0xFFFFFF, "<-/->/mouse_move : Direct move");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 11 \
-		, 0xFFFFFF, "Space/mouse_left : Attack");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 13 \
-		, 0xFFFFFF, "R : return respone");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 15 \
-		, 0xFFFFFF, "N/M : Game speed slow/fast");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 17 \
-		, 0xFFFFFF, "P : game reset");
-	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, WIN_HEIGHT / 100 * 19 \
-		, 0xFFFFFF, "B : Door open/close, NPC contect");
-}
-
 void	mouse_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
@@ -457,17 +320,10 @@ int	rendering(t_vars *vars)
 	map_set(vars);
 	draw_mlx(vars);
 
-	game_key_explain(vars);
-	press_b(vars);
-	aim_point(vars);
-	hp_exp(vars);
-	level_up(vars);
-	warning_message(vars);
-	npc_quest(vars);
+	print_window1(vars);
+	print_window2(vars);
 
 	mini_map(vars);	
-
-	damaged_or_recovery(vars);
 	if (vars->dead_check)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
 	return (0);
