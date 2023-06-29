@@ -40,10 +40,13 @@ INIT_SRCS	= $(addprefix $(INIT_DIR), $(_INIT_SRCS))
 
 EVENT_DIR	= srcs/event/
 
-_EVENT_SRCS	= key_event.c \
-			  mouse_event.c \
-			  rendering.c \
+_EVENT_SRCS	= check_key_and_mouse.c \
+			  key_event.c \
 			  map_set.c \
+			  mouse_event.c \
+			  print_window1.c \
+			  print_window2.c \
+			  rendering.c \
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 

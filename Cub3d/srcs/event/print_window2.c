@@ -26,6 +26,26 @@ static void	warning_message(t_vars *vars)
 		, WIN_WIDTH / 100 * 20, WIN_HEIGHT / 100 * 35);
 }
 
+static void	quest_progress(t_vars *vars)
+{
+	char	*str;
+	char	*kill;
+
+	if (vars->quest_monster_num == 0)
+	{
+		mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
+		, 0xFFFFFF, "quest clear!! go back to NPC");
+		vars->quest_num = 2;
+		return ;
+	}
+	kill = ft_itoa(30 - vars->quest_monster_num);
+	str = ft_strjoin("quest progress : 30 / ", kill);
+	free(kill);
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
+	, 0xFFFFFF, str);
+	free(str);
+}
+
 static void	npc_quest(t_vars *vars)
 {
 	if (vars->quest_num != 0)
@@ -55,5 +75,8 @@ void    print_window2(t_vars *vars)
     level_up(vars);
 	warning_message(vars);
 	npc_quest(vars);
-	damaged_or_recovery(vars);
+	// damaged_or_recovery(vars);
+    if (vars->hp_before > vars->hp)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
+	vars->hp_before = vars->hp;
 }
