@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/29 20:17:17 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/29 20:29:03 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	check_digit_rgb(char **rgb)
 				return (1);
 			j++;
 		}
-		if (rgb[i][0] == '0' && rgb[i][1] == '0')
+		if ((rgb[i][0] == '0' && rgb[i][1] == '0')
+			|| (rgb[i][0] == '0' && ft_isdigit(rgb[i][1])))
 			return (1);
 		i++;
 	}
