@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/29 20:29:03 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/06/29 21:25:25 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,43 @@ int	check_digit_rgb(char **rgb)
 		j = 0;
 		while (rgb[i][j] && rgb[i][j] != '\n')
 		{
-			if (!ft_isdigit(rgb[i][j]))
+			if (!ft_isdigit(rgb[i][j]) && !ft_strchr("+-", rgb[i][j]))
 				return (1);
 			j++;
 		}
-		if ((rgb[i][0] == '0' && rgb[i][1] == '0')
-			|| (rgb[i][0] == '0' && ft_isdigit(rgb[i][1])))
-			return (1);
 		i++;
 	}
 	return (0);
+}
+
+int	ft_atoi_color(const char *str)
+{
+	int	i;
+	int	flag;
+	int	result;
+
+	i = 0;
+	result = 0;
+	flag = 1;
+	while (((str[i] >= 9 && str[i] <= 13) || str[i] == 32) && str[i])
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			flag *= -1;
+		i++;
+	}
+	if (flag == -1 || str[i] == '+' || str[i] == '-')
+		return (-1);
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + str[i] - '0';
+		if (result / 1000)
+			return (-1);
+		i++;
+	}
+	result *= flag;
+	return (result);
 }
 
 int	set_rgb(char **arr, t_vars *vars, char type)
@@ -66,7 +93,7 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 	i = 0;
 	while (i < 3)
 	{
-		tmp = ft_atoi(rgb[i]);
+		tmp = ft_atoi_color(rgb[i]);
 		if (tmp < 0 || tmp > 255)
 		{
 			free_arr_2d(&rgb);
