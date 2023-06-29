@@ -144,6 +144,8 @@ int vars_init(t_vars *vars)
 	// info->posY = POS_Y;
 	// info->dirX = 0.0;
 	// info->dirY = -1.0;
+	// info->planeX = 0.0;
+	// info->planeY = 0.66;
 	printf("%f %f\n", info->dirX, info->dirY);
 	// exit(0);
 
@@ -155,8 +157,6 @@ int vars_init(t_vars *vars)
 	vars->init_dir[Y] = info->dirY;
 	
 	//camera line 카메라 평면벡터
-	info->planeX = 0.0;
-	info->planeY = 0.66;
 	vars->init_plane[X] = info->planeX;
 	vars->init_plane[Y] = info->planeY;
 	info->moveSpeed = 0.05;

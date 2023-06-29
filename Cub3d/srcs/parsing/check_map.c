@@ -35,21 +35,29 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 				{
 					vars->info->dirX = -1.0;
 					vars->info->dirY = 0.0;
+					vars->info->planeX = 0.0;
+					vars->info->planeY = 0.66;
 				}
 				else if (map[i][j] == 'S')
 				{
 					vars->info->dirX = 1.0;
 					vars->info->dirY = 0.0;
+					vars->info->planeX = 0.0;
+					vars->info->planeY = -0.66;
 				}
 				else if (map[i][j] == 'E')
 				{
 					vars->info->dirX = 0.0;
 					vars->info->dirY = 1.0;
+					vars->info->planeX = 0.66;
+					vars->info->planeY = 0.0;
 				}
 				else if (map[i][j] == 'W')
 				{
 					vars->info->dirX = 0.0;
 					vars->info->dirY = -1.0;
+					vars->info->planeX = -0.66;
+					vars->info->planeY = 0.0;
 				}
 				map[i][j] = '0';
 				cnt++;
