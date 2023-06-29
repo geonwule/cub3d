@@ -33,15 +33,6 @@ int main(int ac, char **av)
 	}
 	vars_allocation(&vars);
 	read_file(&vars, av[1]);
-
-	//아래 내용 read_file에 넣기..
-	vars.init_pos[X] = vars.info->posX;
-	vars.init_pos[Y] = vars.info->posY;
-	vars.init_dir[X] = vars.info->dirX;
-	vars.init_dir[Y] = vars.info->dirY;
-	vars.init_plane[X] = vars.info->planeX;
-	vars.init_plane[Y] = vars.info->planeY;
-
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	vars_init(&vars);
