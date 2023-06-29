@@ -140,10 +140,12 @@ int vars_init(t_vars *vars)
 	t_info	*info = vars->info;
 	
 	//jonn 이걸 주석처리
-	info->posX = POS_X;
-	info->posY = POS_Y;
-	info->dirX = -1.0;
-	info->dirY = 0.0;
+	// info->posX = POS_X;
+	// info->posY = POS_Y;
+	// info->dirX = 0.0;
+	// info->dirY = -1.0;
+	printf("%f %f\n", info->dirX, info->dirY);
+	// exit(0);
 
 	vars->init_pos[X] = info->posX;
 	vars->init_pos[Y] = info->posY;

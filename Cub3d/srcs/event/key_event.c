@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+ #include "cub3d.h"
 
 int	key_release(int keycode, t_vars *vars)
 {

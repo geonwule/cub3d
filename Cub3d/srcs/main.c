@@ -31,9 +31,10 @@ int main(int ac, char **av)
 		print_error("Need one argument", &vars);
 		return (RETURN_FAILURE);
 	}
-	read_file(&vars, av[1]);
 
 	vars_allocation(&vars);
+	read_file(&vars, av[1]);
+
 
    vars.mlx = mlx_init();
    vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
