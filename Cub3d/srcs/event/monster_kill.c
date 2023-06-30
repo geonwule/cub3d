@@ -1,5 +1,17 @@
 #include "cub3d.h"
 
+static void init_ray(t_info *info, t_ray *ray)
+{
+    ray->camera_x = 0;
+	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
+	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
+	ray->map[X] = (int)info->posX;
+	ray->map[Y] = (int)info->posY;
+	ray->delta_d[X] = fabs(1 / ray->dir[X]);
+	ray->delta_d[Y] = fabs(1 / ray->dir[Y]);
+	ray->hit = 0;
+}
+
 static void check_ray_dir(t_info *info, t_ray *ray)
 {
     if (ray->dir[X] < 0)
@@ -22,18 +34,6 @@ static void check_ray_dir(t_info *info, t_ray *ray)
 		ray->step[Y] = 1;
 		ray->side_d[Y] = (ray->map[Y] + 1.0 - info->posY) * ray->delta_d[Y];
 	}
-}
-
-static void init_ray(t_info *info, t_ray *ray)
-{
-    ray->camera_x = 0;
-	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
-	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
-	ray->map[X] = (int)info->posX;
-	ray->map[Y] = (int)info->posY;
-	ray->delta_d[X] = fabs(1 / ray->dir[X]);
-	ray->delta_d[Y] = fabs(1 / ray->dir[Y]);
-	ray->hit = 0;
 }
 
 static void dda(char **map, t_ray *ray)

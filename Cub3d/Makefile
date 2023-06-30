@@ -50,6 +50,7 @@ _EVENT_SRCS	= check_key_and_mouse.c \
 			  print_window1.c \
 			  print_window2.c \
 			  ray_casting.c \
+			  ray_function.c \
 			  rendering.c \
 			  sprite.c \
 
