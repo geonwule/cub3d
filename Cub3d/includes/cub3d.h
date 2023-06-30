@@ -313,12 +313,15 @@ void	check_key_and_mouse(t_vars *vars);
 void	attack(t_vars *vars);
 void	reset_game(t_vars *vars);
 
+//event/event_function2.c
+void	return_ellinia(t_vars *vars);
+void	open_door_tell_npc(t_vars *vars, char **map);
+void	adjust_gamespeed(t_info *info, int keycode);
+void	turn_back(t_info *info);
+
 //evnet/key_event
-void	attack(t_vars *vars);
-int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
-void	reset_game(t_vars *vars);
 
 //event/manage_monster
 void	manage_monster(t_vars *vars);

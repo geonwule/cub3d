@@ -42,6 +42,7 @@ EVENT_DIR	= srcs/event/
 
 _EVENT_SRCS	= check_key_and_mouse.c \
 			  event_function1.c \
+			  event_function2.c \
 			  key_event.c \
 			  manage_monster.c \
 			  map_set.c \
