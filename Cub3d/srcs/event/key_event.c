@@ -12,22 +12,6 @@
 
  #include "cub3d.h"
 
-int	key_release(int keycode, t_vars *vars)
-{
-	#ifdef KEY_DEBUG
-	if (keycode == W)
-        printf("release W\n");
-	else if (keycode == A)
-        printf("release A\n");
-	else if (keycode == S)
-        printf("release S\n");
-	else if (keycode == D)
-        printf("release D\n");
-	#endif
-	if (keycode >= 0 && keycode <= 255)
-		vars->keyboard[keycode] = 0;
-	return (0);
-}
 int is_weak_brick(t_vars *vars, int x, int y)
 {
 	char	spot;
@@ -36,119 +20,6 @@ int is_weak_brick(t_vars *vars, int x, int y)
 	if (spot == 'B' || spot == 'b' || spot == 'H')
 		return (1);
 	return (0);
-}
-
-void	monster_kill(t_vars *vars)
-{
-	char	**map = vars->map.arr;
-	t_info	*info = vars->info;
-	double	cameraX = 0;
-	double	rayDirX = info->dirX + info->planeX * cameraX;
-	double	rayDirY = info->dirY + info->planeY * cameraX;
-
-	int	mapX = (int)info->posX;
-	int	mapY = (int)info->posY;
-
-	double	sideDistX;
-	double	sideDistY;
-
-	double	deltaDistX = fabs(1 / rayDirX);
-	double	deltaDistY = fabs(1 / rayDirY);
-	
-	int	stepX;
-	int	stepY;
-
-	if (rayDirX < 0)
-	{
-		stepX = -1;
-		sideDistX = (info->posX - mapX) * deltaDistX;
-	}
-	else
-	{
-		stepX = 1;
-		sideDistX = (mapX + 1.0 - info->posX) * deltaDistX;
-	}
-	if (rayDirY < 0)
-	{
-		stepY = -1;
-		sideDistY = (info->posY - mapY) * deltaDistY;
-	}
-	else
-	{
-		stepY = 1;
-		sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
-	}
-	
-	int hit = 0;
-	while (1)
-	{
-		if (sideDistX < sideDistY)
-		{
-			sideDistX += deltaDistX;
-			mapX += stepX;
-		}
-		else
-		{
-			sideDistY += deltaDistY;
-			mapY += stepY;
-		}
-		if (map[mapX][mapY] == '0' || map[mapX][mapY] == 'b' \
-			|| map[mapX][mapY] == 'P')
-			continue;
-		if (map[mapX][mapY] == 'M')
-		{
-			hit = 1;
-			break ;
-		}
-		else
-			break ;
-	}
-	if (hit)
-	{
-		if (random_generator(3))
-			map[mapX][mapY] = 'P';
-		else
-			map[mapX][mapY] = '0';
-		vars->hunt++;
-		vars->m_num--;
-		vars->monster_come = 0;
-		if (vars->quest_num && vars->quest_monster_num > 0)
-			vars->quest_monster_num--;
-	}
-}
-
-void	reset_game(t_vars *vars)
-{
-	char	**map = vars->map.arr;
-
-	vars_free(vars);
-	vars_allocation(vars);
-	vars_init(vars);	
-	for (int i = 0; i < vars->map.height; i++)
-	{
-		for (int j = 0; j < vars->map.width; j++)
-		{
-			if (map[i][j] == 'b')
-				map[i][j] = 'B';
-			else if (map[i][j] == 'M' || map[i][j] == 'P')
-				map[i][j] = '0';
-		}
-	}
-}
-
-void	attack(t_vars *vars)
-{
-	int		x;
-	int		y;
-	void	*shot;
-	void	*shot2;
-
-	vars->gun_change = 1;
-	shot = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_1.xpm", &x, &y);
-	mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
-	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);
-	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
-	monster_kill(vars);
 }
 
 void	return_ellinia(t_vars *vars)
@@ -208,6 +79,23 @@ void	turn_back(t_info *info)
 	info->dirY *= -1;
 	info->planeX *= -1;
 	info->planeY *= -1;
+}
+
+int	key_release(int keycode, t_vars *vars)
+{
+	#ifdef KEY_DEBUG
+	if (keycode == W)
+        printf("release W\n");
+	else if (keycode == A)
+        printf("release A\n");
+	else if (keycode == S)
+        printf("release S\n");
+	else if (keycode == D)
+        printf("release D\n");
+	#endif
+	if (keycode >= 0 && keycode <= 255)
+		vars->keyboard[keycode] = 0;
+	return (0);
 }
 
 int	key_press(int keycode, t_vars *vars)

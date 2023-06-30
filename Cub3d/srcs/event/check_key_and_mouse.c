@@ -28,7 +28,7 @@ static void	key_check(t_vars *vars)
 	{
 		if (can_move(vars, (int)(info->posX + info->dirX * info->moveSpeed) \
 			, (int)(info->posY)))
-				info->posX += info->dirX * info->moveSpeed;
+			info->posX += info->dirX * info->moveSpeed;
 		if (can_move(vars, (int)(info->posX) \
 			, (int)(info->posY + info->dirY * info->moveSpeed)))
 			info->posY += info->dirY * info->moveSpeed;

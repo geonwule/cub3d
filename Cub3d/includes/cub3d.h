@@ -136,14 +136,16 @@ typedef struct s_dda
 	t_img	img;
 	int		tex[2];
 }	t_dda;
+
 typedef struct s_ray
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+	double	camera_x;
+	double	dir[2];
+	int		map[2];
+	double	side_d[2];
+	double	delta_d[2];
+	int		step[2];
+	int		hit;
 }	t_ray;
 // need later
 
@@ -307,12 +309,15 @@ int 	map_error(t_vars *vars);
 //evnet/check_key_and_mouse
 void	check_key_and_mouse(t_vars *vars);
 
+//event/event_function1.c
+void	attack(t_vars *vars);
+void	reset_game(t_vars *vars);
+
 //evnet/key_event
 void	attack(t_vars *vars);
 int		can_move(t_vars *vars, int y, int x);
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
-void	monster_kill(t_vars *vars);
 void	reset_game(t_vars *vars);
 
 //event/manage_monster
@@ -320,6 +325,9 @@ void	manage_monster(t_vars *vars);
 
 //evnet/map_set
 void	map_set(t_vars *vars);
+
+//evnet/monster_kill
+void	monster_kill(t_vars *vars, t_info *info, char **map);
 
 //evnet/mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);
