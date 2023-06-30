@@ -12,26 +12,16 @@
 
 #include "cub3d.h"
 
-static void mini_map(t_vars *vars)
+static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_width)
 {
-	int mini_width, mini_height;
-	char	**map = vars->map.arr;
+	int	x;
+	int	y;
 
-	mini_width = vars->map.width;
-	mini_height = vars->map.height;
-	
-	void	*mini_back = mlx_new_image(vars->mlx, mini_width * 10, mini_height * 10);
-	for (int x = 0; x < mini_height; x++)
+	x = 0;
+	while (x < mini_height)
 	{
-		for (int y = 0; y < mini_width; y++)
-		{
-			mlx_pixel_put(vars->mlx, mini_back, y, x, 0);
-		}
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, mini_back, 0, 0);
-	for (int x = 0; x < mini_height; x++)
-	{
-		for (int y = 0; y < mini_width; y++)
+		y = 0;
+		while (y < mini_width)
 		{
 			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->player_x, y * 10, x * 10);
@@ -47,14 +37,37 @@ static void mini_map(t_vars *vars)
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == '0' || map[x][y] == 'b')
 				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
+			y++;
 		}
+		x++;
 	}
-	int x = (int)vars->info->posX;
-	int y = (int)vars->info->posY;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
+	x = (int)vars->info->posX;
+	y = (int)vars->info->posY;
+	mlx_put_image_to_window(vars->mlx, vars->win, \
+		vars->dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
 }
 
-void	draw_mlx(t_vars *vars)
+static void mini_map(t_vars *vars)
+{
+	int		mini_width;
+	int		mini_height;
+	char	**map;
+	void	*mini_back;
+
+	mini_width = vars->map.width;
+	mini_height = vars->map.height;
+	map = vars->map.arr;
+	mini_back = mlx_new_image(vars->mlx, mini_width * 10, mini_height * 10);
+	for (int x = 0; x < mini_height; x++)
+	{
+		for (int y = 0; y < mini_width; y++)
+			mlx_pixel_put(vars->mlx, mini_back, y, x, 0);
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, mini_back, 0, 0);
+	minimap_put_mlx(vars, map, mini_height, mini_width);
+}
+
+static void	draw_mlx(t_vars *vars)
 {
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
@@ -66,7 +79,7 @@ void	draw_mlx(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->info->img.img, 0, 0);
 }
 
-int	dead_check_game_end(t_vars *vars)
+static int	dead_check_game_end(t_vars *vars)
 {
 	if (!vars->dead_check)
 		return (0);
@@ -90,15 +103,12 @@ int	rendering(t_vars *vars)
 		return (0);
 	manage_monster(vars);
 	check_key_and_mouse(vars);
-
 	mlx_clear_window(vars->mlx, vars->win); // clear window
 	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
 	map_set(vars);
 	draw_mlx(vars);
-
 	print_window1(vars);
 	print_window2(vars);
-
 	mini_map(vars);	
 	if (vars->dead_check)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
