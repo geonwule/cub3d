@@ -351,11 +351,11 @@ void	print_window2(t_vars *vars);
 void	ray_casting(t_vars *vars, t_info *info, char **map);
 
 //event/ray_function
-static void init_ray(t_info *info, t_ray *ray, int x);
-static void check_ray_dir(t_info *info, t_ray *ray);
-static void dda(t_vars *vars, char **map, t_ray *ray);
-static void	check_ray_texture(t_info *info, t_ray *ray, char **map);
-static void	apply_texture(t_info *info, t_ray *ray, int x, int y);
+void	init_ray(t_info *info, t_ray *ray, int x);
+void	check_ray_dir(t_info *info, t_ray *ray);
+void	dda(t_vars *vars, char **map, t_ray *ray);
+void	check_ray_texture(t_info *info, t_ray *ray, char **map);
+void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 
 //evnet/sprite
 void	sprite(t_vars *vars);
