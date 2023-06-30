@@ -101,21 +101,18 @@ static void	move_y(t_vars *vars, t_info *info, char **map)
 	}
 }
 
-static void	monster_come_on(t_vars *vars)
+void    manage_monster(t_vars *vars)
 {
-	t_info	*info = vars->info;
-	char	**map = vars->map.arr;
+	t_info	*info;
+	char	**map;
 
+	info = vars->info;
+	map = vars->map.arr;
+    monster_rezen(vars);
 	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
 		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M' \
 		|| vars->npc_talk)
 		return ;
 	move_x(vars, info, map);
 	move_y(vars, info, map);
-}
-
-void    manage_monster(t_vars *vars)
-{
-    monster_rezen(vars);
-    monster_come_on(vars);
 }
