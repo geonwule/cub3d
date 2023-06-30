@@ -147,6 +147,18 @@ typedef struct s_ray
 	double	delta_d[2];
 	int		step[2];
 	int		hit;
+	double	perwalldist;
+	int		side;
+
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_num;
+	double	wall_x;
+	int		tex[2];
+	double	t_step;
+	double	tex_pos;
+	int		color;
 }	t_ray;
 
 typedef struct  s_info
@@ -336,7 +348,14 @@ void	print_window1(t_vars *vars);
 void	print_window2(t_vars *vars);
 
 //evnet/ray_casting
-void	ray_casting(t_vars *vars);
+void	ray_casting(t_vars *vars, t_info *info, char **map);
+
+//event/ray_function
+void	init_ray(t_info *info, t_ray *ray, int x);
+void	check_ray_dir(t_info *info, t_ray *ray);
+void	dda(t_vars *vars, char **map, t_ray *ray);
+void	check_ray_texture(t_info *info, t_ray *ray, char **map);
+void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 
 //evnet/sprite
 void	sprite(t_vars *vars);

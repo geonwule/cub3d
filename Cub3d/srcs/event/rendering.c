@@ -105,7 +105,7 @@ int	rendering(t_vars *vars)
 	check_key_and_mouse(vars);
 	mlx_clear_window(vars->mlx, vars->win); // clear window
 	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
-	ray_casting(vars);
+	ray_casting(vars, vars->info, vars->map.arr);
 	sprite(vars);
 	draw_mlx(vars);
 	print_window1(vars);

@@ -1,6 +1,18 @@
 #include "cub3d.h"
 
-static void check_ray_dir(t_info *info, t_ray *ray)
+static void init_ray_m(t_info *info, t_ray *ray)
+{
+    ray->camera_x = 0;
+	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
+	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
+	ray->map[X] = (int)info->posX;
+	ray->map[Y] = (int)info->posY;
+	ray->delta_d[X] = fabs(1 / ray->dir[X]);
+	ray->delta_d[Y] = fabs(1 / ray->dir[Y]);
+	ray->hit = 0;
+}
+
+static void check_ray_dir_m(t_info *info, t_ray *ray)
 {
     if (ray->dir[X] < 0)
 	{
@@ -24,19 +36,7 @@ static void check_ray_dir(t_info *info, t_ray *ray)
 	}
 }
 
-static void init_ray(t_info *info, t_ray *ray)
-{
-    ray->camera_x = 0;
-	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
-	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
-	ray->map[X] = (int)info->posX;
-	ray->map[Y] = (int)info->posY;
-	ray->delta_d[X] = fabs(1 / ray->dir[X]);
-	ray->delta_d[Y] = fabs(1 / ray->dir[Y]);
-	ray->hit = 0;
-}
-
-static void dda(char **map, t_ray *ray)
+static void dda_m(char **map, t_ray *ray)
 {
 	while (1)
 	{
@@ -80,9 +80,9 @@ void	monster_kill(t_vars *vars, t_info *info, char **map)
 {
 	t_ray   ray;
 
-    init_ray(info, &ray);
-    check_ray_dir(info, &ray);
-    dda(map, &ray);
+    init_ray_m(info, &ray);
+    check_ray_dir_m(info, &ray);
+    dda_m(map, &ray);
     if (ray.hit)
         drop_item(vars, map, &ray);
 }
