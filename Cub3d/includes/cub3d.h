@@ -136,6 +136,7 @@ typedef struct s_dda
 	t_img	img;
 	int		tex[2];
 }	t_dda;
+// need later
 
 typedef struct s_ray
 {
@@ -147,7 +148,6 @@ typedef struct s_ray
 	int		step[2];
 	int		hit;
 }	t_ray;
-// need later
 
 typedef struct  s_info
 {
@@ -169,6 +169,12 @@ typedef struct  s_info
 	double	zBuffer[WIN_WIDTH];
 	int		**texture;
 }   t_info;
+
+typedef struct	s_pair
+{
+	double	first;
+	int		second;
+}	t_pair;
 
 typedef struct	s_sprite
 {
@@ -326,8 +332,6 @@ int		key_press(int keycode, t_vars *vars);
 //event/manage_monster
 void	manage_monster(t_vars *vars);
 
-//evnet/map_set
-void	map_set(t_vars *vars);
 
 //evnet/monster_kill
 void	monster_kill(t_vars *vars, t_info *info, char **map);
@@ -339,6 +343,12 @@ int		handle_mouse_move(int x, int y, void *args);
 //evnet/print_window
 void	print_window1(t_vars *vars);
 void	print_window2(t_vars *vars);
+
+//evnet/ray_casting
+void	ray_casting(t_vars *vars);
+
+//evnet/sprite
+void	sprite(t_vars *vars);
 
 //event/redering
 int		rendering(t_vars *vars);
