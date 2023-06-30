@@ -8,8 +8,8 @@ int	can_move(t_vars *vars, int x, int y)
 	if (spot == 'P')
 	{
 		vars->map.arr[x][y] = '0';
-		if (vars->hp < 3)
-			vars->hp++;
+		if (vars->data.hp < 3)
+			vars->data.hp++;
 		return (1);
 	}
 	else if (spot == '0' || spot == 'N' || spot == 'S' \
@@ -87,7 +87,7 @@ static void	mouse_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
 
-	if (vars->mouse_x > vars->mouse_old_x) // right
+	if (vars->data.mouse_x > vars->data.mouse_old_x) // right
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -97,7 +97,7 @@ static void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
-	if (vars->mouse_x < vars->mouse_old_x) // left
+	if (vars->data.mouse_x < vars->data.mouse_old_x) // left
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -107,10 +107,10 @@ static void	mouse_check(t_vars *vars)
 		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
 		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
-	if (++vars->render_i % 5 == 0)
+	if (++vars->data.render_i % 5 == 0)
 	{
-		vars->mouse_old_x = vars->mouse_x;
-		vars->mouse_old_y = vars->mouse_y;
+		vars->data.mouse_old_x = vars->data.mouse_x;
+		vars->data.mouse_old_y = vars->data.mouse_y;
 	}
 }
 

@@ -3,13 +3,13 @@
 static void	level_up(t_vars *vars)
 {
 	char	*level_str;
-	if (vars->hunt != 0 && vars->hunt % 2 == 0)
+	if (vars->data.hunt != 0 && vars->data.hunt % 2 == 0)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->lv, WIN_WIDTH / 9 * 2, WIN_HEIGHT / 5 * 2);
-		vars->level += 1;
-		vars->hunt = 0;
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.lv, WIN_WIDTH / 9 * 2, WIN_HEIGHT / 5 * 2);
+		vars->data.level += 1;
+		vars->data.hunt = 0;
 	}
-	level_str = ft_itoa(vars->level); //overflow protect need!
+	level_str = ft_itoa(vars->data.level); //overflow protect need!
 	mlx_string_put(vars->mlx, vars->win, 50, 710, 0xFFFFFF, level_str);
 	
 	free(level_str);
@@ -17,12 +17,12 @@ static void	level_up(t_vars *vars)
 
 static void	warning_message(t_vars *vars)
 {
-	if (vars->m_num)
+	if (vars->data.m_num)
 		return ;
-	vars->warning_time++;
-	if (vars->warning_time % 7 == 0) //깜빡이게
+	vars->data.warning_time++;
+	if (vars->data.warning_time % 7 == 0) //깜빡이게
 		return ;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->w_messege \
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.w_messege \
 		, WIN_WIDTH / 100 * 20, WIN_HEIGHT / 100 * 35);
 }
 
@@ -31,14 +31,14 @@ static void	quest_progress(t_vars *vars)
 	char	*str;
 	char	*kill;
 
-	if (vars->quest_monster_num == 0)
+	if (vars->data.quest_monster_num == 0)
 	{
 		mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
 		, 0xFFFFFF, "quest clear!! go back to NPC");
-		vars->quest_num = 2;
+		vars->data.quest_num = 2;
 		return ;
 	}
-	kill = ft_itoa(30 - vars->quest_monster_num);
+	kill = ft_itoa(30 - vars->data.quest_monster_num);
 	str = ft_strjoin("quest progress : 30 / ", kill);
 	free(kill);
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 100 * 45, WIN_HEIGHT / 100 * 2 \
@@ -48,26 +48,26 @@ static void	quest_progress(t_vars *vars)
 
 static void	npc_quest(t_vars *vars)
 {
-	if (vars->quest_num != 0)
+	if (vars->data.quest_num != 0)
 		quest_progress(vars);
-	if (vars->npc_talk == 0)
+	if (vars->data.npc_talk == 0)
 		return ;
-	if (vars->quest_num == 0) // init
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_start \
+	if (vars->data.quest_num == 0) // init
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.quest_start \
 		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
-	else if (vars->quest_num == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_ing \
+	else if (vars->data.quest_num == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.quest_ing \
 		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
-	else if (vars->quest_num == 2)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->quest_end \
+	else if (vars->data.quest_num == 2)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.quest_end \
 		, WIN_WIDTH / 100 * 35, WIN_HEIGHT / 100 * 30);
 }
 
 static void	damaged_or_recovery(t_vars *vars)
 {
-	if (vars->hp_before > vars->hp)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
-	vars->hp_before = vars->hp;
+	if (vars->data.hp_before > vars->data.hp)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.damage, WIN_WIDTH / 100 * 12, 0);
+	vars->data.hp_before = vars->data.hp;
 }
 
 void    print_window2(t_vars *vars)
@@ -76,7 +76,7 @@ void    print_window2(t_vars *vars)
 	warning_message(vars);
 	npc_quest(vars);
 	// damaged_or_recovery(vars);
-    if (vars->hp_before > vars->hp)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->damage, WIN_WIDTH / 100 * 12, 0);
-	vars->hp_before = vars->hp;
+    if (vars->data.hp_before > vars->data.hp)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.damage, WIN_WIDTH / 100 * 12, 0);
+	vars->data.hp_before = vars->data.hp;
 }

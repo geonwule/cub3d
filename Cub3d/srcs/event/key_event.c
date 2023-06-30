@@ -51,7 +51,7 @@ int	key_press(int keycode, t_vars *vars)
 	map = vars->map.arr;
 	if (keycode == P)
 		reset_game(vars);
-	if (vars->npc_talk)
+	if (vars->data.npc_talk)
 		return (0);
 	if (keycode >= 0 && keycode <= 255)
 		vars->keyboard[keycode] = 1;

@@ -7,7 +7,7 @@ void	attack(t_vars *vars)
 	void	*shot;
 	void	*shot2;
 
-	vars->gun_change = 1;
+	vars->data.hand_change = 1;
 	shot = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_1.xpm", &x, &y);
 	mlx_put_image_to_window(vars->mlx, vars->win, shot, WIN_WIDTH / 12 * 5, WIN_HEIGHT / 3);
 	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);

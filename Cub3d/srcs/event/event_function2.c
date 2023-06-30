@@ -53,7 +53,7 @@ void	open_door_tell_npc(t_vars *vars, char **map)
 		else if (map[(int)tmp[X]][(int)tmp[Y]] == 'b')
 			map[(int)tmp[X]][(int)tmp[Y]] = 'B';
 		else if (map[(int)tmp[X]][(int)tmp[Y]] == 'H')
-			vars->npc_talk = 1;
+			vars->data.npc_talk = 1;
 	}
 }
 
@@ -62,10 +62,10 @@ void	return_ellinia(t_vars *vars)
 	t_info	*info;
 
 	info = vars->info;
-	info->posX = vars->init_pos[X];
-	info->posY = vars->init_pos[Y];
-	info->dirX = vars->init_dir[X];
-	info->dirY = vars->init_dir[Y];
-	info->planeX = vars->init_plane[X];
-	info->planeY = vars->init_plane[Y];
+	info->posX = vars->data.init_pos[X];
+	info->posY = vars->data.init_pos[Y];
+	info->dirX = vars->data.init_dir[X];
+	info->dirY = vars->data.init_dir[Y];
+	info->planeX = vars->data.init_plane[X];
+	info->planeY = vars->data.init_plane[Y];
 }

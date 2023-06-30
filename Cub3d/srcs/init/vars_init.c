@@ -20,31 +20,31 @@ t_vars  *vars_allocation(t_vars *vars)
 	info = ft_malloc(sizeof(t_info));
 	vars->info = info;
 
-	vars->monster_come = 0;
-	vars->m_num = 0;
-	vars->warning_time = 0;
+	vars->data.monster_come = 0;
+	vars->data.m_num = 0;
+	vars->data.warning_time = 0;
 	vars->sprite = NULL;
 
-	vars->gun_change = 0;
-	vars->hp = 3;
-	vars->hp_before = 3;
-	vars->hunt = 0;
-	vars->level = 1;
-	vars->dead_check = 0;
-	vars->m_speed = 0;
+	vars->data.hand_change = 0;
+	vars->data.hp = 3;
+	vars->data.hp_before = 3;
+	vars->data.hunt = 0;
+	vars->data.level = 1;
+	vars->data.dead_check = 0;
+	vars->data.m_speed = 0;
 
-	vars->npc_talk = 0;
-	vars->quest_num = 0;
-	vars->quest_monster_num = 30;
+	vars->data.npc_talk = 0;
+	vars->data.quest_num = 0;
+	vars->data.quest_monster_num = 30;
 
 	vars->v_move = 64;
 	vars->v_i = 20;
 
-	vars->mouse_x = WIN_WIDTH / 2;
-	vars->mouse_old_x = WIN_WIDTH / 2;
-	vars->mouse_y = WIN_HEIGHT / 2;
+	vars->data.mouse_x = WIN_WIDTH / 2;
+	vars->data.mouse_old_x = WIN_WIDTH / 2;
+	vars->data.mouse_y = WIN_HEIGHT / 2;
 
-	vars->render_i = 0;
+	vars->data.render_i = 0;
 	i = -1;
 	while (++i < 1000)
 		vars->keyboard[i] = 0;
@@ -56,30 +56,32 @@ static void	img_xpm_set(t_vars *vars)
 	int	x;
 	int	y;
 
-	vars->player_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
-	vars->empty_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
-	vars->wall_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
-	vars->monster_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
-	vars->door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
-	vars->potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
-	vars->dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
-	vars->npc_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/npc.xpm", &x, &y);
+	vars->mini.player_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/player_10.xpm", &x, &y);
+	vars->mini.empty_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/empty_10.xpm", &x, &y);
+	vars->mini.wall_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/wall_10.xpm", &x, &y);
+	vars->mini.monster_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/monster_10.xpm", &x, &y);
+	vars->mini.door_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/door_10.xpm", &x, &y);
+	vars->mini.potion_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/potion_10.xpm", &x, &y);
+	vars->mini.dir_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/dir_10.xpm", &x, &y);
+	vars->mini.npc_x = ft_xpm_file_to_image(vars->mlx, "./texture/minimap/npc.xpm", &x, &y);
 
-	vars->quest_start = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_start.xpm", &x, &y);
-	vars->quest_ing = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_ing.xpm", &x, &y);
-	vars->quest_end = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_end.xpm", &x, &y);
+	vars->xpm.quest_start = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_start.xpm", &x, &y);
+	vars->xpm.quest_ing = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_ing.xpm", &x, &y);
+	vars->xpm.quest_end = ft_xpm_file_to_image(vars->mlx, "./texture/npc/quest_end.xpm", &x, &y);
 	
-	vars->dead = ft_xpm_file_to_image(vars->mlx, "texture/etc/dead.xpm", &x, &y);
-	vars->damage = ft_xpm_file_to_image(vars->mlx, "texture/etc/damage.xpm", &x, &y);
-	vars->aim = ft_xpm_file_to_image(vars->mlx, "texture/etc/aim.xpm", &x, &y);
-	vars->w_messege = ft_xpm_file_to_image(vars->mlx, "texture/etc/warning.xpm", &x, &y);
+	vars->xpm.dead = ft_xpm_file_to_image(vars->mlx, "texture/etc/dead.xpm", &x, &y);
+	vars->xpm.damage = ft_xpm_file_to_image(vars->mlx, "texture/etc/damage.xpm", &x, &y);
+	vars->xpm.aim = ft_xpm_file_to_image(vars->mlx, "texture/etc/aim.xpm", &x, &y);
+	vars->xpm.w_messege = ft_xpm_file_to_image(vars->mlx, "texture/etc/warning.xpm", &x, &y);
+	vars->xpm.hand1 = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand1.xpm", &x, &y);
+	vars->xpm.hand2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand2.xpm", &x, &y);
 
-	vars->hp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp1.xpm", &x, &y);
-	vars->hp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp2.xpm", &x, &y);
-	vars->hp3 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp3.xpm", &x, &y);
-	vars->exp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp1.xpm", &x, &y);
-	vars->exp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp2.xpm", &x, &y);
-	vars->lv = ft_xpm_file_to_image(vars->mlx, "texture/underbar/level.xpm", &x, &y);
+	vars->xpm.hp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp1.xpm", &x, &y);
+	vars->xpm.hp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp2.xpm", &x, &y);
+	vars->xpm.hp3 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/hp3.xpm", &x, &y);
+	vars->xpm.exp1 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp1.xpm", &x, &y);
+	vars->xpm.exp2 = ft_xpm_file_to_image(vars->mlx, "texture/underbar/exp2.xpm", &x, &y);
+	vars->xpm.lv = ft_xpm_file_to_image(vars->mlx, "texture/underbar/level.xpm", &x, &y);
 }
 
 void	set_dir(t_info *info, double x, double y)
@@ -139,12 +141,12 @@ int vars_init(t_vars *vars)
 {
 	t_info	*info = vars->info;
 
-	info->posX = vars->init_pos[X];
-	info->posY = vars->init_pos[Y];
-	info->dirX = vars->init_dir[X];
-	info->dirY = vars->init_dir[Y];
-	info->planeX = vars->init_plane[X];
-	info->planeY = vars->init_plane[Y];	
+	info->posX = vars->data.init_pos[X];
+	info->posY = vars->data.init_pos[Y];
+	info->dirX = vars->data.init_dir[X];
+	info->dirY = vars->data.init_dir[Y];
+	info->planeX = vars->data.init_plane[X];
+	info->planeY = vars->data.init_plane[Y];	
 	info->moveSpeed = 0.05;
 	info->rotSpeed = 0.08;
 

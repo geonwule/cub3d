@@ -203,17 +203,8 @@ typedef	struct s_map
 	char		**arr;
 }	t_map;
 
-typedef struct s_vars
+typedef struct s_mini
 {
-
-	int		keyboard[1000];
-
-    void	*mlx;
-    void	*win;
-
-	t_map	map;
-
-	//minimap
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
@@ -227,74 +218,74 @@ typedef struct s_vars
 	void	*potion_x;
 	void	*dir_x;
 	void	*npc_x;
+}	t_mini;
 
-	int		npc_talk;
-	int		quest_num; //no = 0, ing = 1, end = 2
-	int		quest_monster_num; // monster num
-
+typedef struct s_xpm
+{
 	void	*quest_start;
 	void	*quest_ing;
 	void	*quest_end;
+	void	*dead;
+	void	*damage;
+	void	*aim;
+	void	*w_messege;
+	void	*hand1;
+	void	*hand2;
+	void	*hp1;
+	void	*hp2;
+	void	*hp3;
+	void	*exp1;
+	void	*exp2;
+	void	*lv;
+}	t_xpm;
 
-    int     size_l;
-    int     bpp;
-    int     endian;
+// typedef struct s_mouse_pos
+// {
 	
-	// ray
-	// t_ray	ray;
-	t_info	*info;
 
+// }	t_mouse_pos;
+
+typedef struct s_data
+{
+	int				hp;
+	int				hp_before;
+	int				dead_check;
+	int				hunt;
+	int				level;
+	int				hand_change;
 	int				monster_come;
 	int				m_speed;
 	unsigned int	m_pos[2];
 	unsigned int	m_num;
-	
-	void			*w_messege;
 	unsigned int	warning_time;
+	int				npc_talk;
+	int				quest_num; //no = 0, ing = 1, end = 2
+	int				quest_monster_num; // monster num
+	int				mouse_x;
+	int				mouse_old_x;
+	int				mouse_y;
+	int				mouse_old_y;
+	double			init_pos[2];
+	double			init_dir[2];
+	double			init_plane[2];
+	 unsigned int	render_i;
+}	t_data;
 
-	void			*potion;
-
-	int				sprite_num; //sprite_num
+typedef struct s_vars
+{
+	int		keyboard[1000];
+    void	*mlx;
+    void	*win;
+	t_map	map;
+	t_mini	mini;
+	t_xpm	xpm;
+	t_info	*info;
+	t_data	data;
+	//t_sprite sprite
 	t_sprite		*sprite;
-	int				v_move;
-	int				v_i;
-
-	//aim,shot
-	void	*aim;
-	void	*gun;
-
-	int		hp;
-	int		hp_before;
-
-	void	*hp1;
-	void	*hp2;
-	void	*hp3;
-
-	void	*damage;
-
-	int		dead_check;
-	void	*dead;
-
-	int		hunt;
-	void	*exp1;
-	void	*exp2;
-
-	int		level;
-	void	*lv;
-
-	int		gun_change;
-
-	double	init_pos[2];
-	double	init_dir[2];
-	double	init_plane[2];
-
-	//mouse
-	int		mouse_x;
-	int		mouse_old_x;
-	int		mouse_y;
-	int		mouse_old_y;
-
-	unsigned int	render_i;
+	int			sprite_num; //sprite_num
+	int			v_move;
+	int			v_i;
 }   t_vars;
 
 //vars_init

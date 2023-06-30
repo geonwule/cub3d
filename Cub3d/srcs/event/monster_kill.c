@@ -69,11 +69,11 @@ static void drop_item(t_vars *vars, char **map, t_ray *ray)
 		map[ray->map[X]][ray->map[Y]] = 'P';
 	else
 		map[ray->map[X]][ray->map[Y]] = '0';
-	vars->hunt++;
-	vars->m_num--;
-	vars->monster_come = 0;
-	if (vars->quest_num && vars->quest_monster_num > 0)
-		vars->quest_monster_num--;
+	vars->data.hunt++;
+	vars->data.m_num--;
+	vars->data.monster_come = 0;
+	if (vars->data.quest_num && vars->data.quest_monster_num > 0)
+		vars->data.quest_monster_num--;
 }
 
 void	monster_kill(t_vars *vars, t_info *info, char **map)

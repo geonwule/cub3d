@@ -91,11 +91,11 @@ void calc(t_vars *vars, int x)
 		}
 		if (map[mapX][mapY] == '1' || map[mapX][mapY] == 'B')// || map[mapX][mapY] == 'M')
 			hit = 1;
-		if (map[mapX][mapY] == 'M' && vars->monster_come == 0)
+		if (map[mapX][mapY] == 'M' && vars->data.monster_come == 0)
 		{	
-			vars->m_pos[X] = mapX;
-			vars->m_pos[Y] = mapY;
-			vars->monster_come = 1;
+			vars->data.m_pos[X] = mapX;
+			vars->data.m_pos[Y] = mapY;
+			vars->data.monster_come = 1;
 		}
 	}
 

@@ -24,19 +24,19 @@ static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_
 		while (y < mini_width)
 		{
 			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->player_x, y * 10, x * 10);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.player_x, y * 10, x * 10);
 			else if (map[x][y] == '1')// wall
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'M')// monster
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'B')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->door_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.door_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'P')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == 'H')// npc
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
 			else if (map[x][y] == '0' || map[x][y] == 'b')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.empty_x, y * 10, x * 10);
 			y++;
 		}
 		x++;
@@ -44,7 +44,7 @@ static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_
 	x = (int)vars->info->posX;
 	y = (int)vars->info->posY;
 	mlx_put_image_to_window(vars->mlx, vars->win, \
-		vars->dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
+		vars->mini.dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
 }
 
 static void mini_map(t_vars *vars)
@@ -81,16 +81,16 @@ static void	draw_mlx(t_vars *vars)
 
 static int	dead_check_game_end(t_vars *vars)
 {
-	if (!vars->dead_check)
+	if (!vars->data.dead_check)
 		return (0);
-	if (vars->dead_check)
+	if (vars->data.dead_check)
 	{
 		if (vars->keyboard[ESC])
 			exit_game(vars);
 		else if (vars->keyboard[P])
 		{
 			reset_game(vars);
-			vars->dead_check = 0;
+			vars->data.dead_check = 0;
 			return (0);
 		}
 	}
@@ -111,7 +111,7 @@ int	rendering(t_vars *vars)
 	print_window1(vars);
 	print_window2(vars);
 	mini_map(vars);	
-	if (vars->dead_check)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
+	if (vars->data.dead_check)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
 	return (0);
 }
