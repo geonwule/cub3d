@@ -12,49 +12,62 @@
 
 #include "cub3d.h"
 
+static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_width)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < mini_height)
+	{
+		y = 0;
+		while (y < mini_width)
+		{
+			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.player_x, y * 10, x * 10);
+			else if (map[x][y] == '1')// wall
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'M')// monster
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'B')// break 벽
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.door_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'P')// break 벽
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == 'H')// npc
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
+			else if (map[x][y] == '0' || map[x][y] == 'b')
+				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.empty_x, y * 10, x * 10);
+			y++;
+		}
+		x++;
+	}
+	x = (int)vars->info->posX;
+	y = (int)vars->info->posY;
+	mlx_put_image_to_window(vars->mlx, vars->win, \
+		vars->mini.dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
+}
+
 static void mini_map(t_vars *vars)
 {
-	int mini_width, mini_height;
-	char	**map = vars->map.arr;
+	int		mini_width;
+	int		mini_height;
+	char	**map;
+	void	*mini_back;
 
 	mini_width = vars->map.width;
 	mini_height = vars->map.height;
-	
-	void	*mini_back = mlx_new_image(vars->mlx, mini_width * 10, mini_height * 10);
+	map = vars->map.arr;
+	mini_back = mlx_new_image(vars->mlx, mini_width * 10, mini_height * 10);
 	for (int x = 0; x < mini_height; x++)
 	{
 		for (int y = 0; y < mini_width; y++)
-		{
 			mlx_pixel_put(vars->mlx, mini_back, y, x, 0);
-		}
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, mini_back, 0, 0);
-	for (int x = 0; x < mini_height; x++)
-	{
-		for (int y = 0; y < mini_width; y++)
-		{
-			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->player_x, y * 10, x * 10);
-			else if (map[x][y] == '1')// wall
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'M')// monster
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'B')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->door_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'P')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'H')// npc
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == '0' || map[x][y] == 'b')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->empty_x, y * 10, x * 10);
-		}
-	}
-	int x = (int)vars->info->posX;
-	int y = (int)vars->info->posY;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
+	minimap_put_mlx(vars, map, mini_height, mini_width);
 }
 
-void	draw_mlx(t_vars *vars)
+static void	draw_mlx(t_vars *vars)
 {
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
@@ -66,18 +79,18 @@ void	draw_mlx(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->info->img.img, 0, 0);
 }
 
-int	dead_check_game_end(t_vars *vars)
+static int	dead_check_game_end(t_vars *vars)
 {
-	if (!vars->dead_check)
+	if (!vars->data.dead_check)
 		return (0);
-	if (vars->dead_check)
+	if (vars->data.dead_check)
 	{
 		if (vars->keyboard[ESC])
 			exit_game(vars);
 		else if (vars->keyboard[P])
 		{
 			reset_game(vars);
-			vars->dead_check = 0;
+			vars->data.dead_check = 0;
 			return (0);
 		}
 	}
@@ -90,17 +103,15 @@ int	rendering(t_vars *vars)
 		return (0);
 	manage_monster(vars);
 	check_key_and_mouse(vars);
-
 	mlx_clear_window(vars->mlx, vars->win); // clear window
 	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
-	map_set(vars);
+	ray_casting(vars);
+	sprite(vars);
 	draw_mlx(vars);
-
 	print_window1(vars);
 	print_window2(vars);
-
 	mini_map(vars);	
-	if (vars->dead_check)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
+	if (vars->data.dead_check)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
 	return (0);
 }

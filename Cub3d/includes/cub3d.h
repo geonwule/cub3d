@@ -136,16 +136,18 @@ typedef struct s_dda
 	t_img	img;
 	int		tex[2];
 }	t_dda;
+// need later
+
 typedef struct s_ray
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+	double	camera_x;
+	double	dir[2];
+	int		map[2];
+	double	side_d[2];
+	double	delta_d[2];
+	int		step[2];
+	int		hit;
 }	t_ray;
-// need later
 
 typedef struct  s_info
 {
@@ -167,6 +169,12 @@ typedef struct  s_info
 	double	zBuffer[WIN_WIDTH];
 	int		**texture;
 }   t_info;
+
+typedef struct	s_pair
+{
+	double	first;
+	int		second;
+}	t_pair;
 
 typedef struct	s_sprite
 {
@@ -195,17 +203,8 @@ typedef	struct s_map
 	char		**arr;
 }	t_map;
 
-typedef struct s_vars
+typedef struct s_mini
 {
-
-	int		keyboard[1000];
-
-    void	*mlx;
-    void	*win;
-
-	t_map	map;
-
-	//minimap
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
@@ -219,74 +218,74 @@ typedef struct s_vars
 	void	*potion_x;
 	void	*dir_x;
 	void	*npc_x;
+}	t_mini;
 
-	int		npc_talk;
-	int		quest_num; //no = 0, ing = 1, end = 2
-	int		quest_monster_num; // monster num
-
+typedef struct s_xpm
+{
 	void	*quest_start;
 	void	*quest_ing;
 	void	*quest_end;
+	void	*dead;
+	void	*damage;
+	void	*aim;
+	void	*w_messege;
+	void	*hand1;
+	void	*hand2;
+	void	*hp1;
+	void	*hp2;
+	void	*hp3;
+	void	*exp1;
+	void	*exp2;
+	void	*lv;
+}	t_xpm;
 
-    int     size_l;
-    int     bpp;
-    int     endian;
+// typedef struct s_mouse_pos
+// {
 	
-	// ray
-	// t_ray	ray;
-	t_info	*info;
 
+// }	t_mouse_pos;
+
+typedef struct s_data
+{
+	int				hp;
+	int				hp_before;
+	int				dead_check;
+	int				hunt;
+	int				level;
+	int				hand_change;
 	int				monster_come;
 	int				m_speed;
 	unsigned int	m_pos[2];
 	unsigned int	m_num;
-	
-	void			*w_messege;
 	unsigned int	warning_time;
+	int				npc_talk;
+	int				quest_num; //no = 0, ing = 1, end = 2
+	int				quest_monster_num; // monster num
+	int				mouse_x;
+	int				mouse_old_x;
+	int				mouse_y;
+	int				mouse_old_y;
+	double			init_pos[2];
+	double			init_dir[2];
+	double			init_plane[2];
+	 unsigned int	render_i;
+}	t_data;
 
-	void			*potion;
-
-	int				sprite_num; //sprite_num
+typedef struct s_vars
+{
+	int		keyboard[1000];
+    void	*mlx;
+    void	*win;
+	t_map	map;
+	t_mini	mini;
+	t_xpm	xpm;
+	t_info	*info;
+	t_data	data;
+	//t_sprite sprite
 	t_sprite		*sprite;
-	int				v_move;
-	int				v_i;
-
-	//aim,shot
-	void	*aim;
-	void	*gun;
-
-	int		hp;
-	int		hp_before;
-
-	void	*hp1;
-	void	*hp2;
-	void	*hp3;
-
-	void	*damage;
-
-	int		dead_check;
-	void	*dead;
-
-	int		hunt;
-	void	*exp1;
-	void	*exp2;
-
-	int		level;
-	void	*lv;
-
-	int		gun_change;
-
-	double	init_pos[2];
-	double	init_dir[2];
-	double	init_plane[2];
-
-	//mouse
-	int		mouse_x;
-	int		mouse_old_x;
-	int		mouse_y;
-	int		mouse_old_y;
-
-	unsigned int	render_i;
+	int			sprite_num; //sprite_num
+	int			v_move;
+	int			v_i;
 }   t_vars;
 
 //vars_init
@@ -307,19 +306,26 @@ int 	map_error(t_vars *vars);
 //evnet/check_key_and_mouse
 void	check_key_and_mouse(t_vars *vars);
 
-//evnet/key_event
+//event/event_function1.c
 void	attack(t_vars *vars);
-int		can_move(t_vars *vars, int y, int x);
+void	reset_game(t_vars *vars);
+
+//event/event_function2.c
+void	return_ellinia(t_vars *vars);
+void	open_door_tell_npc(t_vars *vars, char **map);
+void	adjust_gamespeed(t_info *info, int keycode);
+void	turn_back(t_info *info);
+
+//evnet/key_event
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
-void	monster_kill(t_vars *vars);
-void	reset_game(t_vars *vars);
 
 //event/manage_monster
 void	manage_monster(t_vars *vars);
 
-//evnet/map_set
-void	map_set(t_vars *vars);
+
+//evnet/monster_kill
+void	monster_kill(t_vars *vars, t_info *info, char **map);
 
 //evnet/mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);
@@ -328,6 +334,12 @@ int		handle_mouse_move(int x, int y, void *args);
 //evnet/print_window
 void	print_window1(t_vars *vars);
 void	print_window2(t_vars *vars);
+
+//evnet/ray_casting
+void	ray_casting(t_vars *vars);
+
+//evnet/sprite
+void	sprite(t_vars *vars);
 
 //event/redering
 int		rendering(t_vars *vars);

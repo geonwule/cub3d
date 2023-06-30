@@ -7,11 +7,11 @@ static void	monster_rezen(t_vars *vars)
 	char	**map;
 
     map = vars->map.arr;
-	if (vars->m_num)
+	if (vars->data.m_num)
 		return ;
-	if (vars->warning_time < 50) //warning_time
+	if (vars->data.warning_time < 50) //warning_time
 		return ;
-	vars->warning_time = 0;
+	vars->data.warning_time = 0;
 	i = 0;
 	while (i < vars->map.height)
 	{
@@ -24,7 +24,7 @@ static void	monster_rezen(t_vars *vars)
 				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
 			{
 				map[i][j] = 'M';
-				vars->m_num++;
+				vars->data.m_num++;
 				usleep(1);
 			}
 			j++;
@@ -39,19 +39,19 @@ static void monster_move(t_vars *vars, int x_or_y, int step)
 	int		x;
 	int		y;
 
-	x = vars->m_pos[X];
-	y = vars->m_pos[Y];
+	x = vars->data.m_pos[X];
+	y = vars->data.m_pos[Y];
 	map = vars->map.arr;
 	map[x][y] = '0';
 	if (x_or_y == X)
 	{
 		map[x + step][y] = 'M';
-		vars->m_pos[X] += step;
+		vars->data.m_pos[X] += step;
 	}
 	else
 	{
 		map[x][y + step] = 'M';
-		vars->m_pos[Y] += step;
+		vars->data.m_pos[Y] += step;
 	}
 }
 
@@ -60,19 +60,19 @@ static void	move_x(t_vars *vars, t_info *info, char **map)
 	int	x;
 	int	y;
 
-	x = vars->m_pos[X];
-	y = vars->m_pos[Y];
+	x = vars->data.m_pos[X];
+	y = vars->data.m_pos[Y];
 	if ((int)info->posX < x && map[x - 1][y] == '0')
 	{
-		if (((int)info->posX == x - 1 && (int)info->posY == y) && vars->hp > 0)
-			vars->hp -= 1;
+		if (((int)info->posX == x - 1 && (int)info->posY == y) && vars->data.hp > 0)
+			vars->data.hp -= 1;
 		else
 			monster_move(vars, X, -1);
 	}
 	else if ((int)info->posX > x && map[x + 1][y] == '0')
 	{
 		if (((int)info->posX == x + 1 && (int)info->posY == y))
-			vars->hp -= 1;
+			vars->data.hp -= 1;
 		else
 			monster_move(vars, X, 1);
 	}
@@ -83,39 +83,36 @@ static void	move_y(t_vars *vars, t_info *info, char **map)
 	int	x;
 	int	y;
 
-	x = vars->m_pos[X];
-	y = vars->m_pos[Y];
+	x = vars->data.m_pos[X];
+	y = vars->data.m_pos[Y];
 	if ((int)info->posY < y && map[x][y - 1] == '0')
 	{
 		if ((int)info->posX == x && (int)info->posY == y - 1)
-			vars->hp -= 1;
+			vars->data.hp -= 1;
 		else
 			monster_move(vars, Y, -1);
 	}
 	else if ((int)info->posY > y && map[x][y + 1] == '0')
 	{
 		if ((int)info->posX == x && (int)info->posY == y + 1)
-			vars->hp -= 1;
+			vars->data.hp -= 1;
 		else
 			monster_move(vars, Y, 1);
 	}
 }
 
-static void	monster_come_on(t_vars *vars)
+void    manage_monster(t_vars *vars)
 {
-	t_info	*info = vars->info;
-	char	**map = vars->map.arr;
+	t_info	*info;
+	char	**map;
 
-	if (!vars->monster_come || ++vars->m_speed % 30 != 0 \
-		|| map[vars->m_pos[X]][vars->m_pos[Y]] != 'M' \
-		|| vars->npc_talk)
+	info = vars->info;
+	map = vars->map.arr;
+    monster_rezen(vars);
+	if (!vars->data.monster_come || ++vars->data.m_speed % 30 != 0 \
+		|| map[vars->data.m_pos[X]][vars->data.m_pos[Y]] != 'M' \
+		|| vars->data.npc_talk)
 		return ;
 	move_x(vars, info, map);
 	move_y(vars, info, map);
-}
-
-void    manage_monster(t_vars *vars)
-{
-    monster_rezen(vars);
-    monster_come_on(vars);
 }

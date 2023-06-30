@@ -66,12 +66,12 @@ void	read_file(t_vars *vars, char *path)
 	init_map_info(vars, path);
 	if (check_map(vars))
 		print_error("Invalid map", vars);
-	vars->init_pos[X] = vars->info->posX;
-	vars->init_pos[Y] = vars->info->posY;
-	vars->init_dir[X] = vars->info->dirX;
-	vars->init_dir[Y] = vars->info->dirY;
-	vars->init_plane[X] = vars->info->planeX;
-	vars->init_plane[Y] = vars->info->planeY;
+	vars->data.init_pos[X] = vars->info->posX;
+	vars->data.init_pos[Y] = vars->info->posY;
+	vars->data.init_dir[X] = vars->info->dirX;
+	vars->data.init_dir[Y] = vars->info->dirY;
+	vars->data.init_plane[X] = vars->info->planeX;
+	vars->data.init_plane[Y] = vars->info->planeY;
 	/*print test*/
 //	print_texture(vars);
 //	print_color(vars);

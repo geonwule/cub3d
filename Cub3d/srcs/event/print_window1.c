@@ -51,38 +51,33 @@ static void press_b(t_vars *vars)
 
 static void	aim_point(t_vars *vars)
 {
-	int x, y;
-	if (vars->gun_change)
+	if (vars->data.hand_change)
 	{
-		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand2.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 10 * 3, WIN_HEIGHT / 9 * 6);
-		vars->gun_change = 0;
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.hand2, WIN_WIDTH / 10 * 3, WIN_HEIGHT / 9 * 6);
+		vars->data.hand_change = 0;
 	}
 	else
-	{
-		vars->gun = ft_xpm_file_to_image(vars->mlx, "texture/etc/hand1.xpm", &x, &y);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->gun, WIN_WIDTH / 9 * 1, WIN_HEIGHT / 9 * 5);
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.hand1, WIN_WIDTH / 9 * 1, WIN_HEIGHT / 9 * 5);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.aim, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }
 
 static void	hp_exp(t_vars *vars)
 {
-	if (vars->hp == 3)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp3, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 2)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp2, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->hp1, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
-	else if (vars->hp == 0)
+	if (vars->data.hp == 3)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.hp3, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->data.hp == 2)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.hp2, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->data.hp == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.hp1, WIN_WIDTH * 0, WIN_HEIGHT / 100 * 98);
+	else if (vars->data.hp == 0)
 	{
-		vars->dead_check = 1;
+		vars->data.dead_check = 1;
 		return ;
 	}
-	if (vars->hunt % 2 == 0)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp1, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
-	else if (vars->hunt % 2 == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->exp2, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
+	if (vars->data.hunt % 2 == 0)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.exp1, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
+	else if (vars->data.hunt % 2 == 1)
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.exp2, WIN_WIDTH / 100 * 34, WIN_HEIGHT / 100 * 98);
 }
 
 void    print_window1(t_vars *vars)
