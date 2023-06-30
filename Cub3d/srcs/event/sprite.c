@@ -1,28 +1,44 @@
 #include "cub3d.h"
 
-static void	sprite_init(t_vars *vars)
+static int	check_sprite_num(t_vars *vars, char **map, int height, int width)
 {
-	char	**map = vars->map.arr;
+	int	i;
+	int	j;
+
 	vars->sprite_num = 0;
-	for (int i = 0; i < vars->map.height; i++)
+	i = 0;
+	while (i < height)
 	{
-		for (int j = 0; j < vars->map.width; j++)
+		j = 0;
+		while (j < width)
 		{
 			if (map[i][j] == 'M' || map[i][j] == 'P' || map[i][j] == 'H')
 				vars->sprite_num++;
+			j++;
 		}
+		i++;
 	}
-	t_sprite	*sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
-	int	s_idx = 0;
-	for (int i = 0; i < vars->map.height; i++)
+	if (vars->sprite_num == 0)
+		return (0);
+	return (1);
+}
+
+static t_sprite	*malloc_sprite(t_vars *vars, int s_idx, int i, int j)
+{
+	t_sprite	*sprite;
+
+	sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
+	i = -1;
+	while (++i < vars->map.height)
 	{
-		for (int j = 0; j < vars->map.width; j++)
+		j = -1;
+		while (++j < vars->map.width)
 		{
-			if (map[i][j] == 'M')
+			if (vars->map.arr[i][j] == 'M')
 				sprite[s_idx].texture = TEX_MONSTER;
-			else if (map[i][j] == 'P')
+			else if (vars->map.arr[i][j] == 'P')
 				sprite[s_idx].texture = TEX_POTION;
-			else if (map[i][j] == 'H')
+			else if (vars->map.arr[i][j] == 'H')
 				sprite[s_idx].texture = TEX_NPC;
 			else
 				continue ;
@@ -31,15 +47,22 @@ static void	sprite_init(t_vars *vars)
 			s_idx++;
 		}
 	}
+	return (sprite);
+}
+
+static void	sprite_init(t_vars *vars, char **map)
+{
+
+	if (!check_sprite_num(vars, map, vars->map.height, vars->map.width))
+		return ;
 	if (vars->sprite)
 		free(vars->sprite);
-
+	vars->sprite = malloc_sprite(vars, 0, -1, -1);
 	//sprite_up_and_down
 	if (vars->v_move >= 300 || vars->v_move <= 0)
 		vars->v_i *= -1;
 	vars->v_move += vars->v_i;
 
-	vars->sprite = sprite;
 }
 
 static void	sort_order(t_pair *orders, int amount)
@@ -82,10 +105,9 @@ static void	sortSprites(int *order, double *dist, int amount)
 	free(sprites);
 }
 
-static void	sprite_ex(t_vars *vars)
+static void	sprite_ex(t_vars *vars, t_sprite *sprite)
 {
 	int numSprites = vars->sprite_num;
-	t_sprite	*sprite = vars->sprite;
 	
 	int		spriteOrder[numSprites];
 	double	spriteDistance[numSprites];
@@ -163,6 +185,7 @@ static void	sprite_ex(t_vars *vars)
 
 void	sprite(t_vars *vars)
 {
-	sprite_init(vars);
-	sprite_ex(vars);
+	sprite_init(vars, vars->map.arr);
+	if (vars->sprite)
+		sprite_ex(vars, vars->sprite);
 }
