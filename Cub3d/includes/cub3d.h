@@ -422,8 +422,8 @@ int		size_arr_2d(char **arr);
 
 // parsing/check.c
 void	check_file(t_vars *vars, char *path);
-int		check_texture(char **arr);
-int		check_color(char **arr);
+int		check_texture(char *line);
+int		check_color(char *line);
 
 // parsing/read_file.c
 void	read_file(t_vars *vars, char *path);
@@ -437,5 +437,13 @@ int		set_color(char **arr, t_vars *vars);
 
 // parsing/check_map.c
 int		check_map(t_vars *vars);
+
+// parsing/check_map2.c
+void	init_dir_plane_ns(t_vars *vars, char type);
+void	init_dir_plane_ew(t_vars *vars, char type);
+
+// parsing/set_color_utils.c
+int		ft_atoi_color(const char *str);
+
 
 #endif

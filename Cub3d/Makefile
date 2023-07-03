@@ -21,11 +21,13 @@ FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
 PARSING_DIR	= srcs/parsing/
 
-_PARSING_SRCS	= read_file.c	\
-				  check.c		\
-				  set.c			\
-				  set_color.c	\
-				  check_map.c	\
+_PARSING_SRCS	= read_file.c		\
+				  check.c			\
+				  set.c				\
+				  set_color.c		\
+				  set_color_utils.c	\
+				  check_map.c		\
+				  check_map2.c		\
 
 				  
 

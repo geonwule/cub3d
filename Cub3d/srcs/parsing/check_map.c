@@ -6,11 +6,23 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/29 18:56:38 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 22:54:53 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	init_player_info(t_vars *vars, char **map, int i, int j)
+{
+	if (map[i][j] == 'N')
+		init_dir_plane_ns(vars, 'N');
+	else if (map[i][j] == 'S')
+		init_dir_plane_ns(vars, 'S');
+	else if (map[i][j] == 'E')
+		init_dir_plane_ew(vars, 'E');
+	else if (map[i][j] == 'W')
+		init_dir_plane_ew(vars, 'W');
+}
 
 static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 {
@@ -19,11 +31,11 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 	int	cnt;
 
 	cnt = 0;
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if (!ft_strchr("NWES01HB ", map[i][j]))
 				return (-1);
@@ -31,40 +43,11 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 			{
 				vars->info->posX = i;
 				vars->info->posY = j;
-				if (map[i][j] == 'N')
-				{
-					vars->info->dirX = -1.0;
-					vars->info->dirY = 0.0;
-					vars->info->planeX = 0.0;
-					vars->info->planeY = 0.66;
-				}
-				else if (map[i][j] == 'S')
-				{
-					vars->info->dirX = 1.0;
-					vars->info->dirY = 0.0;
-					vars->info->planeX = 0.0;
-					vars->info->planeY = -0.66;
-				}
-				else if (map[i][j] == 'E')
-				{
-					vars->info->dirX = 0.0;
-					vars->info->dirY = 1.0;
-					vars->info->planeX = 0.66;
-					vars->info->planeY = 0.0;
-				}
-				else if (map[i][j] == 'W')
-				{
-					vars->info->dirX = 0.0;
-					vars->info->dirY = -1.0;
-					vars->info->planeX = -0.66;
-					vars->info->planeY = 0.0;
-				}
+				init_player_info(vars, map, i, j);
 				map[i][j] = '0';
 				cnt++;
 			}
-			j++;
 		}
-		i++;
 	}
 	return (cnt);
 }
@@ -115,26 +98,15 @@ int	check_map(t_vars *vars)
 
 	map = vars->map.arr;
 	if (count_plyer_and_is_valid(map, vars) != 1)
-	{
-		printf("player is not one or invalid map\n");	// del
 		return (1);
-	}
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-//			if (check_edge(i, j, vars))
-//			{
-//				printf("[%d][%d] is not wall\n", i, j); // del
-//				return (1);
-//			}
 			if (check_dir(i, j, vars))
-			{
-				printf("[%d][%d] is not wall2\n", i, j); // del
 				return (1);
-			}
 			j++;
 		}
 		i++;
