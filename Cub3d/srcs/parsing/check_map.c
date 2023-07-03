@@ -6,13 +6,13 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:42:02 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 22:54:53 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_player_info(char **map, int i; int j)
+static void	init_player_info(t_vars *vars, char **map, int i, int j)
 {
 	if (map[i][j] == 'N')
 		init_dir_plane_ns(vars, 'N');
@@ -43,7 +43,7 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 			{
 				vars->info->posX = i;
 				vars->info->posY = j;
-				inti_player_info(map, i, j);
+				init_player_info(vars, map, i, j);
 				map[i][j] = '0';
 				cnt++;
 			}
