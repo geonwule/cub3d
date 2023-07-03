@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 16:18:00 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:12:48 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ static int	dead_check_game_end(t_vars *vars)
 		return (0);
 	if (vars->data.dead_check)
 	{
-		if (vars->keyboard[ESC])
+		if (vars->data.keyboard[ESC])
 			exit_game(vars);
-		else if (vars->keyboard[P])
+		else if (vars->data.keyboard[P])
 		{
 			reset_game(vars);
 			vars->data.dead_check = 0;

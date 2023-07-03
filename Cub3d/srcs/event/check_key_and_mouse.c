@@ -22,9 +22,9 @@ static void	key_check(t_vars *vars)
 {
 	t_info	*info = vars->info;
 	
-	if (vars->keyboard[ESC])
+	if (vars->data.keyboard[ESC])
        	exit_game(vars);
-	if (vars->keyboard[W])
+	if (vars->data.keyboard[W])
 	{
 		if (can_move(vars, (int)(info->posX + info->dirX * info->moveSpeed) \
 			, (int)(info->posY)))
@@ -33,7 +33,7 @@ static void	key_check(t_vars *vars)
 			, (int)(info->posY + info->dirY * info->moveSpeed)))
 			info->posY += info->dirY * info->moveSpeed;
 	}
-	if (vars->keyboard[S])
+	if (vars->data.keyboard[S])
 	{
 		if (can_move(vars, (int)(info->posX - info->dirX * info->moveSpeed) \
 			, (int)(info->posY)))
@@ -42,7 +42,7 @@ static void	key_check(t_vars *vars)
 			, (int)(info->posY - info->dirY * info->moveSpeed)))
 			info->posY -= info->dirY * info->moveSpeed;
 	}
-	if (vars->keyboard[D])
+	if (vars->data.keyboard[D])
 	{
 		if (can_move(vars, (int)(info->posX + info->dirY * info->moveSpeed) \
 			, (int)(info->posY)))
@@ -51,7 +51,7 @@ static void	key_check(t_vars *vars)
 			, (int)(info->posY - info->dirX * info->moveSpeed)))
 			info->posY -= info->dirX * info->moveSpeed;
 	}
-	if (vars->keyboard[A])
+	if (vars->data.keyboard[A])
 	{
 		if (can_move(vars, (int)(info->posX - info->dirY * info->moveSpeed) \
 			, (int)(info->posY)))
@@ -60,7 +60,7 @@ static void	key_check(t_vars *vars)
 			, (int)(info->posY + info->dirX * info->moveSpeed)))
 			info->posY += info->dirX * info->moveSpeed;
 	}
-	if (vars->keyboard[LEFT])
+	if (vars->data.keyboard[LEFT])
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;
@@ -71,7 +71,7 @@ static void	key_check(t_vars *vars)
 		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
 	//rotate to the left
-	if (vars->keyboard[RIGHT])
+	if (vars->data.keyboard[RIGHT])
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = info->dirX;

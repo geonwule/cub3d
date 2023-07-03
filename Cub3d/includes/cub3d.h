@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:10:15 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:25:45 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,7 @@ typedef struct s_xpm
 
 typedef struct s_data
 {
+	int				keyboard[1000];
 	int				hp;
 	int				hp_before;
 	int				dead_check;
@@ -282,13 +283,12 @@ typedef struct s_data
 	double			init_pos[2];
 	double			init_dir[2];
 	double			init_plane[2];
-	 unsigned int	render_i;
+	unsigned int	render_i;
 }	t_data;
 
 typedef struct s_vars
 {
-	int			keyboard[1000];
-    void		*mlx;
+	void		*mlx;
     void		*win;
 	t_map		map;
 	t_mini		mini;
@@ -299,7 +299,7 @@ typedef struct s_vars
 }   t_vars;
 
 //vars_init
-t_vars  *vars_allocation(t_vars *vars);
+void	vars_allocation(t_vars *vars);
 int		vars_init(t_vars *vars);
 void	set_dir(t_info *info, double x, double y);
 void	set_plane(t_info *info, double x, double y);

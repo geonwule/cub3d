@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 13:21:17 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:14:32 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	key_release(int keycode, t_vars *vars)
         printf("release D\n");
 	#endif
 	if (keycode >= 0 && keycode <= 255)
-		vars->keyboard[keycode] = 0;
+		vars->data.keyboard[keycode] = 0;
 	return (0);
 }
 
@@ -54,7 +54,7 @@ int	key_press(int keycode, t_vars *vars)
 	if (vars->data.npc_talk)
 		return (0);
 	if (keycode >= 0 && keycode <= 255)
-		vars->keyboard[keycode] = 1;
+		vars->data.keyboard[keycode] = 1;
 	if (keycode == N || keycode == M)
 		adjust_gamespeed(info, keycode);
 	if (keycode == SPACE)
