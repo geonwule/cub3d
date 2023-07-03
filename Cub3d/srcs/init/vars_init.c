@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 23:07:36 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 16:03:12 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->data.monster_come = 0;
 	vars->data.m_num = 0;
 	vars->data.warning_time = 0;
-	vars->sprite = NULL;
+	vars->sprite.sp = NULL;
 
 	vars->data.hand_change = 0;
 	vars->data.hp = 3;
@@ -37,8 +37,8 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->data.quest_num = 0;
 	vars->data.quest_monster_num = 30;
 
-	vars->v_move = 64;
-	vars->v_i = 20;
+	vars->sprite.v_move = 64;
+	vars->sprite.v_i = 20;
 
 	vars->data.mouse_x = WIN_WIDTH / 2;
 	vars->data.mouse_old_x = WIN_WIDTH / 2;

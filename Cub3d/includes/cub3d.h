@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/28 02:37:02 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 16:10:15 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,17 +182,19 @@ typedef struct  s_info
 	int		**texture;
 }   t_info;
 
-typedef struct	s_pair
-{
-	double	first;
-	int		second;
-}	t_pair;
-
-typedef struct	s_sprite
+typedef struct	s_sp
 {
 	double		x;
 	double		y;
 	int			texture;
+}	t_sp;
+
+typedef struct	s_sprite
+{
+	t_sp	*sp;
+	int		sprite_num; //sprite_num
+	int		v_move;
+	int		v_i;
 }	t_sprite;
 
 typedef struct s_map_info
@@ -285,19 +287,15 @@ typedef struct s_data
 
 typedef struct s_vars
 {
-	int		keyboard[1000];
-    void	*mlx;
-    void	*win;
-	t_map	map;
-	t_mini	mini;
-	t_xpm	xpm;
-	t_info	*info;
-	t_data	data;
-	//t_sprite sprite
-	t_sprite		*sprite;
-	int			sprite_num; //sprite_num
-	int			v_move;
-	int			v_i;
+	int			keyboard[1000];
+    void		*mlx;
+    void		*win;
+	t_map		map;
+	t_mini		mini;
+	t_xpm		xpm;
+	t_info		*info;
+	t_data		data;
+	t_sprite	sprite;
 }   t_vars;
 
 //vars_init
