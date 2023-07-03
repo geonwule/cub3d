@@ -29,6 +29,7 @@ static t_sprite	*malloc_sprite(t_vars *vars, int s_idx, int i, int j)
 
 	sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
 	i = -1;
+	s_idx = 0;
 	while (++i < vars->map.height)
 	{
 		j = -1;
@@ -65,64 +66,49 @@ static void	sprite_init(t_vars *vars, char **map)
 
 }
 
-static void	sort_order(t_pair *orders, int amount)
+static void	sortSprites(int *order, double *dist, int amount)
 {
-	t_pair	tmp;
+	double	tmp_dist;
+	int		tmp_idx;
+	int		i;
+	int		j;
 
-	for (int i = 0; i < amount; i++)
+	i = -1;
+	while (++i < amount)
 	{
-		for (int j = 0; j < amount - 1; j++)
+		j = -1;
+		while (++j < amount)
 		{
-			if (orders[j].first > orders[j + 1].first)
+			if (dist[j] < dist[j + 1])
 			{
-				tmp.first = orders[j].first;
-				tmp.second = orders[j].second;
-				orders[j].first = orders[j + 1].first;
-				orders[j].second = orders[j + 1].second;
-				orders[j + 1].first = tmp.first;
-				orders[j + 1].second = tmp.second;
+				tmp_dist = dist[j];
+				tmp_idx = order[j];
+				dist[j] = dist[j + 1];
+				order[j] = order[j + 1];
+				dist[j + 1] = tmp_dist;
+				order[j + 1] = tmp_idx;
 			}
 		}
 	}
 }
 
-static void	sortSprites(int *order, double *dist, int amount)
-{
-	t_pair	*sprites;
-
-	sprites = (t_pair*)ft_malloc(sizeof(t_pair) * amount);
-	for (int i = 0; i < amount; i++)
-	{
-		sprites[i].first = dist[i];
-		sprites[i].second = order[i];
-	}
-	sort_order(sprites, amount);
-	for (int i = 0; i < amount; i++)
-	{
-		dist[i] = sprites[amount - i - 1].first;
-		order[i] = sprites[amount - i - 1].second;
-	}
-	free(sprites);
-}
-
 static void	sprite_ex(t_vars *vars, t_sprite *sprite)
 {
-	int numSprites = vars->sprite_num;
-	
-	int		spriteOrder[numSprites];
-	double	spriteDistance[numSprites];
+	int		spriteOrder[vars->sprite_num];
+	double	spriteDistance[vars->sprite_num];
 	t_info	*info = vars->info;
 	
 	//SPRITE CASTING
 	//sort sprites from far to close
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < vars->sprite_num; i++)
 	{
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) + (info->posY - sprite[i].y) * (info->posY - sprite[i].y)); //sqrt not taken, unneeded
+		spriteDistance[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
+			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, numSprites);
+	sortSprites(spriteOrder, spriteDistance, vars->sprite_num);
 	//after sorting the sprites, do the projection and draw them
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < vars->sprite_num; i++)
 	{
 		//translate sprite position to relative to camera
 		double spriteX = sprite[spriteOrder[i]].x - info->posX;
