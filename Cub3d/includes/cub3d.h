@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 20:48:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 04:15:52 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,8 +326,16 @@ int		map_read(char *map_path, t_vars *vars);
 //map_error
 int 	map_error(t_vars *vars);
 
-//evnet/check_key_and_mouse
+// evnet/check_key_and_mouse.c
+int		can_move(t_vars *vars, int x, int y);
 void	check_key_and_mouse(t_vars *vars);
+
+// evnet/check_key_and_mouse2.c
+void	move_forward_backward(t_vars *vars, t_info *info, double move_speed);
+void	move_left_right(t_vars *vars, t_info *info, double move_speed);
+void	rotate_left_right(t_info *info, double rot_speed);
+void	rotate_left(t_info *info, double rot_speed);
+void	rotate_right(t_info *info, double rot_speed);
 
 //event/event_function1.c
 void	attack(t_vars *vars);
@@ -364,9 +372,11 @@ void	ray_casting(t_vars *vars, t_info *info, char **map);
 //event/ray_function
 void	init_ray(t_info *info, t_ray *ray, int x);
 void	check_ray_dir(t_info *info, t_ray *ray);
-void	dda(t_vars *vars, char **map, t_ray *ray);
 void	check_ray_texture(t_info *info, t_ray *ray, char **map);
 void	apply_texture(t_info *info, t_ray *ray, int x, int y);
+
+// event/ray_function_dda.c
+void	dda(t_vars *vars, char **map, t_ray *ray);
 
 //evnet/sprite
 void	sprite(t_vars *vars);

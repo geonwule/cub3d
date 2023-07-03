@@ -6,24 +6,14 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:14:32 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 04:35:18 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "cub3d.h"
+#include "cub3d.h"
 
 int	key_release(int keycode, t_vars *vars)
 {
-	#ifdef KEY_DEBUG
-	if (keycode == W)
-        printf("release W\n");
-	else if (keycode == A)
-        printf("release A\n");
-	else if (keycode == S)
-        printf("release S\n");
-	else if (keycode == D)
-        printf("release D\n");
-	#endif
 	if (keycode >= 0 && keycode <= 255)
 		vars->data.keyboard[keycode] = 0;
 	return (0);
@@ -31,19 +21,6 @@ int	key_release(int keycode, t_vars *vars)
 
 int	key_press(int keycode, t_vars *vars)
 {
-	#ifdef KEY_DEBUG
-	if (keycode == W)
-        printf("press W\n");
-	else if (keycode == A)
-        printf("press A\n");
-	else if (keycode == S)
-        printf("press S\n");
-	else if (keycode == D)
-        printf("press D\n");
-	else if (keycode == ESC)
-		printf("press ESC\n");
-	#endif
-
 	t_info	*info;
 	char	**map;
 

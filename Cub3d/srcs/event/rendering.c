@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 18:02:42 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 05:10:22 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	minimap_put_mlx(t_vars *vars, char **map, \
 			y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7);
 }
 
-static void mini_map(t_vars *vars)
+static void	mini_map(t_vars *vars)
 {
 	int		mini_width;
 	int		mini_height;

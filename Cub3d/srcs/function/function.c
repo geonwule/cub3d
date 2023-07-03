@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:08:51 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 05:23:13 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,63 @@
 #include <time.h> //, time rand()
 #include <sys/time.h>
 
-int		random_generator(int frequency)
+int	random_generator(int frequency)
 {
-    struct timeval      tv;
-    unsigned long long  milliseconds;
-    int                 ret;
+	struct timeval		tv;
+	unsigned long long	milliseconds;
+	int					ret;
 
-    gettimeofday(&tv, NULL);
-    milliseconds = (unsigned long long)(tv.tv_usec);
-    srand((unsigned int)milliseconds);
-    ret = rand();
-    if (ret % frequency == 0)
-        return (1);
-    return (0);
+	gettimeofday(&tv, NULL);
+	milliseconds = (unsigned long long)(tv.tv_usec);
+	srand((unsigned int)milliseconds);
+	ret = rand();
+	if (ret % frequency == 0)
+		return (1);
+	return (0);
 }
 
-void    *ft_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
-    void    *bass;
+	void	*bass;
 
-    bass = malloc(size);
-    if (bass == NULL)
-    {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    return (bass);
+	bass = malloc(size);
+	if (bass == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	return (bass);
 }
 
-int ft_open(char *file_path)
+int	ft_open(char *file_path)
 {
-    int fd;
+	int	fd;
 
-    fd = open(file_path, O_RDONLY, 0600);
-    if (fd < 0)
-    {
-        perror("open");
-        exit(EXIT_FAILURE);
-    }
-    return (fd);
+	fd = open(file_path, O_RDONLY, 0600);
+	if (fd < 0)
+	{
+		perror("open");
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
 }
 
 void	vars_free(t_vars *vars)
 {
-    if (vars->info)
-    {
-        for (int i = 0; i < TEX_NUM; i++)
-            free(vars->info->texture[i]);
-        free(vars->info->texture);
-        free(vars->info);
-    }
-    if (vars->sprite.sp)
-        free (vars->sprite.sp);
+	int	i;
+
+	i = 0;
+	if (vars->info)
+	{
+		while (i < TEX_NUM)
+		{
+			free(vars->info->texture[i]);
+			i++;
+		}
+		free(vars->info);
+	}
+	if (vars->sprite.sp)
+		free (vars->sprite.sp);
 }
 
 int	exit_game(t_vars *vars)

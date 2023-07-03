@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:26:03 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 05:12:53 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av)
 	#ifdef DEBUG_LEAK
 	atexit(leaks); //tmp
 	#endif
-    t_vars  vars;
+    t_vars	vars;
 
 	if (ac != 2)
 	{
