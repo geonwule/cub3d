@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 16:52:36 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 22:55:34 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	set_texture(char **arr, t_vars *vars)
 	return (0);
 }
 
-void	init_map_arr(t_vars *vars, t_list *head)
+static void	init_map_arr(t_vars *vars, t_list *head)
 {
 	int		i;
 	int		j;
@@ -70,16 +70,24 @@ void	init_map_arr(t_vars *vars, t_list *head)
 	}
 }
 
+static void	process_set_map(t_vars *vars, char *line, t_list *head)
+{
+	t_list	*tmp;
+
+	tmp = ft_lstnew(line);
+	ft_lstadd_back(&head, tmp);
+	vars->map.height++;
+	if (vars->map.width < ft_strlen(line) - 1)
+		vars->map.width = ft_strlen(line) - 1;
+}
+
 void	set_map(t_vars *vars, int fd, char *line)
 {
 	t_list	*head;
-	t_list	*tmp;
 	int		errno;
 
 	errno = 0;
 	head = ft_lstnew(line);
-	vars->map.height = 0;
-
 	vars->map.height++;
 	while (1)
 	{
@@ -91,11 +99,7 @@ void	set_map(t_vars *vars, int fd, char *line)
 			errno = 1;
 			break ;
 		}
-		tmp = ft_lstnew(line);
-		ft_lstadd_back(&head, tmp);
-		vars->map.height++;
-		if (vars->map.width < ft_strlen(line) - 1)
-			vars->map.width = ft_strlen(line) - 1;
+		process_set_map(vars, line, head);
 	}
 	if (errno)
 	{
