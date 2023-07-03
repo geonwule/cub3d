@@ -5,7 +5,7 @@ static int	check_sprite_num(t_vars *vars, char **map, int height, int width)
 	int	i;
 	int	j;
 
-	vars->sprite_num = 0;
+	vars->sprite.sprite_num = 0;
 	i = 0;
 	while (i < height)
 	{
@@ -13,41 +13,42 @@ static int	check_sprite_num(t_vars *vars, char **map, int height, int width)
 		while (j < width)
 		{
 			if (map[i][j] == 'M' || map[i][j] == 'P' || map[i][j] == 'H')
-				vars->sprite_num++;
+				vars->sprite.sprite_num++;
 			j++;
 		}
 		i++;
 	}
-	if (vars->sprite_num == 0)
+	if (vars->sprite.sprite_num == 0)
 		return (0);
 	return (1);
 }
 
-static t_sprite	*malloc_sprite(t_vars *vars, int s_idx, int i, int j)
+static t_sp	*malloc_sprite(t_vars *vars, int s_idx, int i, int j)
 {
-	t_sprite	*sprite;
+	t_sp	*sp;
 
-	sprite = ft_malloc(sizeof(t_sprite) * vars->sprite_num);
+	sp = ft_malloc(sizeof(t_sp) * vars->sprite.sprite_num);
 	i = -1;
+	s_idx = 0;
 	while (++i < vars->map.height)
 	{
 		j = -1;
 		while (++j < vars->map.width)
 		{
 			if (vars->map.arr[i][j] == 'M')
-				sprite[s_idx].texture = TEX_MONSTER;
+				sp[s_idx].texture = TEX_MONSTER;
 			else if (vars->map.arr[i][j] == 'P')
-				sprite[s_idx].texture = TEX_POTION;
+				sp[s_idx].texture = TEX_POTION;
 			else if (vars->map.arr[i][j] == 'H')
-				sprite[s_idx].texture = TEX_NPC;
+				sp[s_idx].texture = TEX_NPC;
 			else
 				continue ;
-			sprite[s_idx].x = (double)i + 0.5;
-			sprite[s_idx].y = (double)j + 0.5;
+			sp[s_idx].x = (double)i + 0.5;
+			sp[s_idx].y = (double)j + 0.5;
 			s_idx++;
 		}
 	}
-	return (sprite);
+	return (sp);
 }
 
 static void	sprite_init(t_vars *vars, char **map)
@@ -55,74 +56,59 @@ static void	sprite_init(t_vars *vars, char **map)
 
 	if (!check_sprite_num(vars, map, vars->map.height, vars->map.width))
 		return ;
-	if (vars->sprite)
-		free(vars->sprite);
-	vars->sprite = malloc_sprite(vars, 0, -1, -1);
+	if (vars->sprite.sp)
+		free(vars->sprite.sp);
+	vars->sprite.sp = malloc_sprite(vars, 0, -1, -1);
 	//sprite_up_and_down
-	if (vars->v_move >= 300 || vars->v_move <= 0)
-		vars->v_i *= -1;
-	vars->v_move += vars->v_i;
+	if (vars->sprite.v_move >= 300 || vars->sprite.v_move <= 0)
+		vars->sprite.v_i *= -1;
+	vars->sprite.v_move += vars->sprite.v_i;
 
 }
 
-static void	sort_order(t_pair *orders, int amount)
+static void	sortSprites(int *order, double *dist, int amount)
 {
-	t_pair	tmp;
+	double	tmp_dist;
+	int		tmp_idx;
+	int		i;
+	int		j;
 
-	for (int i = 0; i < amount; i++)
+	i = -1;
+	while (++i < amount)
 	{
-		for (int j = 0; j < amount - 1; j++)
+		j = -1;
+		while (++j < amount)
 		{
-			if (orders[j].first > orders[j + 1].first)
+			if (dist[j] < dist[j + 1])
 			{
-				tmp.first = orders[j].first;
-				tmp.second = orders[j].second;
-				orders[j].first = orders[j + 1].first;
-				orders[j].second = orders[j + 1].second;
-				orders[j + 1].first = tmp.first;
-				orders[j + 1].second = tmp.second;
+				tmp_dist = dist[j];
+				tmp_idx = order[j];
+				dist[j] = dist[j + 1];
+				order[j] = order[j + 1];
+				dist[j + 1] = tmp_dist;
+				order[j + 1] = tmp_idx;
 			}
 		}
 	}
 }
 
-static void	sortSprites(int *order, double *dist, int amount)
+static void	sprite_ex(t_vars *vars, t_sp *sprite)
 {
-	t_pair	*sprites;
-
-	sprites = (t_pair*)ft_malloc(sizeof(t_pair) * amount);
-	for (int i = 0; i < amount; i++)
-	{
-		sprites[i].first = dist[i];
-		sprites[i].second = order[i];
-	}
-	sort_order(sprites, amount);
-	for (int i = 0; i < amount; i++)
-	{
-		dist[i] = sprites[amount - i - 1].first;
-		order[i] = sprites[amount - i - 1].second;
-	}
-	free(sprites);
-}
-
-static void	sprite_ex(t_vars *vars, t_sprite *sprite)
-{
-	int numSprites = vars->sprite_num;
-	
-	int		spriteOrder[numSprites];
-	double	spriteDistance[numSprites];
+	int		spriteOrder[vars->sprite.sprite_num];
+	double	spriteDistance[vars->sprite.sprite_num];
 	t_info	*info = vars->info;
 	
 	//SPRITE CASTING
 	//sort sprites from far to close
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < vars->sprite.sprite_num; i++)
 	{
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) + (info->posY - sprite[i].y) * (info->posY - sprite[i].y)); //sqrt not taken, unneeded
+		spriteDistance[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
+			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, numSprites);
+	sortSprites(spriteOrder, spriteDistance, vars->sprite.sprite_num);
 	//after sorting the sprites, do the projection and draw them
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < vars->sprite.sprite_num; i++)
 	{
 		//translate sprite position to relative to camera
 		double spriteX = sprite[spriteOrder[i]].x - info->posX;
@@ -145,7 +131,7 @@ static void	sprite_ex(t_vars *vars, t_sprite *sprite)
 		#define vDiv 1.5
 		// #define vMove 200.0 // 64 ~ 200
 		// -> sprite->v_move
-		int vMoveScreen = (int)(vars->v_move / transformY);
+		int vMoveScreen = (int)(vars->sprite.v_move / transformY);
 
 		//calculate height of the sprite on screen
 		int spriteHeight = (int)fabs((WIN_HEIGHT / transformY) / vDiv); //using "transformY" instead of the real distance prevents fisheye
@@ -186,6 +172,6 @@ static void	sprite_ex(t_vars *vars, t_sprite *sprite)
 void	sprite(t_vars *vars)
 {
 	sprite_init(vars, vars->map.arr);
-	if (vars->sprite)
-		sprite_ex(vars, vars->sprite);
+	if (vars->sprite.sp)
+		sprite_ex(vars, vars->sprite.sp);
 }

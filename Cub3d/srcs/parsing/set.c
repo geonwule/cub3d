@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 04:31:28 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 16:52:36 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	set_map(t_vars *vars, int fd, char *line)
 
 	errno = 0;
 	head = ft_lstnew(line);
+	vars->map.height = 0;
+
 	vars->map.height++;
 	while (1)
 	{

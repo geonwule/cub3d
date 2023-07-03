@@ -6,13 +6,13 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 23:07:36 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 16:42:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_vars  *vars_allocation(t_vars *vars)
+void	vars_allocation(t_vars *vars)
 {
 	t_info	*info;
 	int		i;
@@ -23,7 +23,7 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->data.monster_come = 0;
 	vars->data.m_num = 0;
 	vars->data.warning_time = 0;
-	vars->sprite = NULL;
+	vars->sprite.sp = NULL;
 
 	vars->data.hand_change = 0;
 	vars->data.hp = 3;
@@ -37,18 +37,25 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->data.quest_num = 0;
 	vars->data.quest_monster_num = 30;
 
-	vars->v_move = 64;
-	vars->v_i = 20;
+	vars->sprite.v_move = 64;
+	vars->sprite.v_i = 20;
 
 	vars->data.mouse_x = WIN_WIDTH / 2;
 	vars->data.mouse_old_x = WIN_WIDTH / 2;
 	vars->data.mouse_y = WIN_HEIGHT / 2;
 
 	vars->data.render_i = 0;
+
+	vars->map.info.north = NULL;
+	vars->map.info.south = NULL;
+	vars->map.info.west = NULL;
+	vars->map.info.east = NULL;
+	vars->map.info.floor = NULL;
+	vars->map.info.ceiling = NULL;
+	vars->map.arr = NULL;
 	i = -1;
 	while (++i < 1000)
-		vars->keyboard[i] = 0;
-    return (vars);
+		vars->data.keyboard[i] = 0;
 }
 
 static void	img_xpm_set(t_vars *vars)
