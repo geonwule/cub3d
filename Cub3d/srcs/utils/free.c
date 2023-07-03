@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:13:11 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 20:43:20 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 04:26:49 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	free_map(t_map *map)
 
 void	free_lst(t_list **head)
 {
-	t_list *cur;
-	t_list *next;
+	t_list	*cur;
+	t_list	*next;
 
 	cur = *head;
 	while (cur)
