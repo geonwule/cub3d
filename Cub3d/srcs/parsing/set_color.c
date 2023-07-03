@@ -6,16 +6,16 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/29 21:25:25 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 23:15:16 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_digit_rgb(char **rgb)
+static int	check_digit_rgb(char **rgb)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 3)
@@ -32,64 +32,11 @@ int	check_digit_rgb(char **rgb)
 	return (0);
 }
 
-int	ft_atoi_color(const char *str)
+static int	process_set_rgb(t_vars *vars, char **rgb, char type)
 {
 	int	i;
-	int	flag;
-	int	result;
+	int	tmp;
 
-	i = 0;
-	result = 0;
-	flag = 1;
-	while (((str[i] >= 9 && str[i] <= 13) || str[i] == 32) && str[i])
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			flag *= -1;
-		i++;
-	}
-	if (flag == -1 || str[i] == '+' || str[i] == '-')
-		return (-1);
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + str[i] - '0';
-		if (result / 1000)
-			return (-1);
-		i++;
-	}
-	result *= flag;
-	return (result);
-}
-
-int	set_rgb(char **arr, t_vars *vars, char type)
-{
-	int		i;
-	int		cnt;
-	char	**rgb;
-	int		tmp;
-
-	i = 0;
-	cnt = 0;
-	while (arr[1][i])
-	{
-		if (arr[1][i] == ',')
-			cnt++;
-		i++;
-	}
-	if (cnt != 2)
-		return (1);
-	rgb = ft_split(arr[1], ',');
-	if (size_arr_2d(rgb) != 3)
-	{
-		free_arr_2d(&rgb);
-		return (1);
-	}
-	if (check_digit_rgb(rgb))
-	{
-		free_arr_2d(&rgb);
-		return (1);
-	}
 	i = 0;
 	while (i < 3)
 	{
@@ -105,7 +52,44 @@ int	set_rgb(char **arr, t_vars *vars, char type)
 			vars->map.info.c[i] = tmp;
 		i++;
 	}
-	free_arr_2d(&rgb);
+	return (0);
+}
+
+static int	count_rest_point(char **arr)
+{
+	int	i;
+	int	cnt;
+
+	cnt = 0;
+	i = 0;
+	while (arr[1][i])
+	{
+		if (arr[1][i] == ',')
+			cnt++;
+		i++;
+	}
+	return (cnt);
+}
+
+static int	set_rgb(char **arr, t_vars *vars, char type)
+{
+	int		i;
+	char	**rgb;
+	int		errno;
+
+	errno = 0;
+	if (count_rest_point(arr) != 2)
+		return (1);
+	rgb = ft_split(arr[1], ',');
+	if (size_arr_2d(rgb) != 3)
+		errno = 1;
+	errno = check_digit_rgb(rgb);
+	errno = process_set_rgb(vars, rgb, type);
+	if (errno)
+	{
+		free_arr_2d(&rgb);
+		return (1);
+	}
 	return (0);
 }
 
