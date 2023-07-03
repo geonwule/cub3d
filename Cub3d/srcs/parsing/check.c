@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:56:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:14:09 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 22:19:27 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_file(t_vars *vars, char *path)
 
 int	check_texture(char *line)
 {
-	char **arr;
+	char	**arr;
 
 	arr = ft_split(line, ' ');
 	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])) \
@@ -39,7 +39,7 @@ int	check_texture(char *line)
 
 int	check_color(char *line)
 {
-	char **arr;
+	char	**arr;
 
 	arr = ft_split(line, ' ');
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0]))
