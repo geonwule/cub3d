@@ -6,13 +6,13 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:03:12 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:26:01 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_vars  *vars_allocation(t_vars *vars)
+void	vars_allocation(t_vars *vars)
 {
 	t_info	*info;
 	int		i;
@@ -47,8 +47,7 @@ t_vars  *vars_allocation(t_vars *vars)
 	vars->data.render_i = 0;
 	i = -1;
 	while (++i < 1000)
-		vars->keyboard[i] = 0;
-    return (vars);
+		vars->data.keyboard[i] = 0;
 }
 
 static void	img_xpm_set(t_vars *vars)
