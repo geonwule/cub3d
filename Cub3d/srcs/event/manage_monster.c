@@ -18,7 +18,7 @@ static void	monster_rezen(t_vars *vars)
 		j = 0;
 		while (j < vars->map.width)
 		{
-			if (i > vars->map.height * 0.7 && vars->map.width * 0.5) // respone area
+			if (i > vars->map.height * 0.6 && vars->map.width * 0.5) // respone area
 				break ;
 			if (map[i][j] == '0' && random_generator(2) \
 				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
