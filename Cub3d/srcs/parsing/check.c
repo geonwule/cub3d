@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:56:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 04:28:09 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 22:14:09 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	check_file(t_vars *vars, char *path)
 		print_error("Invalid file format", vars);
 }
 
-int	check_texture(char **arr)
+int	check_texture(char *line)
 {
+	char **arr;
+
+	arr = ft_split(line, ' ');
 	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])) \
 			|| !ft_strncmp(arr[0], "SO", ft_strlen(arr[0])) \
 			|| !ft_strncmp(arr[0], "WE", ft_strlen(arr[0])) \
@@ -34,8 +37,11 @@ int	check_texture(char **arr)
 	return (0);
 }
 
-int	check_color(char **arr)
+int	check_color(char *line)
 {
+	char **arr;
+
+	arr = ft_split(line, ' ');
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0]))
 		|| !ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
 		return (1);

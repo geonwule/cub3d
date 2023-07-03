@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:13:11 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 00:10:21 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 20:43:20 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_arr_2d(char ***arr)
 {
 	int	i;
 
+	if (!(*arr))
+		return ;
 	i = 0;
 	while ((*arr)[i])
 	{

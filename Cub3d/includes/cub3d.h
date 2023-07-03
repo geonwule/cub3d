@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:25:45 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 22:14:37 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,8 +409,8 @@ int		size_arr_2d(char **arr);
 
 // parsing/check.c
 void	check_file(t_vars *vars, char *path);
-int		check_texture(char **arr);
-int		check_color(char **arr);
+int		check_texture(char *line);
+int		check_color(char *line);
 
 // parsing/read_file.c
 void	read_file(t_vars *vars, char *path);
