@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:04:14 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 18:32:10 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 20:25:15 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	sort_order(int *order, double *dist, int amount)
 	while (++i < amount)
 	{
 		j = -1;
-		while (++j < amount)
+		while (++j < amount - 1)
 		{
 			if (dist[j] < dist[j + 1])
 			{
@@ -104,7 +104,7 @@ static void	sort_order(int *order, double *dist, int amount)
 	}
 }
 
-static int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
+int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
 {
 	int		*order;
 	double	*dist;
