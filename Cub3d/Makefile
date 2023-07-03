@@ -106,6 +106,7 @@ CFLAGS = -g
 #-Wall -Wextra -Werror
 
 DEBUG_FLAG = -fsanitize=address  -g
+#-fsanitize=undefined  -g
 #-O2
 
 NAME = cub3d
