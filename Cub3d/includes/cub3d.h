@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 22:14:37 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 23:15:20 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,5 +424,13 @@ int		set_color(char **arr, t_vars *vars);
 
 // parsing/check_map.c
 int		check_map(t_vars *vars);
+
+// parsing/check_map2.c
+void	init_dir_plane_ns(t_vars *vars, char type);
+void	init_dir_plane_ew(t_vars *vars, char type);
+
+// parsing/set_color_utils.c
+int		ft_atoi_color(const char *str);
+
 
 #endif
