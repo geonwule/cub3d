@@ -21,7 +21,7 @@ void	reset_game(t_vars *vars)
 
 	vars_free(vars);
 	vars_allocation(vars);
-	vars_init(vars);	
+	vars_init(vars);
 	for (int i = 0; i < vars->map.height; i++)
 	{
 		for (int j = 0; j < vars->map.width; j++)

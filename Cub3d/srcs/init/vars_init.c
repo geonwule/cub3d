@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:42:57 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:00:37 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ void	vars_allocation(t_vars *vars)
 
 	vars->data.render_i = 0;
 
-	vars->map.info.north = NULL;
-	vars->map.info.south = NULL;
-	vars->map.info.west = NULL;
-	vars->map.info.east = NULL;
-	vars->map.info.floor = NULL;
-	vars->map.info.ceiling = NULL;
-	vars->map.arr = NULL;
 	i = -1;
 	while (++i < 1000)
 		vars->data.keyboard[i] = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:01:36 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 04:30:14 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/03 18:01:49 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ void	init_map_info(t_vars *vars, char *path)
 
 void	read_file(t_vars *vars, char *path)
 {
+	vars->map.height = 0;
+	vars->map.width = 0;
+	vars->map.info.north = NULL;
+	vars->map.info.south = NULL;
+	vars->map.info.west = NULL;
+	vars->map.info.east = NULL;
+	vars->map.info.floor = NULL;
+	vars->map.info.ceiling = NULL;
+	vars->map.arr = NULL;
 	check_file(vars, path);
 	init_map_info(vars, path);
 	if (check_map(vars))
