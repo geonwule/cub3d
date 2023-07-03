@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 18:04:14 by geonwule          #+#    #+#             */
+/*   Updated: 2023/07/03 18:32:10 by geonwule         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_sprite_num(t_vars *vars, char **map, int height, int width)
@@ -66,7 +78,7 @@ static void	sprite_init(t_vars *vars, char **map)
 
 }
 
-static void	sortSprites(int *order, double *dist, int amount)
+static void	sort_order(int *order, double *dist, int amount)
 {
 	double	tmp_dist;
 	int		tmp_idx;
@@ -92,27 +104,40 @@ static void	sortSprites(int *order, double *dist, int amount)
 	}
 }
 
-static void	sprite_ex(t_vars *vars, t_sp *sprite)
+static int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
 {
-	int		spriteOrder[vars->sprite.sprite_num];
-	double	spriteDistance[vars->sprite.sprite_num];
-	t_info	*info = vars->info;
-	
+	int		*order;
+	double	*dist;
+	int		i;
+
+	order = ft_malloc(sizeof(int) * vars->sprite.sprite_num);
+	dist = ft_malloc(sizeof(double) * vars->sprite.sprite_num);
+	i = -1;
+	while (++i < vars->sprite.sprite_num)
+	{
+		order[i] = i;
+		dist[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
+			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y));
+	}
+	sort_order(order, dist, vars->sprite.sprite_num);
+	free(dist);
+	return (order);
+}
+
+static void	sprite_ex(t_vars *vars, t_info *info, t_sp *sprite)
+{	
+	int	*order;
+
 	//SPRITE CASTING
 	//sort sprites from far to close
-	for(int i = 0; i < vars->sprite.sprite_num; i++)
-	{
-		spriteOrder[i] = i;
-		spriteDistance[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
-			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y)); //sqrt not taken, unneeded
-	}
-	sortSprites(spriteOrder, spriteDistance, vars->sprite.sprite_num);
+	order = sort_sprite(vars, info, sprite);
+	
 	//after sorting the sprites, do the projection and draw them
 	for(int i = 0; i < vars->sprite.sprite_num; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = sprite[spriteOrder[i]].x - info->posX;
-		double spriteY = sprite[spriteOrder[i]].y - info->posY;
+		double spriteX = sprite[order[i]].x - info->posX;
+		double spriteY = sprite[order[i]].y - info->posY;
 
 		//transform sprite with the inverse camera matrix
 		// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
@@ -162,16 +187,20 @@ static void	sprite_ex(t_vars *vars, t_sp *sprite)
 			{
 				int d = (y-vMoveScreen) * 256 - WIN_HEIGHT * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
 				int texY = ((d * TEX_HEIGHT) / spriteHeight) / 256;
-				int color = info->texture[sprite[spriteOrder[i]].texture][TEX_WIDTH * texY + texX]; //get current color from the texture
+				int color = info->texture[sprite[order[i]].texture][TEX_WIDTH * texY + texX]; //get current color from the texture
 				if((color & 0x00FFFFFF) != 0) info->buf[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
 			}
 		}
 	}
+	free(order);
 }
 
 void	sprite(t_vars *vars)
 {
+	t_info	*info;
+
+	info = vars->info;
 	sprite_init(vars, vars->map.arr);
 	if (vars->sprite.sp)
-		sprite_ex(vars, vars->sprite.sp);
+		sprite_ex(vars, info, vars->sprite.sp);
 }

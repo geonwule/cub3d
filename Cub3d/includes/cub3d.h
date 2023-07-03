@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:25:45 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:16:10 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ typedef struct	s_sp
 typedef struct	s_sprite
 {
 	t_sp	*sp;
-	int		sprite_num; //sprite_num
+	int		sprite_num;
 	int		v_move;
 	int		v_i;
 }	t_sprite;
