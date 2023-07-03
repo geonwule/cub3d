@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:53:07 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 01:48:37 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 05:11:21 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ void	print_texture(t_vars *vars)
 	printf("east:%s\n", vars->map.info.east);
 }
 
-
 void	print_color(t_vars *vars)
 {
-	int i;
+	int	i;
 
 	printf("floor:%s\n", vars->map.info.floor);
 	printf("ceiling:%s\n", vars->map.info.ceiling);
@@ -43,7 +42,7 @@ void	print_color(t_vars *vars)
 
 void	print_arr_2d(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
@@ -55,7 +54,7 @@ void	print_arr_2d(char **arr)
 
 void	print_lst(t_list *head)
 {
-	t_list *cur;
+	t_list	*cur;
 
 	cur = head;
 	while (cur)
