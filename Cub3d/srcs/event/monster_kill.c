@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monster_kill.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 04:40:53 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/04 04:42:45 by jonchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static void init_ray_m(t_info *info, t_ray *ray)
+static void	init_ray_m(t_info *info, t_ray *ray)
 {
-    ray->camera_x = 0;
+	ray->camera_x = 0;
 	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
 	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
 	ray->map[X] = (int)info->posX;
@@ -12,9 +24,9 @@ static void init_ray_m(t_info *info, t_ray *ray)
 	ray->hit = 0;
 }
 
-static void check_ray_dir_m(t_info *info, t_ray *ray)
+static void	check_ray_dir_m(t_info *info, t_ray *ray)
 {
-    if (ray->dir[X] < 0)
+	if (ray->dir[X] < 0)
 	{
 		ray->step[X] = -1;
 		ray->side_d[X] = (info->posX - ray->map[X]) * ray->delta_d[X];
@@ -36,7 +48,7 @@ static void check_ray_dir_m(t_info *info, t_ray *ray)
 	}
 }
 
-static void dda_m(char **map, t_ray *ray)
+static void	dda_m(char **map, t_ray *ray)
 {
 	while (1)
 	{
@@ -50,9 +62,10 @@ static void dda_m(char **map, t_ray *ray)
 			ray->side_d[Y] += ray->delta_d[Y];
 			ray->map[Y] += ray->step[Y];
 		}
-		if (map[ray->map[X]][ray->map[Y]] == '0' || map[ray->map[X]][ray->map[Y]] == 'b' \
+		if (map[ray->map[X]][ray->map[Y]] == '0' \
+			|| map[ray->map[X]][ray->map[Y]] == 'b' \
 			|| map[ray->map[X]][ray->map[Y]] == 'P')
-			continue;
+			continue ;
 		if (map[ray->map[X]][ray->map[Y]] == 'M')
 		{
 			ray->hit = 1;
@@ -63,7 +76,7 @@ static void dda_m(char **map, t_ray *ray)
 	}
 }
 
-static void drop_item(t_vars *vars, char **map, t_ray *ray)
+static void	drop_item(t_vars *vars, char **map, t_ray *ray)
 {
 	if (random_generator(3))
 		map[ray->map[X]][ray->map[Y]] = 'P';
@@ -78,11 +91,11 @@ static void drop_item(t_vars *vars, char **map, t_ray *ray)
 
 void	monster_kill(t_vars *vars, t_info *info, char **map)
 {
-	t_ray   ray;
+	t_ray	ray;
 
-    init_ray_m(info, &ray);
-    check_ray_dir_m(info, &ray);
-    dda_m(map, &ray);
-    if (ray.hit)
-        drop_item(vars, map, &ray);
+	init_ray_m(info, &ray);
+	check_ray_dir_m(info, &ray);
+	dda_m(map, &ray);
+	if (ray.hit)
+		drop_item(vars, map, &ray);
 }
