@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_key_and_mouse.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/04 04:16:14 by jonchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	can_move(t_vars *vars, int x, int y)
@@ -20,93 +32,35 @@ int	can_move(t_vars *vars, int x, int y)
 
 static void	key_check(t_vars *vars)
 {
-	t_info	*info = vars->info;
-	
+	t_info	*info;
+
+	info = vars->info;
 	if (vars->data.keyboard[ESC])
-       	exit_game(vars);
+		exit_game(vars);
 	if (vars->data.keyboard[W])
-	{
-		if (can_move(vars, (int)(info->posX + info->dirX * info->moveSpeed) \
-			, (int)(info->posY)))
-			info->posX += info->dirX * info->moveSpeed;
-		if (can_move(vars, (int)(info->posX) \
-			, (int)(info->posY + info->dirY * info->moveSpeed)))
-			info->posY += info->dirY * info->moveSpeed;
-	}
+		move_forward_backward(vars, info, info->moveSpeed);
 	if (vars->data.keyboard[S])
-	{
-		if (can_move(vars, (int)(info->posX - info->dirX * info->moveSpeed) \
-			, (int)(info->posY)))
-			info->posX -= info->dirX * info->moveSpeed;
-		if (can_move(vars, (int)(info->posX) \
-			, (int)(info->posY - info->dirY * info->moveSpeed)))
-			info->posY -= info->dirY * info->moveSpeed;
-	}
+		move_forward_backward(vars, info, -info->moveSpeed);
 	if (vars->data.keyboard[D])
-	{
-		if (can_move(vars, (int)(info->posX + info->dirY * info->moveSpeed) \
-			, (int)(info->posY)))
-			info->posX += info->dirY * info->moveSpeed;
-		if (can_move(vars, (int)(info->posX) \
-			, (int)(info->posY - info->dirX * info->moveSpeed)))
-			info->posY -= info->dirX * info->moveSpeed;
-	}
+		move_left_right(vars, info, -info->moveSpeed);
 	if (vars->data.keyboard[A])
-	{
-		if (can_move(vars, (int)(info->posX - info->dirY * info->moveSpeed) \
-			, (int)(info->posY)))
-			info->posX -= info->dirY * info->moveSpeed;
-		if (can_move(vars, (int)(info->posX) \
-			, (int)(info->posY + info->dirX * info->moveSpeed)))
-			info->posY += info->dirX * info->moveSpeed;
-	}
+		move_left_right(vars, info, info->moveSpeed);
 	if (vars->data.keyboard[LEFT])
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
-		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
-		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
-	}
-	//rotate to the left
+		rotate_left(info, info->rotSpeed);
 	if (vars->data.keyboard[RIGHT])
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
-		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
-		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
-	}
+		rotate_right(info, info->rotSpeed);
 }
 
 static void	mouse_check(t_vars *vars)
 {
-	t_info	*info = vars->info;
+	t_info	*info;
+	double	tmp;
 
-	if (vars->data.mouse_x > vars->data.mouse_old_x) // right
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
-		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
-		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
-	}
-	if (vars->data.mouse_x < vars->data.mouse_old_x) // left
-	{
-		//both camera direction and camera plane must be rotated
-		double oldDirX = info->dirX;
-		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
-		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
-		double oldPlaneX = info->planeX;
-		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
-		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
-	}
+	info = vars->info;
+	if (vars->data.mouse_x > vars->data.mouse_old_x)
+		rotate_left(info, info->rotSpeed);
+	if (vars->data.mouse_x < vars->data.mouse_old_x)
+		rotate_right(info, info->rotSpeed);
 	if (++vars->data.render_i % 5 == 0)
 	{
 		vars->data.mouse_old_x = vars->data.mouse_x;
@@ -116,6 +70,6 @@ static void	mouse_check(t_vars *vars)
 
 void	check_key_and_mouse(t_vars *vars)
 {
-    key_check(vars);
+	key_check(vars);
 	mouse_check(vars);
 }

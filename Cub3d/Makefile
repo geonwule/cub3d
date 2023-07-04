@@ -15,7 +15,6 @@ FUNC_DIR	= srcs/function/
 
 _FUNC_SRCS	= function.c \
 			  mlx_function.c \
-			  ft_lstcub.c \
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
@@ -42,20 +41,24 @@ INIT_SRCS	= $(addprefix $(INIT_DIR), $(_INIT_SRCS))
 
 EVENT_DIR	= srcs/event/
 
-_EVENT_SRCS	= check_key_and_mouse.c \
-			  event_function1.c \
-			  event_function2.c \
-			  key_event.c \
-			  manage_monster.c \
-			  monster_kill.c \
-			  mouse_event.c \
-			  print_window1.c \
-			  print_window2.c \
-			  ray_casting.c \
-			  ray_function.c \
-			  rendering.c \
-			  sprite.c \
-			  sprite2.c \
+
+_EVENT_SRCS	= check_key_and_mouse.c		\
+			  check_key_and_mouse2.c	\
+			  event_function1.c			\
+			  event_function2.c			\
+			  key_event.c				\
+			  manage_monster.c			\
+			  monster_kill.c			\
+			  mouse_event.c				\
+			  print_window1.c			\
+			  print_window2.c			\
+			  ray_casting.c				\
+			  ray_function.c			\
+			  ray_function_dda.c		\
+			  rendering.c				\
+			  sprite.c					\
+        sprite2.c \
+
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 

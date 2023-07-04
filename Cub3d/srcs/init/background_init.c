@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:24:20 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/16 19:25:25 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 05:31:30 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@ static int	create_argb(int a, int rgb[3])
 
 void	fill_background(t_vars *vars, int ceiling[3], int floor[3])
 {
-	for (int y = 0; y < WIN_HEIGHT; y++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIN_HEIGHT)
 	{
-		for (int x = 0; x < WIN_WIDTH; x++)
+		j = 0;
+		while (j < WIN_WIDTH)
 		{
-			if (y < WIN_HEIGHT / 2)
-				vars->info->buf[y][x] = create_argb(0, ceiling);
+			if (i < WIN_HEIGHT / 2)
+				vars->info->buf[i][j] = create_argb(0, ceiling);
 			else
-				vars->info->buf[y][x] = create_argb(0, floor);
+				vars->info->buf[i][j] = create_argb(0, floor);
+			j++;
 		}
+		i++;
 	}
 }

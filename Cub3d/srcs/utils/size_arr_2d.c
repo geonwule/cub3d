@@ -6,15 +6,15 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:38:58 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/28 01:39:35 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 04:25:59 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		size_arr_2d(char **arr)
+int	size_arr_2d(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])

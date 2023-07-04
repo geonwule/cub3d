@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_function2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 04:31:12 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/04 04:33:16 by jonchoi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	adjust_gamespeed(t_info *info, int keycode)
 {
-	if(keycode == N)
+	if (keycode == N)
 	{
 		info->moveSpeed -= 0.01;
 		info->rotSpeed -= 0.01;
@@ -22,7 +34,7 @@ void	turn_back(t_info *info)
 	info->planeY *= -1;
 }
 
-static int is_door_or_npc(t_vars *vars, int x, int y)
+static int	is_door_or_npc(t_vars *vars, int x, int y)
 {
 	char	spot;
 
@@ -38,12 +50,14 @@ void	open_door_tell_npc(t_vars *vars, char **map)
 	double		tmp[2];
 	const int	dx[4] = {-1, 1, 0, 0};
 	const int	dy[4] = {0, 0, -1, 1};
+	int			i;
 
 	info = vars->info;
-	for (int i = 0; i < 4; i++)
+	i = -1;
+	while (++i < 4)
 	{
 		tmp[X] = info->posX + dx[i];
-		tmp[Y] = info->posY + dy[i]; 
+		tmp[Y] = info->posY + dy[i];
 		if (tmp[X] < 0 || tmp[X] >= WIN_HEIGHT \
 			|| tmp[Y] < 0 || tmp[Y] >= WIN_WIDTH \
 			|| !is_door_or_npc(vars, (int)tmp[X], (int)tmp[Y]))
