@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:25:45 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 16:15:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,9 +192,22 @@ typedef struct	s_sp
 typedef struct	s_sprite
 {
 	t_sp	*sp;
-	int		sprite_num; //sprite_num
+	int		sprite_num;
 	int		v_move;
 	int		v_i;
+	double	pos[2];
+	double	inv_det;
+	double	trans[2];
+	int		screen_x;
+	double	u_div;
+	double	v_div;
+	int		vm_screen;
+	int		sp_height;
+	int		sp_width;
+	int		d_start_x;
+	int		d_start_y;
+	int		d_end_x;
+	int		d_end_y;
 }	t_sprite;
 
 typedef struct s_map_info
@@ -358,6 +371,10 @@ void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 //evnet/sprite
 void	sprite(t_vars *vars);
 
+//event/sprite2
+int		*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite);
+void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
+
 //event/redering
 int		rendering(t_vars *vars);
 
@@ -409,8 +426,8 @@ int		size_arr_2d(char **arr);
 
 // parsing/check.c
 void	check_file(t_vars *vars, char *path);
-int		check_texture(char **arr);
-int		check_color(char **arr);
+int		check_texture(char *line);
+int		check_color(char *line);
 
 // parsing/read_file.c
 void	read_file(t_vars *vars, char *path);
@@ -424,5 +441,13 @@ int		set_color(char **arr, t_vars *vars);
 
 // parsing/check_map.c
 int		check_map(t_vars *vars);
+
+// parsing/check_map2.c
+void	init_dir_plane_ns(t_vars *vars, char type);
+void	init_dir_plane_ew(t_vars *vars, char type);
+
+// parsing/set_color_utils.c
+int		ft_atoi_color(const char *str);
+
 
 #endif

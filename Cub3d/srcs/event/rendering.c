@@ -6,13 +6,14 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 16:12:48 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:02:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_width)
+static void	minimap_put_mlx(t_vars *vars, char **map, \
+								int mini_height, int mini_width)
 {
 	int	x;
 	int	y;
@@ -24,27 +25,34 @@ static void	minimap_put_mlx(t_vars *vars, char **map, int mini_height, int mini_
 		while (y < mini_width)
 		{
 			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.player_x, y * 10, x * 10);
-			else if (map[x][y] == '1')// wall
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.wall_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'M')// monster
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.monster_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'B')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.door_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'P')// break 벽
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.potion_x, y * 10, x * 10); // 10x10 xpm이기때문에
-			else if (map[x][y] == 'H')// npc
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.npc_x, y * 10, x * 10); // 10x10 xpm이기때문에
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.player_x, y * 10, x * 10);
+			else if (map[x][y] == '1')
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.wall_x, y * 10, x * 10);
+			else if (map[x][y] == 'M')
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.monster_x, y * 10, x * 10);
+			else if (map[x][y] == 'B')
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.door_x, y * 10, x * 10);
+			else if (map[x][y] == 'P')
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.potion_x, y * 10, x * 10);
+			else if (map[x][y] == 'H')
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.npc_x, y * 10, x * 10);
 			else if (map[x][y] == '0' || map[x][y] == 'b')
-				mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.empty_x, y * 10, x * 10);
+				mlx_put_image_to_window(vars->mlx, vars->win, \
+					vars->mini.empty_x, y * 10, x * 10);
 			y++;
 		}
 		x++;
 	}
 	x = (int)vars->info->posX;
 	y = (int)vars->info->posY;
-	mlx_put_image_to_window(vars->mlx, vars->win, \
-		vars->mini.dir_x, y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7); //dir
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.dir_x, \
+			y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7);
 }
 
 static void mini_map(t_vars *vars)
@@ -103,15 +111,16 @@ int	rendering(t_vars *vars)
 		return (0);
 	manage_monster(vars);
 	check_key_and_mouse(vars);
-	mlx_clear_window(vars->mlx, vars->win); // clear window
-	fill_background(vars, vars->map.info.c, vars->map.info.f); // study_need // fill back ground
+	mlx_clear_window(vars->mlx, vars->win);
+	fill_background(vars, vars->map.info.c, vars->map.info.f);
 	ray_casting(vars, vars->info, vars->map.arr);
 	sprite(vars);
 	draw_mlx(vars);
 	print_window1(vars);
 	print_window2(vars);
-	mini_map(vars);	
+	mini_map(vars);
 	if (vars->data.dead_check)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->xpm.dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
+		mlx_put_image_to_window(vars->mlx, vars->win, \
+			vars->xpm.dead, WIN_WIDTH / 100 * 33, WIN_HEIGHT / 100 * 30);
 	return (0);
 }
