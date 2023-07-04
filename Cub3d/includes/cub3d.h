@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 20:48:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 16:15:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,6 +370,10 @@ void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 
 //evnet/sprite
 void	sprite(t_vars *vars);
+
+//event/sprite2
+int		*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite);
+void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
 
 //event/redering
 int		rendering(t_vars *vars);

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/03 18:00:37 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 16:13:55 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	vars_allocation(t_vars *vars)
 
 	vars->sprite.v_move = 64;
 	vars->sprite.v_i = 20;
+	vars->sprite.u_div = 1.5;
+	vars->sprite.v_div = 1.5;
 
 	vars->data.mouse_x = WIN_WIDTH / 2;
 	vars->data.mouse_old_x = WIN_WIDTH / 2;

@@ -55,6 +55,7 @@ _EVENT_SRCS	= check_key_and_mouse.c \
 			  ray_function.c \
 			  rendering.c \
 			  sprite.c \
+			  sprite2.c \
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 
