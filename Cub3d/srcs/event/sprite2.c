@@ -6,18 +6,18 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:06:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 16:16:01 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:18:44 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void sort_order(int *order, double *dist, int amount)
+static void	sort_order(int *order, double *dist, int amount)
 {
-	double tmp_dist;
-	int tmp_idx;
-	int i;
-	int j;
+	double	tmp_dist;
+	int		tmp_idx;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < amount)
@@ -40,9 +40,9 @@ static void sort_order(int *order, double *dist, int amount)
 
 int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
 {
-	int *order;
-	double *dist;
-	int i;
+	double	*dist;
+	int		*order;
+	int		i;
 
 	order = ft_malloc(sizeof(int) * vars->sprite.sprite_num);
 	dist = ft_malloc(sizeof(double) * vars->sprite.sprite_num);
@@ -50,14 +50,15 @@ int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
 	while (++i < vars->sprite.sprite_num)
 	{
 		order[i] = i;
-		dist[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) + (info->posY - sprite[i].y) * (info->posY - sprite[i].y));
+		dist[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
+			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y));
 	}
 	sort_order(order, dist, vars->sprite.sprite_num);
 	free(dist);
 	return (order);
 }
 
-static void draw_y(t_vars *vars, int tex_num, int x, int *tex)
+static void	draw_y(t_vars *vars, int tex_num, int x, int *tex)
 {
 	t_sprite	sprite;
 	int			y;
@@ -66,16 +67,15 @@ static void draw_y(t_vars *vars, int tex_num, int x, int *tex)
 
 	sprite = vars->sprite;
 	y = sprite.d_start_y;
-	while (y < sprite.d_end_y) // for every pixel of the current w
+	while (y < sprite.d_end_y)
 	{
-		depth = (y - sprite.vm_screen) * 256 - WIN_HEIGHT * 128 + sprite.sp_height * 128; // 256 and 128 factors to avoid floats
+		depth = (y - sprite.vm_screen) * 256 \
+			- WIN_HEIGHT * 128 + sprite.sp_height * 128;
 		tex[Y] = ((depth * TEX_HEIGHT) / sprite.sp_height) / 256;
-		color = vars->info->texture[tex_num][TEX_WIDTH * tex[Y] + tex[X]]; // get current color from the texture
+		color = vars->info->texture[tex_num][TEX_WIDTH * tex[Y] + tex[X]];
 		// if ((color & 0x00FFFFFF) != 0)
 		if ((color >> 24) == 0)
-			vars->info->buf[y][x] = color; // paint pixel if it isn't black, 
-			//black is the invisible color
-			// 0x00FFFFFF is black
+			vars->info->buf[y][x] = color;
 		y++;
 	}
 }
@@ -91,46 +91,37 @@ static void	sprite_to_screen(t_vars *vars, int tex_num, int x)
 	{
 		tex[X] = (int)((256 * (x - (-sprite.sp_width / 2 + sprite.screen_x)) \
 				* TEX_WIDTH / sprite.sp_width) / 256);
-		// the conditions in the if are:
-		// 1) it's in front of camera plane so you don't see things behind you
-		// 2) it's on the screen (left)
-		// 3) it's on the screen (right)
-		// 4) ZBuffer, with perpendicular distance
-		if (sprite.trans[Y] > 0 && x > 0 && x < WIN_WIDTH  \
+		if (sprite.trans[Y] > 0 && x > 0 && x < WIN_WIDTH \
 			&& sprite.trans[Y] < vars->info->zBuffer[x])
 			draw_y(vars, tex_num, x, tex);
 		x++;
 	}
 }
 
-void calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite)
+void	calculate_sprite(t_vars *vars, t_info *i, int idx, t_sprite *s)
 {
-	sprite->pos[X] = vars->sprite.sp[idx].x - info->posX;
-	sprite->pos[Y] = vars->sprite.sp[idx].y - info->posY;
-	sprite->inv_det = 1.0 / (info->planeX * info->dirY \
-			- info->dirX * info->planeY);
-	sprite->trans[X] = sprite->inv_det * \
-			(info->dirY * sprite->pos[X] - info->dirX * sprite->pos[Y]);
-	sprite->trans[Y] = sprite->inv_det * \
-			(-info->planeY * sprite->pos[X] + info->planeX * sprite->pos[Y]); 
-	sprite->screen_x = (int)((WIN_WIDTH / 2) * \
-			(1 + sprite->trans[X] / sprite->trans[Y]));
-	sprite->vm_screen = (int)(vars->sprite.v_move / sprite->trans[Y]);
-	sprite->sp_height = (int)fabs((WIN_HEIGHT / sprite->trans[Y]) / sprite->v_div); 
-	sprite->d_start_y = -sprite->sp_height / 2 + WIN_HEIGHT / 2 + sprite->vm_screen;
-	if (sprite->d_start_y < 0)
-		sprite->d_start_y = 0;
-	sprite->d_end_y = sprite->sp_height / 2 + WIN_HEIGHT / 2 + sprite->vm_screen;
-	if (sprite->d_end_y >= WIN_HEIGHT)
-		sprite->d_end_y = WIN_HEIGHT - 1;
-	sprite->sp_width = (int)fabs((WIN_HEIGHT / sprite->trans[Y]) / sprite->u_div);
-	sprite->d_start_x = -sprite->sp_width / 2 + sprite->screen_x;
-	if (sprite->d_start_x < 0)
-		sprite->d_start_x = 0;
-	sprite->d_end_x = sprite->sp_width / 2 + sprite->screen_x;
-	if (sprite->d_end_x >= WIN_WIDTH)
-		sprite->d_end_x = WIN_WIDTH - 1;
-	sprite_to_screen(vars, vars->sprite.sp[idx].texture, sprite->d_start_x);
+	s->pos[X] = vars->sprite.sp[idx].x - i->posX;
+	s->pos[Y] = vars->sprite.sp[idx].y - i->posY;
+	s->inv_det = 1.0 / (i->planeX * i->dirY - i->dirX * i->planeY);
+	s->trans[X] = s->inv_det * (i->dirY * s->pos[X] - i->dirX * s->pos[Y]);
+	s->trans[Y] = s->inv_det * (-i->planeY * s->pos[X] + i->planeX * s->pos[Y]);
+	s->screen_x = (int)((WIN_WIDTH / 2) * (1 + s->trans[X] / s->trans[Y]));
+	s->vm_screen = (int)(vars->sprite.v_move / s->trans[Y]);
+	s->sp_height = (int)fabs((WIN_HEIGHT / s->trans[Y]) / s->v_div);
+	s->d_start_y = -s->sp_height / 2 + WIN_HEIGHT / 2 + s->vm_screen;
+	if (s->d_start_y < 0)
+		s->d_start_y = 0;
+	s->d_end_y = s->sp_height / 2 + WIN_HEIGHT / 2 + s->vm_screen;
+	if (s->d_end_y >= WIN_HEIGHT)
+		s->d_end_y = WIN_HEIGHT - 1;
+	s->sp_width = (int)fabs((WIN_HEIGHT / s->trans[Y]) / s->u_div);
+	s->d_start_x = -s->sp_width / 2 + s->screen_x;
+	if (s->d_start_x < 0)
+		s->d_start_x = 0;
+	s->d_end_x = s->sp_width / 2 + s->screen_x;
+	if (s->d_end_x >= WIN_WIDTH)
+		s->d_end_x = WIN_WIDTH - 1;
+	sprite_to_screen(vars, vars->sprite.sp[idx].texture, s->d_start_x);
 }
 
 
