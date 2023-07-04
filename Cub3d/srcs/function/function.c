@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:55:45 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 05:23:13 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:10:32 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,29 @@ int	ft_open(char *file_path)
 	return (fd);
 }
 
-void	vars_free(t_vars *vars)
+void	free_vars(t_vars *vars)
 {
 	int	i;
 
 	i = 0;
-	if (vars->info)
+	if (vars->info.texture)
 	{
 		while (i < TEX_NUM)
 		{
-			free(vars->info->texture[i]);
+			free(vars->info.texture[i]);
 			i++;
 		}
-		free(vars->info);
+		free(vars->info.texture);
 	}
 	if (vars->sprite.sp)
-		free (vars->sprite.sp);
+		free(vars->sprite.sp);
 }
 
 int	exit_game(t_vars *vars)
 {
 	write(1, "Player has exited the game\n", 27);
-	//mlx_destroy_window(vars->mlx, vars->win);
-	vars_free(vars);
+	mlx_destroy_window(vars->mlx, vars->win);
+	free_map(&vars->map);
+	free_vars(vars);
 	exit(EXIT_SUCCESS);
 }

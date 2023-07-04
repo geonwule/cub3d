@@ -180,7 +180,7 @@ void    ray_casting(t_vars *vars)
     }
 }
 
-void    mini_map(t_vars *vars)
+void    (t_vars *vars)
 {
     void    *mini = mlx_new_image(vars->mlx, WIDTH / 4, HEIGHT / 4);
 

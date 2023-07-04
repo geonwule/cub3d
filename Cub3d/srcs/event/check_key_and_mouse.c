@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_key_and_mouse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:16:14 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:12:46 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	key_check(t_vars *vars)
 {
 	t_info	*info;
 
-	info = vars->info;
+	info = &vars->info;
 	if (vars->data.keyboard[ESC])
 		exit_game(vars);
 	if (vars->data.keyboard[W])
@@ -56,7 +56,7 @@ static void	mouse_check(t_vars *vars)
 	t_info	*info;
 	double	tmp;
 
-	info = vars->info;
+	info = &vars->info;
 	if (vars->data.mouse_x > vars->data.mouse_old_x)
 		rotate_left(info, info->rotSpeed);
 	if (vars->data.mouse_x < vars->data.mouse_old_x)

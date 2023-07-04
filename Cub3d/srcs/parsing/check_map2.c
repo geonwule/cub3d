@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 22:40:10 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:55:17 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:11:53 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	init_dir_plane_ns(t_vars *vars, char type)
 {
 	if (type == 'N')
 	{
-		vars->info->dirX = -1.0;
-		vars->info->dirY = 0.0;
-		vars->info->planeX = 0.0;
-		vars->info->planeY = 0.66;
+		vars->info.dirX = -1.0;
+		vars->info.dirY = 0.0;
+		vars->info.planeX = 0.0;
+		vars->info.planeY = 0.66;
 	}
 	else if (type == 'S')
 	{
-		vars->info->dirX = 1.0;
-		vars->info->dirY = 0.0;
-		vars->info->planeX = 0.0;
-		vars->info->planeY = -0.66;
+		vars->info.dirX = 1.0;
+		vars->info.dirY = 0.0;
+		vars->info.planeX = 0.0;
+		vars->info.planeY = -0.66;
 	}
 }
 
@@ -34,16 +34,16 @@ void	init_dir_plane_ew(t_vars *vars, char type)
 {
 	if (type == 'E')
 	{
-		vars->info->dirX = 0.0;
-		vars->info->dirY = 1.0;
-		vars->info->planeX = 0.66;
-		vars->info->planeY = 0.0;
+		vars->info.dirX = 0.0;
+		vars->info.dirY = 1.0;
+		vars->info.planeX = 0.66;
+		vars->info.planeY = 0.0;
 	}
 	else if (type == 'W')
 	{
-		vars->info->dirX = 0.0;
-		vars->info->dirY = -1.0;
-		vars->info->planeX = -0.66;
-		vars->info->planeY = 0.0;
+		vars->info.dirX = 0.0;
+		vars->info.dirY = -1.0;
+		vars->info.planeX = -0.66;
+		vars->info.planeY = 0.0;
 	}
 }

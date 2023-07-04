@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:24:20 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 05:31:30 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:12:21 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	fill_background(t_vars *vars, int ceiling[3], int floor[3])
 		while (j < WIN_WIDTH)
 		{
 			if (i < WIN_HEIGHT / 2)
-				vars->info->buf[i][j] = create_argb(0, ceiling);
+				vars->info.buf[i][j] = create_argb(0, ceiling);
 			else
-				vars->info->buf[i][j] = create_argb(0, floor);
+				vars->info.buf[i][j] = create_argb(0, floor);
 			j++;
 		}
 		i++;

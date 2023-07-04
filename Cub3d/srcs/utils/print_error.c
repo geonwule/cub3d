@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:10:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/06/27 23:22:08 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:03:52 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_error(char *str, t_vars *vars)
 	printf("Error\n");
 	printf("%s\n", str);
 	free_map(&vars->map);
-	// vars_free(vars);
+	printf("free map\n");
+	free_vars(vars);
+	printf("free vars\n");
 	exit(1);
 }

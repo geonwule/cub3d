@@ -41,7 +41,6 @@ INIT_SRCS	= $(addprefix $(INIT_DIR), $(_INIT_SRCS))
 
 EVENT_DIR	= srcs/event/
 
-
 _EVENT_SRCS	= check_key_and_mouse.c		\
 			  check_key_and_mouse2.c	\
 			  event_function1.c			\
@@ -56,8 +55,9 @@ _EVENT_SRCS	= check_key_and_mouse.c		\
 			  ray_function.c			\
 			  ray_function_dda.c		\
 			  rendering.c				\
+			  mini_map.c				\
 			  sprite.c					\
-        sprite2.c \
+			  sprite2.c \
 
 
 EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))

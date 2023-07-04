@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:04:14 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 17:21:58 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:15:41 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	sprite(t_vars *vars)
 {
 	t_info	*info;
 
-	info = vars->info;
+	info = &vars->info;
 	init_sprite(vars, vars->map.arr);
 	if (vars->sprite.sp)
 		handle_sprite(vars, info, vars->sprite.sp);
