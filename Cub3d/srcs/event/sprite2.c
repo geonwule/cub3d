@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:06:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 17:22:49 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:16:54 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static void	draw_y(t_vars *vars, int tex_num, int x, int *tex)
 		depth = (y - sprite.vm_screen) * 256 \
 			- WIN_HEIGHT * 128 + sprite.sp_height * 128;
 		tex[Y] = ((depth * TEX_HEIGHT) / sprite.sp_height) / 256;
-		color = vars->info->texture[tex_num][TEX_WIDTH * tex[Y] + tex[X]];
+		color = vars->info.texture[tex_num][TEX_WIDTH * tex[Y] + tex[X]];
 		if ((color >> 24) == 0)
-			vars->info->buf[y][x] = color;
+			vars->info.buf[y][x] = color;
 		y++;
 	}
 }
@@ -91,7 +91,7 @@ static void	sprite_to_screen(t_vars *vars, int tex_num, int x)
 		tex[X] = (int)((256 * (x - (-sprite.sp_width / 2 + sprite.screen_x)) \
 				* TEX_WIDTH / sprite.sp_width) / 256);
 		if (sprite.trans[Y] > 0 && x > 0 && x < WIN_WIDTH \
-			&& sprite.trans[Y] < vars->info->zBuffer[x])
+			&& sprite.trans[Y] < vars->info.zBuffer[x])
 			draw_y(vars, tex_num, x, tex);
 		x++;
 	}

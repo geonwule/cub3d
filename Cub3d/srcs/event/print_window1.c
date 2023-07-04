@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_window1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:44:47 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 05:05:21 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:08:33 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,23 @@ static void	game_key_explain(t_vars *vars)
 		WIN_HEIGHT / 100 * 19, 0xFFFFFF, "B : Door open/close, NPC contect");
 }
 
-static void	press_b(t_vars *vars)
+static void	press_b(t_vars *vars, double nx, double ny, int i)
 {
 	t_info		*info;
 	char		**map;
-	double		x;
-	double		y;
 	const int	dx[4] = {-1, 1, 0, 0};
 	const int	dy[4] = {0, 0, -1, 1};
 	char		spot;
-	int			i;
 
-	info = vars->info;
+	info = &vars->info;
 	map = vars->map.arr;
 	i = -1;
 	while (++i < 4)
 	{
-		x = info->posX + dx[i];
-		y = info->posY + dy[i];
-		spot = map[(int)x][(int)y];
-		if (x < 0 || x >= WIN_HEIGHT || y < 0 || y >= WIN_WIDTH)
+		nx = info->posX + dx[i];
+		ny = info->posY + dy[i];
+		spot = map[(int)nx][(int)ny];
+		if (nx < 0 || nx >= WIN_HEIGHT || ny < 0 || ny >= WIN_WIDTH)
 			continue ;
 		if (spot == 'B' || spot == 'b' || spot == 'H')
 		{
@@ -106,7 +103,7 @@ static void	hp_exp(t_vars *vars)
 void	print_window1(t_vars *vars)
 {
 	game_key_explain(vars);
-	press_b(vars);
+	press_b(vars, 0, 0, 0);
 	aim_point(vars);
 	hp_exp(vars);
 }

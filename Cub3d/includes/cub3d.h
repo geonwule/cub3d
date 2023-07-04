@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 04:15:52 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:16:53 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,7 @@ typedef struct s_vars
 	t_map		map;
 	t_mini		mini;
 	t_xpm		xpm;
-	t_info		*info;
+	t_info		info;
 	t_data		data;
 	t_sprite	sprite;
 }   t_vars;
@@ -398,13 +398,13 @@ size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 
 //mlx_function
-void    *ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
-char    *ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
+void	*ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
+char	*ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
 
 //function
-void    *ft_malloc(size_t size);
+void	*ft_malloc(size_t size);
 int		ft_open(char *file_path);
-void	vars_free(t_vars *vars);
+void	free_vars(t_vars *vars);
 int		exit_game(t_vars *vars);
 int		random_generator(int frequency);
 

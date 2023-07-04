@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 05:10:22 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:15:34 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	minimap_put_mlx(t_vars *vars, char **map, \
 		y = 0;
 		while (y < mini_width)
 		{
-			if (x == (int)vars->info->posX && y == (int)vars->info->posY)
+			if (x == (int)vars->info.posX && y == (int)vars->info.posY)
 				mlx_put_image_to_window(vars->mlx, vars->win, \
 					vars->mini.player_x, y * 10, x * 10);
 			else if (map[x][y] == '1')
@@ -49,10 +49,10 @@ static void	minimap_put_mlx(t_vars *vars, char **map, \
 		}
 		x++;
 	}
-	x = (int)vars->info->posX;
-	y = (int)vars->info->posY;
+	x = (int)vars->info.posX;
+	y = (int)vars->info.posY;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.dir_x, \
-			y * 10 + vars->info->dirY * 7, x * 10 + vars->info->dirX * 7);
+			y * 10 + vars->info.dirY * 7, x * 10 + vars->info.dirX * 7);
 }
 
 static void	mini_map(t_vars *vars)
@@ -81,10 +81,10 @@ static void	draw_mlx(t_vars *vars)
 	{
 		for (int x = 0; x < WIN_WIDTH; x++)
 		{
-			vars->info->img.data[y * WIN_WIDTH + x] = vars->info->buf[y][x];
+			vars->info.img.data[y * WIN_WIDTH + x] = vars->info.buf[y][x];
 		}
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->info->img.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->info.img.img, 0, 0);
 }
 
 static int	dead_check_game_end(t_vars *vars)
@@ -113,7 +113,7 @@ int	rendering(t_vars *vars)
 	check_key_and_mouse(vars);
 	mlx_clear_window(vars->mlx, vars->win);
 	fill_background(vars, vars->map.info.c, vars->map.info.f);
-	ray_casting(vars, vars->info, vars->map.arr);
+	ray_casting(vars, &vars->info, vars->map.arr);
 	sprite(vars);
 	draw_mlx(vars);
 	print_window1(vars);
