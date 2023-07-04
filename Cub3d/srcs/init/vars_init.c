@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:01:13 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 16:13:55 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:08:46 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	vars_allocation(t_vars *vars)
 {
-	t_info	*info;
+	// t_info	*info;
 	int		i;
 
-	info = ft_malloc(sizeof(t_info));
-	vars->info = info;
+	// info = ft_malloc(sizeof(t_info));
+	// vars->info = info;
 
 	vars->data.monster_come = 0;
 	vars->data.m_num = 0;
@@ -141,7 +141,7 @@ static void	load_texture(t_vars *vars, t_info *info)
 
 int vars_init(t_vars *vars)
 {
-	t_info	*info = vars->info;
+	t_info	*info = &vars->info;
 
 	info->posX = vars->data.init_pos[X];
 	info->posY = vars->data.init_pos[Y];

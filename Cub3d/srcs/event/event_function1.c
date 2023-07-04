@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_function1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:28:40 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:31:02 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:13:16 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	attack(t_vars *vars)
 	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);
 	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, \
 			WIN_HEIGHT / 3);
-	monster_kill(vars, vars->info, vars->map.arr);
+	monster_kill(vars, &vars->info, vars->map.arr);
 }
 
 void	reset_game(t_vars *vars)
@@ -36,7 +36,7 @@ void	reset_game(t_vars *vars)
 	int		j;
 
 	map = vars->map.arr;
-	vars_free(vars);
+	free_vars(vars);
 	vars_allocation(vars);
 	vars_init(vars);
 	i = -1;

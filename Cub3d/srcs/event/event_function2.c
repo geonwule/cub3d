@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_function2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:31:12 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:33:16 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:13:56 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	open_door_tell_npc(t_vars *vars, char **map)
 	const int	dy[4] = {0, 0, -1, 1};
 	int			i;
 
-	info = vars->info;
+	info = &vars->info;
 	i = -1;
 	while (++i < 4)
 	{
@@ -75,7 +75,7 @@ void	return_ellinia(t_vars *vars)
 {
 	t_info	*info;
 
-	info = vars->info;
+	info = &vars->info;
 	info->posX = vars->data.init_pos[X];
 	info->posY = vars->data.init_pos[Y];
 	info->dirX = vars->data.init_dir[X];

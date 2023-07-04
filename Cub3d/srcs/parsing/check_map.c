@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:54:53 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:11:35 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 				return (-1);
 			if (ft_strchr("NWES", map[i][j]))
 			{
-				vars->info->posX = i;
-				vars->info->posY = j;
+				vars->info.posX = i;
+				vars->info.posY = j;
 				init_player_info(vars, map, i, j);
 				map[i][j] = '0';
 				cnt++;

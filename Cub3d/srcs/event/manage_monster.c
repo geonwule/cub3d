@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_monster.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:35:32 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:39:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:14:43 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	monster_rezen(t_vars *vars)
 		j = -1;
 		while (++j < vars->map.width)
 		{
-			if (i > vars->map.height * 0.6 && vars->map.width * 0.5)
+			if (i > vars->map.height * 0.8 && vars->map.width * 0.7)
 				break ;
 			if (map[i][j] == '0' && random_generator(2) \
-				&& i != (int)vars->info->posX && j != (int)vars->info->posY)
+				&& i != (int)vars->info.posX && j != (int)vars->info.posY)
 			{
 				map[i][j] = 'M';
 				vars->data.m_num++;
@@ -115,7 +115,7 @@ void	manage_monster(t_vars *vars)
 	t_info	*info;
 	char	**map;
 
-	info = vars->info;
+	info = &vars->info;
 	map = vars->map.arr;
 	monster_rezen(vars);
 	if (!vars->data.monster_come || ++vars->data.m_speed % 30 != 0 \

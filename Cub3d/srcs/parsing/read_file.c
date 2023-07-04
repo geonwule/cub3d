@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:01:36 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:17:21 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:11:08 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ void	read_file(t_vars *vars, char *path)
 	init_map_info(vars, path);
 	if (check_map(vars))
 		print_error("Invalid map", vars);
-	vars->data.init_pos[X] = vars->info->posX;
-	vars->data.init_pos[Y] = vars->info->posY;
-	vars->data.init_dir[X] = vars->info->dirX;
-	vars->data.init_dir[Y] = vars->info->dirY;
-	vars->data.init_plane[X] = vars->info->planeX;
-	vars->data.init_plane[Y] = vars->info->planeY;
+	vars->data.init_pos[X] = vars->info.posX;
+	vars->data.init_pos[Y] = vars->info.posY;
+	vars->data.init_dir[X] = vars->info.dirX;
+	vars->data.init_dir[Y] = vars->info.dirY;
+	vars->data.init_plane[X] = vars->info.planeX;
+	vars->data.init_plane[Y] = vars->info.planeY;
 }

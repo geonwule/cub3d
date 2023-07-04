@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:14:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 04:35:18 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/04 18:14:21 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	key_press(int keycode, t_vars *vars)
 	t_info	*info;
 	char	**map;
 
-	info = vars->info;
+	info = &vars->info;
 	map = vars->map.arr;
 	if (keycode == P)
 		reset_game(vars);
