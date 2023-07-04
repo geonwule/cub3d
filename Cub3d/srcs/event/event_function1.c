@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:28:40 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:13:16 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:59:45 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	reset_game(t_vars *vars)
 
 	map = vars->map.arr;
 	free_vars(vars);
-	vars_allocation(vars);
-	vars_init(vars);
+	init_vars(vars);
+	init_vars_info(vars);
 	i = -1;
 	while (++i < vars->map.height)
 	{
