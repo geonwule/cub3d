@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_set.c                                          :+:      :+:    :+:   */
+/*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:18:48 by geonwule          #+#    #+#             */
-/*   Updated: 2023/06/27 16:44:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/04 19:06:28 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ray_casting(t_vars *vars, t_info *info, char **map)
 		dda(vars, map, &ray);
 		check_ray_texture(info, &ray, map);
 		apply_texture(info, &ray, x, ray.draw_start);
-		info->zBuffer[x] = ray.perwalldist; //need sprite
+		info->zBuffer[x] = ray.perwalldist;
 		x++;
 	}
 }
