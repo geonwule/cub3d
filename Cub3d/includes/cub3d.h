@@ -381,6 +381,10 @@ void	dda(t_vars *vars, char **map, t_ray *ray);
 //evnet/sprite
 void	sprite(t_vars *vars);
 
+//event/sprite2
+int		*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite);
+void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
+
 //event/redering
 int		rendering(t_vars *vars);
 
