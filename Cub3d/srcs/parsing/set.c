@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 16:55:48 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:01:15 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	process_set_map(t_vars *vars, char *line, t_list *head)
 		vars->map.width = ft_strlen(line) - 1;
 }
 
-void	set_map(t_vars *vars, int fd, char *line)
+int	set_map(t_vars *vars, int fd, char *line)
 {
 	t_list	*head;
 	int		errno;
@@ -96,16 +96,12 @@ void	set_map(t_vars *vars, int fd, char *line)
 			break ;
 		if (!ft_strncmp(line, "\n", 1))
 		{
-			errno = 1;
+			errno = 2;
 			break ;
 		}
 		process_set_map(vars, line, head);
 	}
-	if (errno)
-	{
-		free_lst(&head);
-		print_error("Invalid map: new line", vars);
-	}
 	init_map_arr(vars, head);
 	free_lst(&head);
+	return (errno);
 }

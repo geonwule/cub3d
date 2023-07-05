@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:01:36 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 15:35:05 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 17:39:35 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ static void	init_vars_parsing(t_vars *vars)
 	vars->map.info.floor = NULL;
 	vars->map.info.ceiling = NULL;
 	vars->map.arr = NULL;
-}
-
-static int	open_file(t_vars *vars, char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		print_error("File open failed", vars);
-	return (fd);
 }
 
 static int	process_map_info(t_vars *vars, int *cnt, char *line)
@@ -63,6 +53,14 @@ static int	process_map_info(t_vars *vars, int *cnt, char *line)
 	return (errno);
 }
 
+static void	check_errno(int errno, t_vars *vars)
+{
+	if (errno == 1)
+		print_error("Invalid info input", vars);
+	else if (errno == 2)
+		print_error("Invalid map: new line", vars);
+}
+
 static void	init_map_info(t_vars *vars, char *path)
 {
 	int		fd;
@@ -70,10 +68,10 @@ static void	init_map_info(t_vars *vars, char *path)
 	int		cnt;
 	int		errno;
 
-	fd = open_file(vars, path);
+	fd = ft_open(path);
 	cnt = 0;
 	errno = 0;
-	while (1)
+	while (!errno)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -81,14 +79,14 @@ static void	init_map_info(t_vars *vars, char *path)
 		if (cnt == 6 && ft_strncmp(line, "\n", 1)
 			&& !check_texture(line) && !check_color(line))
 		{
-			set_map(vars, fd, line);
+			errno = set_map(vars, fd, line);
 			break ;
 		}
 		errno = process_map_info(vars, &cnt, line);
 		free(line);
-		if (errno)
-			print_error("Invalid info input", vars);
 	}
+	close(fd);
+	check_errno(errno, vars);
 }
 
 void	read_file(t_vars *vars, char *path)

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 16:53:51 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:06:08 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (!ft_strchr("NWES01HB ", map[i][j]))
+			if (!ft_strchr("NWES01HB \n", map[i][j]))
 				return (-1);
 			if (ft_strchr("NWES", map[i][j]))
 			{
