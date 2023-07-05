@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 19:56:56 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:14:57 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	check_digit_rgb(char **rgb)
 	int	i;
 	int	j;
 
-	print_arr_2d(rgb);
 	i = 0;
 	while (i < 3)
 	{
@@ -90,7 +89,7 @@ static int	set_rgb(char **arr, t_vars *vars, char type)
 
 int	set_color(char **arr, t_vars *vars)
 {
-	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0])))
+	if (!ft_strcmp(arr[0], "F"))
 	{
 		if (vars->map.info.floor)
 			return (1);
@@ -98,7 +97,7 @@ int	set_color(char **arr, t_vars *vars)
 		if (set_rgb(arr, vars, 'F'))
 			return (1);
 	}
-	else if (!ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
+	else if (!ft_strcmp(arr[0], "C"))
 	{
 		if (vars->map.info.ceiling)
 			return (1);

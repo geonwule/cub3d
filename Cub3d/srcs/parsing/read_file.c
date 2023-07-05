@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:01:36 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 18:48:29 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:11:45 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	process_map_info(t_vars *vars, int *cnt, char *line)
 
 	arr = ft_split(line, ' ');
 	errno = 0;
-	if (*cnt < 6 && ft_strncmp(line, "\n", 1) \
+	if (*cnt < 6 && ft_strcmp(line, "\n") \
 			&& !check_texture(line) && !check_color(line))
 	{
 		errno = 1;
@@ -76,7 +76,7 @@ static void	init_map_info(t_vars *vars, char *path)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (cnt == 6 && ft_strncmp(line, "\n", 1)
+		if (cnt == 6 && ft_strcmp(line, "\n")
 			&& !check_texture(line) && !check_color(line))
 		{
 			errno = set_map(vars, fd, line);

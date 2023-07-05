@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 18:21:25 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:13:07 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 int	set_texture(char **arr, t_vars *vars)
 {
-	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])))
+	if (!ft_strcmp(arr[0], "NO"))
 	{
 		if (vars->map.info.north)
 			return (1);
 		vars->map.info.north = allocate_and_copy_string(arr[1]);
 	}
-	else if (!ft_strncmp(arr[0], "SO", ft_strlen(arr[0])))
+	else if (!ft_strcmp(arr[0], "SO"))
 	{
 		if (vars->map.info.south)
 			return (1);
 		vars->map.info.south = allocate_and_copy_string(arr[1]);
 	}
-	else if (!ft_strncmp(arr[0], "WE", ft_strlen(arr[0])))
+	else if (!ft_strcmp(arr[0], "WE"))
 	{
 		if (vars->map.info.west)
 			return (1);
 		vars->map.info.west = allocate_and_copy_string(arr[1]);
 	}
-	else if (!ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
+	else if (!ft_strcmp(arr[0], "EA"))
 	{
 		if (vars->map.info.east)
 			return (1);
@@ -94,7 +94,7 @@ int	set_map(t_vars *vars, int fd, char *line)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (!ft_strncmp(line, "\n", 1))
+		if (!ft_strcmp(line, "\n"))
 		{
 			errno = 2;
 			break ;

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:56:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 20:06:13 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:11:22 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	check_color(char *line)
 	int		end;
 
 	arr = ft_split(line, ' ');
-	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0]))
-		|| !ft_strncmp(arr[0], "C", ft_strlen(arr[0])))
+	if (!ft_strcmp(arr[0], "F")
+		|| !ft_strcmp(arr[0], "C"))
 	{
 		if (line[0] == ' ')
 		{
