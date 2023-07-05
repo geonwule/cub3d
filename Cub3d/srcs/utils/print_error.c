@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:10:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 12:22:54 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:25:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_error(char *str, t_vars *vars)
 	printf("%s\n", str);
 	free_map(&vars->map);
 	printf("free map\n");
-	free_vars(vars);
-	printf("free vars\n");
+	// free_vars(vars);
+	// printf("free vars\n");
 	exit(1);
 }

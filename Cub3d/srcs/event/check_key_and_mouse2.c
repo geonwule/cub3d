@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_key_and_mouse2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:11:57 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:41:34 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:35:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	move_left_right(t_vars *vars, t_info *info, double move_speed)
 		info->pos_y += info->dir_x * move_speed;
 }
 
-void	rotate_left_right(t_info *info, double rot_speed)
-{
-	double	tmp;
+// void	rotate_left_right(t_info *info, double rot_speed)
+// {
+// 	double	tmp;
 
-	tmp = info->dir_x;
-	info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y \
-				* sin(-info->rot_speed);
-	info->dir_y = tmp * sin(-info->rot_speed) + info->dir_y \
-				* cos(-info->rot_speed);
-	tmp = info->plane_x;
-	info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y \
-				* sin(-info->rot_speed);
-	info->plane_y = tmp * sin(-info->rot_speed) + info->plane_y \
-				* cos(-info->rot_speed);
-}
+// 	tmp = info->dir_x;
+// 	info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y \
+// 				* sin(-info->rot_speed);
+// 	info->dir_y = tmp * sin(-info->rot_speed) + info->dir_y \
+// 				* cos(-info->rot_speed);
+// 	tmp = info->plane_x;
+// 	info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y \
+// 				* sin(-info->rot_speed);
+// 	info->plane_y = tmp * sin(-info->rot_speed) + info->plane_y \
+// 				* cos(-info->rot_speed);
+// }
 
 void	rotate_left(t_info *info, double rot_speed)
 {
