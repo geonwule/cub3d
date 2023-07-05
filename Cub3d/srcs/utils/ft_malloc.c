@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:10:20 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:11:21 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:16:44 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	*ft_malloc(size_t size)
 	bass = malloc(size);
 	if (bass == NULL)
 	{
+		printf("Error\n");
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}

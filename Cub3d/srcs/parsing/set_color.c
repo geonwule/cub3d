@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 16:05:01 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 18:38:06 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static int	process_set_rgb(t_vars *vars, char **rgb, char type)
 	{
 		tmp = ft_atoi_color(rgb[i]);
 		if (tmp < 0 || tmp > 255)
-		{
-			free_arr_2d(&rgb);
 			return (1);
-		}
 		if (type == 'F')
 			vars->map.info.f[i] = tmp;
 		else if (type == 'C')
@@ -80,16 +77,12 @@ static int	set_rgb(char **arr, t_vars *vars, char type)
 	if (count_rest_point(arr) != 2)
 		return (1);
 	rgb = ft_split(arr[1], ',');
-	if (size_arr_2d(rgb) != 3)
+	if (size_arr_2d(rgb) != 3 || check_digit_rgb(rgb) \
+		||process_set_rgb(vars, rgb, type))
 		errno = 1;
-	errno = check_digit_rgb(rgb);
-	errno = process_set_rgb(vars, rgb, type);
-	if (errno)
-	{
-		free_arr_2d(&rgb);
-		return (1);
-	}
 	free_arr_2d(&rgb);
+	if (errno)
+		return (1);
 	return (0);
 }
 
@@ -99,7 +92,7 @@ int	set_color(char **arr, t_vars *vars)
 	{
 		if (vars->map.info.floor)
 			return (1);
-		vars->map.info.floor = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.floor = allocate_and_copy_string(arr[1]);
 		if (set_rgb(arr, vars, 'F'))
 			return (1);
 	}
@@ -107,7 +100,7 @@ int	set_color(char **arr, t_vars *vars)
 	{
 		if (vars->map.info.ceiling)
 			return (1);
-		vars->map.info.ceiling = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.ceiling = allocate_and_copy_string(arr[1]);
 		if (set_rgb(arr, vars, 'C'))
 			return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 17:36:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:20:50 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	free_map(t_map *map);
 void	free_lst(t_list **head);
 
 // utils/alloc_copy_str.c
-char	*allocate_and_copy_string(char *src, t_vars *vars);
+char	*allocate_and_copy_string(char *src);
 
 // utils/size_arr_2d.c
 int		size_arr_2d(char **arr);

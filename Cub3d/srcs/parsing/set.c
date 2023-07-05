@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 18:01:15 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:21:25 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ int	set_texture(char **arr, t_vars *vars)
 	{
 		if (vars->map.info.north)
 			return (1);
-		vars->map.info.north = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.north = allocate_and_copy_string(arr[1]);
 	}
 	else if (!ft_strncmp(arr[0], "SO", ft_strlen(arr[0])))
 	{
 		if (vars->map.info.south)
 			return (1);
-		vars->map.info.south = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.south = allocate_and_copy_string(arr[1]);
 	}
 	else if (!ft_strncmp(arr[0], "WE", ft_strlen(arr[0])))
 	{
 		if (vars->map.info.west)
 			return (1);
-		vars->map.info.west = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.west = allocate_and_copy_string(arr[1]);
 	}
 	else if (!ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
 	{
 		if (vars->map.info.east)
 			return (1);
-		vars->map.info.east = allocate_and_copy_string(arr[1], vars);
+		vars->map.info.east = allocate_and_copy_string(arr[1]);
 	}
 	return (0);
 }
