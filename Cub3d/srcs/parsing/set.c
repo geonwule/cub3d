@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 14:37:14 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:55:48 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ static void	init_map_arr(t_vars *vars, t_list *head)
 	int		i;
 	int		j;
 	t_list	*cur;
+	char	*str;
 
-	vars->map.arr = (char **)malloc(sizeof(char *) * (vars->map.height + 1));
-	if (!vars->map.arr)
-		return ;
+	vars->map.arr = (char **)ft_malloc(sizeof(char *) * (vars->map.height + 1));
 	vars->map.arr[vars->map.height] = NULL;
 	i = 0;
 	cur = head;
 	while (cur)
 	{
-		vars->map.arr[i] = (char *)malloc(sizeof(char) * vars->map.width);
-		if (!vars->map.arr[i])
-			return ;
-		ft_memcpy(vars->map.arr[i], cur->content, ft_strlen(cur->content) - 1);
+		vars->map.arr[i] = (char *)ft_malloc(sizeof(char) * vars->map.width);
+		str = (char *)cur->content;
+		if (str[(int)ft_strlen(cur->content) - 1] == '\n')
+			ft_memcpy(vars->map.arr[i], cur->content, \
+					ft_strlen(cur->content) - 1);
 		j = ft_strlen(cur->content) - 1;
 		while (j <= vars->map.width - 1)
 		{
