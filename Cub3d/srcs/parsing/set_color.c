@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 18:38:06 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:56:56 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static int	check_digit_rgb(char **rgb)
 	int	i;
 	int	j;
 
+	print_arr_2d(rgb);
 	i = 0;
 	while (i < 3)
 	{
 		j = 0;
-		while (rgb[i][j] && rgb[i][j] != '\n')
+		while (rgb[i][j])
 		{
-			if (!ft_isdigit(rgb[i][j]) && !ft_strchr("+-", rgb[i][j]))
+			if (!ft_strchr("0123456789+-\n", rgb[i][j]) \
+				|| rgb[2][0] == '\n')
 				return (1);
 			j++;
 		}
