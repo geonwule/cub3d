@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 22:55:34 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:37:14 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	process_set_map(t_vars *vars, char *line, t_list *head)
 	tmp = ft_lstnew(line);
 	ft_lstadd_back(&head, tmp);
 	vars->map.height++;
-	if (vars->map.width < ft_strlen(line) - 1)
+	if (vars->map.width < (int)ft_strlen(line) - 1)
 		vars->map.width = ft_strlen(line) - 1;
 }
 

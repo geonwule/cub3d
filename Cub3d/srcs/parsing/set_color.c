@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/03 23:15:16 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:37:46 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	count_rest_point(char **arr)
 
 static int	set_rgb(char **arr, t_vars *vars, char type)
 {
-	int		i;
 	char	**rgb;
 	int		errno;
 
@@ -95,8 +94,6 @@ static int	set_rgb(char **arr, t_vars *vars, char type)
 
 int	set_color(char **arr, t_vars *vars)
 {
-	char	**rgb;
-
 	if (!ft_strncmp(arr[0], "F", ft_strlen(arr[0])))
 	{
 		if (vars->map.info.floor)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_function_dda.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:07:16 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 01:12:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:46:50 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	update_side_and_step(t_ray *ray, char **map)
+static void	update_side_and_step(t_ray *ray)
 {
 	if (ray->side_d[X] < ray->side_d[Y])
 	{
@@ -51,7 +51,7 @@ void	dda(t_vars *vars, char **map, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		update_side_and_step(ray, map);
+		update_side_and_step(ray);
 		check_hit_and_monster(vars, map, ray);
 	}
 }

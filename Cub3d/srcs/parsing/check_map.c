@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:30:28 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:47:41 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,6 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 		}
 	}
 	return (cnt);
-}
-
-static int	check_edge(int i, int j, t_vars *vars)
-{
-	char	**map;
-
-	map = vars->map.arr;
-	if ((i == 0 || i == (vars->map.height - 1) \
-		|| j == 0 || j == (vars->map.width - 1)) \
-		&& (map[i][j] != ' ' && map[i][j] != '1'))
-		return (1);
-	return (0);
 }
 
 static int	check_dir(int i, int j, t_vars *vars)

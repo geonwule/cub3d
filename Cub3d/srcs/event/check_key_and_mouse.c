@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:33:47 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 14:47:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	key_check(t_vars *vars)
 static void	mouse_check(t_vars *vars)
 {
 	t_info	*info;
-	double	tmp;
 
 	info = &vars->info;
 	if (vars->data.mouse_x > vars->data.mouse_old_x)

@@ -108,8 +108,7 @@ MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
-CFLAGS = -g
-#-Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 DEBUG_FLAG = -fsanitize=address  -g
 #-fsanitize=undefined  -g
