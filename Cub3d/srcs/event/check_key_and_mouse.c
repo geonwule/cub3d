@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 14:47:27 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:24:57 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	can_move(t_vars *vars, int x, int y)
 			vars->data.hp++;
 		return (1);
 	}
-	else if (spot == '0' || spot == 'N' || spot == 'S' \
-		|| spot == 'W' || spot == 'E' || spot == 'b')
+	else if (spot == '0' || spot == 'b')
 		return (1);
 	return (0);
 }
