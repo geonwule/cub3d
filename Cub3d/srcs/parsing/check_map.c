@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 18:06:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:48:03 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static int	check_dir(int i, int j, t_vars *vars)
 			k++;
 			continue ;
 		}
-		if (vars->map.arr[nx][ny] == ' ' \
-			&& (vars->map.arr[i][j] != '1' && vars->map.arr[i][j] != ' '))
+		if ((vars->map.arr[i][j] != '1' && vars->map.arr[i][j] != ' ') \
+			&& vars->map.arr[nx][ny] == ' ')
 			return (1);
 		k++;
 	}
