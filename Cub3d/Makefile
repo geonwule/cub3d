@@ -67,6 +67,7 @@ _UTILS_SRCS	=	print_error.c			\
 				size_arr_2d.c			\
 				random_generator.c		\
 				ft_malloc.c				\
+				ft_open.c				\
 				free_vars.c				\
 				exit_game.c				\
 				ft_get_data_addr.c		\

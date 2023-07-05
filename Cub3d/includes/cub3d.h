@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 14:23:41 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:36:27 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ int		random_generator(int frequency);
 // utils/ft_malloc.c
 void	*ft_malloc(size_t size);
 
+// utils/ft_open.c
+int		ft_open(char *file_path);
+
 // utils/free_vars.c
 void	free_vars(t_vars *vars);
 
@@ -166,7 +169,7 @@ void	read_file(t_vars *vars, char *path);
 
 // parsing/set.c
 int		set_texture(char **arr, t_vars *vars);
-void	set_map(t_vars *vars, int fd, char *line);
+int		set_map(t_vars *vars, int fd, char *line);
 
 // parsing/set_color.c
 int		set_color(char **arr, t_vars *vars);
