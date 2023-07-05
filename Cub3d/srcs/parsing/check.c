@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:56:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 17:05:14 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:06:13 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	check_texture(char *line)
 	int		end;
 
 	arr = ft_split(line, ' ');
-	if (!ft_strncmp(arr[0], "NO", ft_strlen(arr[0])) \
-			|| !ft_strncmp(arr[0], "SO", ft_strlen(arr[0])) \
-			|| !ft_strncmp(arr[0], "WE", ft_strlen(arr[0])) \
-			|| !ft_strncmp(arr[0], "EA", ft_strlen(arr[0])))
+	if (!ft_strcmp(arr[0], "NO") \
+			|| !ft_strcmp(arr[0], "SO") \
+			|| !ft_strcmp(arr[0], "WE") \
+			|| !ft_strcmp(arr[0], "EA"))
 	{
 		if (line[0] == ' ')
 		{
