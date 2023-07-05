@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:44:47 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:08:33 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:50:39 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	press_b(t_vars *vars, double nx, double ny, int i)
 	i = -1;
 	while (++i < 4)
 	{
-		nx = info->posX + dx[i];
-		ny = info->posY + dy[i];
+		nx = info->pos_x + dx[i];
+		ny = info->pos_y + dy[i];
 		spot = map[(int)nx][(int)ny];
 		if (nx < 0 || nx >= WIN_HEIGHT || ny < 0 || ny >= WIN_WIDTH)
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:17:52 by geonwule          #+#    #+#             */
-/*   Updated: 2022/11/20 16:43:51 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:09:34 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,4 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-
 #endif

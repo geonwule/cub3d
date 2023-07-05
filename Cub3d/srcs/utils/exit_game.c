@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 21:10:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 12:22:54 by jonchoi          ###   ########.fr       */
+/*   Created: 2023/07/05 11:15:17 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/05 11:18:45 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_error(char *str, t_vars *vars)
+int	exit_game(t_vars *vars)
 {
-	printf("Error\n");
-	printf("%s\n", str);
+	write(1, "Player has exited the game\n", 27);
+	mlx_destroy_window(vars->mlx, vars->win);
 	free_map(&vars->map);
-	printf("free map\n");
 	free_vars(vars);
-	printf("free vars\n");
-	exit(1);
+	exit(EXIT_SUCCESS);
 }

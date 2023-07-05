@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:23:47 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 19:34:10 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:55:53 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	process_minimap_put_mlx(t_vars *vars, char **map, int x, int y)
 {
-	if (x == (int)vars->info.posX && y == (int)vars->info.posY)
+	if (x == (int)vars->info.pos_x && y == (int)vars->info.pos_y)
 		mlx_put_image_to_window(vars->mlx, vars->win, \
 					vars->mini.player_x, y * 10, x * 10);
 	else if (map[x][y] == '1')
@@ -54,10 +54,10 @@ static void	minimap_put_mlx(t_vars *vars, char **map, \
 		}
 		x++;
 	}
-	x = (int)vars->info.posX;
-	y = (int)vars->info.posY;
+	x = (int)vars->info.pos_x;
+	y = (int)vars->info.pos_y;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.dir_x, \
-			y * 10 + vars->info.dirY * 7, x * 10 + vars->info.dirX * 7);
+			y * 10 + vars->info.dir_y * 7, x * 10 + vars->info.dir_x * 7);
 }
 
 void	mini_map(t_vars *vars)

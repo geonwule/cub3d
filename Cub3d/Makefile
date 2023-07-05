@@ -11,13 +11,6 @@ _GNL_SRCS	= get_next_line.c \
 
 GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 
-FUNC_DIR	= srcs/function/
-
-_FUNC_SRCS	= function.c \
-			  mlx_function.c \
-
-FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
-
 PARSING_DIR	= srcs/parsing/
 
 _PARSING_SRCS	= read_file.c		\
@@ -34,8 +27,12 @@ PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
 INIT_DIR	= srcs/init/
 
-_INIT_SRCS	= vars_init.c \
-			  background_init.c \
+_INIT_SRCS	=	init_vars_info.c	\
+				init_vars.c			\
+				background_init.c	\
+				load_texture.c		\
+				img_xpm_set.c		\
+
 
 INIT_SRCS	= $(addprefix $(INIT_DIR), $(_INIT_SRCS))
 
@@ -64,10 +61,16 @@ EVENT_SRCS	= $(addprefix $(EVENT_DIR), $(_EVENT_SRCS))
 
 UTILS_DIR	= srcs/utils/
 
-_UTILS_SRCS	=	print_error.c	\
-				free.c			\
-				alloc_copy_str.c\
-				size_arr_2d.c	\
+_UTILS_SRCS	=	print_error.c			\
+				free.c					\
+				alloc_copy_str.c		\
+				size_arr_2d.c			\
+				random_generator.c		\
+				ft_malloc.c				\
+				free_vars.c				\
+				exit_game.c				\
+				ft_get_data_addr.c		\
+				ft_xpm_file_to_image.c	\
 
 UTILS_SRCS	= $(addprefix $(UTILS_DIR), $(_UTILS_SRCS))
 
@@ -80,7 +83,6 @@ TEST_SRCS	= $(addprefix $(TEST_DIR), $(_TEST_SRCS))
 
 SRCS = srcs/main.c \
 	   ${PARSING_SRCS} \
-	   ${FUNC_SRCS} \
 	   ${GNL_SRCS} \
 	   ${INIT_SRCS} \
 	   ${EVENT_SRCS} \

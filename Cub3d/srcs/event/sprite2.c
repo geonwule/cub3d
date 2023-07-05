@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:06:28 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 19:28:17 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:08:26 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite)
 	while (++i < vars->sprite.sprite_num)
 	{
 		order[i] = i;
-		dist[i] = ((info->posX - sprite[i].x) * (info->posX - sprite[i].x) \
-			+ (info->posY - sprite[i].y) * (info->posY - sprite[i].y));
+		dist[i] = ((info->pos_x - sprite[i].x) * (info->pos_x - sprite[i].x) \
+			+ (info->pos_y - sprite[i].y) * (info->pos_y - sprite[i].y));
 	}
 	sort_order(order, dist, vars->sprite.sprite_num);
 	free(dist);
@@ -91,7 +91,7 @@ static void	sprite_to_screen(t_vars *vars, int tex_num, int x)
 		tex[X] = (int)((256 * (x - (-sprite.sp_width / 2 + sprite.screen_x)) \
 				* TEX_WIDTH / sprite.sp_width) / 256);
 		if (sprite.trans[Y] > 0 && x > 0 && x < WIN_WIDTH \
-			&& sprite.trans[Y] < vars->info.zBuffer[x])
+			&& sprite.trans[Y] < vars->info.z_buffer[x])
 			draw_y(vars, tex_num, x, tex);
 		x++;
 	}
@@ -99,11 +99,12 @@ static void	sprite_to_screen(t_vars *vars, int tex_num, int x)
 
 void	calculate_sprite(t_vars *vars, t_info *i, int idx, t_sprite *s)
 {
-	s->pos[X] = vars->sprite.sp[idx].x - i->posX;
-	s->pos[Y] = vars->sprite.sp[idx].y - i->posY;
-	s->inv_det = 1.0 / (i->planeX * i->dirY - i->dirX * i->planeY);
-	s->trans[X] = s->inv_det * (i->dirY * s->pos[X] - i->dirX * s->pos[Y]);
-	s->trans[Y] = s->inv_det * (-i->planeY * s->pos[X] + i->planeX * s->pos[Y]);
+	s->pos[X] = vars->sprite.sp[idx].x - i->pos_x;
+	s->pos[Y] = vars->sprite.sp[idx].y - i->pos_y;
+	s->inv_det = 1.0 / (i->plane_x * i->dir_y - i->dir_x * i->plane_y);
+	s->trans[X] = s->inv_det * (i->dir_y * s->pos[X] - i->dir_x * s->pos[Y]);
+	s->trans[Y] = s->inv_det * \
+					(-i->plane_y * s->pos[X] + i->plane_x * s->pos[Y]);
 	s->screen_x = (int)((WIN_WIDTH / 2) * (1 + s->trans[X] / s->trans[Y]));
 	s->vm_screen = (int)(vars->sprite.v_move / s->trans[Y]);
 	s->sp_height = (int)fabs((WIN_HEIGHT / s->trans[Y]) / s->v_div);

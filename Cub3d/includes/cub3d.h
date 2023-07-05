@@ -6,40 +6,34 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 19:46:02 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:21:07 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../Libft/libft.h"
-#include "../mlx_opengl/mlx.h" // mlx.h
-#include "define.h"
-#include <fcntl.h> // open
-#include <unistd.h> //close, read, write
-#include <stdio.h> // printf, perror, strerror
-#include <stdlib.h> // malloc, free, exit
-#include <math.h> // math.h
+# include "../Libft/libft.h"
+# include "../mlx_opengl/mlx.h"
+# include "define.h"
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <time.h>
+# include <sys/time.h>
 
-//debug
-// #define MAP_DEBUG
-// # define DEBUG
-// # define KEY_DEBUG
-// # define DEBUG_LEAK
-// #define DEBUG_MON
-
-typedef	struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	int		*data;
-
 	int		size_l;
 	int		bpp;
 	int		endian;
 	int		img_width;
 	int		img_height;
-}	t_img;
+}			t_img;
 
 typedef struct s_ray
 {
@@ -64,35 +58,32 @@ typedef struct s_ray
 	int		color;
 }	t_ray;
 
-typedef struct  s_info
+typedef struct s_info
 {
-	//jonn
-    double  posX;
-    double  posY;
-    double  dirX;
-    double  dirY;
-
-    double  planeX;
-    double  planeY;
-    void    *mlx;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	void	*mlx;
 	void	*win;
-	double	moveSpeed;
-	double	rotSpeed;
-
+	double	move_speed;
+	double	rot_speed;
 	t_img	img;
 	int		buf[WIN_HEIGHT][WIN_WIDTH];
-	double	zBuffer[WIN_WIDTH];
+	double	z_buffer[WIN_WIDTH];
 	int		**texture;
-}	t_info;
+}			t_info;
 
-typedef struct	s_sp
+typedef struct s_sp
 {
 	double		x;
 	double		y;
 	int			texture;
 }	t_sp;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	t_sp	*sp;
 	int		sprite_num;
@@ -125,7 +116,7 @@ typedef struct s_map_info
 	int		c[3];
 }			t_map_info;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	t_map_info	info;
 	int			height;
@@ -208,9 +199,17 @@ typedef struct s_vars
 	t_sprite	sprite;
 }	t_vars;
 
-//vars_init
-void	init_vars(t_vars *vars);
+// init/init_vars_info.c
 int		init_vars_info(t_vars *vars);
+
+// init/init_vars.c
+void	init_vars(t_vars *vars);
+
+// init/load_texture.c
+void	load_texture(t_vars *vars, t_info *info);
+
+// init/img_xpm_set.c
+void	img_xpm_set(t_vars *vars);
 
 //background_init
 void	fill_background(t_vars *vars, int ceiling[3], int floor[3]);
@@ -226,38 +225,38 @@ void	rotate_left_right(t_info *info, double rot_speed);
 void	rotate_left(t_info *info, double rot_speed);
 void	rotate_right(t_info *info, double rot_speed);
 
-//event/event_function1.c
+// event/event_function1.c
 void	attack(t_vars *vars);
 void	reset_game(t_vars *vars);
 
-//event/event_function2.c
+// event/event_function2.c
 void	return_ellinia(t_vars *vars);
 void	open_door_tell_npc(t_vars *vars, char **map);
 void	adjust_gamespeed(t_info *info, int keycode);
 void	turn_back(t_info *info);
 
-//evnet/key_event
+// evnet/key_event
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 
-//event/manage_monster
+// event/manage_monster
 void	manage_monster(t_vars *vars);
 
-//evnet/monster_kill
+// evnet/monster_kill
 void	monster_kill(t_vars *vars, t_info *info, char **map);
 
-//evnet/mouse_event
+// evnet/mouse_event
 int		handle_mouse_button(int button, int x, int y, void *args);
 int		handle_mouse_move(int x, int y, void *args);
 
-//evnet/print_window
+// evnet/print_window
 void	print_window1(t_vars *vars);
 void	print_window2(t_vars *vars);
 
-//evnet/ray_casting
+// evnet/ray_casting
 void	ray_casting(t_vars *vars, t_info *info, char **map);
 
-//event/ray_function
+// event/ray_function
 void	init_ray(t_info *info, t_ray *ray, int x);
 void	check_ray_dir(t_info *info, t_ray *ray);
 void	check_ray_texture(t_info *info, t_ray *ray, char **map);
@@ -266,37 +265,26 @@ void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 // event/ray_function_dda.c
 void	dda(t_vars *vars, char **map, t_ray *ray);
 
-//evnet/sprite
+// evnet/sprite
 void	sprite(t_vars *vars);
 
-//event/sprite2
+// event/sprite2
 int		*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite);
 void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
 
-//event/redering
+// event/redering
 int		rendering(t_vars *vars);
 
 // event/mini_map.c
 void	mini_map(t_vars *vars);
 
-//get_next_line
+// get_next_line
 char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(const char *s);
 char	*ft_strdup_gnl(const char *s1, char *back);
 char	*ft_strchr_gnl(const char *s, int c);
 size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
-
-//mlx_function
-void	*ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
-char	*ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
-
-//function
-void	*ft_malloc(size_t size);
-int		ft_open(char *file_path);
-void	free_vars(t_vars *vars);
-int		exit_game(t_vars *vars);
-int		random_generator(int frequency);
 
 //ft_lstcub
 t_map	*ft_lstnew_cub(void *content);
@@ -310,7 +298,7 @@ void	print_color(t_vars *vars);
 void	print_arr_2d(char **arr);
 void	print_lst(t_list *head);
 
-//	utils/print_error.c
+// utils/print_error.c
 void	print_error(char *str, t_vars *vars);
 
 // utils/free.c
@@ -323,6 +311,24 @@ char	*allocate_and_copy_string(char *src, t_vars *vars);
 
 // utils/size_arr_2d.c
 int		size_arr_2d(char **arr);
+
+// utils/random_generator
+int		random_generator(int frequency);
+
+// utils/ft_malloc.c
+void	*ft_malloc(size_t size);
+
+// utils/free_vars.c
+void	free_vars(t_vars *vars);
+
+// utils/exit_game.c
+int		exit_game(t_vars *vars);
+
+// utils/ft_get_data_addr.c
+char	*ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end);
+
+// utils/ft_xpm_file_to_image.c
+void	*ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h);
 
 // parsing/check.c
 void	check_file(t_vars *vars, char *path);

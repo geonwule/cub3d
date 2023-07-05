@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:31:12 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:13:56 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:47:01 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	adjust_gamespeed(t_info *info, int keycode)
 {
 	if (keycode == N)
 	{
-		info->moveSpeed -= 0.01;
-		info->rotSpeed -= 0.01;
+		info->move_speed -= 0.01;
+		info->rot_speed -= 0.01;
 	}
 	else if (keycode == M)
 	{
-		info->moveSpeed += 0.01;
-		info->rotSpeed += 0.01;
+		info->move_speed += 0.01;
+		info->rot_speed += 0.01;
 	}
 }
 
 void	turn_back(t_info *info)
 {
-	info->dirX *= -1;
-	info->dirY *= -1;
-	info->planeX *= -1;
-	info->planeY *= -1;
+	info->dir_x *= -1;
+	info->dir_y *= -1;
+	info->plane_x *= -1;
+	info->plane_y *= -1;
 }
 
 static int	is_door_or_npc(t_vars *vars, int x, int y)
@@ -56,8 +56,8 @@ void	open_door_tell_npc(t_vars *vars, char **map)
 	i = -1;
 	while (++i < 4)
 	{
-		tmp[X] = info->posX + dx[i];
-		tmp[Y] = info->posY + dy[i];
+		tmp[X] = info->pos_x + dx[i];
+		tmp[Y] = info->pos_y + dy[i];
 		if (tmp[X] < 0 || tmp[X] >= WIN_HEIGHT \
 			|| tmp[Y] < 0 || tmp[Y] >= WIN_WIDTH \
 			|| !is_door_or_npc(vars, (int)tmp[X], (int)tmp[Y]))
@@ -76,10 +76,10 @@ void	return_ellinia(t_vars *vars)
 	t_info	*info;
 
 	info = &vars->info;
-	info->posX = vars->data.init_pos[X];
-	info->posY = vars->data.init_pos[Y];
-	info->dirX = vars->data.init_dir[X];
-	info->dirY = vars->data.init_dir[Y];
-	info->planeX = vars->data.init_plane[X];
-	info->planeY = vars->data.init_plane[Y];
+	info->pos_x = vars->data.init_pos[X];
+	info->pos_y = vars->data.init_pos[Y];
+	info->dir_x = vars->data.init_dir[X];
+	info->dir_y = vars->data.init_dir[Y];
+	info->plane_x = vars->data.init_plane[X];
+	info->plane_y = vars->data.init_plane[Y];
 }

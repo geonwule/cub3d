@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:12:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 11:33:47 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ static void	key_check(t_vars *vars)
 	if (vars->data.keyboard[ESC])
 		exit_game(vars);
 	if (vars->data.keyboard[W])
-		move_forward_backward(vars, info, info->moveSpeed);
+		move_forward_backward(vars, info, info->move_speed);
 	if (vars->data.keyboard[S])
-		move_forward_backward(vars, info, -info->moveSpeed);
+		move_forward_backward(vars, info, -info->move_speed);
 	if (vars->data.keyboard[D])
-		move_left_right(vars, info, -info->moveSpeed);
+		move_left_right(vars, info, -info->move_speed);
 	if (vars->data.keyboard[A])
-		move_left_right(vars, info, info->moveSpeed);
+		move_left_right(vars, info, info->move_speed);
 	if (vars->data.keyboard[LEFT])
-		rotate_left(info, info->rotSpeed);
+		rotate_left(info, info->rot_speed);
 	if (vars->data.keyboard[RIGHT])
-		rotate_right(info, info->rotSpeed);
+		rotate_right(info, info->rot_speed);
 }
 
 static void	mouse_check(t_vars *vars)
@@ -58,9 +58,9 @@ static void	mouse_check(t_vars *vars)
 
 	info = &vars->info;
 	if (vars->data.mouse_x > vars->data.mouse_old_x)
-		rotate_left(info, info->rotSpeed);
+		rotate_left(info, info->rot_speed);
 	if (vars->data.mouse_x < vars->data.mouse_old_x)
-		rotate_right(info, info->rotSpeed);
+		rotate_right(info, info->rot_speed);
 	if (++vars->data.render_i % 5 == 0)
 	{
 		vars->data.mouse_old_x = vars->data.mouse_x;

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   free_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 21:10:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 12:22:54 by jonchoi          ###   ########.fr       */
+/*   Created: 2023/07/05 11:13:35 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/05 11:15:07 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_error(char *str, t_vars *vars)
+void	free_vars(t_vars *vars)
 {
-	printf("Error\n");
-	printf("%s\n", str);
-	free_map(&vars->map);
-	printf("free map\n");
-	free_vars(vars);
-	printf("free vars\n");
-	exit(1);
+	int	i;
+
+	i = 0;
+	if (vars->info.texture)
+	{
+		while (i < TEX_NUM)
+		{
+			free(vars->info.texture[i]);
+			i++;
+		}
+		free(vars->info.texture);
+	}
+	if (vars->sprite.sp)
+		free(vars->sprite.sp);
 }

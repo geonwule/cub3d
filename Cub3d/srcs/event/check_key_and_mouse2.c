@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:11:57 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:16:43 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 11:41:34 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,68 +14,68 @@
 
 void	move_forward_backward(t_vars *vars, t_info *info, double move_speed)
 {
-	if (can_move(vars, (int)(info->posX + info->dirX * move_speed), \
-			(int)(info->posY)))
-		info->posX += info->dirX * move_speed;
-	if (can_move(vars, (int)(info->posX), \
-			(int)(info->posY + info->dirY * move_speed)))
-		info->posY += info->dirY * move_speed;
+	if (can_move(vars, (int)(info->pos_x + info->dir_x * move_speed), \
+			(int)(info->pos_y)))
+		info->pos_x += info->dir_x * move_speed;
+	if (can_move(vars, (int)(info->pos_x), \
+			(int)(info->pos_y + info->dir_y * move_speed)))
+		info->pos_y += info->dir_y * move_speed;
 }
 
 void	move_left_right(t_vars *vars, t_info *info, double move_speed)
 {
-	if (can_move(vars, (int)(info->posX - info->dirY * move_speed), \
-			(int)(info->posY)))
-		info->posX -= info->dirY * move_speed;
-	if (can_move(vars, (int)(info->posX), \
-			(int)(info->posY + info->dirX * move_speed)))
-		info->posY += info->dirX * move_speed;
+	if (can_move(vars, (int)(info->pos_x - info->dir_y * move_speed), \
+			(int)(info->pos_y)))
+		info->pos_x -= info->dir_y * move_speed;
+	if (can_move(vars, (int)(info->pos_x), \
+			(int)(info->pos_y + info->dir_x * move_speed)))
+		info->pos_y += info->dir_x * move_speed;
 }
 
 void	rotate_left_right(t_info *info, double rot_speed)
 {
 	double	tmp;
 
-	tmp = info->dirX;
-	info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY \
-				* sin(-info->rotSpeed);
-	info->dirY = tmp * sin(-info->rotSpeed) + info->dirY \
-				* cos(-info->rotSpeed);
-	tmp = info->planeX;
-	info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY \
-				* sin(-info->rotSpeed);
-	info->planeY = tmp * sin(-info->rotSpeed) + info->planeY \
-				* cos(-info->rotSpeed);
+	tmp = info->dir_x;
+	info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y \
+				* sin(-info->rot_speed);
+	info->dir_y = tmp * sin(-info->rot_speed) + info->dir_y \
+				* cos(-info->rot_speed);
+	tmp = info->plane_x;
+	info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y \
+				* sin(-info->rot_speed);
+	info->plane_y = tmp * sin(-info->rot_speed) + info->plane_y \
+				* cos(-info->rot_speed);
 }
 
 void	rotate_left(t_info *info, double rot_speed)
 {
 	double	tmp;
 
-	tmp = info->dirX;
-	info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY \
-				* sin(-info->rotSpeed);
-	info->dirY = tmp * sin(-info->rotSpeed) + info->dirY \
-				* cos(-info->rotSpeed);
-	tmp = info->planeX;
-	info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY \
-				* sin(-info->rotSpeed);
-	info->planeY = tmp * sin(-info->rotSpeed) + info->planeY \
-				* cos(-info->rotSpeed);
+	tmp = info->dir_x;
+	info->dir_x = info->dir_x * cos(-info->rot_speed) - info->dir_y \
+				* sin(-info->rot_speed);
+	info->dir_y = tmp * sin(-info->rot_speed) + info->dir_y \
+				* cos(-info->rot_speed);
+	tmp = info->plane_x;
+	info->plane_x = info->plane_x * cos(-info->rot_speed) - info->plane_y \
+				* sin(-info->rot_speed);
+	info->plane_y = tmp * sin(-info->rot_speed) + info->plane_y \
+				* cos(-info->rot_speed);
 }
 
 void	rotate_right(t_info *info, double rot_speed)
 {
 	double	tmp;
 
-	tmp = info->dirX;
-	info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY \
-				* sin(info->rotSpeed);
-	info->dirY = tmp * sin(info->rotSpeed) + info->dirY \
-				* cos(info->rotSpeed);
-	tmp = info->planeX;
-	info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY \
-				* sin(info->rotSpeed);
-	info->planeY = tmp * sin(info->rotSpeed) + info->planeY \
-				* cos(info->rotSpeed);
+	tmp = info->dir_x;
+	info->dir_x = info->dir_x * cos(info->rot_speed) - info->dir_y \
+				* sin(info->rot_speed);
+	info->dir_y = tmp * sin(info->rot_speed) + info->dir_y \
+				* cos(info->rot_speed);
+	tmp = info->plane_x;
+	info->plane_x = info->plane_x * cos(info->rot_speed) - info->plane_y \
+				* sin(info->rot_speed);
+	info->plane_y = tmp * sin(info->rot_speed) + info->plane_y \
+				* cos(info->rot_speed);
 }

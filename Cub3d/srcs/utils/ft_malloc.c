@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 21:10:56 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 12:22:54 by jonchoi          ###   ########.fr       */
+/*   Created: 2023/07/05 11:10:20 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/05 11:11:21 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_error(char *str, t_vars *vars)
+void	*ft_malloc(size_t size)
 {
-	printf("Error\n");
-	printf("%s\n", str);
-	free_map(&vars->map);
-	printf("free map\n");
-	free_vars(vars);
-	printf("free vars\n");
-	exit(1);
+	void	*bass;
+
+	bass = malloc(size);
+	if (bass == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	return (bass);
 }

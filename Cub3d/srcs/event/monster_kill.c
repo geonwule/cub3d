@@ -6,7 +6,7 @@
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:40:53 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 04:42:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 11:50:24 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	init_ray_m(t_info *info, t_ray *ray)
 {
 	ray->camera_x = 0;
-	ray->dir[X] = info->dirX + info->planeX * ray->camera_x;
-	ray->dir[Y] = info->dirY + info->planeY * ray->camera_x;
-	ray->map[X] = (int)info->posX;
-	ray->map[Y] = (int)info->posY;
+	ray->dir[X] = info->dir_x + info->plane_x * ray->camera_x;
+	ray->dir[Y] = info->dir_y + info->plane_y * ray->camera_x;
+	ray->map[X] = (int)info->pos_x;
+	ray->map[Y] = (int)info->pos_y;
 	ray->delta_d[X] = fabs(1 / ray->dir[X]);
 	ray->delta_d[Y] = fabs(1 / ray->dir[Y]);
 	ray->hit = 0;
@@ -29,22 +29,22 @@ static void	check_ray_dir_m(t_info *info, t_ray *ray)
 	if (ray->dir[X] < 0)
 	{
 		ray->step[X] = -1;
-		ray->side_d[X] = (info->posX - ray->map[X]) * ray->delta_d[X];
+		ray->side_d[X] = (info->pos_x - ray->map[X]) * ray->delta_d[X];
 	}
 	else
 	{
 		ray->step[X] = 1;
-		ray->side_d[X] = (ray->map[X] + 1.0 - info->posX) * ray->delta_d[X];
+		ray->side_d[X] = (ray->map[X] + 1.0 - info->pos_x) * ray->delta_d[X];
 	}
 	if (ray->dir[Y] < 0)
 	{
 		ray->step[Y] = -1;
-		ray->side_d[Y] = (info->posY - ray->map[Y]) * ray->delta_d[Y];
+		ray->side_d[Y] = (info->pos_y - ray->map[Y]) * ray->delta_d[Y];
 	}
 	else
 	{
 		ray->step[Y] = 1;
-		ray->side_d[Y] = (ray->map[Y] + 1.0 - info->posY) * ray->delta_d[Y];
+		ray->side_d[Y] = (ray->map[Y] + 1.0 - info->pos_y) * ray->delta_d[Y];
 	}
 }
 
