@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:22:57 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 03:44:41 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/05 12:42:52 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		print_error("Need one argument", &vars);
+		printf("Error\n");
+		printf("Need one argument\n");
 		return (RETURN_FAILURE);
 	}
 	init_vars(&vars);

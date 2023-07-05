@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:01:36 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 15:14:36 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:35:05 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	process_map_info(t_vars *vars, int *cnt, char *line)
 			&& !check_texture(line) && !check_color(line))
 	{
 		errno = 1;
+		free_arr_2d(&arr);
 		return (errno);
 	}
 	else if (check_texture(line))
@@ -58,6 +59,7 @@ static int	process_map_info(t_vars *vars, int *cnt, char *line)
 		errno = set_color(arr, vars);
 		(*cnt)++;
 	}
+	free_arr_2d(&arr);
 	return (errno);
 }
 

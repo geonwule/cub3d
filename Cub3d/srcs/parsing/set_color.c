@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:15:09 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 14:37:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:05:01 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static int	set_rgb(char **arr, t_vars *vars, char type)
 		free_arr_2d(&rgb);
 		return (1);
 	}
+	free_arr_2d(&rgb);
 	return (0);
 }
 

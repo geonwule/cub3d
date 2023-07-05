@@ -3,7 +3,7 @@ SO ./texture/ray/so.xpm
 WE ./texture/ray/we.xpm
 EA ./texture/ray/ea.xpm
 
-F 0,50,0
+F 0,50,100
 C 0,100,0
         1111111111111111111111111
         1000000000110000000000001    
