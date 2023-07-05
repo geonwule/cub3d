@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:30:34 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 20:13:07 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/06 00:27:35 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	set_map(t_vars *vars, int fd, char *line)
 	errno = 0;
 	head = ft_lstnew(line);
 	vars->map.height++;
+	if (vars->map.width < (int)ft_strlen(line) - 1)
+		vars->map.width = ft_strlen(line) - 1;
 	while (1)
 	{
 		line = get_next_line(fd);
