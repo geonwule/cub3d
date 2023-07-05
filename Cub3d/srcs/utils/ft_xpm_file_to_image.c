@@ -19,8 +19,8 @@ void	*ft_xpm_file_to_image(void *mlx_ptr, char *path, int *w, int *h)
 	img = mlx_xpm_file_to_image(mlx_ptr, path, w, h);
 	if (img == NULL)
 	{
-		printf("Error: mlx_xpm_file_to_image :");
-		printf("%s not exist\n", path);
+		printf("Error\n");
+		printf("mlx_xpm_file_to_image: %s not exist\n", path);
 		exit(EXIT_FAILURE);
 	}
 	return (img);

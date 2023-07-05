@@ -19,8 +19,8 @@ char	*ft_get_data_addr(void *img_ptr, int *bits, int *size, int *end)
 	data = mlx_get_data_addr(img_ptr, bits, size, end);
 	if (data == NULL)
 	{
-		printf("Error: mlx_get_data_addr :");
-		printf("img_ptr not exist\n");
+		printf("Error\n");
+		printf("mlx_get_data_addr: img_ptr not exist\n");
 		exit(EXIT_FAILURE);
 	}
 	return (data);
