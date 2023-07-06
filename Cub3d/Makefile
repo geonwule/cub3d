@@ -29,7 +29,7 @@ INIT_DIR	= srcs/init/
 
 _INIT_SRCS	=	init_vars_info.c	\
 				init_vars.c			\
-				background_init.c	\
+				init_background.c	\
 				load_texture.c		\
 				img_xpm_set.c		\
 
@@ -44,7 +44,7 @@ _EVENT_SRCS	= check_key_and_mouse.c		\
 			  event_function2.c			\
 			  key_event.c				\
 			  manage_monster.c			\
-			  monster_kill.c			\
+			  kill_monster.c			\
 			  mouse_event.c				\
 			  print_window1.c			\
 			  print_window2.c			\
