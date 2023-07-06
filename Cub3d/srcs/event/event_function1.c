@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:28:40 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:59:45 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/07 02:26:58 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	attack(t_vars *vars)
 	shot2 = ft_xpm_file_to_image(vars->mlx, "texture/etc/clo_2.xpm", &x, &y);
 	mlx_put_image_to_window(vars->mlx, vars->win, shot2, WIN_WIDTH / 12 * 5, \
 			WIN_HEIGHT / 3);
-	monster_kill(vars, &vars->info, vars->map.arr);
+	kill_monster(vars, &vars->info, vars->map.arr);
 }
 
 void	reset_game(t_vars *vars)

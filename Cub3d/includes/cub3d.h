@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 18:20:50 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/07 02:27:30 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	load_texture(t_vars *vars, t_info *info);
 // init/img_xpm_set.c
 void	img_xpm_set(t_vars *vars);
 
-//background_init
+//	init/init_background.c
 void	fill_background(t_vars *vars, int ceiling[3], int floor[3]);
 
-// evnet/check_key_and_mouse.c
+// event/check_key_and_mouse.c
 int		can_move(t_vars *vars, int x, int y);
 void	check_key_and_mouse(t_vars *vars);
 
-// evnet/check_key_and_mouse2.c
+// event/check_key_and_mouse2.c
 void	move_forward_backward(t_vars *vars, t_info *info, double move_speed);
 void	move_left_right(t_vars *vars, t_info *info, double move_speed);
 void	rotate_left_right(t_info *info, double rot_speed);
@@ -61,28 +61,30 @@ void	open_door_tell_npc(t_vars *vars, char **map);
 void	adjust_gamespeed(t_info *info, int keycode);
 void	turn_back(t_info *info);
 
-// evnet/key_event
+// event/key_event.c
 int		key_release(int keycode, t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
 
-// event/manage_monster
+// event/manage_monster.c
 void	manage_monster(t_vars *vars);
 
-// evnet/monster_kill
+// event/kill_monster.c
 void	monster_kill(t_vars *vars, t_info *info, char **map);
 
-// evnet/mouse_event
+// event/mouse_event.c
 int		handle_mouse_button(int button, int x, int y, void *args);
 int		handle_mouse_move(int x, int y, void *args);
 
-// evnet/print_window
+// event/print_window1.c
 void	print_window1(t_vars *vars);
+
+// event/print_window2.c
 void	print_window2(t_vars *vars);
 
-// evnet/ray_casting
+// event/ray_casting.c
 void	ray_casting(t_vars *vars, t_info *info, char **map);
 
-// event/ray_function
+// event/ray_function.c
 void	init_ray(t_info *info, t_ray *ray, int x);
 void	check_ray_dir(t_info *info, t_ray *ray);
 void	check_ray_texture(t_info *info, t_ray *ray, char **map);
@@ -91,14 +93,14 @@ void	apply_texture(t_info *info, t_ray *ray, int x, int y);
 // event/ray_function_dda.c
 void	dda(t_vars *vars, char **map, t_ray *ray);
 
-// evnet/sprite
+// event/sprite.c
 void	sprite(t_vars *vars);
 
-// event/sprite2
+// event/sprite2.c
 int		*sort_sprite(t_vars *vars, t_info *info, t_sp *sprite);
 void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
 
-// event/redering
+// event/rendering.c
 int		rendering(t_vars *vars);
 
 // event/mini_map.c
@@ -111,12 +113,6 @@ char	*ft_strdup_gnl(const char *s1, char *back);
 char	*ft_strchr_gnl(const char *s, int c);
 size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
-
-//ft_lstcub
-t_map	*ft_lstnew_cub(void *content);
-t_map	*ft_lstlast_cub(t_map *lst);
-void	ft_lstadd_back_cub(t_map **lst, t_map *new);
-int		ft_lstsize_cub(t_map *lst);
 
 // test/print.c
 void	print_texture(t_vars *vars);
@@ -138,7 +134,7 @@ char	*allocate_and_copy_string(char *src);
 // utils/size_arr_2d.c
 int		size_arr_2d(char **arr);
 
-// utils/random_generator
+// utils/random_generator.c
 int		random_generator(int frequency);
 
 // utils/ft_malloc.c

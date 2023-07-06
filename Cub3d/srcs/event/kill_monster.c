@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monster_kill.c                                     :+:      :+:    :+:   */
+/*   kill_monster.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 04:40:53 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:50:24 by jonchoi          ###   ########.fr       */
+/*   Created: 2023/07/07 02:26:13 by jonchoi           #+#    #+#             */
+/*   Updated: 2023/07/07 02:26:33 by jonchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	drop_item(t_vars *vars, char **map, t_ray *ray)
 		vars->data.quest_monster_num--;
 }
 
-void	monster_kill(t_vars *vars, t_info *info, char **map)
+void	kill_monster(t_vars *vars, t_info *info, char **map)
 {
 	t_ray	ray;
 
