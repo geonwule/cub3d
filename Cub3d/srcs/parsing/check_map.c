@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/06 15:20:36 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:38:24 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 
 	cnt = 0;
 	i = -1;
-	while (map[++i])
+	while (++i < vars->map.height)
 	{
 		j = -1;
-		while (map[i][++j])
+		while (++j < vars->map.width)
 		{
 			if (!ft_strchr("NWES01HB \n", map[i][j]))
 				return (-1);
@@ -88,10 +88,10 @@ int	check_map(t_vars *vars)
 	if (count_plyer_and_is_valid(map, vars) != 1)
 		return (RETURN_FAILURE);
 	i = 0;
-	while (map[i])
+	while (i < vars->map.height)
 	{
 		j = 0;
-		while (map[i][j])
+		while (j < vars->map.width)
 		{
 			if (check_dir(i, j, vars))
 				return (RETURN_FAILURE);
