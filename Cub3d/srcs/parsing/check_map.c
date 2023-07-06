@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/06 13:48:23 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:20:36 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_map(t_vars *vars)
 
 	map = vars->map.arr;
 	if (count_plyer_and_is_valid(map, vars) != 1)
-		return (1);
+		return (RETURN_FAILURE);
 	i = 0;
 	while (map[i])
 	{
@@ -94,10 +94,10 @@ int	check_map(t_vars *vars)
 		while (map[i][j])
 		{
 			if (check_dir(i, j, vars))
-				return (1);
+				return (RETURN_FAILURE);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (RETURN_SUCCESS);
 }
