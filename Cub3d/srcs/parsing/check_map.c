@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 02:35:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 20:11:41 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:48:23 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	count_plyer_and_is_valid(char **map, t_vars *vars)
 				return (-1);
 			if (ft_strchr("NWES", map[i][j]))
 			{
-				vars->info.pos_x = i + 0.1;
-				vars->info.pos_y = j + 0.1;
+				vars->data.init_pos[X] = i + 0.1;
+				vars->data.init_pos[Y] = j + 0.1;
 				init_player_info(vars, map, i, j);
 				map[i][j] = '0';
 				cnt++;
