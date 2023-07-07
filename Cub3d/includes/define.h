@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:14:34 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/04 19:41:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:00:09 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define MAP_HEIGHT 15
 # define MAP_WIDTH 34
 # define BUFFER_SIZE 1
+# define ZEN_RATE 2
 
 # define M_PLAYER "texture/minimap/player_10.xpm"
 # define M_EMPTY "texture/minimap/empty_10.xpm"

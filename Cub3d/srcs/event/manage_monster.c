@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:35:32 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:48:58 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/07 12:00:29 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	monster_rezen(t_vars *vars)
 		j = -1;
 		while (++j < vars->map.width)
 		{
-			if (i > vars->map.height * 0.8 && vars->map.width * 0.7)
+			if (fabs(vars->info.pos_x - i) + fabs(vars->info.pos_y - j) <= 7)
 				break ;
-			if (map[i][j] == '0' && random_generator(2) \
+			if (map[i][j] == '0' && random_generator(ZEN_RATE) \
 				&& i != (int)vars->info.pos_x && j != (int)vars->info.pos_y)
 			{
 				map[i][j] = 'M';
