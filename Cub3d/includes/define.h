@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:14:34 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/07 12:00:09 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:08:44 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ enum	e_texture
 	TEX_MONSTER,
 	TEX_POTION,
 	TEX_NPC,
-};
+}	;
 
 enum	e_key
 {
