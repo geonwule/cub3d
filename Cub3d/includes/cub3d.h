@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/07 02:27:30 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/07 11:49:52 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		key_press(int keycode, t_vars *vars);
 void	manage_monster(t_vars *vars);
 
 // event/kill_monster.c
-void	monster_kill(t_vars *vars, t_info *info, char **map);
+void	kill_monster(t_vars *vars, t_info *info, char **map);
 
 // event/mouse_event.c
 int		handle_mouse_button(int button, int x, int y, void *args);
