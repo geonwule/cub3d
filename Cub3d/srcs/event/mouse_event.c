@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:15:25 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/16 12:41:19 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:57:29 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ static void	talk_npc_agree(t_vars *vars)
 {
 	vars->data.npc_talk = 0;
 	vars->data.quest_num = 1;
+	mlx_mouse_hide();
 }
 
 static void	talk_npc_negative(t_vars *vars)
 {
 	vars->data.npc_talk = 0;
+	mlx_mouse_hide();
 }
 
 int	handle_mouse_button(int button, int x, int y, void *args)

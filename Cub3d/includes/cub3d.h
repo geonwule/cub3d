@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/07 11:49:52 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:30:36 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void	check_key_and_mouse(t_vars *vars);
 // event/check_key_and_mouse2.c
 void	move_forward_backward(t_vars *vars, t_info *info, double move_speed);
 void	move_left_right(t_vars *vars, t_info *info, double move_speed);
-void	rotate_left_right(t_info *info, double rot_speed);
 void	rotate_left(t_info *info, double rot_speed);
 void	rotate_right(t_info *info, double rot_speed);
+void	rotate_up(t_info *info, double rot_speed);
+void	rotate_down(t_info *info, double rot_speed);
 
 // event/event_function1.c
 void	attack(t_vars *vars);

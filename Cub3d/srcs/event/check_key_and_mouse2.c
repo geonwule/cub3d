@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:11:57 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/06 12:25:30 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:41:08 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,18 @@ void	rotate_right(t_info *info, double rot_speed)
 	info->plane_y = tmp * sin(rot_speed) + info->plane_y \
 				* cos(rot_speed);
 }
+
+int r = 100;
+void	rotate_up(t_info *info, double rot_speed)
+{
+	info->draw_start += rot_speed * r;
+	info->draw_end += rot_speed * r;
+	//background_vertical_line add
+}
+
+void	rotate_down(t_info *info, double rot_speed)
+{
+	info->draw_start -= rot_speed * r;
+	info->draw_end -= rot_speed * r;
+}
+

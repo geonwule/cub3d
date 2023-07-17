@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 00:47:14 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/16 14:58:33 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:46:10 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	apply_texture(t_info *info, t_ray *ray, int x, int y)
 	{
 		ray->tex[Y] = (int)ray->tex_pos % (TEX_HEIGHT - 1);
 		ray->tex_pos += ray->t_step;
-		color = texture[ray->tex_num][TEX_HEIGHT * ray->tex[Y] + ray->tex[X]];
+		color = texture[ray->tex_num][TEX_WIDTH * ray->tex[Y] + ray->tex[X]];
 		info->buf[y][x] = color;
 		y++;
 	}

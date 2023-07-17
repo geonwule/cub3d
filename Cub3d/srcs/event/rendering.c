@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 19:17:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/16 15:03:08 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:25:34 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	rendering(t_vars *vars)
 {
 	if (dead_check_game_end(vars))
 		return (0);
-	// manage_monster(vars);
+	manage_monster(vars);
 	check_key_and_mouse(vars);
 	mlx_clear_window(vars->mlx, vars->win);
 	fill_background(vars, vars->map.info.c, vars->map.info.f);
