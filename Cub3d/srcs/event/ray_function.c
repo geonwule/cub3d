@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 00:47:14 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 14:19:48 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:58:33 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ void	check_ray_texture(t_info *info, t_ray *ray, char **map)
 		ray->perwalldist = (ray->map[Y] - info->pos_y \
 				+ (1 - ray->step[Y]) / 2) / ray->dir[Y];
 	ray->line_height = (int)(WIN_HEIGHT / ray->perwalldist);
-	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
+	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2 \
+						+ info->draw_start;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
+	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2 \
+						+ info->draw_end;
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 	if (map[ray->map[X]][ray->map[Y]] == '1')

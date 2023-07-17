@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 03:10:49 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 14:45:21 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:46:41 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	process_init_vars_info1(t_vars *vars, t_info *info)
 	info->plane_x = vars->data.init_plane[X];
 	info->plane_y = vars->data.init_plane[Y];
 	info->move_speed = 0.05;
-	info->rot_speed = 0.08;
+	info->rot_speed = 0.01;
 }
 
 static void	process_init_vars_info2(t_info *info)

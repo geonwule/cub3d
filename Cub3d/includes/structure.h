@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:21:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 14:22:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:57:52 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_info
 	int		buf[WIN_HEIGHT][WIN_WIDTH];
 	double	z_buffer[WIN_WIDTH];
 	int		**texture;
+	int		draw_start;
+	int		draw_end;
 }			t_info;
 
 typedef struct s_sp
