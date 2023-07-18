@@ -104,6 +104,10 @@ void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
 // event/rendering.c
 int		rendering(t_vars *vars);
 
+// event/mini_map_expan.c
+void	fill_mini_back_expan(t_vars *vars);
+void	fill_minimap_expan(t_vars *vars, char **map);
+
 // event/mini_map.c
 void	mini_map(t_vars *vars);
 

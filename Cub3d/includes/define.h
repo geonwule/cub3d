@@ -15,6 +15,8 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+# define MINI_WIDTH (WIN_WIDTH / 4)
+# define MINI_HEIGHT (WIN_HEIGHT / 4)
 # define TEX_WIDTH 400	
 # define TEX_HEIGHT 400
 # define MAP_HEIGHT 15

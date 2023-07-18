@@ -178,6 +178,7 @@ typedef struct s_data
 	double			init_dir[2];
 	double			init_plane[2];
 	unsigned int	render_i;
+	int				mini_expan;
 }	t_data;
 
 typedef struct s_vars
