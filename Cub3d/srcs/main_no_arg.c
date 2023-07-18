@@ -12,12 +12,14 @@
 
 #include "cub3d.h"
 
-int	main()
+int	main(int ac, char **av)
 {
 	t_vars	vars;
 
+	ac = 0;
+	ft_strlcpy(vars.path, av[0], ft_strlen(av[0]) - 4);
 	init_vars(&vars);
-	read_file(&vars, "map/ellinia.cub");
+	read_file(&vars, ft_strjoin(vars.path, "map/ellinia.cub"));
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	init_vars_info(&vars);

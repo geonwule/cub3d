@@ -24,6 +24,7 @@
 # include <math.h>
 # include <time.h>
 # include <sys/time.h>
+# include <string.h>
 
 // init/init_vars_info.c
 int		init_vars_info(t_vars *vars);

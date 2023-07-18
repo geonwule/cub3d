@@ -187,6 +187,7 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
+	char		path[1000];
 	t_map		map;
 	t_mini		mini;
 	t_xpm		xpm;

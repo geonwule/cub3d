@@ -29,6 +29,8 @@
         "string": "c",
         "string_view": "c",
         "vector": "c",
-        "structure.h": "c"
+        "structure.h": "c",
+        "stdio.h": "c",
+        "define.h": "c"
     }
 }
