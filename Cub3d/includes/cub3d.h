@@ -53,6 +53,7 @@ void	rotate_up(t_info *info, double rot_speed);
 void	rotate_down(t_info *info, double rot_speed);
 
 // event/event_function1.c
+void	change_mini_map(t_vars *vars);
 void	attack(t_vars *vars);
 void	reset_game(t_vars *vars);
 

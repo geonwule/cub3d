@@ -47,51 +47,60 @@ static void	put_mini_xpm(t_vars *vars, char **map, int x, int y, int px, int py,
 					vars->mini.empty_x, y * 10, x * 10);
 }
 
-static void	put_player_dir_xpm(t_vars *vars, int px, int py)
+static void	put_player_dir_xpm(t_vars *vars)
 {
+	int	x;
+	int	y;
+
+	x = vars->mini.pos[X];
+	y = vars->mini.pos[Y];
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->mini.dir_x, \
-			py * 10 + vars->info.dir_y * 7, px * 10 + vars->info.dir_x * 7);
+			y * 10 + vars->info.dir_y * 7, x * 10 + vars->info.dir_x * 7);
+}
+
+static int	init_fact_location(t_vars *vars, int flag)
+{
+	int location;
+
+	if (flag == X)
+		location = (int)vars->info.pos_x - vars->mini.len[X] / 2;
+	else
+		location = (int)vars->info.pos_y - vars->mini.len[Y] / 2;
+	if (location < 0)
+		location = 0;
+	return (location);
 }
 
 static void	fill_minimap(t_vars *vars, char **map)
 {
-	int	min[2];
-
-	min[X] = MINI_HEIGHT / 10;
-	min[Y] = MINI_WIDTH / 10;
-
-	int	pos[2];
 	int	x;
 	int	y;
-	int	pr[2];
+	int	loc[2];
+
 	x = 0;
-	pr[X] = (int)vars->info.pos_x - min[X] / 2;
-	if (pr[X] < 0)
-		pr[X] = 0;
-	while (x < min[X])
+	loc[X] = init_fact_location(vars, X);
+	while (x < vars->mini.len[X])
 	{
 		y = 0;
-		pr[Y] = (int)vars->info.pos_y - min[Y] / 2;
-		if (pr[Y] < 0)
-			pr[Y] = 0;
-		while (y < min[Y])
+		loc[Y] = init_fact_location(vars, Y);
+		while (y < vars->mini.len[Y])
 		{
-			if (pr[X] >= vars->map.height || pr[Y] >= vars->map.width)
-				put_mini_xpm(vars, map, x, y, pr[X], pr[Y], 1);
+			if (loc[X] >= vars->map.height || loc[Y] >= vars->map.width)
+				put_mini_xpm(vars, map, x, y, loc[X], loc[Y], 1);
 			else
-				put_mini_xpm(vars, map, x, y, pr[X], pr[Y], 0);
-			if (pr[X] == (int)vars->info.pos_x && pr[Y] == (int)vars->info.pos_y)
+				put_mini_xpm(vars, map, x, y, loc[X], loc[Y], 0);
+			if (loc[X] == (int)vars->info.pos_x && loc[Y] == (int)vars->info.pos_y)
 			{
-				pos[X] = x;
-				pos[Y] = y;
+				vars->mini.pos[X] = x;
+				vars->mini.pos[Y] = y;
 			}
 			y++;
-			pr[Y]++;
+			loc[Y]++;
 		}
 		x++;
-		pr[X]++;
+		loc[X]++;
 	}
-	put_player_dir_xpm(vars, pos[X], pos[Y]);
+	put_player_dir_xpm(vars);
 }
 
 void	mini_map(t_vars *vars)

@@ -119,6 +119,8 @@ typedef struct s_map
 
 typedef struct s_mini
 {
+	int		len[2];
+	int		pos[2];
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
