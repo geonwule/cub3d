@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 05:05:28 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/04 18:51:41 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:08:00 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	level_up(t_vars *vars)
 {
-	char	*level_str;
+	char	*level[2];
 
 	if (vars->data.hunt != 0 && vars->data.hunt % 2 == 0)
 	{
@@ -23,9 +23,15 @@ static void	level_up(t_vars *vars)
 		vars->data.level += 1;
 		vars->data.hunt = 0;
 	}
-	level_str = ft_itoa(vars->data.level);
-	mlx_string_put(vars->mlx, vars->win, 50, 710, 0xFFFFFF, level_str);
-	free(level_str);
+	if (vars->data.level / 10)
+	{
+		level[0] = ft_itoa(vars->data.level / 10);
+		mlx_string_put(vars->mlx, vars->win, 43, 710, 0xFFFFFF, level[0]);
+		free(level[0]);
+	}
+	level[1] = ft_itoa(vars->data.level % 10);
+	mlx_string_put(vars->mlx, vars->win, 55, 710, 0xFFFFFF, level[1]);
+	free(level[1]);
 }
 
 static void	warning_message(t_vars *vars)

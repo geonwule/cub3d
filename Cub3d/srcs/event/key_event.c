@@ -42,5 +42,7 @@ int	key_press(int keycode, t_vars *vars)
 		open_door_tell_npc(vars, map);
 	if (keycode == R)
 		return_ellinia(vars);
+	if (keycode == TAB)
+		change_mini_map(vars);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:21:00 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/05 14:22:46 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/16 14:57:52 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_info
 	int		buf[WIN_HEIGHT][WIN_WIDTH];
 	double	z_buffer[WIN_WIDTH];
 	int		**texture;
+	int		draw_start;
+	int		draw_end;
 }			t_info;
 
 typedef struct s_sp
@@ -117,6 +119,8 @@ typedef struct s_map
 
 typedef struct s_mini
 {
+	int		len[2];
+	int		pos[2];
 	void	*north_x;
 	void	*south_x;
 	void	*west_x;
@@ -176,12 +180,14 @@ typedef struct s_data
 	double			init_dir[2];
 	double			init_plane[2];
 	unsigned int	render_i;
+	int				mini_expan;
 }	t_data;
 
 typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
+	char		path[1000];
 	t_map		map;
 	t_mini		mini;
 	t_xpm		xpm;

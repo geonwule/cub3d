@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 04:31:12 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 11:47:01 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/17 12:58:42 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	open_door_tell_npc(t_vars *vars, char **map)
 		else if (map[(int)tmp[X]][(int)tmp[Y]] == 'b')
 			map[(int)tmp[X]][(int)tmp[Y]] = 'B';
 		else if (map[(int)tmp[X]][(int)tmp[Y]] == 'H')
+		{
 			vars->data.npc_talk = 1;
+			mlx_mouse_show();
+		}
 	}
 }
 

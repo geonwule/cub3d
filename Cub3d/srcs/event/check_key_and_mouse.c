@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:17:22 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 20:24:57 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:57:06 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,28 @@ static void	mouse_check(t_vars *vars)
 
 	info = &vars->info;
 	if (vars->data.mouse_x > vars->data.mouse_old_x)
-		rotate_left(info, info->rot_speed);
-	if (vars->data.mouse_x < vars->data.mouse_old_x)
-		rotate_right(info, info->rot_speed);
-	if (++vars->data.render_i % 5 == 0)
 	{
-		vars->data.mouse_old_x = vars->data.mouse_x;
-		vars->data.mouse_old_y = vars->data.mouse_y;
+		rotate_left(info, info->rot_speed \
+			* abs(vars->data.mouse_x - vars->data.mouse_old_x) / 100);
 	}
+	if (vars->data.mouse_x < vars->data.mouse_old_x)
+	{
+		rotate_right(info, info->rot_speed \
+		* abs(vars->data.mouse_x - vars->data.mouse_old_x) / 100);
+	}
+	// up & down... 
+	// if (vars->data.mouse_y < vars->data.mouse_old_y)
+	// {
+	// 	rotate_up(info, info->rot_speed \
+	// 	* abs(vars->data.mouse_y - vars->data.mouse_old_y) / 100);
+	// }
+	// if (vars->data.mouse_y > vars->data.mouse_old_y)
+	// {
+	// 	rotate_down(info, info->rot_speed \
+	// 	* abs(vars->data.mouse_y - vars->data.mouse_old_y) / 100);
+	// }
+	if (vars->data.npc_talk == 0)
+		mlx_mouse_move(vars->win, vars->data.mouse_old_x, vars->data.mouse_old_y);
 }
 
 void	check_key_and_mouse(t_vars *vars)

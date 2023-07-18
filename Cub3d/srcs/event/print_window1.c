@@ -32,6 +32,8 @@ static void	game_key_explain(t_vars *vars)
 		WIN_HEIGHT / 100 * 17, 0xFFFFFF, "P : game reset");
 	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, \
 		WIN_HEIGHT / 100 * 19, 0xFFFFFF, "B : Door open/close, NPC contect");
+	mlx_string_put(vars->mlx, vars->win, WIN_WIDTH / 10 * 8, \
+		WIN_HEIGHT / 100 * 21, 0xFFFFFF, "TAB : Minimap_Scale UP/DOWN");
 }
 
 static void	press_b(t_vars *vars, double nx, double ny, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonchoi <jonchoi@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 03:03:03 by jonchoi           #+#    #+#             */
-/*   Updated: 2023/07/05 03:43:45 by jonchoi          ###   ########.fr       */
+/*   Updated: 2023/07/16 14:59:13 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ static void	process_init_vars2(t_vars *vars)
 	vars->sprite.v_i = 20;
 	vars->sprite.u_div = 1.5;
 	vars->sprite.v_div = 1.5;
+	vars->data.mouse_old_x = WIN_WIDTH / 2;
+	vars->data.mouse_old_y = WIN_HEIGHT / 2;
+	vars->info.draw_start = 0;
+	vars->info.draw_end = 0;
+	vars->mini.len[X] = MINI_HEIGHT / 10;
+	vars->mini.len[Y] = MINI_WIDTH / 10;
+	vars->data.mini_expan = 0;
 	i = 0;
 	while (i < 1000)
 	{

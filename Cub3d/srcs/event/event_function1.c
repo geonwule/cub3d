@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+void	change_mini_map(t_vars *vars)
+{
+	if (vars->data.mini_expan == 0)
+		vars->data.mini_expan = 1;
+	else
+		vars->data.mini_expan = 0;
+}
+
 void	attack(t_vars *vars)
 {
 	int		x;

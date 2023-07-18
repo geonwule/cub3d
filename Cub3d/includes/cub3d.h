@@ -6,7 +6,7 @@
 /*   By: geonwule <geonwule@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:19:21 by geonwule          #+#    #+#             */
-/*   Updated: 2023/07/07 11:49:52 by geonwule         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:30:36 by geonwule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <math.h>
 # include <time.h>
 # include <sys/time.h>
+# include <string.h>
 
 // init/init_vars_info.c
 int		init_vars_info(t_vars *vars);
@@ -47,11 +48,13 @@ void	check_key_and_mouse(t_vars *vars);
 // event/check_key_and_mouse2.c
 void	move_forward_backward(t_vars *vars, t_info *info, double move_speed);
 void	move_left_right(t_vars *vars, t_info *info, double move_speed);
-void	rotate_left_right(t_info *info, double rot_speed);
 void	rotate_left(t_info *info, double rot_speed);
 void	rotate_right(t_info *info, double rot_speed);
+void	rotate_up(t_info *info, double rot_speed);
+void	rotate_down(t_info *info, double rot_speed);
 
 // event/event_function1.c
+void	change_mini_map(t_vars *vars);
 void	attack(t_vars *vars);
 void	reset_game(t_vars *vars);
 
@@ -102,6 +105,10 @@ void	calculate_sprite(t_vars *vars, t_info *info, int idx, t_sprite *sprite);
 
 // event/rendering.c
 int		rendering(t_vars *vars);
+
+// event/mini_map_expan.c
+void	fill_mini_back_expan(t_vars *vars);
+void	fill_minimap_expan(t_vars *vars, char **map);
 
 // event/mini_map.c
 void	mini_map(t_vars *vars);

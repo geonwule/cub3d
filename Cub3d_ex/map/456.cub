@@ -1,0 +1,14 @@
+NO ./texture/ray/no.xpm
+SO ./texture/ray/so.xpm
+WE ./texture/ray/we.xpm
+EA ./texture/ray/ea.xpm
+
+F 220,100,1
+C 225,30,0
+
+
+111111111
+100000001
+100N000011111111111111
+100000001
+111111111       
