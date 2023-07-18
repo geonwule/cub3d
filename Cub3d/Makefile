@@ -52,6 +52,7 @@ _EVENT_SRCS	= check_key_and_mouse.c		\
 			  ray_function.c			\
 			  ray_function_dda.c		\
 			  rendering.c				\
+			  mini_map_expan.c 			\
 			  mini_map.c				\
 			  sprite.c					\
 			  sprite2.c \
@@ -107,7 +108,7 @@ MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
 
 #-L${MLXDIR} -lmlx -I${MLXDIR} -lX11 -lXext
 
-CC = cc
+CC = cc -g
 
 CFLAGS = -Wall -Wextra -Werror
 

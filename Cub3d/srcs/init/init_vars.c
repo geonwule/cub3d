@@ -46,6 +46,7 @@ static void	process_init_vars2(t_vars *vars)
 	vars->data.mouse_old_y = WIN_HEIGHT / 2;
 	vars->info.draw_start = 0;
 	vars->info.draw_end = 0;
+	vars->data.mini_expan = 0;
 	i = 0;
 	while (i < 1000)
 	{

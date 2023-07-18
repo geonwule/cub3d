@@ -99,6 +99,7 @@ enum	e_key
 	LEFT = 124,
 	RIGHT = 123,
 	SPACE = 49,
+	TAB = 48,
 }	;
 
 enum	e_hook_event

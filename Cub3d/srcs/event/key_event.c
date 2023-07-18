@@ -19,6 +19,14 @@ int	key_release(int keycode, t_vars *vars)
 	return (0);
 }
 
+static void	change_mini_map(t_vars *vars)
+{
+	if (vars->data.mini_expan == 0)
+		vars->data.mini_expan = 1;
+	else
+		vars->data.mini_expan = 0;
+}
+
 int	key_press(int keycode, t_vars *vars)
 {
 	t_info	*info;
@@ -42,5 +50,7 @@ int	key_press(int keycode, t_vars *vars)
 		open_door_tell_npc(vars, map);
 	if (keycode == R)
 		return_ellinia(vars);
+	if (keycode == TAB)
+		change_mini_map(vars);
 	return (0);
 }
